@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WomenEssentail.ServiceBusinessRules", "WomenEssentail.ServiceBusinessRules\WomenEssentail.ServiceBusinessRules.csproj", "{C4BF5521-30CB-4451-B04C-3CD0E3AC0B5D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WomenEssentail.Common", "WomenEssentail.Common\WomenEssentail.Common.csproj", "{FA0D6E2C-240A-4AB2-9BD2-A3DFFE7C24E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WomenEssentail.DataAccess", "WomenEssentail.DataAccess\WomenEssentail.DataAccess.csproj", "{6F7C1A2E-FFF8-451E-90E8-43028E73AB6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WomenEssentail.ApiService", "WomenEssentail.ApiService\WomenEssentail.ApiService.csproj", "{EF6282B5-ED4F-4585-912F-08E4D93B1813}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WomenEssentail.WebClient", "WomenEssentail.WebClient\WomenEssentail.WebClient.csproj", "{6B2C3426-273E-4AAD-ADA4-3EAF68E31C88}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C4BF5521-30CB-4451-B04C-3CD0E3AC0B5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4BF5521-30CB-4451-B04C-3CD0E3AC0B5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4BF5521-30CB-4451-B04C-3CD0E3AC0B5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4BF5521-30CB-4451-B04C-3CD0E3AC0B5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA0D6E2C-240A-4AB2-9BD2-A3DFFE7C24E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA0D6E2C-240A-4AB2-9BD2-A3DFFE7C24E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA0D6E2C-240A-4AB2-9BD2-A3DFFE7C24E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA0D6E2C-240A-4AB2-9BD2-A3DFFE7C24E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F7C1A2E-FFF8-451E-90E8-43028E73AB6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F7C1A2E-FFF8-451E-90E8-43028E73AB6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F7C1A2E-FFF8-451E-90E8-43028E73AB6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F7C1A2E-FFF8-451E-90E8-43028E73AB6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF6282B5-ED4F-4585-912F-08E4D93B1813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF6282B5-ED4F-4585-912F-08E4D93B1813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF6282B5-ED4F-4585-912F-08E4D93B1813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF6282B5-ED4F-4585-912F-08E4D93B1813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B2C3426-273E-4AAD-ADA4-3EAF68E31C88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B2C3426-273E-4AAD-ADA4-3EAF68E31C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B2C3426-273E-4AAD-ADA4-3EAF68E31C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B2C3426-273E-4AAD-ADA4-3EAF68E31C88}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
