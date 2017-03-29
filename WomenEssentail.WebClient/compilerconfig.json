@@ -6,5 +6,13 @@
   {
     "outputFile": "assets/css/controls.css",
     "inputFile": "assets/css/controls.less"
+  },
+  {
+    "outputFile": "assets/css/centerbox.css",
+    "inputFile": "assets/css/centerbox.less"
+  },
+  {
+    "outputFile": "assets/css/modals.css",
+    "inputFile": "assets/css/modals.less"
   }
 ]

@@ -95,12 +95,134 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\app.config.js" />
+    <Content Include="app\app.module.js" />
+    <Content Include="app\app.routes.js" />
+    <Content Include="app\app.run.js" />
+    <Content Include="app\components\changepassword\changePasswordController.js" />
+    <Content Include="app\components\changepassword\changePasswordFactory.js" />
+    <Content Include="app\components\changepassword\changePasswordView.html" />
+    <Content Include="app\components\companyusers\companyUsersController.js" />
+    <Content Include="app\components\companyusers\companyUsersFactory.js" />
+    <Content Include="app\components\companyusers\companyUsersView.html" />
+    <Content Include="app\components\companyusers\Modals\companyUserModalController.js" />
+    <Content Include="app\components\companyusers\Modals\companyUserModalView.html" />
+    <Content Include="app\components\core\errormodal.html" />
+    <Content Include="app\components\core\footer\footerView.html" />
+    <Content Include="app\components\core\header\headerController.js" />
+    <Content Include="app\components\core\header\headerView.html" />
+    <Content Include="app\components\forgotpassword\forgotPasswordController.js" />
+    <Content Include="app\components\forgotpassword\forgotPasswordFactory.js" />
+    <Content Include="app\components\forgotpassword\forgotPasswordView.html" />
+    <Content Include="app\components\forgotpassword\resetPasswordController.js" />
+    <Content Include="app\components\forgotpassword\resetPasswordView.html" />
+    <Content Include="app\components\home\homeController.js" />
+    <Content Include="app\components\home\views\homeView.html" />
+    <Content Include="app\components\login\loginController.js" />
+    <Content Include="app\components\login\loginFactory.js" />
+    <Content Include="app\components\login\loginView.html" />
+    <Content Include="app\components\organisations\organisationsController.js" />
+    <Content Include="app\components\organisations\organisationsFactory.js" />
+    <Content Include="app\components\organisations\organisationsView.html" />
+    <Content Include="app\components\organisations\organisation\organisationController.js" />
+    <Content Include="app\components\organisations\organisation\organisationFactory.js" />
+    <Content Include="app\components\organisations\organisation\organisationModalController.js" />
+    <Content Include="app\components\organisations\organisation\organisationModalView.html" />
+    <Content Include="app\components\organisations\organisation\organisationuser\organisationUserController.js" />
+    <Content Include="app\components\organisations\organisation\organisationuser\organisationUserFactory.js" />
+    <Content Include="app\components\organisations\organisation\organisationuser\organisationUserModalController.js" />
+    <Content Include="app\components\organisations\organisation\organisationuser\organisationUserModalView.html" />
+    <Content Include="app\components\organisations\organisation\organisationuser\organisationUserView.html" />
+    <Content Include="app\components\organisations\organisation\organisationView.html" />
+    <Content Include="app\components\organisations\partails\companyController.js" />
+    <Content Include="app\components\organisations\partails\companyDetailsView.html" />
+    <Content Include="app\components\organisations\partails\companyTaxDetails.html" />
+    <Content Include="app\components\organisations\partails\companyView.html" />
+    <Content Include="app\components\products\Modals\saveProductModalController.js" />
+    <Content Include="app\components\products\Modals\saveProductModalView.html" />
+    <Content Include="app\components\products\productsController.js" />
+    <Content Include="app\components\products\productsFactory.js" />
+    <Content Include="app\components\products\productsView.html" />
+    <Content Include="app\components\promotionproducts\Modals\savePromotionProductModalController.js" />
+    <Content Include="app\components\promotionproducts\Modals\savePromotionProductModalView.html" />
+    <Content Include="app\components\promotionproducts\promotionProductsController.js" />
+    <Content Include="app\components\promotionproducts\promotionProductsFactory.js" />
+    <Content Include="app\components\promotionproducts\promotionProductsView.html" />
+    <Content Include="app\components\rolesadmin\modals\roleAdminSaveModalController.js" />
+    <Content Include="app\components\rolesadmin\modals\roleAdminSaveModalView.html" />
+    <Content Include="app\components\rolesadmin\rolesAdminController.js" />
+    <Content Include="app\components\rolesadmin\rolesAdminFactory.js" />
+    <Content Include="app\components\rolesadmin\rolesAdminView.html" />
+    <Content Include="app\components\salons\modals\saveSalonModalController.js" />
+    <Content Include="app\components\salons\modals\saveSalonModalView.html" />
+    <Content Include="app\components\salons\salonsController.js" />
+    <Content Include="app\components\salons\salonsFactory.js" />
+    <Content Include="app\components\salons\salonsView.html" />
+    <Content Include="app\components\userprofile\userProfileController.js" />
+    <Content Include="app\components\userprofile\userProfileFactory.js" />
+    <Content Include="app\components\userprofile\userProfileView.html" />
+    <Content Include="app\constants.js" />
+    <Content Include="app\shared\controllers\appController.js" />
+    <Content Include="app\shared\directives\accessControlDirective.js" />
+    <Content Include="app\shared\directives\buttonControlDirective.js" />
+    <Content Include="app\shared\directives\compareToValidatorDirective.js" />
+    <Content Include="app\shared\directives\convertToNumberDirective.js" />
+    <Content Include="app\shared\directives\menuHighlightDirective.js" />
+    <Content Include="app\shared\directives\appGridDirective.js" />
+    <Content Include="app\shared\directives\appSubFormDirective.js" />
+    <Content Include="app\shared\directives\appTabsValidatorDirective.js" />
+    <Content Include="app\shared\directives\appValidatorDirective.js" />
+    <Content Include="app\shared\error\errorAlert.html" />
+    <Content Include="app\shared\error\errorController.js" />
+    <Content Include="app\shared\factories\accountApiFactory.js" />
+    <Content Include="app\shared\factories\companyApiFactory.js" />
+    <Content Include="app\shared\factories\dashboardApiFactory.js" />
+    <Content Include="app\shared\factories\errorFactory.js" />
+    <Content Include="app\shared\factories\lookupApiFactory.js" />
+    <Content Include="app\shared\factories\moduleApiFactory.js" />
+    <Content Include="app\shared\factories\notificationFactory.js" />
+    <Content Include="app\shared\factories\organisationApiFactory.js" />
+    <Content Include="app\shared\factories\appFactory.js" />
+    <Content Include="app\shared\factories\appHttpInterceptorFactory.js" />
+    <Content Include="app\shared\factories\productApiFactory.js" />
+    <Content Include="app\shared\factories\promotionProductApiFactory.js" />
+    <Content Include="app\shared\factories\roleApiFactory.js" />
+    <Content Include="app\shared\factories\utilsFactory.js" />
+    <Content Include="app\shared\filters\percentageFormat.js" />
+    <Content Include="app\shared\objects\customgrid.js" />
+    <Content Include="app\shared\objects\subformvalidation.js" />
+    <Content Include="app\shared\objects\tabformvalidation.js" />
+    <Content Include="app\shared\objects\utils.js" />
+    <Content Include="assets\css\AdminLTE.css" />
+    <Content Include="assets\css\AdminLTE.min.css" />
+    <Content Include="assets\css\centerbox.css">
+      <DependentUpon>centerbox.less</DependentUpon>
+    </Content>
+    <Content Include="assets\css\centerbox.min.css">
+      <DependentUpon>centerbox.css</DependentUpon>
+    </Content>
+    <Content Include="assets\css\modals.css">
+      <DependentUpon>modals.less</DependentUpon>
+    </Content>
+    <Content Include="assets\css\modals.min.css">
+      <DependentUpon>modals.css</DependentUpon>
+    </Content>
+    <Content Include="assets\libs\angular\angularjs-geolocation.min.js" />
+    <Content Include="assets\libs\bootstrap\js\ui-bootstrap-tpls-2.4.0.js" />
+    <Content Include="assets\libs\bootstrap\js\ui-bootstrap-tpls-2.4.0.min.js" />
+    <Content Include="assets\libs\jquery\jquery-2.1.4.js" />
+    <Content Include="assets\libs\jquery\jquery-2.1.4.min.js" />
+    <Content Include="authComplete.html" />
+    <Content Include="authComplete.js" />
     <Content Include="packages.config" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="assets\libs\jquery\jquery-1.9.1.min.map" />
+    <Content Include="assets\css\centerbox.less" />
+    <Content Include="assets\css\modals.less" />
+    <None Include="Properties\PublishProfiles\Admin Site.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -206,7 +328,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\" />
+    <Folder Include="app\components\register\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

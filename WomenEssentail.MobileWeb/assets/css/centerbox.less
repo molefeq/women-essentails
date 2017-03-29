@@ -1,0 +1,31 @@
+﻿@import "definitions.less";
+
+body {
+    .center-box {
+        width: 360px;
+        margin: auto;
+        height: 100%;
+
+        button {
+            position: fixed;
+            top: 45%;
+            left: 45%;
+            padding: 20px;
+            border-color: @header-background;
+
+            &:hover {
+                background-color: @row-background;
+                color: @white;
+            }
+        }
+    }
+
+    @media (max-width: 768px) {
+        .center-box {
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            height: 100%;
+        }
+    }
+}

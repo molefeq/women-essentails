@@ -1,0 +1,1 @@
+﻿body .center-box{width:360px;margin:auto;height:100%;}body .center-box button{position:fixed;top:45%;left:45%;padding:20px;border-color:#e91e63;}body .center-box button:hover{background-color:#f48fb1;color:#fff;}@media(max-width:768px){body .center-box{width:100%;margin:auto;text-align:center;height:100%;}}

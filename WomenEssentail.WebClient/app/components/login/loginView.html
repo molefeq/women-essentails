@@ -1,0 +1,110 @@
+﻿<div class="center-box">
+    <div class="center-box-body">
+        <p class="center-box-msg">Sign in to start your session</p>
+        <form novalidate name="frmLogin" id="frmLogin" app-validator validation-summary-id="loginValidationSummary">
+            <div class="form-group has-feedback">
+                <input type="text" required data-required-msg="Username is required." id="Username" name="Username" ng-model="model.Username" class="form-control" placeholder="Username">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="k-valid-msg" data-for="Username"></div>
+            <div class="form-group has-feedback">
+                <input required data-required-msg="Password is required." id="Password" name="Password" ng-model="model.Password" type="password" class="form-control" placeholder="Password">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="k-valid-msg" data-for="Password"></div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="summary-validation-valid" data-valmsg-summary="true" id="loginValidationSummary">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+
+                    </div>
+                </div><!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" ng-click="login()" button-control action-value="Sign in" action-in-progress-value="Signing in ...">Sign In</button>
+                </div><!-- /.col -->
+            </div>
+        </form>
+
+        <a ui-sref="forgotpassword">I forgot my password</a><br>
+    </div><!-- /.login-box-body -->
+</div>
+
+<!--<div class="container-fluid contentsContainer" id="loginContainer">
+    <div id="center-box-contanier">
+        <div class="center-box">
+            <form novalidate name="frmLogin" id="frmLogin" app-validator validation-summary-id="loginValidationSummary">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Login</div>
+                    <div class="panel-body">
+                        <div class="container-fluid LoginContainer">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 label">
+                                    <label for="Username">Username<i class="required">*</i></label>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12" ng-class="{ 'has-error' : frmLogin.Username.$invalid && frmLogin.Username.$touched }">
+                                    <input required data-required-msg="Username is required." id="Username" name="Username" type="text" ng-model="model.Username" placeholder="Enter Username">
+                                    <div class="k-valid-msg" data-for="Username"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12 label">
+                                    <label for="Password">Password <i class="required">*</i></label>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12 ">
+                                    <input required data-required-msg="Password is required." id="Password" name="Password" type="password" ng-model="model.Password" placeholder="Enter Password">
+                                    <div class="k-valid-msg" data-for="Password"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="col-md-12 col-sm-12 col-xs-12 buttonRow">
+                                    <input type="submit" class="btn btn-primary btn-block btnGreen" ng-click="login()" value="Log in" button-control action-value="Log in" action-in-progress-value="Logging in ...">
+                                    <div class="summary-validation-valid" data-valmsg-summary="true" id="loginValidationSummary">
+                                    </div>
+                                </div>
+                                <div class="col-md-12 col-sm-12 col-xs-12" id="divforgotpassword-container">
+                                    <span class="float-left">
+                                        <a class="lnkforgotpassword text-left" ui-sref="forgotpassword">Forgot Password?</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="supportedBrowsersContainer">
+                <div>
+                    <h5>Supported Browsers</h5>
+                </div>
+                <div class="browserIconContainer">
+                    <img src="../../../assets/img/icons/internet-explorer.png" />
+                    <p>IE 8+</p>
+                </div>
+                <div class="browserIconContainer">
+                    <img src="../../../assets/img/icons/chrome.png" />
+                    <p>Chrome</p>
+                </div>
+                <div class="browserIconContainer">
+                    <img src="../../../assets/img/icons/firefox.png" />
+                    <p>FireFox</p>
+                </div>
+                <div class="browserIconContainer">
+                    <img src="../../../assets/img/icons/safari.png" />
+                    <p>Safari</p>
+                </div>
+                <div class="browserIconContainer">
+                    <img src="../../../assets/img/icons/opera.png" />
+                    <p>Opera</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>-->

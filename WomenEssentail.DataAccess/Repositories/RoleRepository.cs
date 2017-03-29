@@ -12,6 +12,7 @@ using WomenEssentail.Common.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using WomenEssentail.Common.DataFilters;
 
 namespace WomenEssentail.DataAccess.Repositories
 {
@@ -22,8 +23,16 @@ namespace WomenEssentail.DataAccess.Repositories
 		{
 		}
 
+        public Result<RoleDto> Get(SearchFilter searchFilter, Func<SqlDataReader, RoleDto> roleMapper)
+        {
+            List<SqlQueryParameter> sqlQueryParameters = GetPagedDataParameters(searchFilter.PageData);
 
-		public Response<RoleDto> Save(RoleDto roleDto, Func<SqlDataReader, RoleDto> roleDtoMapper) 
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "SearchText ", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = searchFilter.SearchText });
+
+            return GetPagedEntities("RolesFetch", roleMapper, sqlQueryParameters.ToArray());
+        }
+
+        public Response<RoleDto> Save(RoleDto roleDto, Func<SqlDataReader, RoleDto> roleDtoMapper) 
 		{
 			SqlQueryParameter[] sqlQueryParameters = GetSaveParameters(roleDto);
 			string storedProcedureName = GetCrudStoredProcedureName(roleDto.CrudStatus);
@@ -75,9 +84,14 @@ namespace WomenEssentail.DataAccess.Repositories
 			}
 		}
 
-		#endregion
+        public Result<RoleDto> Get(int? userId, string searchText, PageData pageData, object mapToRoleDto)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
 
-	}
+    }
 }
 

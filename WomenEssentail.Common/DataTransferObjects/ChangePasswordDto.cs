@@ -8,5 +8,8 @@ namespace WomenEssentail.Common.DataTransferObjects
 {
     public class ChangePasswordDto
     {
+        public object OldPassword { get; set; }
+        public object Password { get; set; }
+        public object Username { get; set; }
     }
 }

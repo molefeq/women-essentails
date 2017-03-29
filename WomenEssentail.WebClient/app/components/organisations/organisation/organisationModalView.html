@@ -1,0 +1,172 @@
+﻿<script type="text/ng-template" id="organisationtemplate.html">
+    <div class="modal-header">
+        <h5>{{Title}}</h5>
+        <span ng-click="cancel()" class="close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div class="modal-body dialog-content">
+        <form novalidate name="frmOrganisation" id="frmOrganisation" app-validator validation-summary-id="organisationValidationSummary">
+            <div class="ModalContainer">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 label">
+                        <div class="summary-validation-valid" data-valmsg-summary="true" id="organisationValidationSummary">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center" ng-if="organisationsFactory.organisation.LogoFileNamePath">
+                            <img ng-attr-src="{{organisationsFactory.organisation.LogoFileNamePath}}" class="img-responsive center-block" height="80" width="80">
+                        </div>
+                        <div class="row text-center">
+                            <a ng-click="addOrganisation()" class="addItemButton" ng-file-select ng-file-change="uploadImage($files)"><i class="fa fa-upload" aria-hidden="true"></i>Upload Logo</a>
+                            <input type="hidden" name="LogoFileNamePath" id="LogoFileNamePath" ng-model="organisationsFactory.organisation.LogoFileNamePath" required data-required-msg="Organisation logo is required." />
+                            <div class="k-valid-msg text-center" data-for="LogoFileNamePath"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12 label">
+                            <label for="Name">Name <i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input required data-required-msg="Name is required." ng-maxlength="100" data-maxlength-msg="Name cannot be more than 100 characters." id="Name" name="Name" type="text"
+                                   ng-model="organisationsFactory.organisation.Name" placeholder="Enter Name"
+                                   ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for the Name are not allowed." />
+                            <div class="k-valid-msg" data-for="Name"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12 label">
+                            <label for="Description">Description</label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <textarea ng-maxlength="5000" data-maxlength-msg="Description cannot be more than 5000 characters." id="Description" name="Description" rows="2"
+                                      ng-model="organisationsFactory.organisation.Description" placeholder="Enter Description"
+                                      ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for the Description are not allowed." />
+                            <div class="k-valid-msg" data-for="Description"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12 ">
+                        <div class="row label">
+                            <label for="PostalAddressLine1">Physical Address<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 address-row">
+                            <input required data-required-msg="Physical Address Line 1 is required." ng-maxlength="100" data-maxlength-msg="Physical Address Line 1 cannot be more than 100 characters."
+                                   id="PhysicalAddressLine1" name="PhysicalAddressLine1" type="text"
+                                   ng-model="organisationsFactory.organisation.PhysicalAddressLine1" placeholder="Enter Physical Address Line 1"
+                                   ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for Address Line 1 are not allowed." />
+                            <div class="k-valid-msg" data-for="PhysicalAddressLine1"></div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 address-row">
+                            <input ng-maxlength="100" data-maxlength-msg="Physical Address Line 2 cannot be more than 100 characters." id="PhysicalAddressLine2" name="PhysicalAddressLine2" type="text"
+                                   ng-model="organisationsFactory.organisation.PhysicalAddressLine2" placeholder="Enter Physical Address Line 2"
+                                   ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for Address Line 2 are not allowed." />
+                            <div class="k-valid-msg" data-for="PhysicalAddressLine2"></div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 address-row">
+                            <input ng-maxlength="100" data-maxlength-msg="Suburb cannot be more than 100 characters." id="PhysicalAddressSuburb" required data-required-msg="Suburb is required." name="PhysicalAddressSuburb"
+                                   type="text" ng-model="organisationsFactory.organisation.PhysicalAddressSuburb" placeholder="Enter Suburb"
+                                   ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for the Suburb are not allowed." />
+                            <div class="k-valid-msg" data-for="PhysicalAddressSuburb"></div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 address-row">
+                            <input ng-maxlength="100" data-maxlength-msg="City cannot be more than 100 characters." id="PhysicalAddressCity" name="PhysicalAddressCity" type="text"
+                                   ng-model="organisationsFactory.organisation.PhysicalAddressCity" placeholder="Enter City"
+                                   ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for the City are not allowed." />
+                            <div class="k-valid-msg" data-for="PhysicalAddressCity"></div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 address-row">
+                            <input ng-maxlength="100" data-maxlength-msg="Postal Code cannot be more than 100 characters." id="PhysicalAddressPostalCode" required data-required-msg="Postal Code is required."
+                                   name="PhysicalAddressPostalCode" type="text" ng-model="organisationsFactory.organisation.PhysicalAddressPostalCode" placeholder="Enter Postal Code"
+                                   ng-pattern="/^([A-Za-z0-9]*)$/" data-pattern-msg="Characters entered for the Postal Code are not allowed." />
+                            <div class="k-valid-msg" data-for="PhysicalAddressPostalCode"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row label">
+                            <label for="PostalAddressLine1">Postal Address</label>
+                            <input type="checkbox" name="cbSameAsPhysicalAddress" ng-click="setPostalSameAsPhysicalAddress()" ng-model="postalSameAsPhysicalAddress" /><label id="lblSameAsPhysicalAddress">Same As Physical Address</label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 address-row">
+                            <input ng-maxlength="100" data-maxlength-msg="Postal Address Line 1 cannot be more than 100 characters." id="PostalAddressLine1" name="PostalAddressLine1" type="text"
+                                   ng-model="organisationsFactory.organisation.PostalAddressLine1" placeholder="Enter Postal Address Line 1"
+                                   ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for Address Line 1 are not allowed." />
+                            <div class="k-valid-msg" data-for="PostalAddressLine1"></div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 address-row">
+                            <input ng-maxlength="100" data-maxlength-msg="Postal Address Line 2 cannot be more than 100 characters." id="PostalAddressLine2" name="PostalAddressLine2" type="text"
+                                   ng-model="organisationsFactory.organisation.PostalAddressLine2" placeholder="Enter Postal Address Line 2"
+                                   ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for Address Line 2 are not allowed." />
+                            <div class="k-valid-msg" data-for="PostalAddressLine2"></div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 address-row">
+                            <input ng-maxlength="100" data-maxlength-msg="Suburb cannot be more than 100 characters." id="PostalAddressSuburb" name="PostalAddressSuburb" type="text"
+                                   ng-model="organisationsFactory.organisation.PostalAddressSuburb" placeholder="Enter Suburb"
+                                   ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for the Suburb are not allowed." />
+                            <div class="k-valid-msg" data-for="PostalAddressSuburb"></div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 address-row">
+                            <input ng-maxlength="100" data-maxlength-msg="City cannot be more than 100 characters." id="PostalAddressCity" name="PostalAddressCity" type="text"
+                                   ng-model="organisationsFactory.organisation.PostalAddressCity" placeholder="Enter City" ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/"
+                                   data-pattern-msg="Characters entered for the City are not allowed." />
+                            <div class="k-valid-msg" data-for="PostalAddressCity"></div>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12 address-row">
+                            <input ng-maxlength="100" data-maxlength-msg="Postal Code cannot be more than 100 characters." id="PostalAddressPostalCode" name="PostalAddressPostalCode"
+                                   type="text" ng-model="organisationsFactory.organisation.PostalAddressPostalCode" placeholder="Enter Postal Code"
+                                   ng-pattern="/^([A-Za-z0-9]*)$/" data-pattern-msg="Characters entered for the Postal Code are not allowed." />
+                            <div class="k-valid-msg" data-for="PostalAddressPostalCode"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row label">
+                            <label for="ContactNumber">Contact Number</label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input ng-maxlength="20" data-maxlength-msg="Contact Number cannot be more than 20 characters." ng-pattern="/^(\+27[0-9]{9}|0[0-9]{9})$/" data-pattern-msg="Enter a valid Contact Number."
+                                   id="ContactNumber" name="ContactNumber" type="text" ng-model="organisationsFactory.organisation.ContactNumber" placeholder="Enter Contact Number" />
+                            <div class="k-valid-msg" data-for="ContactNumber"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row label">
+                            <label for="EmailAddress">Email Address<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input ng-maxlength="500" data-maxlength-msg="Email Address cannot be more than 500 characters." required data-required-msg="Email Address is required." ng-pattern="/^([A-Za-z0-9_\.-]+)@([\dA-Za-z\.-]+)\.([A-Za-z\.]{2,6})$/"
+                                   data-pattern-msg="Enter a valid Email Address."
+                                   id="EmailAddress" name="EmailAddress" type="text" ng-model="organisationsFactory.organisation.EmailAddress" placeholder="Enter Email Address" />
+                            <div class="k-valid-msg" data-for="EmailAddress"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row label">
+                            <label for="FaxNumber">Fax Number</label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input ng-maxlength="20" data-maxlength-msg="Fax Number cannot be more than 20 characters." ng-pattern="/^(\+27[0-9]{9}|0[0-9]{9})$/" data-pattern-msg="Enter a valid Fax Number."
+                                   id="FaxNumber" name="FaxNumber" type="text" ng-model="organisationsFactory.organisation.FaxNumber" placeholder="Enter Fax Number" />
+                            <div class="k-valid-msg" data-for="FaxNumber"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row buttonRow">
+                    <input type="submit" class="btn btnGreen" ng-click="save()" value="Save" button-control action-value="Save" action-in-progress-value="Saving ..." />
+                    <input type="button" class="btn btnGreen" ng-click="cancel()" value="Cancel" button-control action-value="Cancel" action-in-progress-value="Cancelling ..." />
+                </div>
+            </div>
+        </form>
+    </div>
+</script>

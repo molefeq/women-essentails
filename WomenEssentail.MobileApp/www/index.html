@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">-->
+    <!--<meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *;script-src 'self' https://* 'unsafe-inline' 'unsafe-eval'; ">-->
+
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <title>Women's Essentail</title>
+    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/libs/angular-toastr/angular-toastr.min.css" rel="stylesheet" />
+    <link href="assets/css/AdminLTE.css" rel="stylesheet" />
+
+    <link href="assets/css/app.min.css" rel="stylesheet" />
+    <link href="assets/css/controls.min.css" rel="stylesheet" />
+    <link href="assets/css/centerbox.min.css" rel="stylesheet" />
+    <link href="assets/css/modals.min.css" rel="stylesheet" />
+
+    <script type="text/javascript" src="app/shared/objects/utils.js"></script>
+    <script type="text/javascript" src="app/shared/objects/customgrid.js"></script>
+    <script type="text/javascript" src="app/shared/objects/subformvalidation.js"></script>
+    <script type="text/javascript" src="app/shared/objects/tabformvalidation.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+</head>
+<body>
+    <div class="wrapper" ui-view="">
+
+    </div>
+
+    <div ng-include="'app/shared/error/errorAlert.html'"></div>
+
+
+    <script type="text/javascript" src="assets/libs/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-animate.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-aria.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-mocks.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-resource.js"></script>
+    <script type="text/javascript" src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angularjs-geolocation.min.js"></script>
+    <script type="text/javascript" src="assets/libs/bootstrap/js/ui-bootstrap-tpls-2.4.0.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular-toastr/angular-toastr.tpls.min.js"></script>
+    <script type="text/javascript" src="assets/libs/lodash/lodash.js"></script>
+    <script type="text/javascript" src="assets/libs/angular-simple-logger/angular-simple-logger.js"></script>
+    <script type="text/javascript" src="assets/libs/angular-maps/angular-google-maps.js"></script>
+    <script>
+      function initMap() {
+          alert('Maps is nitialised.');
+          angular.element(function () {
+              angular.bootstrap(document, ['app']);
+          });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Dp0M7lBi97YoSYlpgt_7IDCMeXEZBiQ&callback=initMap" async defer></script>
+
+    <script type="text/javascript" src="app/app.module.js"></script>
+    <script type="text/javascript" src="app/app.routes.js"></script>
+    <script type="text/javascript" src="app/app.config.js"></script>
+    <script type="text/javascript" src="app/app.run.js"></script>
+    <script type="text/javascript" src="app/constants.js"></script>
+
+    <script type="text/javascript" src="app/shared/error/errorController.js"></script>
+
+    <script type="text/javascript" src="app/shared/directives/appValidatorDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/appTabsValidatorDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/buttonControlDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/compareToValidatorDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/appGridDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/convertToNumberDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/appSubFormDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/menuHighlightDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/accessControlDirective.js"></script>
+
+    <script type="text/javascript" src="app/shared/factories/appFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/companyApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/utilsFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/appHttpInterceptorFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/dashboardApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/lookupApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/productApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/errorFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/notificationFactory.js"></script>
+
+    <script type="text/javascript" src="app/shared/filters/percentageFormat.js"></script>
+
+    <script type="text/javascript" src="app/shared/controllers/appController.js"></script>
+
+    <script type="text/javascript" src="app/components/home/homeController.js"></script>
+
+    <script type="text/javascript" src="app/components/main/mainController.js"></script>
+
+    <script type="text/javascript" src="app/components/salondirection/salonDirectionController.js"></script>
+    <script type="text/javascript" src="app/components/salondirection/salonDirectionFactory.js"></script>
+
+    <script type="text/javascript" src="app/components/salons/salonsController.js"></script>
+    <script type="text/javascript" src="app/components/salons/salonsFactory.js"></script>
+</body>
+</html>

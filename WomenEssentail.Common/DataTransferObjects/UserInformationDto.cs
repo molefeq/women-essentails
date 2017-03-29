@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace WomenEssentail.Common.DataTransferObjects
 {
@@ -14,7 +15,7 @@ namespace WomenEssentail.Common.DataTransferObjects
         public string OrganisationName { get; set; }
         public int? CompanyId { get; set; }
         public string CompanyName { get; set; }
-        public int? EmployeeId { get; set; }
+        public DateTime CreateDate { get; set; }
 
         public List<RoleModuleDto> AccessModules { get; set; }
 

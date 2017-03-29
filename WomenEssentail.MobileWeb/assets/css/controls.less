@@ -1,0 +1,164 @@
+﻿@import "definitions.less";
+
+body {
+    a {
+        color: #3c8dbc;
+    }
+
+    i.required {
+        color: @red;
+    }
+
+    .input-group, .input-group-btn {
+        max-width: 300px;
+    }
+
+    .form-control {
+        border-radius: 0 !important;
+        box-shadow: none;
+        border-color: #d2d6de;
+    }
+
+    .form-control:not(select) {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+    }
+
+    .btn-primary:hover, .btn-primary:active, .btn-primary.hover {
+        background-color: #367fa9;
+    }
+
+    .btn.btn-flat {
+        border-radius: 0;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        border-width: 1px;
+    }
+
+    .form-group {
+        margin-bottom: 5px@i;
+    }
+
+    div.k-valid-msg {
+        display: none;
+    }
+
+    div.k-invalid-msg {
+        display: inline-block;
+        color: @red@i;
+        text-align: left;
+        width: 100%;
+        margin-bottom: 5px;
+    }
+
+    div.summary-validation-valid {
+        display: none;
+    }
+
+    div.summary-validation-invalid {
+        display: inline-block;
+        color: @red@i;
+        text-align: left;
+        width: 100%;
+        margin-bottom: 10px;
+        border: 1px solid;
+        box-shadow: 0 0.1px 0.1px @red,inset 0 1px 0 #fff;
+        padding: 10px;
+        border-radius: 1px;
+        margin-top: 5px;
+    }
+
+    div.haserror {
+        input, select, textarea {
+            border: 1px solid @red@i;
+        }
+    }
+
+    .addItemButton {
+        cursor: pointer;
+
+        i {
+            padding-right: 5px;
+        }
+    }
+
+    .action-label {
+        cursor: pointer;
+    }
+}
+
+
+.womenessentail {
+    button {
+        width: 100px;
+        height: 30px;
+        left: -1px;
+        top: 612px;
+        color: #fff;
+        background-color: #ff6091;
+        border-color: #d81b60;
+        transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        font-size: 14.0px;
+        border-radius: 8px;
+        border-width: 1px;
+        border-style: solid;
+        text-align: center;
+        font-weight: normal;
+        font-style: normal;
+        z-index: 7;
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+
+.angular-google-map-container {
+    height: 400px;
+    margin-bottom: 15px;
+}
+
+.panel-primary {
+    padding: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    #loadingmessage {
+
+        > div {
+            font-size: 15px !important;
+        }
+    }
+}
+
+#loadingmessage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10001;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter: alpha(opacity=70);
+    display: block;
+    z-index: 10002;
+    opacity: 0.7;
+
+
+    > div {
+        margin-left: 0;
+        margin-right: -50%;
+        color: white;
+        font-size: 25px;
+        vertical-align: middle;
+        text-align: center;
+        display: table-cell;
+        width: 100%;
+        height: 100%;
+        position: absolute; /* 2 */
+        top: 50%;
+        background: url('../img/loading-image.gif') no-repeat scroll 8px 100%;
+    }
+}

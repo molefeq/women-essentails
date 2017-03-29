@@ -1,16 +1,40 @@
+using Libraries.Common.Enums;
 using Libraries.Common.ResponseObjects;
+using Libraries.Common.Utils;
+
+using WomenEssentail.Common.DataFilters;
 using WomenEssentail.Common.DataTransferObjects;
+
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts.Mappers;
 
 namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts
 {
-	public class AccountManager : IAccountManager
+    public class AccountManager : IAccountManager
     {
+        public Result<AccountSummaryDto> GetAccounts(AccountSearchFilter accountSearchFilter)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                return unitOfWork.AccountSummaries.Get(accountSearchFilter, AccountMappers.Instance.MapToAccountSummaryDto);
+            }
+        }
+        public Response<AccountDto> Save(AccountDto accountDto)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                if (accountDto.CrudStatus == CrudStatus.CREATE)
+                {
+                    accountDto.Password = RandomStringGenerator.Generate(accountDto.UserName);
+                }
+
+                return unitOfWork.Accounts.Save(accountDto, AccountMappers.Instance.MapToAccountDto);
+            }
+        }
         public Response<UserInformationDto> Login(string username, string password)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                return unitOfWork.Accounts.Login(username, password, AccountQueryMappers.Instance.MapLoginQuery);
+                return unitOfWork.Accounts.Login(username, password, AccountMappers.Instance.MapLoginQuery);
             }
         }
 
@@ -18,7 +42,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                return unitOfWork.Accounts.ChangePassword(changePasswordDto, AccountQueryMappers.Instance.MapLoginQuery);
+                return unitOfWork.Accounts.ChangePassword(changePasswordDto, AccountMappers.Instance.MapLoginQuery);
             }
         }
 

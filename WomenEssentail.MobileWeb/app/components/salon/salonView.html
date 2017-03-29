@@ -1,0 +1,56 @@
+﻿<header class="bar bar-nav">
+    <a class="btn btn-link btn-nav pull-left" href="#" data-transition="slide-out" ng-click="goToSalons($event)">
+        <span class="icon icon-left-nav"></span>
+        Back
+    </a>
+    <h1 class="title">Women's Essentials</h1>
+</header>
+<div class="content content-padded">
+
+    <div id='loadingmessage' ng-show="isLoading">
+        <div><p>{{loadingMessage}}</p><img src="/assets/img/loading-image.gif" /></div>
+    </div>
+
+    <h4 style="text-align: center; text-transform: uppercase;">{{salonFactory.salon.Name}}</h4>
+    <div style="text-align: center;">
+        <img ng-attr-src="{{salonFactory.salon.RelativeFileName}}" alt="{{salonFactory.salon.Name}}" />
+    </div>
+    <button class="btn btn-primary btn-block btn-outlined" ng-click="goToSalonDirections()" style="padding: 10px 0;">
+        Take Me There
+        <span class="icon icon-right pull-right"></span>
+    </button>
+    <div ng-repeat="(key, value) in salonFactory.products" ng-if="products.length == 0" style="padding-top: 10px;">
+        <h5 class="content-padded" style="text-transform: uppercase;">{{key}}</h5>
+        <ul class="table-view">
+            <li class="table-view-cell" ng-repeat="(sckey, scvalue) in value">
+                <a class="navigate-right" href="#" data-transition="slide-in" ng-click="viewProducts($event, key, sckey, scvalue)">
+                    <small>{{sckey}}</small>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <ul class="table-view" ng-if="products.length > 0" style="border-width:0; padding-top: 10px;">
+        <li class="table-view-cell" style="border-width:0; padding-left: 2px;">
+            <div class="media-body">
+                <button class="btn btn-positive btn-outlined" ng-click="backToSubCategories()">
+                    <span class="icon icon-left"></span>
+                    Categories
+                </button>
+            </div>
+        </li>
+        <li class="table-view-cell table-view-divider" style="padding: 15px 5px 15px 5px;">{{categoryName}} {{subCategoryName}} Products</li>
+
+        <li class="table-view-cell" ng-repeat="product in products">
+            <small class="pull-left">{{product.Name}}</small><small class="pull-right">R {{product.Price| number:2}}</small>
+        </li>
+        <li class="table-view-cell" style="border-width:0; padding-left: 2px;">
+            <div class="media-body">
+                <button class="btn btn-positive btn-outlined" ng-click="backToSubCategories()">
+                    <span class="icon icon-left"></span>
+                    Categories
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>
+<footer></footer>

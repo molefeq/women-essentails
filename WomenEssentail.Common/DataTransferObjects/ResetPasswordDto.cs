@@ -8,5 +8,7 @@ namespace WomenEssentail.Common.DataTransferObjects
 {
     public class ResetPasswordDto
     {
+        public object ForgotPasswordKey { get; set; }
+        public object Password { get; set; }
     }
 }

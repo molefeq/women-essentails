@@ -5,9 +5,11 @@ using System.Net.Http;
 using System.Security.Claims;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using WomenEssentail.ServiceBusinessRules.Filters;
 
 namespace WomenEssentail.ServiceBusinessRules.Providers
 {
+//    [RequireHttps]
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class BaseApiController : ApiController
     {

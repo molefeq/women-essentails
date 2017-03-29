@@ -35,6 +35,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -44,8 +45,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataFilters\AccountSearchFilter.cs" />
+    <Compile Include="DataFilters\CompanySearchFilter.cs" />
+    <Compile Include="DataFilters\ProductPromotionsearchFilter.cs" />
+    <Compile Include="DataFilters\ProductSearchFilter.cs" />
+    <Compile Include="DataFilters\SearchFilter.cs" />
+    <Compile Include="DataFilters\SubCategorySearchFilter.cs" />
+    <Compile Include="DataHelper\CompanyDataObject.cs" />
+    <Compile Include="DataHelper\ImageInformation.cs" />
+    <Compile Include="DataHelper\ImageModel.cs" />
     <Compile Include="DataTransferObjects\AccountDto.cs" />
     <Compile Include="DataTransferObjects\AccountRoleDto.cs" />
+    <Compile Include="DataTransferObjects\AccountSummaryDto.cs" />
     <Compile Include="DataTransferObjects\AddressDto.cs" />
     <Compile Include="DataTransferObjects\Audit_AccountDto.cs" />
     <Compile Include="DataTransferObjects\Audit_AccountRoleDto.cs" />
@@ -59,25 +69,33 @@
     <Compile Include="DataTransferObjects\Audit_PromotionProductDto.cs" />
     <Compile Include="DataTransferObjects\Audit_RoleDto.cs" />
     <Compile Include="DataTransferObjects\Audit_RoleModuleDto.cs" />
+    <Compile Include="DataTransferObjects\CategoryDto.cs" />
     <Compile Include="DataTransferObjects\ChangePasswordDto.cs" />
     <Compile Include="DataTransferObjects\CompanyDto.cs" />
     <Compile Include="DataTransferObjects\CompanyProductDto.cs" />
+    <Compile Include="DataTransferObjects\CompanyRequestDto.cs" />
+    <Compile Include="DataTransferObjects\CompanySummaryDto.cs" />
     <Compile Include="DataTransferObjects\CompanyTypeDto.cs" />
     <Compile Include="DataTransferObjects\CompanyTypeProductDto.cs" />
     <Compile Include="DataTransferObjects\CountryDto.cs" />
+    <Compile Include="DataTransferObjects\DashboardDataDto.cs" />
     <Compile Include="DataTransferObjects\ExternalAuthenticationTypeDto.cs" />
     <Compile Include="DataTransferObjects\ModuleDto.cs" />
     <Compile Include="DataTransferObjects\OrganisationDto.cs" />
     <Compile Include="DataTransferObjects\PersonDto.cs" />
     <Compile Include="DataTransferObjects\ProductDto.cs" />
+    <Compile Include="DataTransferObjects\ProductSummaryDto.cs" />
     <Compile Include="DataTransferObjects\PromotionProductDto.cs" />
+    <Compile Include="DataTransferObjects\PromotionProductSummaryDto.cs" />
     <Compile Include="DataTransferObjects\ProvinceDto.cs" />
     <Compile Include="DataTransferObjects\ResetPasswordDto.cs" />
     <Compile Include="DataTransferObjects\RoleDto.cs" />
     <Compile Include="DataTransferObjects\RoleModuleDto.cs" />
     <Compile Include="DataTransferObjects\StatusDto.cs" />
+    <Compile Include="DataTransferObjects\SubCategoryDto.cs" />
     <Compile Include="DataTransferObjects\UserInformationDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\ImageResizer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,0 +1,30 @@
+﻿<div class="container-fluid">
+    <div id="landingPageContainer">
+        <div class="pageFilters">
+            <div class="buttonActionsContainer">
+                    <button ng-click="addOrganisation()" class="btnGreen">Add Organisation</button>
+            </div>
+            <div class="searchContainer">
+                <div class="input-group">
+                    <input type="text" ng-model="searchText" name="SearchText" class="SearchInput form-control" aria-describedby="sizing-addon2" /><span class="input-group-btn" id="sizing-addon2"><button><i class="fa fa-search"></i></button></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="module" ng-repeat="organisation in organisationsFactory.organisations">
+
+            <div class="moduleIcon" ng-if="organisation.LogoFileNamePath">
+                <img ng-attr-src="{{organisation.LogoFileNamePath}}" />
+            </div>
+            <p>
+                <h5>{{organisation.Name}}</h5>
+                <div class="moduleactions">
+                    <a class="edit btn btnGrey" ng-click="editOrganisation(organisation, $event)" href="#">Edit</a>
+                    <a class="edit btn btnGrey" ng-click="viewOrganisation(organisation, $event)" href="#">View</a>
+                </div>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'app/components/organisations/organisation/organisationModalView.html'"></div>

@@ -1,0 +1,377 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2E530E37-548E-4F79-BEDC-05273B4B0846}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WomenEssentail.MobileWeb</RootNamespace>
+    <AssemblyName>WomenEssentail.MobileWeb</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>1.8</TypeScriptToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="app\app.config.js" />
+    <Content Include="app\app.module.js" />
+    <Content Include="app\app.routes.js" />
+    <Content Include="app\app.run.js" />
+    <Content Include="app\components\core\errormodal.html" />
+    <Content Include="app\components\core\footer\footerView.html" />
+    <Content Include="app\components\core\header\headerController.js" />
+    <Content Include="app\components\core\header\headerView.html" />
+    <Content Include="app\components\home\homeController.js" />
+    <Content Include="app\components\home\views\homeView.html" />
+    <Content Include="app\components\main\mainController.js" />
+    <Content Include="app\components\main\mainView.html" />
+    <Content Include="app\components\salondirection\salonDirectionController.js" />
+    <Content Include="app\components\salondirection\salonDirectionFactory.js" />
+    <Content Include="app\components\salondirection\salonDirectionView.html" />
+    <Content Include="app\components\salons\salonsController.js" />
+    <Content Include="app\components\salons\salonsFactory.js" />
+    <Content Include="app\components\salons\salonsView.html" />
+    <Content Include="app\components\salon\salonController.js" />
+    <Content Include="app\components\salon\salonFactory.js" />
+    <Content Include="app\components\salon\salonView.html" />
+    <Content Include="app\constants.js" />
+    <Content Include="app\shared\controllers\appController.js" />
+    <Content Include="app\shared\directives\accessControlDirective.js" />
+    <Content Include="app\shared\directives\appGridDirective.js" />
+    <Content Include="app\shared\directives\appSubFormDirective.js" />
+    <Content Include="app\shared\directives\appTabsValidatorDirective.js" />
+    <Content Include="app\shared\directives\appValidatorDirective.js" />
+    <Content Include="app\shared\directives\buttonControlDirective.js" />
+    <Content Include="app\shared\directives\compareToValidatorDirective.js" />
+    <Content Include="app\shared\directives\convertToNumberDirective.js" />
+    <Content Include="app\shared\directives\menuHighlightDirective.js" />
+    <Content Include="app\shared\error\errorAlert.html" />
+    <Content Include="app\shared\error\errorController.js" />
+    <Content Include="app\shared\factories\appFactory.js" />
+    <Content Include="app\shared\factories\appHttpInterceptorFactory.js" />
+    <Content Include="app\shared\factories\companyApiFactory.js" />
+    <Content Include="app\shared\factories\dashboardApiFactory.js" />
+    <Content Include="app\shared\factories\errorFactory.js" />
+    <Content Include="app\shared\factories\lookupApiFactory.js" />
+    <Content Include="app\shared\factories\notificationFactory.js" />
+    <Content Include="app\shared\factories\productApiFactory.js" />
+    <Content Include="app\shared\factories\utilsFactory.js" />
+    <Content Include="app\shared\filters\percentageFormat.js" />
+    <Content Include="app\shared\objects\customgrid.js" />
+    <Content Include="app\shared\objects\subformvalidation.js" />
+    <Content Include="app\shared\objects\tabformvalidation.js" />
+    <Content Include="app\shared\objects\utils.js" />
+    <Content Include="assets\css\AdminLTE.css" />
+    <Content Include="assets\css\AdminLTE.min.css" />
+    <Content Include="assets\css\app.css" />
+    <Content Include="assets\css\app.min.css" />
+    <Content Include="assets\css\centerbox.css" />
+    <Content Include="assets\css\centerbox.min.css" />
+    <Content Include="assets\css\components\home.css">
+      <DependentUpon>home.less</DependentUpon>
+    </Content>
+    <Content Include="assets\css\components\home.min.css">
+      <DependentUpon>home.css</DependentUpon>
+    </Content>
+    <Content Include="assets\css\components\main.css">
+      <DependentUpon>main.less</DependentUpon>
+    </Content>
+    <Content Include="assets\css\components\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="assets\css\components\salons.css">
+      <DependentUpon>salons.less</DependentUpon>
+    </Content>
+    <Content Include="assets\css\components\salons.min.css">
+      <DependentUpon>salons.css</DependentUpon>
+    </Content>
+    <Content Include="assets\css\controls.css" />
+    <Content Include="assets\css\controls.min.css" />
+    <Content Include="assets\css\img\login-bg.jpeg" />
+    <Content Include="assets\css\modals.css" />
+    <Content Include="assets\css\modals.min.css" />
+    <Content Include="assets\img\loading-image.gif" />
+    <Content Include="assets\libs\angular-maps\angular-google-maps.js" />
+    <Content Include="assets\libs\angular-simple-logger\angular-simple-logger.js" />
+    <Content Include="assets\libs\angular-toastr\angular-toastr.css" />
+    <Content Include="assets\libs\angular-toastr\angular-toastr.js" />
+    <Content Include="assets\libs\angular-toastr\angular-toastr.min.css" />
+    <Content Include="assets\libs\angular-toastr\angular-toastr.min.js" />
+    <Content Include="assets\libs\angular-toastr\angular-toastr.tpls.js" />
+    <Content Include="assets\libs\angular-toastr\angular-toastr.tpls.min.js" />
+    <Content Include="assets\libs\angular\angular-animate.js" />
+    <Content Include="assets\libs\angular\angular-animate.min.js" />
+    <Content Include="assets\libs\angular\angular-aria.js" />
+    <Content Include="assets\libs\angular\angular-aria.min.js" />
+    <Content Include="assets\libs\angular\angular-breadcrumb.js" />
+    <Content Include="assets\libs\angular\angular-breadcrumb.min.js" />
+    <Content Include="assets\libs\angular\angular-cookies.js" />
+    <Content Include="assets\libs\angular\angular-cookies.min.js" />
+    <Content Include="assets\libs\angular\angular-file-upload-shim.min.js" />
+    <Content Include="assets\libs\angular\angular-file-upload.min.js" />
+    <Content Include="assets\libs\angular\angular-loader.js" />
+    <Content Include="assets\libs\angular\angular-loader.min.js" />
+    <Content Include="assets\libs\angular\angular-material-mocks.js" />
+    <Content Include="assets\libs\angular\angular-material.js" />
+    <Content Include="assets\libs\angular\angular-material.min.js" />
+    <Content Include="assets\libs\angular\angular-message-format.js" />
+    <Content Include="assets\libs\angular\angular-message-format.min.js" />
+    <Content Include="assets\libs\angular\angular-messages.js" />
+    <Content Include="assets\libs\angular\angular-messages.min.js" />
+    <Content Include="assets\libs\angular\angular-mocks.js" />
+    <Content Include="assets\libs\angular\angular-resource.js" />
+    <Content Include="assets\libs\angular\angular-resource.min.js" />
+    <Content Include="assets\libs\angular\angular-route.js" />
+    <Content Include="assets\libs\angular\angular-route.min.js" />
+    <Content Include="assets\libs\angular\angular-sanitize.js" />
+    <Content Include="assets\libs\angular\angular-sanitize.min.js" />
+    <Content Include="assets\libs\angular\angular-touch.js" />
+    <Content Include="assets\libs\angular\angular-touch.min.js" />
+    <Content Include="assets\libs\angular\angular-ui-router.js" />
+    <Content Include="assets\libs\angular\angular-ui-router.min.js" />
+    <Content Include="assets\libs\angular\angular.js" />
+    <Content Include="assets\libs\angular\angular.min.js" />
+    <Content Include="assets\libs\angular\angularjs-geolocation.min.js" />
+    <Content Include="assets\libs\angular\css\angular-material.css" />
+    <Content Include="assets\libs\angular\css\angular-material.min.css" />
+    <Content Include="assets\libs\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="assets\libs\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="assets\libs\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\libs\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\libs\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\libs\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\libs\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\libs\bootstrap\js\ui-bootstrap-tpls-2.4.0.js" />
+    <Content Include="assets\libs\bootstrap\js\ui-bootstrap-tpls-2.4.0.min.js" />
+    <Content Include="assets\libs\font-awesome\css\font-awesome.css" />
+    <Content Include="assets\libs\font-awesome\css\font-awesome.min.css" />
+    <Content Include="assets\libs\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\css\components\home.less" />
+    <Content Include="assets\css\components\main.less" />
+    <Content Include="assets\css\components\salons.less" />
+    <Content Include="app\components\home\views\home.less" />
+    <None Include="assets\libs\jquery\jquery-1.9.1.intellisense.js" />
+    <Content Include="assets\libs\jquery\jquery-1.9.1.js" />
+    <Content Include="assets\libs\jquery\jquery-1.9.1.min.js" />
+    <Content Include="assets\libs\jquery\jquery-2.1.4.js" />
+    <Content Include="assets\libs\jquery\jquery-2.1.4.min.js" />
+    <Content Include="assets\libs\lodash\lodash.js" />
+    <Content Include="assets\libs\onsenui\css-components-src\gulpfile.js" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\alert-dialog.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\button-bar.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\button.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\checkbox.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\dialog.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\fab.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\global.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\index.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\list.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\modal.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\notification.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\page.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\popover.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\progress-bar.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\progress-circular.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\radio-button.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\range.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\search-input.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\select.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\switch.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\tabbar.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\text-input.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\textarea.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\toolbar-button.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\toolbar.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\components\util.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\img\hamburger_dark.svg" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\img\light-grips.png" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\img\search.svg" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\license.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\onsen-css-components.css" />
+    <Content Include="assets\libs\onsenui\css-components-src\src\theme.css" />
+    <Content Include="assets\libs\onsenui\css\font_awesome\css\font-awesome.css" />
+    <Content Include="assets\libs\onsenui\css\font_awesome\css\font-awesome.min.css" />
+    <Content Include="assets\libs\onsenui\css\font_awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\libs\onsenui\css\ionicons\css\ionicons.css" />
+    <Content Include="assets\libs\onsenui\css\ionicons\css\ionicons.min.css" />
+    <Content Include="assets\libs\onsenui\css\ionicons\fonts\ionicons.svg" />
+    <Content Include="assets\libs\onsenui\css\material-design-iconic-font\css\material-design-iconic-font.css" />
+    <Content Include="assets\libs\onsenui\css\material-design-iconic-font\css\material-design-iconic-font.min.css" />
+    <Content Include="assets\libs\onsenui\css\material-design-iconic-font\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="assets\libs\onsenui\css\onsen-css-components.css" />
+    <Content Include="assets\libs\onsenui\css\onsenui.css" />
+    <Content Include="assets\libs\onsenui\css\preview.html" />
+    <Content Include="assets\libs\onsenui\js\angular-onsenui.js" />
+    <Content Include="assets\libs\onsenui\js\angular-onsenui.min.js" />
+    <Content Include="assets\libs\onsenui\js\onsenui.js" />
+    <Content Include="assets\libs\onsenui\js\onsenui.min.js" />
+    <Content Include="assets\libs\ratchet-v2.0.2\css\ratchet-theme-android.css" />
+    <Content Include="assets\libs\ratchet-v2.0.2\css\ratchet-theme-android.min.css" />
+    <Content Include="assets\libs\ratchet-v2.0.2\css\ratchet-theme-ios.css" />
+    <Content Include="assets\libs\ratchet-v2.0.2\css\ratchet-theme-ios.min.css" />
+    <Content Include="assets\libs\ratchet-v2.0.2\css\ratchet.css" />
+    <Content Include="assets\libs\ratchet-v2.0.2\css\ratchet.min.css" />
+    <Content Include="assets\libs\ratchet-v2.0.2\fonts\ratchicons.svg" />
+    <Content Include="assets\libs\ratchet-v2.0.2\js\ratchet.js" />
+    <Content Include="assets\libs\ratchet-v2.0.2\js\ratchet.min.js" />
+    <Content Include="assets\libs\underscore\underscore-min.js" />
+    <Content Include="assets\libs\underscore\underscore.js" />
+    <Content Include="index.html" />
+    <Content Include="packages.config" />
+    <Content Include="assets\css\app.less" />
+    <Content Include="assets\css\centerbox.less" />
+    <Content Include="assets\css\controls.less" />
+    <Content Include="assets\css\definitions.less" />
+    <Content Include="assets\css\modals.less" />
+    <Content Include="assets\libs\bootstrap\css\bootstrap-theme.css.map" />
+    <Content Include="assets\libs\bootstrap\css\bootstrap-theme.min.css.map" />
+    <Content Include="assets\libs\bootstrap\css\bootstrap.css.map" />
+    <Content Include="assets\libs\bootstrap\css\bootstrap.min.css.map" />
+    <Content Include="assets\libs\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\libs\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\libs\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\libs\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="assets\libs\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\libs\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\libs\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\libs\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\libs\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="assets\libs\jquery\jquery-1.9.1.min.map" />
+    <Content Include="assets\libs\onsenui\css\font_awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\libs\onsenui\css\font_awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\libs\onsenui\css\font_awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\libs\onsenui\css\font_awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="assets\libs\onsenui\css\font_awesome\fonts\FontAwesome.otf" />
+    <Content Include="assets\libs\onsenui\css\ionicons\fonts\ionicons.eot" />
+    <Content Include="assets\libs\onsenui\css\ionicons\fonts\ionicons.ttf" />
+    <Content Include="assets\libs\onsenui\css\ionicons\fonts\ionicons.woff" />
+    <Content Include="assets\libs\onsenui\css\material-design-iconic-font\fonts\Material-Design-Iconic-Font.eot" />
+    <Content Include="assets\libs\onsenui\css\material-design-iconic-font\fonts\Material-Design-Iconic-Font.ttf" />
+    <Content Include="assets\libs\onsenui\css\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff" />
+    <Content Include="assets\libs\onsenui\css\material-design-iconic-font\fonts\Material-Design-Iconic-Font.woff2" />
+    <Content Include="assets\libs\onsenui\css-components-src\package.json" />
+    <Content Include="assets\libs\onsenui\css-components-src\README.md" />
+    <Content Include="assets\libs\onsenui\css-components-src\templates\preview.html.eco" />
+    <Content Include="assets\libs\onsenui\css-components-src\yarn.lock" />
+    <Content Include="assets\libs\ratchet-v2.0.2\fonts\ratchicons.eot" />
+    <Content Include="assets\libs\ratchet-v2.0.2\fonts\ratchicons.ttf" />
+    <Content Include="assets\libs\ratchet-v2.0.2\fonts\ratchicons.woff" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="app\components\register\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52955</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:52955/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

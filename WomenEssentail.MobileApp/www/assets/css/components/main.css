@@ -1,0 +1,24 @@
+﻿html body .wrapper header {
+  display: none;
+}
+html body .wrapper main {
+  margin-top: 0;
+  background: url('../img/login-bg.jpeg');
+  min-height: 800px;
+  position: relative;
+  padding: 15px;
+}
+html body .wrapper main .left-box {
+  display: inline-block;
+  width: 40%;
+  max-width: 120px;
+}
+@media (max-width: 767px) {
+  html body .wrapper header {
+    text-align: center;
+  }
+  html body .wrapper main .center-box {
+    min-height: 600px;
+    padding-top: 50%;
+  }
+}

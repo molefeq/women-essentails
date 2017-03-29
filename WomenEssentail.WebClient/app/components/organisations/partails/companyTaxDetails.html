@@ -1,0 +1,64 @@
+﻿<ng-form name="frmCompanyDetails">
+    <div class="form-group">
+        <label for="Firstnames" class="col-md-2 col-xs-12 control-label">Trading Name*</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.Name" placeholder="Enter Company Name" ng-maxlength="200" ng-required="true"
+                       name="Name" id="Name"
+                       data-required-msg="Company Name are required." data-maxlength-msg="Company Name cannot be more than 200 characters." />
+                <p ng-show="frmCompanyDetails['Name'].$invalid" class="help-block" data-val-for="Name"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">PAYE Reference Number</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.EmployeeNumberPrefix" placeholder="Enter Employee No Prefix" ng-maxlength="100" custom="true"
+                       name="EmployeeNumberPrefix" id="EmployeeNumberPrefix" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['EmployeeNumberPrefix'].$invalid" class="help-block" data-val-for="EmployeeNumberPrefix"></p>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">SDL Reference Number</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.EmployeeNumberPrefix" placeholder="Enter Employee No Prefix" ng-maxlength="100" custom="true"
+                       name="EmployeeNumberPrefix" id="EmployeeNumberPrefix" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['EmployeeNumberPrefix'].$invalid" class="help-block" data-val-for="EmployeeNumberPrefix"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">UIF Reference Number</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.PhysicalCity" placeholder="Enter Physical Address City" ng-maxlength="100" custom="true"
+                       name="PhysicalCity" id="PhysicalCity" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['PhysicalCity'].$invalid" class="help-block" data-val-for="PhysicalCity"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">Contact Person</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.PhysicalProvince" placeholder="Enter Physical Address Province" ng-maxlength="100" custom="true"
+                       name="PhysicalProvince" id="PhysicalProvince" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['PhysicalProvince'].$invalid" class="help-block" data-val-for="PhysicalProvince"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">Trade Classification</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.PhysicalProvince" placeholder="Enter Physical Address Province" ng-maxlength="100" custom="true"
+                       name="PhysicalProvince" id="PhysicalProvince" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['PostalAddressLine1'].$invalid" class="help-block" data-val-for="PostalAddressLine1"></p>
+            </div>
+        </div>
+    </div>
+</ng-form>

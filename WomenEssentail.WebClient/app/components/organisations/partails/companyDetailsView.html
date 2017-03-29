@@ -1,0 +1,116 @@
+﻿<ng-form name="frmCompanyDetails">
+    <div class="form-group">
+        <label for="Firstnames" class="col-md-2 col-xs-12 control-label">Name*</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.Name" placeholder="Enter Company Name" ng-maxlength="200" ng-required="true"
+                       name="Name" id="Name"
+                       data-required-msg="Company Name are required." data-maxlength-msg="Company Name cannot be more than 200 characters." />
+                <p ng-show="frmCompanyDetails['Name'].$invalid" class="help-block" data-val-for="Name"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">Employee No Prefix</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.EmployeeNumberPrefix" placeholder="Enter Employee No Prefix" ng-maxlength="100" custom="true"
+                       name="EmployeeNumberPrefix" id="EmployeeNumberPrefix" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['EmployeeNumberPrefix'].$invalid" class="help-block" data-val-for="EmployeeNumberPrefix"></p>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">Physical Address</label>
+        <div class="col-md-10 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <textarea type="text" ng-model="model.PhysicalAddressLine1" placeholder="Enter Physical Address" ng-maxlength="100" custom="true"
+                          name="PhysicalAddressLine1" id="PhysicalAddressLine1" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters."></textarea>
+                <p ng-show="frmCompanyDetails['PhysicalAddressLine1'].$invalid" class="help-block" data-val-for="PhysicalAddressLine1"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">City</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.PhysicalCity" placeholder="Enter Physical Address City" ng-maxlength="100" custom="true"
+                       name="PhysicalCity" id="PhysicalCity" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['PhysicalCity'].$invalid" class="help-block" data-val-for="PhysicalCity"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">Province</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.PhysicalProvince" placeholder="Enter Physical Address Province" ng-maxlength="100" custom="true"
+                       name="PhysicalProvince" id="PhysicalProvince" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['PhysicalProvince'].$invalid" class="help-block" data-val-for="PhysicalProvince"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">Postal Address</label>
+        <div class="col-md-10 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <textarea ng-model="model.PostalAddressLine1" placeholder="Enter Postal Address" ng-maxlength="100" custom="true"
+                          name="PostalAddressLine1" id="PostalAddressLine1" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters."></textarea>
+                <p ng-show="frmCompanyDetails['PostalAddressLine1'].$invalid" class="help-block" data-val-for="PostalAddressLine1"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">City</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.PostalCity" placeholder="Enter Postal Address City" ng-maxlength="100" custom="true"
+                       name="PostalCity" id="PostalCity" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['PostalCity'].$invalid" class="help-block" data-val-for="PostalCity"></p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">Province</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.PostalProvince" placeholder="Enter Postal Address Province" ng-maxlength="100" custom="true"
+                       name="PostalProvince" id="PostalProvince" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['PostalProvince'].$invalid" class="help-block" data-val-for="PostalProvince"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">Telephone Number</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.TelephoneNumber" placeholder="Enter Telephone Number" ng-maxlength="100" custom="true"
+                       name="TelephoneNumber" id="TelephoneNumber" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['TelephoneNumber'].$invalid" class="help-block" data-val-for="TelephoneNumber"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">Fax Number</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.FaxNumber" placeholder="Enter Fax Number" ng-maxlength="100" custom="true"
+                       name="FaxNumber" id="FaxNumber" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['FaxNumber'].$invalid" class="help-block" data-val-for="FaxNumber"></p>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Lastname" class="col-md-2 col-xs-12 control-label">Email Address</label>
+        <div class="col-md-4 col-xs-12 form-element">
+            <div class="col-md-12 col-xs-12">
+                <input type="text" ng-model="model.EmailAddress" placeholder="Enter Email Address" ng-maxlength="100" custom="true"
+                       name="EmailAddress" id="EmailAddress" data-maxlength-msg="Enter Employee No Prefix cannot be more than 100 characters." />
+                <p ng-show="frmCompanyDetails['EmailAddress'].$invalid" class="help-block" data-val-for="EmailAddress"></p>
+            </div>
+        </div>
+    </div>
+</ng-form>

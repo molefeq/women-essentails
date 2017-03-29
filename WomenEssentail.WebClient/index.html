@@ -1,10 +1,158 @@
 ﻿<!DOCTYPE html>
-<html>
+<html ng-app="app">
 <head>
     <title></title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="assets/libs/angular-toastr/angular-toastr.min.css" rel="stylesheet" />
+    <link href="assets/css/AdminLTE.css" rel="stylesheet" />
+
+    <link href="assets/css/app.min.css" rel="stylesheet" />
+    <link href="assets/css/controls.min.css" rel="stylesheet" />
+    <link href="assets/css/centerbox.min.css" rel="stylesheet" />
+    <link href="assets/css/modals.min.css" rel="stylesheet" />
+
+
+    <script type="text/javascript" src="app/shared/objects/utils.js"></script>
+    <script type="text/javascript" src="app/shared/objects/customgrid.js"></script>
+    <script type="text/javascript" src="app/shared/objects/subformvalidation.js"></script>
+    <script type="text/javascript" src="app/shared/objects/tabformvalidation.js"></script>
 </head>
 <body>
+    <div class="wrapper">
 
+        <header class="main-header" role="banner" ng-controller="appController">
+            <a ng-click="goToHome($event);" href="#" class="logo">Woman Essentails<b>Admin</b></a>
+            <nav class="navbar navbar-static-top" role="navigation">
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav" ng-if="appFactory.IsUserLogged">
+                        <li class="dropdown user user-menu">
+                            <a class="dropdown-toggle" data-toggle="dropdown" style="color:white;">
+                                <i class="fa fa-user"></i>
+                                <!--<span class="hidden-xs">Alexander Pierce</span>-->
+                            </a>
+                            <ul class="dropdown-menu">
+                                <!-- User image -->
+                                <li class="user-header">
+                                    <p style="color:black">
+                                        {{appFactory.UserDisplayName}}
+                                        <small>Member since {{appFactory.User.CreateDate | date: 'MMM. yyyy'}}</small>
+                                    </p>
+                                </li>
+                                <!-- Menu Body -->
+                                <li class="user-body">
+                                    <div class="col-xs-12 text-left">
+                                        <a href="#" ng-click="changePassword($event)">Change Password</a>
+                                    </div>
+                                </li>
+                                <!-- Menu Footer-->
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a class="btn btn-default btn-flat" href="#" ng-click="viewProfile($event)">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a class="btn btn-default btn-flat" href="#" ng-click="appFactory.LogOut($event)">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <main>
+            <div class="viewsContainer" ui-view="" ng-cloak></div>
+        </main>
+
+        <footer ui-view="footer"></footer>
+    </div>
+
+    <div ng-include="'app/shared/error/errorAlert.html'"></div>
+
+    <script src="assets/libs/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-animate.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-aria.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-mocks.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-file-upload-shim.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-file-upload.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-resource.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angular-breadcrumb.js"></script>
+    <script type="text/javascript" src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular/angularjs-geolocation.min.js"></script>
+    <script type="text/javascript" src="assets/libs/bootstrap/js/ui-bootstrap-tpls-2.4.0.min.js"></script>
+    <script type="text/javascript" src="assets/libs/angular-toastr/angular-toastr.tpls.min.js"></script>
+    <script type="text/javascript" src="assets/libs/underscore/underscore.js"></script>
+    <script type="text/javascript" src="app/app.module.js"></script>
+    <script type="text/javascript" src="app/app.routes.js"></script>
+    <script type="text/javascript" src="app/app.config.js"></script>
+    <script type="text/javascript" src="app/app.run.js"></script>
+    <script type="text/javascript" src="app/constants.js"></script>
+
+    <script type="text/javascript" src="app/shared/error/errorController.js"></script>
+
+    <script type="text/javascript" src="app/shared/directives/appValidatorDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/appTabsValidatorDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/buttonControlDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/compareToValidatorDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/appGridDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/convertToNumberDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/appSubFormDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/menuHighlightDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/accessControlDirective.js"></script>
+
+    <script type="text/javascript" src="app/shared/factories/appFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/accountApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/organisationApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/roleApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/companyApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/utilsFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/moduleApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/appHttpInterceptorFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/dashboardApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/lookupApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/productApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/promotionProductApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/errorFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/notificationFactory.js"></script>
+
+    <script type="text/javascript" src="app/shared/filters/percentageFormat.js"></script>
+
+    <script type="text/javascript" src="app/shared/controllers/appController.js"></script>
+
+    <script type="text/javascript" src="app/components/login/loginController.js"></script>
+    <script type="text/javascript" src="app/components/login/loginFactory.js"></script>
+
+    <script type="text/javascript" src="app/components/forgotpassword/forgotPasswordController.js"></script>
+    <script type="text/javascript" src="app/components/forgotpassword/resetPasswordController.js"></script>
+    <script type="text/javascript" src="app/components/forgotpassword/forgotPasswordFactory.js"></script>
+
+    <script type="text/javascript" src="app/components/changepassword/changePasswordController.js"></script>
+    <script type="text/javascript" src="app/components/changepassword/changePasswordFactory.js"></script>
+
+    <script type="text/javascript" src="app/components/home/homeController.js"></script>
+
+    <script type="text/javascript" src="app/components/salons/salonsController.js"></script>
+    <script type="text/javascript" src="app/components/salons/modals/saveSalonModalController.js"></script>
+    <script type="text/javascript" src="app/components/salons/salonsFactory.js"></script>
+
+    <script type="text/javascript" src="app/components/products/Modals/saveProductModalController.js"></script>
+    <script type="text/javascript" src="app/components/products/productsController.js"></script>
+    <script type="text/javascript" src="app/components/products/productsFactory.js"></script>
+
+    <script type="text/javascript" src="app/components/companyusers/companyUsersController.js"></script>
+    <script type="text/javascript" src="app/components/companyusers/companyUsersFactory.js"></script>
+    <script type="text/javascript" src="app/components/companyusers/Modals/companyUserModalController.js"></script>
+
+    <script type="text/javascript" src="app/components/promotionproducts/Modals/savePromotionProductModalController.js"></script>
+    <script type="text/javascript" src="app/components/promotionproducts/promotionProductsController.js"></script>
+    <script type="text/javascript" src="app/components/promotionproducts/promotionProductsFactory.js"></script>
 </body>
 </html>

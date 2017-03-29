@@ -1,0 +1,24 @@
+﻿<header class="bar bar-nav">
+    <a class="btn btn-link btn-nav pull-left" href="#" data-transition="slide-out" ng-click="goToSalons($event)">
+        <span class="icon icon-left-nav"></span>
+        Back
+    </a>
+    <h1 class="title">Women's Essentials</h1>
+</header>
+<div class="content content-padded">
+    <div id='loadingmessage' ng-show="isLoading">
+        <div><p>{{loadingMessage}}</p><img src="/assets/img/loading-image.gif" /></div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div id="map-canvas">
+                <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom">
+                    <marker coords="marker.center"></marker>
+                </ui-gmap-google-map>
+            </div>
+            <div id="directionsList" ng-show="showList" class="panel panel-primary"></div>
+        </div>
+    </div>
+</div>
+<footer></footer>
+

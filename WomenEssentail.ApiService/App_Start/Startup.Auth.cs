@@ -11,16 +11,27 @@ using WomenEssentail.ServiceBusinessRules.Providers;
 
 using SimpleInjector;
 using System;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
 
-namespace WomenEssentail.ApiService.App_Start
+namespace WomenEssentail.ApiService
 {
     public partial class Startup
     {
         public static OAuthBearerAuthenticationOptions OAuthBearerOptions { get; private set; }
+        public static GoogleOAuth2AuthenticationOptions googleAuthOptions { get; private set; }
 
         public void ConfigureAuth(IAppBuilder appBuilder)
         {
             BearerTokenAuthorization(appBuilder);
+            googleAuthOptions = new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "117641525700-n4l13nvcv36v2ueaegpo5762mot6ob1t.apps.googleusercontent.com",
+                ClientSecret = "mEKnZNEsTbQtFFp9iSUp_k_Y",
+                Provider = new GoogleAuthProvider()
+            };
+
+            appBuilder.UseGoogleAuthentication(googleAuthOptions);
         }
 
         private void BearerTokenAuthorization(IAppBuilder appBuilder)

@@ -1,0 +1,41 @@
+﻿
+<header class="main-header" role="banner" ng-controller="appController">
+    <a ng-click="goToHome($event);" href="#" class="logo">Woman Essentails<b>Admin</b></a>
+    <nav class="navbar navbar-static-top" role="navigation">
+        <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav" ng-if="appFactory.IsUserLogged">
+                <li class="dropdown user user-menu">
+                    <a class="dropdown-toggle" data-toggle="dropdown" style="color:white;">
+                        <i class="fa fa-user"></i>
+                        <!--<span class="hidden-xs">Alexander Pierce</span>-->
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <p style="color:black">
+                                {{appFactory.UserDisplayName}}
+                                <small>Member since {{appFactory.User.CreateDate | date: 'MMM. yyyy'}}</small>
+                            </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <li class="user-body">
+                            <div class="col-xs-12 text-left">
+                                <a href="#" ng-click="changePassword($event)">Change Password</a>
+                            </div>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a class="btn btn-default btn-flat" href="#" ng-click="viewProfile($event)">Profile</a>
+                            </div>
+                            <div class="pull-right">
+                                <a class="btn btn-default btn-flat" href="#" ng-click="appFactory.LogOut($event)">Sign out</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
+

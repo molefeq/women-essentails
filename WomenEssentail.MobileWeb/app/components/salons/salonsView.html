@@ -1,0 +1,46 @@
+﻿
+<header class="bar bar-nav">
+    <a class="btn btn-link btn-nav pull-left" href="#" data-transition="slide-out"  ng-click="goToMain($event)">
+        <span class="icon icon-left-nav"></span>
+        Back
+    </a>
+    <h1 class="title">Women's Essentials</h1>
+</header>
+<div class="bar bar-standard bar-header-secondary">
+    <form ng-submit="searchSalons()">
+        <input type="search" placeholder="Search" ng-model="SearchFilter.SearchText">
+    </form>
+</div>
+<div class="content">
+
+    <div id='loadingmessage' ng-show="isLoading">
+        <div><p>{{loadingMessage}}</p><img src="/assets/img/loading-image.gif" /></div>
+    </div>
+
+    <ul class="table-view">
+        <li class="table-view-cell media" ng-repeat="salon in salonsFactory.salons">
+            <a data-transition="slide-in">
+                <img class="media-object pull-left" ng-attr-src="{{salon.RelativeFileName}}" alt="{{salon.Name}}">
+                <div class="media-body">
+                    {{salon.Name}}
+                    <p class="col-lg-12">
+                        <small ng-if="salon.PhysicalAddressLine1">{{salon.PhysicalAddressLine1}} <br /></small>
+                        <small ng-if="salon.PhysicalAddressLine2">{{salon.PhysicalAddressLine2}}<br /></small>
+                        <small ng-if="salon.PhysicalAddressSuburb">{{salon.PhysicalAddressSuburb}}<br /></small>
+                        <small ng-if="salon.PhysicalAddressCity">{{salon.PhysicalAddressCity}}<br /></small>
+                        <small>{{salon.Distance}} km<br /></small>
+                    </p>
+                </div>
+            </a>
+            <div class="col-lg-12">
+                <button class="btn pull-left" ng-click="goToSalon(salon)">
+                    View Details
+                </button>
+                <button class="btn pull-right" ng-click="goToSalonDirection(salon)">
+                    Take Me There
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>
+<footer></footer>

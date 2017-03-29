@@ -1,0 +1,30 @@
+﻿<header>
+    <button class="btn btn-default" ng-click="goToMain()">Back</button>
+</header>
+<main>
+    <div class="salons-container">
+        <div ng-repeat="salon in salonsFactory.salons" ng-click="goToSalon(salon);" class="salon-container">
+            <div class="salon-left-box">
+                <div class="salon-name">{{salon.Name}}</div>
+                <div class="salon-address">
+                    <div ng-if="salon.PhysicalAddressLine1">{{salon.PhysicalAddressLine1}}</div>
+                    <div ng-if="salon.PhysicalAddressLine2">{{salon.PhysicalAddressLine2}}</div>
+                    <div ng-if="salon.PhysicalAddressSuburb">{{salon.PhysicalAddressSuburb}}</div>
+                    <div ng-if="salon.PhysicalAddressCity">{{salon.PhysicalAddressCity}}</div>
+                </div>
+            </div>
+            <div class="salon-right-box">
+                <div class="salon-logo">
+                    <img ng-attr-src="{{salon.RelativeFileName}}"/>
+                </div>
+                <div>
+                    <button ng-click="goToSalonDirection(salon)">Take Me There</button>
+                </div>
+            </div>
+        </div>    
+    </div>
+</main>
+<footer></footer>
+
+
+<link href="../../../assets/css/components/salons.min.css" rel="stylesheet" />

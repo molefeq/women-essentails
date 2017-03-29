@@ -162,11 +162,6 @@ namespace WomenEssentail.ServiceBusinessRules.Providers
                 claims.Add(new Claim("CompanyId", userInformationDto.CompanyId.Value.ToString()));
             }
 
-            if (userInformationDto.EmployeeId != null)
-            {
-                claims.Add(new Claim("EmployeeId", userInformationDto.EmployeeId.Value.ToString()));
-            }
-
             //claims.Add(new Claim("RoleId", userInformationDto.RoleId.ToString()));
             //claims.Add(new Claim("RoleName", userInformationDto.RoleName));
 

@@ -31,7 +31,7 @@ namespace WomenEssentail.ServiceBusinessRules.Utilities
 
         public void Log()
         {
-            ILog log = log4net.LogManager.GetLogger(typeof(EACController));
+            //ILog log = log4net.LogManager.GetLogger(typeof(EACController));
 
         }
     }

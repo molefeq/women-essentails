@@ -12,6 +12,7 @@ using WomenEssentail.Common.DataTransferObjects;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using WomenEssentail.Common.DataFilters;
 
 namespace WomenEssentail.DataAccess.Repositories
 {
@@ -21,9 +22,16 @@ namespace WomenEssentail.DataAccess.Repositories
 			: base(new StoredProcedureManager(connection)) 
 		{
 		}
+        public Result<CompanyTypeDto> Get(SearchFilter searchFilter, Func<SqlDataReader, CompanyTypeDto> companyTypeMapper)
+        {
+            List<SqlQueryParameter> sqlQueryParameters = GetPagedDataParameters(searchFilter.PageData);
 
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "SearchText ", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = searchFilter.SearchText });
 
-		public Response<CompanyTypeDto> Save(CompanyTypeDto companyTypeDto, Func<SqlDataReader, CompanyTypeDto> companyTypeDtoMapper) 
+            return GetPagedEntities("CompanyTypesFetch", companyTypeMapper, sqlQueryParameters.ToArray());
+        }
+
+        public Response<CompanyTypeDto> Save(CompanyTypeDto companyTypeDto, Func<SqlDataReader, CompanyTypeDto> companyTypeDtoMapper) 
 		{
 			SqlQueryParameter[] sqlQueryParameters = GetSaveParameters(companyTypeDto);
 			string storedProcedureName = GetCrudStoredProcedureName(companyTypeDto.CrudStatus);

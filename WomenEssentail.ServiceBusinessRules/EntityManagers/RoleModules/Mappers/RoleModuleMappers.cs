@@ -1,12 +1,12 @@
 using Libraries.Common.Extensions;
 
-using WomenEssentail.Common.DataTransferObjects;
-
 using System.Data.SqlClient;
+
+using WomenEssentail.Common.DataTransferObjects;
 
 namespace WomenEssentail.ServiceBusinessRules.EntityManagers.RoleModules.Mappers
 {
-	public class RoleModuleMappers 
+    public class RoleModuleMappers 
 	{
 		private static RoleModuleMappers _Instance;
 
@@ -32,8 +32,10 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.RoleModules.Mappers
 
 			roleModuleDto.Id = sqlDataReader["Id"].ToInteger();
 			roleModuleDto.ModuleId = sqlDataReader["ModuleId"].ToInteger();
-			roleModuleDto.RoleId = sqlDataReader["RoleId"].ToInteger();
-			roleModuleDto.StatusId = sqlDataReader["StatusId"].ToInteger();
+            roleModuleDto.ModuleName = sqlDataReader["ModuleName"].ToString();
+            roleModuleDto.RoleId = sqlDataReader["RoleId"].ToInteger();
+            roleModuleDto.RoleName = sqlDataReader["RoleName"].ToString();
+            roleModuleDto.StatusId = sqlDataReader["StatusId"].ToInteger();
 			roleModuleDto.CreateDate = sqlDataReader["CreateDate"].ToDateTime();
 			roleModuleDto.CreateUserId = sqlDataReader["CreateUserId"].ToInteger();
 			roleModuleDto.EditDate = sqlDataReader["EditDate"].ToDateTime();

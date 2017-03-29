@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
+using WomenEssentail.ServiceBusinessRules.ExceptionHandlers;
 
 namespace WomenEssentail.ApiService
 {
@@ -16,9 +15,12 @@ namespace WomenEssentail.ApiService
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Services.Add(typeof(IExceptionLogger), new GlobalExceptionLogger());
+            config.Services.Replace(typeof(IExceptionHandler), new GlobalExceptionHandler());
         }
     }
 }

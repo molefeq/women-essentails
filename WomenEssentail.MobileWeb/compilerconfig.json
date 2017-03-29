@@ -1,0 +1,30 @@
+﻿[
+  {
+    "outputFile": "assets/css/app.css",
+    "inputFile": "assets/css/app.less"
+  },
+  {
+    "outputFile": "assets/css/components/login.css",
+    "inputFile": "assets/css/components/login.less"
+  },
+  {
+    "outputFile": "assets/css/components/home.css",
+    "inputFile": "assets/css/components/home.less"
+  },
+  {
+    "outputFile": "assets/css/components/main.css",
+    "inputFile": "assets/css/components/main.less"
+  },
+  {
+    "outputFile": "assets/css/components/salons.css",
+    "inputFile": "assets/css/components/salons.less"
+  },
+  {
+    "outputFile": "assets/css/controls.css",
+    "inputFile": "assets/css/controls.less"
+  },
+  {
+    "outputFile": "assets/css/centerbox.css",
+    "inputFile": "assets/css/centerbox.less"
+  }
+]

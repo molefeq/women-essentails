@@ -31,8 +31,10 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyTypes.Mapper
 			CompanyTypeDto companyTypeDto = new CompanyTypeDto();
 
 			companyTypeDto.Id = sqlDataReader["Id"].ToInteger();
+            companyTypeDto.Name = sqlDataReader["Name"].ToString();
+            companyTypeDto.Code = sqlDataReader["Code"].ToString();
 
-			return companyTypeDto;
+            return companyTypeDto;
 		}
 
 	}

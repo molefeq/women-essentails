@@ -1,0 +1,72 @@
+﻿<div class="content-wrapper" style="min-height: 873px;">
+    <section class="content-header">
+        <h1>
+            Salons
+            <!--<small>preview of simple tables</small>-->
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#" ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <!--<h3 class="box-title">Salons</h3>-->
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary pull-left" ng-click="addSalon()"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="box-tools">
+                        <div class="input-group">
+                            <input name="table_search" class="form-control input-sm pull-right" style="width: 250px;" type="text" placeholder="Search" ng-model="SearchFilter.SearchText">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-default" ng-click="searchSalons()"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding" app-grid="salonsGrid" app-grid-options="salonsGridOptions">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr ng-repeat="salon in salonsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
+                                <td>{{salon.Name}}</td>
+                                <td>{{salon.CreateDate | date:'dd/MM/yyyy'}}</td>
+                                <td>
+                                    <div class="animate-switch-container" ng-switch on="salon.StatusCode">
+                                        <span ng-switch-when="NEW" class="label label-success">{{salon.StatusName}}</span>
+                                        <span ng-switch-when="DELETED"class="label label-danger">{{salon.StatusName}}</span>
+                                        <span ng-switch-when="ACTIVE" class="label label-primary">{{salon.StatusName}}</span>
+                                        <span ng-switch-when="INACTIVE" class="label label-warning">{{salon.StatusName}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <small class="action-label label label-info" ng-click="editSalon(salon);"><i class="fa fa-pencil"></i> Edit</small>
+                                    <small class="action-label label label-info" ng-click="deleteSalon(salon);"><i class="fa fa-remove"></i> Delete</small>
+                                    <small class="action-label label label-info" ng-click="goToUsers(salon);">{{salon.TotalUsers}} users</small>
+                                    <small class="action-label label label-info" ng-click="goToProducts(salon);">{{salon.TotalProducts}} products</small>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix" ng-show="salonsGrid.Paging.Pages.length > 0">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li ng-click="salonsGrid.SetPage($event, 1)" ng-disabled="salonsGrid.Paging.IsFirstPage"><a href="#">«</a></li>
+                        <li ng-repeat="page in salonsGrid.Paging.Pages" ng-click="salonsGrid.SetPage($event, page)" ng-disabled="salonsGrid.Paging.PageIndex==page"><a href="#">{{page}}</a></li>
+                        <li><a href="#" ng-click="salonsGrid.SetPage($event, salonsGrid.Paging.TotalPages)" ng-disabled="salonsGrid.Paging.IsLastPage">»</a></li>
+                    </ul>
+                </div>
+            </div><!-- /.box -->
+        </div>
+    </section>
+</div>
+
+<div ng-include="'app/components/salons/modals/saveSalonModalView.html'"></div>

@@ -1,0 +1,41 @@
+﻿@import "../definitions";
+
+html {
+    body {
+        .wrapper {
+            header {
+                display: none;
+            }
+
+            main {
+                margin-top: 0;
+                background: url('../img/login-bg.jpeg');
+                min-height: 800px;
+                position: relative;
+                padding: 15px;
+
+                .left-box {
+                    display:inline-block;
+                    width:40%;
+                    max-width: 120px;
+                }
+            }
+        }
+
+
+        @media (max-width: 767px) {
+            .wrapper {
+                header {
+                    text-align: center;
+                }
+
+                main {
+                    .center-box {
+                        min-height: 600px;
+                        padding-top: 50%;
+                    }
+                }
+            }
+        }
+    }
+}

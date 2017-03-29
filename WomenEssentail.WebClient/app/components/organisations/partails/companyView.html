@@ -1,0 +1,16 @@
+﻿<script type="text/ng-template" id="myModalContent.html">
+    <div class="modal-body">
+        <uib-tabset active="active">
+            <uib-tab index="0" heading="Company Detalis" active="tab.active">
+                <div ui-view="companydetails"></div>
+            </uib-tab>
+            <uib-tab index="1" heading="Company Tax Detalis">
+                <div ui-view="companytaxdetails"></div>
+            </uib-tab>
+        </uib-tabset>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btnGrey" type="button" ng-click="ok()">OK</button>
+        <button class="btn btnGrey" type="button" ng-click="cancel()">Cancel</button>
+    </div>
+</script>

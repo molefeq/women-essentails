@@ -1,0 +1,47 @@
+﻿@import "../definitions";
+
+html {
+    body {
+        .wrapper {
+            #home-page {
+
+                main {
+                    min-height: 800px;
+                    position: relative;
+
+                    .center-box {
+                        width: 100px;
+                        margin: auto;
+                        position: relative;
+                        height: 100%;
+                        min-height: 800px;
+                        padding-top: 10%;
+
+                        button {
+                            background: @white;
+                            color: @text-color;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        @media (max-width: 767px) {
+            .wrapper {
+                #home-page {
+                    header {
+                        text-align: center;
+                    }
+
+                    main {
+                        .center-box {
+                            min-height: 600px;
+                            padding-top: 50%;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,73 @@
+﻿<div class="content-wrapper" style="min-height: 873px;">
+    <section class="content-header">
+        <h1>
+            {{productsFactory.salon.Name}} Products
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#" ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#" ng-click="goToSalons($event);"><i class="fa fa-"></i> Salons</a></li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <!--<h3 class="box-title">Salons</h3>-->
+                    <div class="input-group-btn">
+                        <button class="btn btn-primary pull-left" ng-click="addProduct()"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="box-tools">
+                        <div class="input-group">
+                            <input name="table_search" class="form-control input-sm pull-right" style="width: 250px;" type="text" placeholder="Search" ng-model="SearchFilter.SearchText">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-default" ng-click="searchProducts()"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding" app-grid="productsGrid" app-grid-options="productsGridOptions">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th>Name</th>
+                                <th>Price</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr ng-repeat="product in productsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
+                                <td>{{product.Name}}</td>
+                                <td>{{product.Price}}</td>
+                                <td>{{product.CreateDate | date:'dd/MM/yyyy'}}</td>
+                                <td>
+                                    <div class="animate-switch-container" ng-switch on="product.StatusCode">
+                                        <span ng-switch-when="NEW" class="label label-success">{{product.StatusName}}</span>
+                                        <span ng-switch-when="DELETED" class="label label-danger">{{product.StatusName}}</span>
+                                        <span ng-switch-when="ACTIVE" class="label label-primary">{{product.StatusName}}</span>
+                                        <span ng-switch-when="INACTIVE" class="label label-warning">{{product.StatusName}}</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <small class="action-label label label-info" ng-click="editProduct(product);"><i class="fa fa-pencil"></i> Edit</small>
+                                    <small class="action-label label label-info" ng-click="deleteProduct(product);"><i class="fa fa-remove"></i> Delete</small>
+                                    <small class="action-label label label-info" ng-click="goToPromotions(product);">{{product.TotalPromotionProducts}} promotions</small>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix" ng-show="productsGrid.Paging.Pages.length > 0">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li ng-click="productsGrid.SetPage($event, 1)" ng-disabled="productsGrid.Paging.IsFirstPage"><a href="#">«</a></li>
+                        <li ng-repeat="page in productsGrid.Paging.Pages" ng-click="productsGrid.SetPage($event, page)" ng-disabled="productsGrid.Paging.PageIndex==page"><a href="#">{{page}}</a></li>
+                        <li><a href="#" ng-click="productsGrid.SetPage($event, productsGrid.Paging.TotalPages)" ng-disabled="productsGrid.Paging.IsLastPage">»</a></li>
+                    </ul>
+                </div>
+            </div><!-- /.box -->
+        </div>
+    </section>
+</div>
+
+<div ng-include="'app/components/products/modals/saveProductModalView.html'"></div>
