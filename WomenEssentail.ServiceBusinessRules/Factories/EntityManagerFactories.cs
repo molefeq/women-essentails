@@ -3,6 +3,7 @@
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Categories;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Companies;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyTypes;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.DashboardData;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Modules;
@@ -29,6 +30,7 @@ namespace WomenEssentail.ServiceBusinessRules.Factories
             container.Register<IPromotionProductManager, PromotionProductManager>(Lifestyle.Singleton);
             container.Register<ICategoryManager, CategoryManager>(Lifestyle.Singleton);
             container.Register<ISubCategoryManager, SubCategoryManager>(Lifestyle.Singleton);
+            container.Register<ICompanyRequestManager, CompanyRequestManager>(Lifestyle.Singleton);
         }        
     }
 }

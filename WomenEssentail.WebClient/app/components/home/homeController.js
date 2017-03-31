@@ -13,6 +13,7 @@
         viewModel.goToSalons = goToSalons;
         viewModel.goToProducts = goToProducts;
         viewModel.goToUsers = goToUsers;
+        viewModel.goToRequests = goToRequests;
 
         initialise();
 
@@ -33,6 +34,11 @@
 
         function goToUsers(salon) {
             $state.go('companyusers', { companyId: salon.Id });
+        };
+        function goToRequests(e) {
+            e.preventDefault();
+
+            $state.go('salonrequests');
         };
     };
 

@@ -9,7 +9,6 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequest.Mapp
 {
     public class CompanyRequestMapper
     {
-
         private static CompanyRequestMapper _instance;
 
         private CompanyRequestMapper()
@@ -28,6 +27,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequest.Mapp
                 return _instance;
             }
         }
+
         public CompanyRequestDto MapToCompanyRequestDto(SqlDataReader sqlDataReader)
         {
             CompanyRequestDto companyRequestDto = new CompanyRequestDto();
@@ -39,6 +39,8 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequest.Mapp
             companyRequestDto.ContactNumber = sqlDataReader["ContactNumber"].ToString();
             companyRequestDto.PhysicalAddress = sqlDataReader["PhysicalAddress"].ToString();
             companyRequestDto.StatusId = sqlDataReader["StatusId"].ToInteger();
+            companyRequestDto.StatusName = sqlDataReader["StatusName"].ToString();
+            companyRequestDto.StatusCode = sqlDataReader["StatusCode"].ToString();
             companyRequestDto.CreateDate = sqlDataReader["CreateDate"].ToDateTime();
             companyRequestDto.EditDate = sqlDataReader["EditDate"].ToDateTime();
             companyRequestDto.CrudStatus = CrudStatus.UPDATE;

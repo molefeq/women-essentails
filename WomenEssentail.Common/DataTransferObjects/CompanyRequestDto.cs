@@ -14,6 +14,8 @@ namespace WomenEssentail.Common.DataTransferObjects
         public string PhysicalAddress { get; set; }
         public DateTime CreateDate { get; set; }
         public int StatusId { get; set; }
+        public string StatusName { get; set; }
+        public string StatusCode { get; set; }
         public DateTime EditDate { get; set; }
         public CrudStatus CrudStatus { get; set; }
     }

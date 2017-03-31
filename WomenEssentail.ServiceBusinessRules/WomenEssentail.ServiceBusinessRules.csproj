@@ -133,6 +133,8 @@
     <Compile Include="EntityManagers\CompanyProducts\CompanyProductManager.cs" />
     <Compile Include="EntityManagers\CompanyProducts\ICompanyProductManager.cs" />
     <Compile Include="EntityManagers\CompanyProducts\Mappers\CompanyProductMappers.cs" />
+    <Compile Include="EntityManagers\CompanyRequest\CompanyRequestManager.cs" />
+    <Compile Include="EntityManagers\CompanyRequest\ICompanyRequestManager.cs" />
     <Compile Include="EntityManagers\CompanyRequest\Mappers\CompanyRequestMapper.cs" />
     <Compile Include="EntityManagers\CompanyTypeProducts\CompanyTypeProductManager.cs" />
     <Compile Include="EntityManagers\CompanyTypeProducts\ICompanyTypeProductManager.cs" />

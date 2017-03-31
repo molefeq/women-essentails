@@ -23,6 +23,7 @@ public class UnitOfWork : DataServer, IDisposable
     private PromotionProductSummaryRepository _PromotionProductSummaries;
     private SubCategoryRepository _SubCategories;
     private CategoryRepository _Categories;
+    private CompanyRequestRepository _CompanyRequests;
 
     #endregion
 
@@ -213,6 +214,19 @@ public class UnitOfWork : DataServer, IDisposable
             }
 
             return _Categories;
+        }
+    }
+
+    public CompanyRequestRepository CompanyRequests
+    {
+        get
+        {
+            if (_CompanyRequests == null)
+            {
+                _CompanyRequests = new CompanyRequestRepository(Connection);
+            }
+
+            return _CompanyRequests;
         }
     }
 

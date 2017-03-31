@@ -1,0 +1,42 @@
+﻿<div class="center-box">
+    <div class="center-box-body">
+        <p class="center-box-msg">Contact Us</p>
+        <form novalidate name="frmContactUs" id="frmContactUs" app-validator validation-summary-id="contactUsValidationSummary">
+            <div class="form-group has-feedback">
+                <input type="text" required data-required-msg="Email is required." id="Email" name="Email" 
+                       ng-model="model.Email" class="form-control" placeholder="Email Address">
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+            </div>
+            <div class="k-valid-msg" data-for="Email"></div>
+            <div class="form-group has-feedback">
+                <input type="text" required data-required-msg="Subject is required." id="Subject" 
+                       name="Subject" ng-model="model.Subject" class="form-control" placeholder="Subject">
+                <span class="glyphicon glyphicon-comment form-control-feedback"></span>
+            </div>
+            <div class="k-valid-msg" data-for="Subject"></div>
+            <div class="form-group has-feedback">
+                <textarea required data-required-msg="Message is required." id="Message" 
+                          name="Message" ng-model="model.Message" class="form-control" placeholder="Message"/>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="k-valid-msg" data-for="Message"></div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="summary-validation-valid" data-valmsg-summary="true" id="contactUsValidationSummary">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" ng-click="send()" button-control action-value="Send" action-in-progress-value="Sending ...">Send</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

@@ -12,6 +12,7 @@ using WomenEssentail.Common.DataHelper;
 using WomenEssentail.Common.DataTransferObjects;
 
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Companies;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests;
 using WomenEssentail.ServiceBusinessRules.Providers;
 using WomenEssentail.ServiceBusinessRules.Utilities;
 
@@ -21,7 +22,7 @@ namespace WomenEssentail.ApiService.Controllers
     {
         private readonly ICompanyManager companyManager;
 
-        public CompanyController(ICompanyManager companyManager)
+        public CompanyController(ICompanyManager companyManager, ICompanyRequestManager companyRequestManager)
         {
             this.companyManager = companyManager;
         }
@@ -105,6 +106,7 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<ImageModel>(HttpStatusCode.OK, new ImageModel { ImageFileNamePath = normalImageInformation.RelativeFileName, ImageFileName = fileName });
         }
 
+        
         #region Private Methods
 
         private HttpResponseMessage SaveCompany(CompanyDto companyDto)

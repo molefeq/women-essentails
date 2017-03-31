@@ -135,7 +135,6 @@
 
         function manageUrlRedirects(event, fromState, toState) {
             setIsUserLoggedIn();
-            $rootScope.DoesPageHaveBreadcrumb = toState.ncyBreadcrumb && !toState.ncyBreadcrumb.skip;
 
             if (!AnonymousStates[toState.name] && !factory.IsUserLogged) {
                 event.preventDefault();

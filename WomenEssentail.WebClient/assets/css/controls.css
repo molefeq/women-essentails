@@ -72,3 +72,19 @@ body .addItemButton i {
 body .action-label {
   cursor: pointer;
 }
+body #navbar-collapse .nav > li > a:hover {
+  text-decoration: none;
+  background-color: #23527c;
+}
+body #navbar-collapse a {
+  color: #FFFFFF  !important;
+}
+body #navbar-collapse a > .label-login {
+  position: absolute;
+  right: 7px;
+  text-align: center;
+  font-size: 9px;
+  padding: 2px 3px;
+  line-height: .9;
+  color: #FFFFFF  !important;
+}

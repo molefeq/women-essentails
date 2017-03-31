@@ -15,6 +15,7 @@
         viewModel.editOrganisation = editorganisation;
         viewModel.goToMenuItem = goToMenuItem;
         viewModel.goToHome = goToHome;
+        viewModel.goToLogin = goToLogin;
         viewModel.subMenuItems = [];
         viewModel.currentNavItem = '';
 
@@ -48,6 +49,12 @@
 
         function editorganisation() {
             $state.go('organisation', { organisationId: appFactory.User.OrganisationId });
+        };
+
+        function goToLogin(e) {
+            e.preventDefault();
+
+            $state.go('login');
         };
 
         function goToMenuItem(menuItem) {

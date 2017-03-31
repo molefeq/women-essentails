@@ -216,6 +216,7 @@ namespace WomenEssentail.ApiService.Controllers
             return Ok(accessTokenResponse);
 
         }
+
         #region Private Methods
 
         private HttpResponseMessage Save(AccountDto accountDto)
@@ -225,6 +226,7 @@ namespace WomenEssentail.ApiService.Controllers
 
             return Request.CreateResponse<Response<AccountDto>>(HttpStatusCode.OK, response);
         }
+
         private IHttpActionResult GetErrorResult(IdentityResult result)
         {
             if (result == null)
@@ -375,6 +377,7 @@ namespace WomenEssentail.ApiService.Controllers
 
             return tokenResponse;
         }
+
         #endregion
     }
 
@@ -413,6 +416,7 @@ namespace WomenEssentail.ApiService.Controllers
             };
         }
     }
+
     public class ExternalLoginViewModel
     {
         public string Name { get; set; }

@@ -25,7 +25,19 @@ var menus = {
         ]
     }
 };
-var anonymousStates = { 'login': true, 'forgotpassword': true, 'resetpassword': true, 'changepassword': true };
+
+var anonymousStates =
+    {
+        'login': true,
+        'forgotpassword': true,
+        'resetpassword': true,
+        'changepassword': true,
+        'landing': true,
+        'aboutus': true,
+        'contactus': true,
+        'searchsalons': true,
+        'register': true
+    };
 
 angular.module('app').constant('ServerBaseUrl', 'http://localhost:55464/');
 angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:55464/api/');

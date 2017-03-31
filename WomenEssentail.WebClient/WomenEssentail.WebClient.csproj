@@ -99,14 +99,18 @@
     <Content Include="app\app.module.js" />
     <Content Include="app\app.routes.js" />
     <Content Include="app\app.run.js" />
+    <Content Include="app\components\aboutus\aboutUsView.html" />
     <Content Include="app\components\changepassword\changePasswordController.js" />
     <Content Include="app\components\changepassword\changePasswordFactory.js" />
     <Content Include="app\components\changepassword\changePasswordView.html" />
+    <Content Include="app\components\companyrequests\companyRequestsController.js" />
+    <Content Include="app\components\companyrequests\companyRequestsView.html" />
     <Content Include="app\components\companyusers\companyUsersController.js" />
     <Content Include="app\components\companyusers\companyUsersFactory.js" />
     <Content Include="app\components\companyusers\companyUsersView.html" />
     <Content Include="app\components\companyusers\Modals\companyUserModalController.js" />
     <Content Include="app\components\companyusers\Modals\companyUserModalView.html" />
+    <Content Include="app\components\contactus\contactUsView.html" />
     <Content Include="app\components\core\errormodal.html" />
     <Content Include="app\components\core\footer\footerView.html" />
     <Content Include="app\components\core\header\headerController.js" />
@@ -118,6 +122,8 @@
     <Content Include="app\components\forgotpassword\resetPasswordView.html" />
     <Content Include="app\components\home\homeController.js" />
     <Content Include="app\components\home\views\homeView.html" />
+    <Content Include="app\components\landing\landingController.js" />
+    <Content Include="app\components\landing\landingView.html" />
     <Content Include="app\components\login\loginController.js" />
     <Content Include="app\components\login\loginFactory.js" />
     <Content Include="app\components\login\loginView.html" />
@@ -148,6 +154,9 @@
     <Content Include="app\components\promotionproducts\promotionProductsController.js" />
     <Content Include="app\components\promotionproducts\promotionProductsFactory.js" />
     <Content Include="app\components\promotionproducts\promotionProductsView.html" />
+    <Content Include="app\components\register\registerController.js" />
+    <Content Include="app\components\register\registerFactory.js" />
+    <Content Include="app\components\register\registerView.html" />
     <Content Include="app\components\rolesadmin\modals\roleAdminSaveModalController.js" />
     <Content Include="app\components\rolesadmin\modals\roleAdminSaveModalView.html" />
     <Content Include="app\components\rolesadmin\rolesAdminController.js" />
@@ -158,6 +167,8 @@
     <Content Include="app\components\salons\salonsController.js" />
     <Content Include="app\components\salons\salonsFactory.js" />
     <Content Include="app\components\salons\salonsView.html" />
+    <Content Include="app\components\searchsalons\searchSalonsController.js" />
+    <Content Include="app\components\searchsalons\searchSalonsView.html" />
     <Content Include="app\components\userprofile\userProfileController.js" />
     <Content Include="app\components\userprofile\userProfileFactory.js" />
     <Content Include="app\components\userprofile\userProfileView.html" />
@@ -176,6 +187,7 @@
     <Content Include="app\shared\error\errorController.js" />
     <Content Include="app\shared\factories\accountApiFactory.js" />
     <Content Include="app\shared\factories\companyApiFactory.js" />
+    <Content Include="app\shared\factories\companyRequestApiFactory.js" />
     <Content Include="app\shared\factories\dashboardApiFactory.js" />
     <Content Include="app\shared\factories\errorFactory.js" />
     <Content Include="app\shared\factories\lookupApiFactory.js" />
@@ -327,9 +339,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="app\components\register\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

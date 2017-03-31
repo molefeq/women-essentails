@@ -14,7 +14,8 @@
             updateCompany: updateCompany,
             deleteCompany: deleteCompany,
             saveCompanyLogo: saveCompanyLogo,
-            getCompanyData: getCompanyData
+            getCompanyData: getCompanyData,
+            addCompanyRequest: addCompanyRequest
         };
 
         return factory;
@@ -130,6 +131,21 @@
             return deferred.promise;
         };
 
+        function addCompanyRequest(companyRequest) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + '/Company/AddCompanyRequest',
+                data: companyRequest
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ CompanyRequest: data.Item });
+            });
+
+            return deferred.promise;
+        };
     };
 
 })();

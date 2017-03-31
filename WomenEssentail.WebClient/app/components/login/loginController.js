@@ -12,7 +12,7 @@
         viewModel.model = {};
         viewModel.forgotPassword = forgotpassword;
         viewModel.login = login;
-        viewModel.authExternalProvider = authExternalProvider;
+        viewModel.externalProviderLogin = externalProviderLogin;
 
         function forgotpassword() {
             $state.path('root.resetpassword');
@@ -29,7 +29,9 @@
             });
         };
 
-        function authExternalProvider(provider) {
+        function externalProviderLogin(e, provider) {
+            e.preventDefault();
+
             loginFactory.loginauthExternalProvider(provider, $scope);
         };
 

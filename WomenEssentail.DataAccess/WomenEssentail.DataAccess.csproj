@@ -55,6 +55,7 @@
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\CompanyProductRepository.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
+    <Compile Include="Repositories\CompanyRequestRepository.cs" />
     <Compile Include="Repositories\CompanySummaryRepository.cs" />
     <Compile Include="Repositories\CompanyTypeProductRepository.cs" />
     <Compile Include="Repositories\CompanyTypeRepository.cs" />

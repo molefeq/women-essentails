@@ -87,4 +87,25 @@ body {
     .action-label {
         cursor: pointer;
     }
+
+    #navbar-collapse {
+        .nav > li > a:hover {
+            text-decoration: none;
+            background-color: #23527c;
+        }
+
+        a {
+            color: @white@i;
+
+            > .label-login {
+                position: absolute;
+                right: 7px;
+                text-align: center;
+                font-size: 9px;
+                padding: 2px 3px;
+                line-height: .9;
+                color: @white@i;
+            }
+        }
+    }
 }
