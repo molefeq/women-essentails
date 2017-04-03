@@ -1,10 +1,11 @@
 ﻿using Libraries.Common.Enums;
 using Libraries.Common.ResponseObjects;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
+
 using Newtonsoft.Json.Linq;
+
 using System;
 using System.Linq;
 using System.Net;
@@ -14,6 +15,7 @@ using System.Threading.Tasks;
 using System.Web.Http;
 
 using WomenEssentail.ApiService.App_Start;
+
 using WomenEssentail.Common.DataFilters;
 using WomenEssentail.Common.DataTransferObjects;
 
@@ -42,6 +44,7 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<Result<AccountSummaryDto>>(HttpStatusCode.OK, result);
         }
 
+        [SecurityFilter("CompanyUsers")]
         [HttpPost]
         public HttpResponseMessage AddUser(AccountDto accountDto)
         {
@@ -50,6 +53,7 @@ namespace WomenEssentail.ApiService.Controllers
             return Save(accountDto);
         }
 
+        [SecurityFilter("CompanyUsers")]
         [HttpPost]
         public HttpResponseMessage UpdateUser(AccountDto accountDto)
         {
@@ -57,7 +61,17 @@ namespace WomenEssentail.ApiService.Controllers
 
             return Save(accountDto);
         }
+        
+        [SecurityFilter("CompanyUsers")]
+        [HttpPost]
+        public HttpResponseMessage FetchUser(int userId)
+        {
+            AccountDto accountDto = new AccountDto { CrudStatus = CrudStatus.READ, Id = userId };
+            
+            return Save(accountDto);
+        }
 
+        [SecurityFilter("CompanyUsers")]
         [HttpPost]
         public HttpResponseMessage DeleteUser(AccountDto accountDto)
         {
@@ -71,6 +85,7 @@ namespace WomenEssentail.ApiService.Controllers
         /// </summary>
         /// <param name="model">Username or Email Address and system the user is currently working on, but for spar exports only the username can be used.</param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost]
         public HttpResponseMessage ForgotPassword(string username)
         {
@@ -84,6 +99,7 @@ namespace WomenEssentail.ApiService.Controllers
         /// </summary>
         /// <param name="model">Username or Email Address and system the user is currently working on, but for spar exports only the username can be used.</param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost]
         public HttpResponseMessage ResetPassword(ResetPasswordDto model)
         {
@@ -97,6 +113,7 @@ namespace WomenEssentail.ApiService.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
+        [AllowAnonymous]
         [HttpPost]
         public HttpResponseMessage ChangePassword(ChangePasswordDto model)
         {
@@ -105,6 +122,7 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<Response<UserInformationDto>>(HttpStatusCode.OK, response);
         }
 
+        [SecurityFilter()]
         [HttpPost]
         public HttpResponseMessage LogOut()
         {

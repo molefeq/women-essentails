@@ -15,7 +15,7 @@ namespace WomenEssentail.Common.DataTransferObjects
         public string OrganisationName { get; set; }
         public int? CompanyId { get; set; }
         public string CompanyName { get; set; }
-        public DateTime CreateDate { get; set; }
+        public string CreateDate { get; set; }
 
         public List<RoleModuleDto> AccessModules { get; set; }
 

@@ -34,8 +34,7 @@
 
             return deferred.promise;
         };
-
-
+        
         function getCompanies(searchFilter) {
             var deferred = $q.defer();
 
@@ -146,6 +145,7 @@
 
             return deferred.promise;
         };
+
     };
 
 })();

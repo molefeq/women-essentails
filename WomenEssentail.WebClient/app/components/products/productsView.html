@@ -4,8 +4,9 @@
             {{productsFactory.salon.Name}} Products
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#" ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="#" ng-click="goToSalons($event);"><i class="fa fa-"></i> Salons</a></li>
+            <li access-control module="home"><a href="#" ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
+            <li access-control module="salons"><a href="#" ng-click="goToSalons($event);"><i class="fa fa-home"></i> Salons</a></li>
+            <li access-control module="companyusers"><a ui-sref="companyusers"><i class="fa fa-home"></i> Users</a></li>
         </ol>
     </section>
 
@@ -16,7 +17,7 @@
                 <div class="box-header">
                     <!--<h3 class="box-title">Salons</h3>-->
                     <div class="input-group-btn">
-                        <button class="btn btn-primary pull-left" ng-click="addProduct()"><i class="fa fa-plus"></i></button>
+                        <button class="btn btn-primary pull-left" access-control module="products" ng-click="addProduct()"><i class="fa fa-plus"></i></button>
                     </div>
                     <div class="box-tools">
                         <div class="input-group">
@@ -50,9 +51,9 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <small class="action-label label label-info" ng-click="editProduct(product);"><i class="fa fa-pencil"></i> Edit</small>
-                                    <small class="action-label label label-info" ng-click="deleteProduct(product);"><i class="fa fa-remove"></i> Delete</small>
-                                    <small class="action-label label label-info" ng-click="goToPromotions(product);">{{product.TotalPromotionProducts}} promotions</small>
+                                    <small class="action-label label label-info" access-control module="products" ng-click="editProduct(product);"><i class="fa fa-pencil"></i> Edit</small>
+                                    <small class="action-label label label-info" access-control module="products" ng-click="deleteProduct(product);"><i class="fa fa-remove"></i> Delete</small>
+                                    <small class="action-label label label-info" access-control module="promotionproducts" ng-click="goToPromotions(product);">{{product.TotalPromotionProducts}} promotions</small>
                                 </td>
                             </tr>
                         </tbody>

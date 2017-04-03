@@ -12,6 +12,7 @@ using WomenEssentail.Common.DataHelper;
 using WomenEssentail.Common.DataTransferObjects;
 
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Products;
+using WomenEssentail.ServiceBusinessRules.Filters;
 using WomenEssentail.ServiceBusinessRules.Providers;
 using WomenEssentail.ServiceBusinessRules.Utilities;
 
@@ -26,6 +27,7 @@ namespace WomenEssentail.ApiService.Controllers
             this.productManager = productManager;
         }
 
+        [SecurityFilter("Products")]
         [HttpPost]
         public HttpResponseMessage GetProducts(ProductSearchFilter productSearchFilter)
         {
@@ -36,6 +38,7 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<Result<ProductSummaryDto>>(HttpStatusCode.OK, result);
         }
 
+        [SecurityFilter("Products")]
         [HttpPost]
         public HttpResponseMessage AddProduct(ProductDto productDto)
         {
@@ -44,6 +47,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SaveProduct(productDto);
         }
 
+        [SecurityFilter("Products")]
         [HttpPost]
         public HttpResponseMessage UpdateProduct(ProductDto productDto)
         {
@@ -52,6 +56,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SaveProduct(productDto);
         }
 
+        [SecurityFilter("Products")]
         [HttpPost]
         public HttpResponseMessage DeleteProduct(ProductDto productDto)
         {
@@ -60,6 +65,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SaveProduct(productDto);
         }
 
+        [SecurityFilter("Products")]
         [HttpPost]
         public HttpResponseMessage FetchProduct(int productId)
         {
@@ -68,6 +74,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SaveProduct(productDto);
         }
 
+        [SecurityFilter("Products")]
         [HttpPost]
         public HttpResponseMessage SaveImage()
         {

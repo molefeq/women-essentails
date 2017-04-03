@@ -33,6 +33,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.RoleModules.Mappers
 			roleModuleDto.Id = sqlDataReader["Id"].ToInteger();
 			roleModuleDto.ModuleId = sqlDataReader["ModuleId"].ToInteger();
             roleModuleDto.ModuleName = sqlDataReader["ModuleName"].ToString();
+            roleModuleDto.ModuleUrl = sqlDataReader["ModuleUrl"].ToString();
             roleModuleDto.RoleId = sqlDataReader["RoleId"].ToInteger();
             roleModuleDto.RoleName = sqlDataReader["RoleName"].ToString();
             roleModuleDto.StatusId = sqlDataReader["StatusId"].ToInteger();

@@ -13,6 +13,7 @@ using WomenEssentail.Common.DataTransferObjects;
 
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Companies;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests;
+using WomenEssentail.ServiceBusinessRules.Filters;
 using WomenEssentail.ServiceBusinessRules.Providers;
 using WomenEssentail.ServiceBusinessRules.Utilities;
 
@@ -31,7 +32,7 @@ namespace WomenEssentail.ApiService.Controllers
         public HttpResponseMessage GetCompanyData(string companyTypeCode)
         {
             CompanyDataObject result = companyManager.GetCompanyData(companyTypeCode);
-            
+
             return Request.CreateResponse<CompanyDataObject>(HttpStatusCode.OK, result);
         }
 
@@ -46,6 +47,7 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<Result<CompanySummaryDto>>(HttpStatusCode.OK, result);
         }
 
+        [SecurityFilter("Companies")]
         [HttpPost]
         public HttpResponseMessage AddCompany(CompanyDto companyDto)
         {
@@ -54,6 +56,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SaveCompany(companyDto);
         }
 
+        [SecurityFilter("Companies")]
         [HttpPost]
         public HttpResponseMessage UpdateCompany(CompanyDto companyDto)
         {
@@ -62,6 +65,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SaveCompany(companyDto);
         }
 
+        [SecurityFilter("Companies")]
         [HttpPost]
         public HttpResponseMessage DeleteCompany(CompanyDto companyDto)
         {
@@ -69,7 +73,7 @@ namespace WomenEssentail.ApiService.Controllers
 
             return SaveCompany(companyDto);
         }
-
+        
         [HttpPost]
         public HttpResponseMessage FetchCompany(int companyId)
         {
@@ -78,6 +82,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SaveCompany(companyDto);
         }
 
+        [SecurityFilter("Companies")]
         [HttpPost]
         public HttpResponseMessage SaveImage()
         {
@@ -106,7 +111,6 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<ImageModel>(HttpStatusCode.OK, new ImageModel { ImageFileNamePath = normalImageInformation.RelativeFileName, ImageFileName = fileName });
         }
 
-        
         #region Private Methods
 
         private HttpResponseMessage SaveCompany(CompanyDto companyDto)

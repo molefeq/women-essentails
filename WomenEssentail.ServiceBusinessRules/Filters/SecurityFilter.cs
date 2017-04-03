@@ -9,26 +9,26 @@ namespace WomenEssentail.ServiceBusinessRules.Filters
 {
     public class SecurityFilter : AuthorizationFilterAttribute
     {
-        private string[] _Roles;
+        private string[] _Modules;
 
         public SecurityFilter() { }
 
-        public SecurityFilter(params string[] roles)
+        public SecurityFilter(params string[] modules)
         {
-            _Roles = roles;
+            _Modules = modules;
         }
 
         public override void OnAuthorization(HttpActionContext actionContext)
         {
             var user = actionContext.RequestContext.Principal.Identity as ClaimsIdentity;
-            bool isAuthorized = _Roles == null ? true : false;
+            bool isAuthorized = _Modules == null ? true : false;
             bool isAuthenticated = user != null && user.IsAuthenticated;
 
-            if (_Roles != null && user.Claims.Where(c => c.Type == ClaimTypes.Role).Count() > 0)
+            if (_Modules != null && user.Claims.Where(c => c.Type == "ModuleName").Count() > 0)
             {
-                foreach (string role in _Roles)
+                foreach (string module in _Modules)
                 {
-                    if (user.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role && c.Value.ToLower() == role.ToLower()) != null)
+                    if (user.Claims.FirstOrDefault(c => c.Type == "ModuleName" && c.Value.ToLower() == module.ToLower()) != null)
                     {
                         isAuthorized = true;
                         break;

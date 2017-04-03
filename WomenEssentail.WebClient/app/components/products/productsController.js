@@ -4,11 +4,14 @@
 
     angular.module('app').controller('productsController', productsController);
 
-    productsController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'notificationFactory', 'productsFactory'];
+    productsController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'notificationFactory', 'productsFactory', 'appFactory'];
 
-    function productsController($scope, $rootScope, $state, $stateParams, notificationFactory, productsFactory) {
+    function productsController($scope, $rootScope, $state, $stateParams, notificationFactory, productsFactory, appFactory) {
         var viewModel = $scope;
-        var companyId = $stateParams.salonId
+
+        appFactory.Initialise();
+
+        var companyId = $stateParams.salonId ? $stateParams.salonId : appFactory.User.CompanyId;
 
         viewModel.productsFactory = productsFactory;
         viewModel.addProduct = addProduct;
@@ -31,7 +34,7 @@
         viewModel.productsGridOptions = {
             Paging: {
                 PageIndex: 1,
-                PageSize: 5
+                PageSize: 30
             },
             PageSizes: [30, 40, 60, 90, 100],
             Read: function (options) {

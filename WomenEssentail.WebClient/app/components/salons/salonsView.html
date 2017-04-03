@@ -5,7 +5,7 @@
             <!--<small>preview of simple tables</small>-->
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#" ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="#" access-control module="home"  ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
         </ol>
     </section>
 
@@ -16,7 +16,7 @@
                 <div class="box-header">
                     <!--<h3 class="box-title">Salons</h3>-->
                     <div class="input-group-btn">
-                        <button class="btn btn-primary pull-left" ng-click="addSalon()"><i class="fa fa-plus"></i></button>
+                        <button class="btn btn-primary pull-left" access-control module="companies" ng-click="addSalon()"><i class="fa fa-plus"></i></button>
                     </div>
                     <div class="box-tools">
                         <div class="input-group">
@@ -42,16 +42,16 @@
                                 <td>
                                     <div class="animate-switch-container" ng-switch on="salon.StatusCode">
                                         <span ng-switch-when="NEW" class="label label-success">{{salon.StatusName}}</span>
-                                        <span ng-switch-when="DELETED"class="label label-danger">{{salon.StatusName}}</span>
+                                        <span ng-switch-when="DELETED" class="label label-danger">{{salon.StatusName}}</span>
                                         <span ng-switch-when="ACTIVE" class="label label-primary">{{salon.StatusName}}</span>
                                         <span ng-switch-when="INACTIVE" class="label label-warning">{{salon.StatusName}}</span>
                                     </div>
                                 </td>
                                 <td>
-                                    <small class="action-label label label-info" ng-click="editSalon(salon);"><i class="fa fa-pencil"></i> Edit</small>
-                                    <small class="action-label label label-info" ng-click="deleteSalon(salon);"><i class="fa fa-remove"></i> Delete</small>
-                                    <small class="action-label label label-info" ng-click="goToUsers(salon);">{{salon.TotalUsers}} users</small>
-                                    <small class="action-label label label-info" ng-click="goToProducts(salon);">{{salon.TotalProducts}} products</small>
+                                    <small class="action-label label label-info" access-control module="companies" ng-click="editSalon(salon);"><i class="fa fa-pencil"></i> Edit</small>
+                                    <small class="action-label label label-info" access-control module="companies" ng-click="deleteSalon(salon);"><i class="fa fa-remove"></i> Delete</small>
+                                    <small class="action-label label label-info" access-control module="companyusers" ng-click="goToUsers(salon);">{{salon.TotalUsers}} users</small>
+                                    <small class="action-label label label-info" access-control module="products" ng-click="goToProducts(salon);">{{salon.TotalProducts}} products</small>
                                 </td>
                             </tr>
                         </tbody>

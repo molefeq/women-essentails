@@ -16,8 +16,10 @@
         viewModel.goToMenuItem = goToMenuItem;
         viewModel.goToHome = goToHome;
         viewModel.goToLogin = goToLogin;
+        viewModel.searchSalons = searchSalons;
         viewModel.subMenuItems = [];
         viewModel.currentNavItem = '';
+        viewModel.SearchText = '';
 
         viewModel.appFactory.Initialise();
 
@@ -55,6 +57,12 @@
             e.preventDefault();
 
             $state.go('login');
+        };
+
+        function searchSalons() {
+            $rootScope.SearchSalonText = viewModel.SearchText;
+
+            $state.go('searchsalons');
         };
 
         function goToMenuItem(menuItem) {

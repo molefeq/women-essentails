@@ -8,6 +8,7 @@ using WomenEssentail.Common.DataFilters;
 using WomenEssentail.Common.DataTransferObjects;
 
 using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests;
+using WomenEssentail.ServiceBusinessRules.Filters;
 using WomenEssentail.ServiceBusinessRules.Providers;
 
 namespace WomenEssentail.ApiService.Controllers
@@ -29,6 +30,7 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<Result<CompanyRequestDto>>(HttpStatusCode.OK, result);
         }
 
+        [SecurityFilter("CompanyRequests")]
         [HttpPost]
         public HttpResponseMessage AddCompanyRequest(CompanyRequestDto companyRequestDto)
         {
@@ -38,6 +40,7 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<Response<CompanyRequestDto>>(HttpStatusCode.OK, response);
         }
 
+        [SecurityFilter("CompanyRequests")]
         [HttpPost]
         public HttpResponseMessage UpdateCompanyRequest(CompanyRequestDto companyRequestDto)
         {

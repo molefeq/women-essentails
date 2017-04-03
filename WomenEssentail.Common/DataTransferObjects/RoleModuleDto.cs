@@ -9,6 +9,7 @@ namespace WomenEssentail.Common.DataTransferObjects
         public int? Id { get; set; }
         public int ModuleId { get; set; }
         public string ModuleName { get; set; }
+        public string ModuleUrl { get; set; }
         public int RoleId { get; set; }
         public string RoleName { get; set; }
         public int StatusId { get; set; }

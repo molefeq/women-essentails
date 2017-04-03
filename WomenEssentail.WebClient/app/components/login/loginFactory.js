@@ -4,9 +4,9 @@
 
     angular.module('app').factory('loginFactory', loginFactory);
 
-    loginFactory.$inject = ['$http', '$q', '$state', 'ServerBaseUrl', 'appFactory'];
+    loginFactory.$inject = ['$http', '$q', '$state', 'ServerBaseUrl', 'appFactory', 'errorFactory'];
 
-    function loginFactory($http, $q, $state, ServerBaseUrl, appFactory) {
+    function loginFactory($http, $q, $state, ServerBaseUrl, appFactory, errorFactory) {
         var factory = {
             login: login,
             loginauthExternalProvider: authExternalProvider,
@@ -42,10 +42,21 @@
                     deferred.resolve({ redirectState: 'changepassword' });
                     return;
                 }
-                
+
+                if (appFactory.User.AccessModules == null || appFactory.User.AccessModules.length == 0) {
+                    errorFactory.handleHttpServerError({
+                        status: 403,
+                        data: {
+                            Message: 'You do not have enough permessions to access this view.'
+                        }
+                    });
+                    deferred.reject();
+                    return;
+                }
+
                 var landingRoute = app.RoutesManager.getLandingRoute(appFactory.User.AccessModules, $state.get());
 
-                deferred.resolve({ redirectState: landingRoute.name});
+                deferred.resolve({ redirectState: landingRoute.name });
             });
 
             return deferred.promise;

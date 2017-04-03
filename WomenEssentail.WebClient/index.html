@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="app">
+<html>
 <head>
     <title></title>
     <meta charset="utf-8" />
@@ -55,9 +55,10 @@
                             </a>
                         </li>
                     </ul>
-                    <form class="navbar-form navbar-right" role="search">
+                    <form class="navbar-form navbar-right" role="search" ng-submit="searchSalons()">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
+                            <input type="text" class="form-control" id="navbar-search-input" ng-model="SearchText"
+                                    placeholder="Search">
                         </div>
                     </form>
                 </div>
@@ -73,7 +74,7 @@
                                 <li class="user-header">
                                     <p style="color:black">
                                         {{appFactory.UserDisplayName}}
-                                        <small>Member since {{appFactory.User.CreateDate | date: 'MMM. yyyy'}}</small>
+                                        <small>Member since {{appFactory.User.CreateDate}}</small>
                                     </p>
                                 </li>
                                 <!-- Menu Body -->
@@ -124,6 +125,9 @@
     <script type="text/javascript" src="assets/libs/bootstrap/js/ui-bootstrap-tpls-2.4.0.min.js"></script>
     <script type="text/javascript" src="assets/libs/angular-toastr/angular-toastr.tpls.min.js"></script>
     <script type="text/javascript" src="assets/libs/underscore/underscore.js"></script>
+    <script type="text/javascript" src="assets/libs/angular-simple-logger/angular-simple-logger.js"></script>
+    <script type="text/javascript" src="assets/libs/angular-maps/angular-google-maps.js"></script>
+
     <script type="text/javascript" src="app/app.module.js"></script>
     <script type="text/javascript" src="app/app.routes.js"></script>
     <script type="text/javascript" src="app/app.config.js"></script>
@@ -196,5 +200,17 @@
     <script type="text/javascript" src="app/components/register/registerFactory.js"></script>
 
     <script type="text/javascript" src="app/components/companyrequests/companyRequestsController.js"></script>
+
+    <script type="text/javascript" src="app/components/searchsalondirections/searchSalonDirectionsController.js"></script>
+    <script>
+        //angular.bootstrap(document, ['app']);
+        function initMap() {
+            angular.element(function () {
+                angular.bootstrap(document, ['app']);
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Dp0M7lBi97YoSYlpgt_7IDCMeXEZBiQ&callback=initMap" async defer></script>
+
 </body>
 </html>

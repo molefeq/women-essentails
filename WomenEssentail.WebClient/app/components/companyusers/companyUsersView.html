@@ -1,11 +1,12 @@
 ﻿<div class="content-wrapper" style="min-height: 873px;">
     <section class="content-header">
         <h1>
-            {{companyUsersFactory.salon.Name}} Products
+            {{companyUsersFactory.salon.Name}} Users
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#" ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="#" ng-click="goToSalons($event);"><i class="fa fa-"></i> Salons</a></li>
+            <li access-control module="home"><a href="#" ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
+            <li access-control module="salons"><a href="#" ng-click="goToSalons($event);"><i class="fa fa-home"></i> Salons</a></li>
+            <li access-control module="products"><a ui-sref="products"><i class="fa fa-home"></i> Products</a></li>
         </ol>
     </section>
 

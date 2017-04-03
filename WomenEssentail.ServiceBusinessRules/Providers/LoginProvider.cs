@@ -165,11 +165,13 @@ namespace WomenEssentail.ServiceBusinessRules.Providers
             //claims.Add(new Claim("RoleId", userInformationDto.RoleId.ToString()));
             //claims.Add(new Claim("RoleName", userInformationDto.RoleName));
 
-            //foreach (var module in userInformationDto.AccessModules)
-            //{
-            //    claims.Add(new Claim("moduleId", module.Id.ToString()));
-            //    claims.Add(new Claim("module", module.ModuleName));
-            //}
+            foreach (var module in userInformationDto.AccessModules)
+            {
+                claims.Add(new Claim("RoleId", module.RoleId.ToString()));
+                claims.Add(new Claim("RoleName", module.RoleName.ToString()));
+                claims.Add(new Claim("ModuleId", module.ModuleId.ToString()));
+                claims.Add(new Claim("ModuleName", module.ModuleName));
+            }
 
             return claims;
         }

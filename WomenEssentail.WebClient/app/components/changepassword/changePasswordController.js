@@ -9,6 +9,8 @@
     function ChangePasswordController($scope, $rootScope, $state, $location, changePasswordFactory, appFactory) {
         var viewModel = $scope;
 
+        appFactory.Initialise();
+
         viewModel.changepassword = changepassword;
         viewModel.model = { Username: appFactory.User.UserName };
 

@@ -36,6 +36,7 @@ var anonymousStates =
         'aboutus': true,
         'contactus': true,
         'searchsalons': true,
+        'searchsalondirections': true,
         'register': true
     };
 

@@ -4,9 +4,9 @@
 
     angular.module('app').factory('appFactory', AppFactory);
 
-    AppFactory.$inject = ['$http', '$q', '$state', '$rootScope', 'ServerApiBaseUrl', 'AnonymousStates'];
+    AppFactory.$inject = ['$http', '$q', '$state', '$rootScope', 'ServerApiBaseUrl', 'AnonymousStates', 'notificationFactory'];
 
-    function AppFactory($http, $q, $state, $rootScope, ServerApiBaseUrl, AnonymousStates) {
+    function AppFactory($http, $q, $state, $rootScope, ServerApiBaseUrl, AnonymousStates, notificationFactory) {
         var user, userDisplayName, token;
 
         var factory = {
@@ -101,12 +101,12 @@
 
             factory.Organisation = JSON.parse(sessionStorage["Organisation"]);;
         };
-        
+
         function logout(e) {
             if (e) {
                 e.preventDefault;
             }
-            
+
             var deferred = $q.defer();
 
             $http(
@@ -138,27 +138,43 @@
 
             if (!AnonymousStates[toState.name] && !factory.IsUserLogged) {
                 event.preventDefault();
+
                 logout();
                 $state.go('login');
                 return;
             }
-            else {
+            else if (AnonymousStates[toState.name] && factory.IsUserLogged && toState.name !== 'changepassword') {
+                clearSessionVariables();
+                return;
+            }
+            else if (AnonymousStates[toState.name] && toState.name !== 'changepassword') {
                 manageSessionVariables(fromState, toState)
+            }
+            else if (!AnonymousStates[toState.name], app.RoutesManager.canRouteAccessModule(factory.User.AccessModules, toState)) {
+                manageSessionVariables(fromState, toState)
+            }
+            else if (!AnonymousStates[toState.name], app.RoutesManager.canRouteAccessModule(factory.User.AccessModules, toState)) {
+                manageSessionVariables(fromState, toState)
+            }
+            else if (!AnonymousStates[toState.name], !app.RoutesManager.canRouteAccessModule(factory.User.AccessModules, toState)) {
+                event.preventDefault();
+
+                errorFactory.handleHttpServerError({
+                    status: 401,
+                    data: {
+                        Message: 'You do not have enough permessions to access this view.'
+                    }
+                });
             }
         };
 
         function manageSessionVariables(fromState, toState) {
+            if (toState.name != 'searchsalons') {
+                // $rootScope.SearchSalonText = '';
+            }
+
             if (toState.name == 'login') {
-                localStorage.clear();
-                sessionStorage.clear();
-
-                factory.TokenKey = null;
-                factory.Organisation = null;
-                factory.Company = null;
-                factory.IsUserLogged = false;
-                factory.User = null;
-                factory.UserDisplayName = null;
-
+                clearSessionVariables();
                 return;
             }
 
@@ -171,8 +187,19 @@
                 sessionStorage.removeItem('Organisation');
                 return;
             }
-
         };
+
+        function clearSessionVariables() {
+            localStorage.clear();
+            sessionStorage.clear();
+
+            factory.TokenKey = null;
+            factory.Organisation = null;
+            factory.Company = null;
+            factory.IsUserLogged = false;
+            factory.User = null;
+            factory.UserDisplayName = null;
+        }
     };
 
 })();

@@ -57,7 +57,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts.Mappers
             userInformationDto.OrganisationName = sqlDataReader["OrganisationName"].ToString();
             userInformationDto.CompanyId = sqlDataReader["CompanyId"].ToNullableInteger();
             userInformationDto.CompanyName = sqlDataReader["CompanyName"].ToString();
-            userInformationDto.CreateDate = sqlDataReader["CreateDate"].ToDateTime();
+            userInformationDto.CreateDate = sqlDataReader["CreateDate"].ToDateTime().ToString("dd/MM/yyyy");
 
             return userInformationDto;
         }

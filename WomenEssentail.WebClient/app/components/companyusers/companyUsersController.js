@@ -4,11 +4,14 @@
 
     angular.module('app').controller('companyUsersController', companyUsersController);
 
-    companyUsersController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'notificationFactory', 'companyUsersFactory'];
+    companyUsersController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'notificationFactory', 'companyUsersFactory', 'appFactory'];
 
-    function companyUsersController($scope, $rootScope, $state, $stateParams, notificationFactory, companyUsersFactory) {
+    function companyUsersController($scope, $rootScope, $state, $stateParams, notificationFactory, companyUsersFactory, appFactory) {
         var viewModel = $scope;
-        var companyId = $stateParams.companyId;
+
+        appFactory.Initialise();
+
+        var companyId = $stateParams.companyId ? $stateParams.companyId : appFactory.User.CompanyId;
 
         viewModel.companyUsersFactory = companyUsersFactory;
         viewModel.searchCompanyUsers = searchCompanyUsers;

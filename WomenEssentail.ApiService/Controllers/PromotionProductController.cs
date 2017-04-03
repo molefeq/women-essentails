@@ -12,6 +12,7 @@ using WomenEssentail.Common.DataHelper;
 using WomenEssentail.Common.DataTransferObjects;
 
 using WomenEssentail.ServiceBusinessRules.EntityManagers.PromotionProducts;
+using WomenEssentail.ServiceBusinessRules.Filters;
 using WomenEssentail.ServiceBusinessRules.Providers;
 using WomenEssentail.ServiceBusinessRules.Utilities;
 
@@ -26,6 +27,7 @@ namespace WomenEssentail.ApiService.Controllers
             this.promotionProductManager = promotionProductManager;
         }
 
+        [SecurityFilter("PromotionProducts")]
         [HttpPost]
         public HttpResponseMessage GetPromotionProducts(ProductPromotionSearchFilter productPromotionSearchFilter)
         {
@@ -36,6 +38,7 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<Result<PromotionProductSummaryDto>>(HttpStatusCode.OK, result);
         }
 
+        [SecurityFilter("PromotionProducts")]
         [HttpPost]
         public HttpResponseMessage AddPromotionProduct(PromotionProductDto promotionProductDto)
         {
@@ -44,6 +47,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SavePromotionProduct(promotionProductDto);
         }
 
+        [SecurityFilter("PromotionProducts")]
         [HttpPost]
         public HttpResponseMessage UpdatePromotionProduct(PromotionProductDto promotionProductDto)
         {
@@ -52,6 +56,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SavePromotionProduct(promotionProductDto);
         }
 
+        [SecurityFilter("PromotionProducts")]
         [HttpPost]
         public HttpResponseMessage DeletePromotionProduct(PromotionProductDto promotionProductDto)
         {
@@ -60,6 +65,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SavePromotionProduct(promotionProductDto);
         }
 
+        [SecurityFilter("PromotionProducts")]
         [HttpPost]
         public HttpResponseMessage FetchPromotionProduct(int promotionProductId)
         {
@@ -68,6 +74,7 @@ namespace WomenEssentail.ApiService.Controllers
             return SavePromotionProduct(promotionProductDto);
         }
 
+        [SecurityFilter("PromotionProducts")]
         [HttpPost]
         public HttpResponseMessage SaveImage()
         {

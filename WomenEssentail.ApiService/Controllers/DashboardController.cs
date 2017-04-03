@@ -5,6 +5,7 @@ using System.Web.Http;
 using WomenEssentail.Common.DataTransferObjects;
 
 using WomenEssentail.ServiceBusinessRules.EntityManagers.DashboardData;
+using WomenEssentail.ServiceBusinessRules.Filters;
 using WomenEssentail.ServiceBusinessRules.Providers;
 
 namespace WomenEssentail.ApiService.Controllers
@@ -18,7 +19,9 @@ namespace WomenEssentail.ApiService.Controllers
             this.dashboardDataManager = dashboardDataManager;
         }
 
+        [SecurityFilter("Home")]
         [HttpGet]
+
         public HttpResponseMessage GetData()
         {
             DashboardDataDto response = dashboardDataManager.GetData(UserId);

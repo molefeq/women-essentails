@@ -1,8 +1,71 @@
-﻿<div class="center-box">
-    <div class="center-box-body">
-        <h3 class="center-box-msg">Welcome Home</h3>
-        <p>
-            This is the hub of all your beauty places of your choice. Women's Essentail's provices for you the gateway to the places. You can search by the area where the salon is, the services that are ithin your area or beauticiain you want.
-        </p>
-    </div>
+﻿<div class="content-wrapper" style="min-height: 873px;">
+    <section class="content-header">
+        <h1>
+            Nearest Salons
+            <!--<small>preview of simple tables</small>-->
+        </h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="landing"><i class="fa fa-home"></i> Home</a></li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header" style="min-height:50px;">
+                    <!--<h3 class="box-title">Salons</h3>-->
+                    <div class="input-group-btn">
+                    </div>
+                    <div class="box-tools">
+                        <div class="input-group">
+                            <input name="table_search" class="form-control input-sm pull-right" style="width: 250px;" type="text" placeholder="Search" ng-model="SearchFilter.SearchText">
+                            <div class="input-group-btn">
+                                <button class="btn btn-sm btn-default" ng-click="searchSalons()"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.box-header -->
+                <div class="box-body table-responsive no-padding" app-grid="salonsGrid" app-grid-options="salonsGridOptions">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Address</th>
+                                <th>Actions</th>
+                            </tr>
+                            <tr ng-repeat="salon in salonsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
+                                <td>
+                                    <img ng-attr-src="{{salon.RelativeFileName}}" alt="{{salon.Name}}" class="img-circle"/>
+                                </td>
+                                <td>{{salon.Name}}</td>
+                                <td>
+                                    <div class="animate-switch-container">
+                                        <span ng-if="salon.PhysicalAddressLine1">{{salon.PhysicalAddressLine1}}</span>
+                                        <span ng-if="salon.PhysicalAddressLine2">{{salon.PhysicalAddressLine2}}</span>
+                                        <span ng-if="salon.PhysicalAddressSuburb">{{salon.PhysicalAddressSuburb}}</span>
+                                        <span ng-if="salon.PhysicalAddressCity">{{salon.PhysicalAddressCity}}</span>
+                                        <span ng-if="salon.PhysicalAddressPostalCode">{{salon.PhysicalAddressPostalCode}}</span>
+                                        <span ng-if="salon.Distance">{{salon.Distance}} km</span>
+                                    </div>
+                                </td>
+                                <td>
+                                    <small class="action-label label label-info" ng-click="goToSalonDirection(salon);"><i class="fa fa-map-marker"></i> Go There</small>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+                <div class="box-footer clearfix" ng-show="salonsGrid.Paging.Pages.length > 0">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li ng-click="salonsGrid.SetPage($event, 1)" ng-disabled="salonsGrid.Paging.IsFirstPage"><a href="#">«</a></li>
+                        <li ng-repeat="page in salonsGrid.Paging.Pages" ng-click="salonsGrid.SetPage($event, page)" ng-disabled="salonsGrid.Paging.PageIndex==page"><a href="#">{{page}}</a></li>
+                        <li><a href="#" ng-click="salonsGrid.SetPage($event, salonsGrid.Paging.TotalPages)" ng-disabled="salonsGrid.Paging.IsLastPage">»</a></li>
+                    </ul>
+                </div>
+            </div><!-- /.box -->
+        </div>
+    </section>
 </div>
+

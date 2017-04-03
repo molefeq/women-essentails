@@ -256,8 +256,6 @@ Global
 		{2E530E37-548E-4F79-BEDC-05273B4B0846}.Release|Windows-x86.ActiveCfg = Release|Any CPU
 		{2E530E37-548E-4F79-BEDC-05273B4B0846}.Release|Windows-x86.Build.0 = Release|Any CPU
 		{88680910-98DF-4FA8-9C17-3B4F183A2BE5}.Debug|Android.ActiveCfg = Debug|Android
-		{88680910-98DF-4FA8-9C17-3B4F183A2BE5}.Debug|Android.Build.0 = Debug|Android
-		{88680910-98DF-4FA8-9C17-3B4F183A2BE5}.Debug|Android.Deploy.0 = Debug|Android
 		{88680910-98DF-4FA8-9C17-3B4F183A2BE5}.Debug|Any CPU.ActiveCfg = Debug|Android
 		{88680910-98DF-4FA8-9C17-3B4F183A2BE5}.Debug|iOS.ActiveCfg = Debug|iOS
 		{88680910-98DF-4FA8-9C17-3B4F183A2BE5}.Debug|iOS.Build.0 = Debug|iOS

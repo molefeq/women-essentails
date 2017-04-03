@@ -32,7 +32,15 @@ var app = app || {};
           .state('searchsalons', {
               url: "/searchsalons",
               templateUrl: "app/components/searchsalons/searchSalonsView.html",
-              controller: 'appController',
+              controller: 'searchSalonsController',
+              sessionState: {
+                  skip: true
+              }
+          })
+          .state('searchsalondirections', {
+              url: "/searchsalondirections/:salonId",
+              templateUrl: "app/components/searchsalondirections/searchSalonDirectionsView.html",
+              controller: 'searchSalonDirectionsController',
               sessionState: {
                   skip: true
               }
@@ -96,7 +104,8 @@ var app = app || {};
               controller: 'salonsController',
               sessionState: {
                   home: 'home',
-                  moduleOrder: 2
+                  moduleOrder: 2,
+                  modules: ['Companies']
               }
           })
           .state('products', {
@@ -105,7 +114,8 @@ var app = app || {};
               controller: 'productsController',
               sessionState: {
                   home: 'home',
-                  moduleOrder: 3
+                  moduleOrder: 3,
+                  modules: ['Products']
               }
           })
           .state('promotionproducts', {
@@ -114,7 +124,8 @@ var app = app || {};
               controller: 'promotionProductsController',
               sessionState: {
                   home: 'home',
-                  moduleOrder: 4
+                  moduleOrder: 4,
+                  modules: ['PromotionProducts']
               }
           })
         .state('companyusers', {
@@ -123,7 +134,8 @@ var app = app || {};
             controller: 'companyUsersController',
             sessionState: {
                 home: 'home',
-                moduleOrder: 3
+                moduleOrder: 3,
+                modules: ['CompanyUsers']
             }
         })
         .state('salonrequests', {
@@ -132,7 +144,8 @@ var app = app || {};
             controller: 'companyRequestsController',
             sessionState: {
                 home: 'home',
-                moduleOrder: 3
+                moduleOrder: 3,
+                modules:['CompanyRequests']
             }
         });
     };
@@ -174,7 +187,7 @@ var app = app || {};
         }
 
         var matchedmodules = _.find(usermodules, function (usermodule) {
-            return usermodule.ModuleName == module;
+            return usermodule.ModuleName.toLowerCase() == module.toLowerCase();
         });
 
         return matchedmodules !== null && matchedmodules !== undefined;
