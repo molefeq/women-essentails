@@ -29,6 +29,18 @@ namespace WomenEssentail.ApiService.Controllers
 
         [SecurityFilter("PromotionProducts")]
         [HttpPost]
+        public HttpResponseMessage GetAppPromotionProducts(ProductPromotionAppSearchFilter productPromotionAppSearchFilter)
+        {
+            Result<PromotionProductSummaryDto> result = promotionProductManager.GetPromotionProductsApp(productPromotionAppSearchFilter);
+
+            MapRelativeLogoPaths(result.Items);
+
+            return Request.CreateResponse<Result<PromotionProductSummaryDto>>(HttpStatusCode.OK, result);
+        }
+
+
+        [SecurityFilter("PromotionProducts")]
+        [HttpPost]
         public HttpResponseMessage GetPromotionProducts(ProductPromotionSearchFilter productPromotionSearchFilter)
         {
             Result<PromotionProductSummaryDto> result = promotionProductManager.GetPromotionProducts(productPromotionSearchFilter);

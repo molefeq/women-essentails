@@ -2,11 +2,11 @@
 
     'use strict';
 
-    angular.module('app').controller('mainController', mainController);
+    angular.module('app').controller('promotionProductsController', promotionProductsController);
 
-    mainController.$inject = ['$scope', '$state', 'lookupApiFactory', 'salonsFactory'];
+    promotionProductsController.$inject = ['$scope', '$state', 'lookupApiFactory', 'salonsFactory'];
 
-    function mainController($scope, $state, lookupApiFactory, salonsFactory) {
+    function promotionProductsController($scope, $state, lookupApiFactory, salonsFactory) {
         var viewModel = $scope
 
         viewModel.goToSalons = goToSalons;

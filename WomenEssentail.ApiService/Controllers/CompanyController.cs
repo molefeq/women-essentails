@@ -37,6 +37,16 @@ namespace WomenEssentail.ApiService.Controllers
         }
 
         [HttpPost]
+        public HttpResponseMessage GetAppCompanies(CompanyAppSearchFilter companyAppSearchFilter)
+        {
+            Result<CompanySummaryDto> result = companyManager.GetAppCompanies(companyAppSearchFilter);
+
+            MapRelativeLogoPaths(result.Items);
+
+            return Request.CreateResponse<Result<CompanySummaryDto>>(HttpStatusCode.OK, result);
+        }
+
+        [HttpPost]
         public HttpResponseMessage GetCompanies(CompanySearchFilter companySearchFilter)
         {
             companySearchFilter.UserId = UserId;

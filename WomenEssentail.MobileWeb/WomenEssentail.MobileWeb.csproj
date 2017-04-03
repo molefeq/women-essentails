@@ -80,6 +80,8 @@
     <Content Include="app\components\home\views\homeView.html" />
     <Content Include="app\components\main\mainController.js" />
     <Content Include="app\components\main\mainView.html" />
+    <Content Include="app\components\promotionproducts\promotionProductsController.js" />
+    <Content Include="app\components\promotionproducts\promotionProductsView.html" />
     <Content Include="app\components\salondirection\salonDirectionController.js" />
     <Content Include="app\components\salondirection\salonDirectionFactory.js" />
     <Content Include="app\components\salondirection\salonDirectionView.html" />

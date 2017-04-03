@@ -9,6 +9,7 @@
     function salonsFactory($q, $rootScope, companyApiFactory) {
         var factory = {
             searchSalons: searchSalons,
+            searchFilter: {},
             salons:[]
         };
 

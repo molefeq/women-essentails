@@ -17,18 +17,22 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies
                 return unitOfWork.Companies.GetData(companyTypeCode, CompanyMappers.Instance.MapToCompanyDataObject);
             }
         }
+        public Result<CompanySummaryDto> GetAppCompanies(CompanyAppSearchFilter companyAppSearchFilter)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                    return unitOfWork.CompanySummaries.GetApp(companyAppSearchFilter, CompanyMappers.Instance.MapToLocationQueryCompanySummaryDto);
+            }
+        }
+
         public Result<CompanySummaryDto> GetCompanies(CompanySearchFilter companySearchFilter)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                if (companySearchFilter.IsLocationSearch)
-                {
-                    return unitOfWork.CompanySummaries.GetByLocation(companySearchFilter, CompanyMappers.Instance.MapToLocationQueryCompanySummaryDto);
-                }
-
                 return unitOfWork.CompanySummaries.Get(companySearchFilter, CompanyMappers.Instance.MapToCompanySummaryDto);
             }
         }
+
         public Response<CompanyDto> Save(CompanyDto companyDto)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())

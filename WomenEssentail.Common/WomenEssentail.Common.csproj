@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataFilters\AccountSearchFilter.cs" />
+    <Compile Include="DataFilters\CompanyAppSearchFilter.cs" />
     <Compile Include="DataFilters\CompanySearchFilter.cs" />
+    <Compile Include="DataFilters\ProductPromotionAppSearchFilter.cs" />
     <Compile Include="DataFilters\ProductPromotionsearchFilter.cs" />
     <Compile Include="DataFilters\ProductSearchFilter.cs" />
     <Compile Include="DataFilters\SearchFilter.cs" />

@@ -2,12 +2,10 @@
 
 namespace WomenEssentail.Common.DataFilters
 {
-    public class CompanySearchFilter
+    public class ProductPromotionAppSearchFilter
     {
-        public int? OrganisationId { get; set; }
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
-        public int? UserId { get; set; }
         public string SearchText { get; set; }
         public PageData PageData { get; set; }
     }

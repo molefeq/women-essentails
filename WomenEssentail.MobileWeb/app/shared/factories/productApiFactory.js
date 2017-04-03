@@ -9,6 +9,7 @@
     function productApiFactory($http, $rootScope, $q, ServerApiBaseUrl) {
         var factory = {
             getProducts: getProducts,
+            getPromotionProducts: getPromotionProducts,
             getProduct: getProduct
         };
 
@@ -20,7 +21,7 @@
             $http(
             {
                 method: 'POST',
-                url: ServerApiBaseUrl + '/Product/GetProducts',
+                url: ServerApiBaseUrl + 'Product/GetProducts',
                 data: searchFilter
             })
             .success(function (data, status, headers, config) {
@@ -36,7 +37,7 @@
             $http(
             {
                 method: 'POST',
-                url: ServerApiBaseUrl + '/Product/FetchProduct/?productId=' + productId
+                url: ServerApiBaseUrl + 'Product/FetchProduct/?productId=' + productId
             })
             .success(function (data, status, headers, config) {
                 deferred.resolve({ Product: data.Item });
@@ -44,6 +45,22 @@
 
             return deferred.promise;
         };
+
+        function getPromotionProducts(searchFilter) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + 'Product/GetAppPromotionProducts',
+                data: searchFilter
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ PromotionProducts: data.Items, TotalPromotionProducts: data.TotalItems });
+            });
+
+            return deferred.promise;
+        }
     };
 
 })();

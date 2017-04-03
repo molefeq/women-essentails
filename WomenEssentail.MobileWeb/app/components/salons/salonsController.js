@@ -21,7 +21,8 @@
                 Take: 30,
                 Skip: 0
             },
-            SearchText: '',
+            SearchText: salonsFactory.searchFilter.SearchText,
+            SubCategoryId: salonsFactory.searchFilter.SubCategoryId,
             IsLocationSearch: true
         };
 

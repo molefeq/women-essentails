@@ -29,5 +29,16 @@ namespace WomenEssentail.DataAccess.Repositories
 
             return GetPagedEntities("PromotionProductsFetch", promotionProductDtoMapper, sqlQueryParameters.ToArray());
         }
+
+        public Result<PromotionProductSummaryDto> GetApp(ProductPromotionAppSearchFilter productPromotionAppSearchFilter, Func<SqlDataReader, PromotionProductSummaryDto> promotionProductDtoMapper)
+        {
+            List<SqlQueryParameter> sqlQueryParameters = GetPagedDataParameters(productPromotionAppSearchFilter.PageData);
+
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Latitude", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Decimal, ParameterValue = productPromotionAppSearchFilter.Latitude });
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Longitude", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Decimal, ParameterValue = productPromotionAppSearchFilter.Longitude });
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "SearchText", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = productPromotionAppSearchFilter.SearchText });
+
+            return GetPagedEntities("PromotionProductsAppFetch", promotionProductDtoMapper, sqlQueryParameters.ToArray());
+        }
     }
 }
