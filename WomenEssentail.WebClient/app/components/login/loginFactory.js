@@ -22,7 +22,7 @@
             $http(
             {
                 method: 'Post',
-                url: ServerBaseUrl + '/Account/Login',
+                url: ServerBaseUrl + 'Account/Login',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded'
                 },

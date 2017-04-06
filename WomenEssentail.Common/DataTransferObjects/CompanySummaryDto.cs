@@ -6,6 +6,7 @@
         public string StatusCode { get; set; }
         public int TotalProducts { get; set; }
         public int TotalUsers { get; set; }
+        public bool HasPromotions { get; set; }
         public int Distance { get; set; }
     }
 }

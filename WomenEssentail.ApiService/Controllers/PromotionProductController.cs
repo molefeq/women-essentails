@@ -26,8 +26,7 @@ namespace WomenEssentail.ApiService.Controllers
         {
             this.promotionProductManager = promotionProductManager;
         }
-
-        [SecurityFilter("PromotionProducts")]
+        
         [HttpPost]
         public HttpResponseMessage GetAppPromotionProducts(ProductPromotionAppSearchFilter productPromotionAppSearchFilter)
         {

@@ -3,30 +3,8 @@
 html {
     body {
         .wrapper {
-            header {
-            }
-
-            main {
-                margin-top: 0;
-                min-height: 800px;
-                position: relative;
-                padding: 15px;
-
-                .salons-container {
-                    width: 100%;
-
-                    .salon-container {
-                        width: 100%;
-                    }
-                }
-            }
-        }
-
-
-        @media (max-width: 767px) {
-            .wrapper {
+            #salons-page {
                 header {
-                    text-align: center;
                 }
 
                 main {
@@ -36,29 +14,53 @@ html {
                     padding: 15px;
 
                     .salons-container {
-                        width: 100%;
 
                         .salon-container {
                             width: 100%;
+                        }
+                    }
+                }
+            }
+        }
 
-                            .salon-left-box {
-                                width: 50%;
-                                display: inline-block;
-                                padding: 5px;
-                                vertical-align: top;
-                            }
 
-                            .salon-right-box {
-                                width: 48%;
-                                display: inline-block;
-                                padding: 5px;
+        @media (max-width: 767px) {
+            .wrapper {
+                #salons-page {
+                    header {
+                        text-align: center;
+                    }
 
-                                .salon-logo {
-                                    margin: 5px;
+                    main {
+                        margin-top: 0;
+                        min-height: 800px;
+                        position: relative;
+                        padding: 15px;
 
-                                    img {
-                                        height: 100%;
-                                        width: 100%;
+                        .salons-container {
+
+                            .salon-container {
+                                width: 100%;
+
+                                .salon-left-box {
+                                    width: 50%;
+                                    display: inline-block;
+                                    padding: 5px;
+                                    vertical-align: top;
+                                }
+
+                                .salon-right-box {
+                                    width: 48%;
+                                    display: inline-block;
+                                    padding: 5px;
+
+                                    .salon-logo {
+                                        margin: 5px;
+
+                                        img {
+                                            height: 100%;
+                                            width: 100%;
+                                        }
                                     }
                                 }
                             }

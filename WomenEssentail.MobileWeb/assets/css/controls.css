@@ -115,8 +115,9 @@ body .action-label {
   background-color: #000;
   filter: alpha(opacity=70);
   display: block;
-  z-index: 10002;
+  z-index: 99;
   opacity: 0.7;
+  padding: 10px;
 }
 #loadingmessage > div {
   margin-left: 0;
@@ -130,6 +131,37 @@ body .action-label {
   height: 100%;
   position: absolute;
   /* 2 */
-  top: 50%;
+  top: 30%;
   background: url('../img/loading-image.gif') no-repeat scroll 8px 100%;
+}
+.modal {
+  position: fixed;
+  top: 120px;
+  z-index: 11;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background-color: transparent;
+  opacity: 0;
+  -webkit-transition: none;
+  -moz-transition: none;
+  transition: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+.modal .modal-content {
+  border-radius: 0  !important;
+}
+.modal .modal-content .error-dialog-details {
+  font-size: 12px  !important;
+  text-overflow: ellipsis  !important;
+  word-wrap: break-word  !important;
+}
+.modal .modal-content .btn-danger {
+  color: #fff;
+  background-color: #d9534f;
+  border-color: #d43f3a;
+  padding: 10px;
+  border-radius: 0;
 }

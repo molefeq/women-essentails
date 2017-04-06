@@ -1,31 +1,31 @@
-﻿body {
+﻿@import "definitions.less";
+
+body {
     .center-box {
         width: 360px;
-        margin: 7% auto;
+        margin: auto;
+        height: 100%;
 
-        .center-box-body {
-            background: #fff;
-            padding: 20px;
-            color: #444;
-            border-top: 0;
-            color: #666;
+        button {
+            position: fixed;
+            top: 35%;
+            left: 40%;
+            padding: 15px;
+            border-color: @content-background;
 
-            .form-control-feedback {
-                color: #777;
-            }
-
-            .center-box-msg {
-                margin: 0;
-                text-align: center;
-                padding: 0 20px 20px 20px;
+            &:hover {
+                background-color: @row-background;
+                color: @white;
             }
         }
     }
 
     @media (max-width: 768px) {
         .center-box {
-            width: 90%;
-            margin-top: 20px;
+            width: 100%;
+            margin: auto;
+            text-align: center;
+            height: 100%;
         }
     }
 }

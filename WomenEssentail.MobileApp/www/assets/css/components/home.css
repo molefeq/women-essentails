@@ -1,22 +1,8 @@
-﻿html body .wrapper header {
-  background: #ff4081;
-  height: 100px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  padding: 15px;
-}
-html body .wrapper header h3 {
-  color: #FFFFFF;
-}
-html body .wrapper main {
-  margin-top: 100px;
-  background: url('../img/login-bg.jpeg');
+﻿html body .wrapper #home-page main {
   min-height: 800px;
   position: relative;
 }
-html body .wrapper main .center-box {
+html body .wrapper #home-page main .center-box {
   width: 100px;
   margin: auto;
   position: relative;
@@ -24,15 +10,15 @@ html body .wrapper main .center-box {
   min-height: 800px;
   padding-top: 10%;
 }
-html body .wrapper main .center-box button {
+html body .wrapper #home-page main .center-box button {
   background: #FFFFFF;
   color: #333;
 }
 @media (max-width: 767px) {
-  html body .wrapper header {
+  html body .wrapper #home-page header {
     text-align: center;
   }
-  html body .wrapper main .center-box {
+  html body .wrapper #home-page main .center-box {
     min-height: 600px;
     padding-top: 50%;
   }

@@ -25,6 +25,11 @@ var app = app || {};
               templateUrl: "app/components/salon/salonView.html",
               controller: 'salonController'
           })
+          .state('promotionproducts', {
+              url: "/promotionproducts",
+              templateUrl: "app/components/promotionproducts/promotionProductsView.html",
+              controller: 'promotionProductsController'
+          })
         .state('salondirection', {
             url: "/salondirection/:salonId",
             templateUrl: "app/components/salondirection/salonDirectionView.html",

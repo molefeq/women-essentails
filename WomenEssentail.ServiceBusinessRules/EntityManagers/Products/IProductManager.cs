@@ -7,6 +7,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Products
 {
     public interface IProductManager 
 	{
+        Result<ProductSummaryDto> GetAppProducts(ProductSearchFilter productSearchFilter);
         Result<ProductSummaryDto> GetProducts(ProductSearchFilter productSearchFilter);
         Response<ProductDto> Save(ProductDto productDto);
     }

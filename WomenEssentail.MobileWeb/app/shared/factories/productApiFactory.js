@@ -21,7 +21,7 @@
             $http(
             {
                 method: 'POST',
-                url: ServerApiBaseUrl + 'Product/GetProducts',
+                url: ServerApiBaseUrl + 'Product/GetAppProducts',
                 data: searchFilter
             })
             .success(function (data, status, headers, config) {
@@ -52,7 +52,7 @@
             $http(
             {
                 method: 'POST',
-                url: ServerApiBaseUrl + 'Product/GetAppPromotionProducts',
+                url: ServerApiBaseUrl + 'PromotionProduct/GetAppPromotionProducts',
                 data: searchFilter
             })
             .success(function (data, status, headers, config) {

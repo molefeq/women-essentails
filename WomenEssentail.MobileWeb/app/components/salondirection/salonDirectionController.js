@@ -18,10 +18,12 @@
             },
             zoom: 14
         };
-        
-        viewModel.isLoading = true;
+
+        $rootScope.isLoading = true;
+        viewModel.ViewType = 'Map';
         viewModel.salonDirectionFactory = salonDirectionFactory;
         viewModel.goToSalons = goToSalons;
+        viewModel.showList = false;
 
         geolocation.getLocation().then(function (data) {
             $scope.map.center = {
@@ -29,6 +31,7 @@
                 longitude: data.coords.longitude
             };
 
+            viewModel.showList = false;
             viewModel.salonDirectionFactory.initialise(salonId).then(function () {
                 var directionsDisplay = new google.maps.DirectionsRenderer();
                 var directionsService = new google.maps.DirectionsService();
@@ -43,7 +46,6 @@
                         lat: Number(viewModel.salonDirectionFactory.salon.PhysicalAddressLatitude),
                         lng: Number(viewModel.salonDirectionFactory.salon.PhysicalAddressLongitude)
                     },
-                    showList: false
                 };
 
                 var request = {
@@ -57,10 +59,11 @@
                         directionsDisplay.setDirections(response);
                         directionsDisplay.setMap($scope.map.control.getGMap());
                         directionsDisplay.setPanel(document.getElementById('directionsList'));
-                        $scope.showList = true;
-                        viewModel.isLoading = false;
+                        viewModel.showList = true;
+                        $rootScope.isLoading = false;
                     } else {
                         alert('Google route unsuccesfull!');
+                        $rootScope.isLoading = false;
                     }
                 });
             });

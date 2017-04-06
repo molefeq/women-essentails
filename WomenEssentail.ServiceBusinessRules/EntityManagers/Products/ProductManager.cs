@@ -9,18 +9,27 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Products
 {
     public class ProductManager : IProductManager
     {
+        public Result<ProductSummaryDto> GetAppProducts(ProductSearchFilter productSearchFilter)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                return unitOfWork.ProductSummaries.GetAppProducts(productSearchFilter, ProductMappers.Instance.MapAppProductsQueryToProductSummaryDto);
+            }
+        }
+
         public Result<ProductSummaryDto> GetProducts(ProductSearchFilter productSearchFilter)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
                 if (productSearchFilter.IsCompanySearch)
                 {
-                    return unitOfWork.ProductSummaries.GetCompanyProducts(productSearchFilter, ProductMappers.Instance.MapToCompanyPrdocutsQueryToProductSummaryDto);
+                    return unitOfWork.ProductSummaries.GetCompanyProducts(productSearchFilter, ProductMappers.Instance.MapToCompanyProductsQueryToProductSummaryDto);
                 }
 
                 return unitOfWork.ProductSummaries.Get(productSearchFilter, ProductMappers.Instance.MapToProductSummaryDto);
             }
         }
+
         public Response<ProductDto> Save(ProductDto productDto)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())

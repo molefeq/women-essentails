@@ -20,7 +20,7 @@
             $http(
             {
                 method: 'POST',
-                url: ServerApiBaseUrl + '/Company/GetCompanies',
+                url: ServerApiBaseUrl + 'Company/GetAppCompanies',
                 data: searchFilter
             })
             .success(function (data, status, headers, config) {

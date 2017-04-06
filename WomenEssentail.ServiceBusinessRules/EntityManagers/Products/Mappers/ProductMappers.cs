@@ -27,7 +27,47 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Products.Mappers
 			}
         }
 
-        public ProductSummaryDto MapToCompanyPrdocutsQueryToProductSummaryDto(SqlDataReader sqlDataReader)
+        public ProductSummaryDto MapAppProductsQueryToProductSummaryDto(SqlDataReader sqlDataReader)
+        {
+            ProductSummaryDto productSummaryDto = new ProductSummaryDto();
+
+            productSummaryDto.Id = sqlDataReader["Id"].ToInteger();
+            productSummaryDto.CategoryId = sqlDataReader["CategoryId"].ToInteger();
+            productSummaryDto.SubCategoryId = sqlDataReader["SubCategoryId"].ToInteger();
+            productSummaryDto.CategoryName = sqlDataReader["CategoryName"].ToString();
+            productSummaryDto.SubCategoryName = sqlDataReader["SubCategoryName"].ToString();
+            productSummaryDto.CompanyId = sqlDataReader["CompanyId"].ToInteger();
+            productSummaryDto.Name = sqlDataReader["Name"].ToString();
+            productSummaryDto.Logo = sqlDataReader["Logo"].ToString();
+            productSummaryDto.Description = sqlDataReader["Description"].ToString();
+            productSummaryDto.Title = sqlDataReader["Title"].ToString();
+            productSummaryDto.StatusId = sqlDataReader["StatusId"].ToInteger();
+            productSummaryDto.StatusName = sqlDataReader["StatusName"].ToString();
+            productSummaryDto.StatusCode = sqlDataReader["StatusCode"].ToString();
+            productSummaryDto.IsInPromotion = sqlDataReader["IsInPromotion"].ToBoolean();
+            productSummaryDto.CreateDate = sqlDataReader["CreateDate"].ToDateTime();
+            productSummaryDto.CreateUserId = sqlDataReader["CreateUserId"].ToInteger();
+            productSummaryDto.EditDate = sqlDataReader["EditDate"].ToDateTime(); ;
+            productSummaryDto.EditUserId = sqlDataReader["EditUserId"].ToInteger();
+            productSummaryDto.Price = sqlDataReader["Price"].ToDecimal();
+            productSummaryDto.CrudStatus = CrudStatus.UPDATE;
+
+            if (productSummaryDto.IsInPromotion)
+            {
+                productSummaryDto.Promotion = new PromotionProductDto();
+
+                productSummaryDto.Promotion.Logo = sqlDataReader["Promotion_Logo"].ToString();
+                productSummaryDto.Promotion.StartDate = sqlDataReader["Promotion_StartDate"].ToDateTime();
+                productSummaryDto.Promotion.EndDate = sqlDataReader["Promotion_EndDate"].ToDateTime();
+                productSummaryDto.Promotion.Name = sqlDataReader["Promotion_Name"].ToString();
+                productSummaryDto.Promotion.Description = sqlDataReader["Promotion_Description"].ToString();
+                productSummaryDto.Promotion.Price = sqlDataReader["Promotion_Price"].ToDecimal();
+                productSummaryDto.Promotion.Title = sqlDataReader["Promotion_Title"].ToString();
+            }
+
+            return productSummaryDto;
+        }
+        public ProductSummaryDto MapToCompanyProductsQueryToProductSummaryDto(SqlDataReader sqlDataReader)
         {
             ProductSummaryDto productSummaryDto = new ProductSummaryDto();
 

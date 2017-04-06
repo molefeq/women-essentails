@@ -143,8 +143,9 @@ body {
     background-color: #000;
     filter: alpha(opacity=70);
     display: block;
-    z-index: 10002;
+    z-index: 99;
     opacity: 0.7;
+    padding: 10px;
 
 
     > div {
@@ -158,7 +159,42 @@ body {
         width: 100%;
         height: 100%;
         position: absolute; /* 2 */
-        top: 50%;
+        top: 30%;
         background: url('../img/loading-image.gif') no-repeat scroll 8px 100%;
+    }
+}
+
+.modal {
+    position: fixed;
+    top: 120px;
+    z-index: 11;
+    width: 100%;
+    min-height: 100%;
+    overflow: hidden;
+    background-color: transparent;
+    opacity: 0;
+    -webkit-transition: none;
+    -moz-transition: none;
+    transition: none;
+    -webkit-transform: none;
+    -ms-transform: none;
+    transform: none;
+
+    .modal-content {
+        border-radius: 0@i;
+
+        .error-dialog-details {
+            font-size: 12px@i;
+            text-overflow: ellipsis@i;
+            word-wrap: break-word@i;
+        }
+
+        .btn-danger {
+            color: #fff;
+            background-color: #d9534f;
+            border-color: #d43f3a;
+            padding: 10px;
+            border-radius: 0;
+        }
     }
 }

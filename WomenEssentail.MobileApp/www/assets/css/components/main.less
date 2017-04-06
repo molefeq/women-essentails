@@ -3,21 +3,14 @@
 html {
     body {
         .wrapper {
-            header {
-                display: none;
-            }
+            #salons-page {
+                .center-box {
+                    min-height: 600px;
+                    padding-top: 50%;
+                }
 
-            main {
-                margin-top: 0;
-                background: url('../img/login-bg.jpeg');
-                min-height: 800px;
-                position: relative;
-                padding: 15px;
-
-                .left-box {
-                    display:inline-block;
-                    width:40%;
-                    max-width: 120px;
+                .list__item {
+                    background-color: transparent;
                 }
             }
         }
@@ -25,15 +18,11 @@ html {
 
         @media (max-width: 767px) {
             .wrapper {
-                header {
+                .center-box {
+                    min-height: 600px;
+                    padding-top: 50%;
+                    width: 100%;
                     text-align: center;
-                }
-
-                main {
-                    .center-box {
-                        min-height: 600px;
-                        padding-top: 50%;
-                    }
                 }
             }
         }

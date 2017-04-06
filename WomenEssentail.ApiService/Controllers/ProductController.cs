@@ -27,6 +27,16 @@ namespace WomenEssentail.ApiService.Controllers
             this.productManager = productManager;
         }
 
+        [HttpPost]
+        public HttpResponseMessage GetAppProducts(ProductSearchFilter productSearchFilter)
+        {
+            Result<ProductSummaryDto> result = productManager.GetAppProducts(productSearchFilter);
+
+            MapRelativeLogoPaths(result.Items);
+
+            return Request.CreateResponse<Result<ProductSummaryDto>>(HttpStatusCode.OK, result);
+        }
+
         [SecurityFilter("Products")]
         [HttpPost]
         public HttpResponseMessage GetProducts(ProductSearchFilter productSearchFilter)
@@ -168,7 +178,15 @@ namespace WomenEssentail.ApiService.Controllers
                 return;
             }
 
-            productDtos.ForEach(item => MapRelativeLogoPath(item));
+            foreach (var productDto in productDtos)
+            {
+                MapRelativeLogoPath(productDto);
+
+                if (productDto.Promotion != null && !string.IsNullOrEmpty(productDto.Promotion.Logo))
+                {
+                    MapRelativePromotionLogoPath(productDto.Promotion);
+                }
+            }
         }
 
         private void MapRelativeLogoPath(ProductDto productDto)
@@ -179,6 +197,16 @@ namespace WomenEssentail.ApiService.Controllers
             }
 
             productDto.RelativeFileName = AppSettingsUtils.GetStringAppSetting("SiteUrl") + UploadFileHandler.GetRelativeFileName(AppSettingsUtils.GetAppSettingPhysicalPath("ProductImagesThumbnailsDirectory", VirtualPathUtility.ToAbsolute), productDto.Logo);
+        }
+
+        private void MapRelativePromotionLogoPath(PromotionProductDto promotionProductDto)
+        {
+            if (string.IsNullOrEmpty(promotionProductDto.Logo))
+            {
+                return;
+            }
+
+            promotionProductDto.RelativeFileName = AppSettingsUtils.GetStringAppSetting("SiteUrl") + UploadFileHandler.GetRelativeFileName(AppSettingsUtils.GetAppSettingPhysicalPath("PromotionProductImagesThumbnailsDirectory", VirtualPathUtility.ToAbsolute), promotionProductDto.Logo);
         }
 
         #endregion

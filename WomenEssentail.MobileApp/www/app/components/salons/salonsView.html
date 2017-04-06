@@ -1,30 +1,62 @@
-﻿<header>
-    <button class="btn btn-default" ng-click="goToMain()">Back</button>
+﻿
+<header class="bar bar-nav">
+    <a class="btn btn-link btn-nav pull-left" href="#" data-transition="slide-out" ng-click="goToMain($event)">
+        <span class="icon icon-left-nav"></span>
+        Back
+    </a>
+    <h1 class="title">Women's Essentials</h1>
+    <a class="tab-item pull-right" href="#popover">
+        <span class="icon icon-search"></span>
+    </a>
 </header>
-<main>
-    <div class="salons-container">
-        <div ng-repeat="salon in salonsFactory.salons" ng-click="goToSalon(salon);" class="salon-container">
-            <div class="salon-left-box">
-                <div class="salon-name">{{salon.Name}}</div>
-                <div class="salon-address">
-                    <div ng-if="salon.PhysicalAddressLine1">{{salon.PhysicalAddressLine1}}</div>
-                    <div ng-if="salon.PhysicalAddressLine2">{{salon.PhysicalAddressLine2}}</div>
-                    <div ng-if="salon.PhysicalAddressSuburb">{{salon.PhysicalAddressSuburb}}</div>
-                    <div ng-if="salon.PhysicalAddressCity">{{salon.PhysicalAddressCity}}</div>
+
+<div id="popover" class="popover">
+    <div class="content">
+        <form ng-submit="searchSalons()">
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="search" placeholder="Search" ng-model="SearchFilter.SearchText">
+                </div>
+                <div class="col-lg-6">
+                    <select type="search" ng-model="SearchFilter.SubCategoryId" style="padding:10px;"
+                            class="form-control" ng-change="searchSalons()">
+                        <option value="">Select</option>
+                        <option ng-repeat="subCategory in subCategories" value="subCategory.Id">{{subCategory.DisplayName}}</option>
+                    </select>
                 </div>
             </div>
-            <div class="salon-right-box">
-                <div class="salon-logo">
-                    <img ng-attr-src="{{salon.RelativeFileName}}"/>
-                </div>
-                <div>
-                    <button ng-click="goToSalonDirection(salon)">Take Me There</button>
-                </div>
-            </div>
-        </div>    
+        </form>
     </div>
-</main>
+</div>
+<div class="content sp-salons-view-container">
+
+
+    <ul class="table-view">
+        <li class="table-view-cell media" ng-repeat="salon in salonsFactory.salons" style="padding: 10px;">
+            <a data-transition="slide-in">
+                <img class="media-object pull-left" ng-attr-src="{{salon.RelativeFileName}}" alt="{{salon.Name}}">
+                <div class="media-body">
+                    <div class="media-content-header">
+                        {{salon.Name}}
+                    </div>
+                    <p class="media-content-body">
+                        <small ng-if="salon.PhysicalAddressLine1">{{salon.PhysicalAddressLine1}} <br /></small>
+                        <small ng-if="salon.PhysicalAddressLine2">{{salon.PhysicalAddressLine2}}<br /></small>
+                        <small ng-if="salon.PhysicalAddressSuburb">{{salon.PhysicalAddressSuburb}}<br /></small>
+                        <small ng-if="salon.PhysicalAddressCity">{{salon.PhysicalAddressCity}}<br /></small>
+                        <small>{{salon.Distance}} KM Away</small>
+                    </p>
+                </div>
+            </a>
+            <div class="col-lg-12">
+                <button class="btn pull-left" ng-click="goToSalon(salon)">
+                    View Details
+                </button>
+                <button class="btn pull-right" ng-click="goToSalonDirection(salon)">
+                    Take Me There
+                </button>
+            </div>
+        </li>
+    </ul>
+</div>
 <footer></footer>
-
-
-<link href="../../../assets/css/components/salons.min.css" rel="stylesheet" />

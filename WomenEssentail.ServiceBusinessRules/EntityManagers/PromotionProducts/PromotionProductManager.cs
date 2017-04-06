@@ -21,7 +21,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.PromotionProducts
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                return unitOfWork.PromotionProductSummaries.GetApp(productPromotionAppSearchFilter, PromotionProductMappers.Instance.MapToPromotionProductSummaryDto);
+                return unitOfWork.PromotionProductSummaries.GetApp(productPromotionAppSearchFilter, PromotionProductMappers.Instance.MapAppQueryToPromotionProductSummaryDto);
             }
         }
 

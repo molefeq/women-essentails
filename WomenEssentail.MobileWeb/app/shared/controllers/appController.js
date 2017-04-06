@@ -18,8 +18,6 @@
         viewModel.subMenuItems = [];
         viewModel.currentNavItem = '';
 
-        viewModel.appFactory.Initialise();
-
         $scope.$on('server-error-occurred', function (event, data) {
             data.controller = errorController;
             notificationFactory.open(data);

@@ -34,6 +34,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabases>false</PublishDatabases>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -238,7 +239,10 @@
     <Content Include="assets\libs\jquery\jquery-1.9.1.min.map" />
     <Content Include="assets\css\centerbox.less" />
     <Content Include="assets\css\modals.less" />
+    <None Include="Properties\PublishProfiles\Admin Site Azure.pubxml" />
     <None Include="Properties\PublishProfiles\Admin Site.pubxml" />
+    <None Include="Properties\PublishProfiles\WomenEssentailsAdmin - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\WomenEssentailsAdmin - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

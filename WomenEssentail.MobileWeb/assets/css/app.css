@@ -13,6 +13,172 @@ html body {
   min-height: 100%;
   height: 100%;
 }
+html body .bar {
+  background-color: #E91E63  !important;
+}
+html body .bar .btn-link {
+  font-size: 12px;
+}
+html body .bar .title {
+  color: #FFFFFF  !important;
+}
+html body .bar a {
+  color: #FFFFFF  !important;
+}
+html body #popover {
+  width: 100%;
+  max-width: 100%;
+  left: 0  !important;
+  margin: 0  !important;
+  background: transparent  !important;
+}
+html body #popover .content {
+  min-height: 120px  !important;
+  padding: 10px;
+  background: #FFFFFF  !important;
+  margin: 0 5px 5px 5px  !important;
+}
+html body #popover .content .row {
+  padding: 0;
+}
+html body #popover .content .row input[type=search] {
+  font-size: 14px;
+  border-radius: 0;
+}
+html body #popover .content .row select {
+  font-size: 14px;
+  -webkit-appearance: menulist-button;
+  /*webkit browsers */
+  -moz-appearance: menulist-button;
+  /*Firefox */
+  appearance: menulist-button;
+  /* modern browsers */
+  border-radius: 0;
+  height: 40px;
+}
+html body .content {
+  background: #FFD1DC  !important;
+}
+html body .sp-main-view-container .table-view {
+  background-color: transparent  !important;
+  color: #FFFFFF  !important;
+  border-top: 1px solid transparent  !important;
+  border-bottom: 1px solid transparent  !important;
+}
+html body .sp-main-view-container .table-view li {
+  border-bottom: 1px solid #FFFFFF  !important;
+}
+html body .sp-main-view-container .table-view li .push-right:after {
+  color: #FFFFFF  !important;
+}
+html body .sp-main-view-container .table-view p {
+  color: #FFFFFF  !important;
+}
+html body .sp-salons-view-container .table-view {
+  background-color: transparent  !important;
+  color: #FFFFFF  !important;
+  border-top: 1px solid transparent  !important;
+  border-bottom: 1px solid transparent  !important;
+}
+html body .sp-salons-view-container .table-view li {
+  border-bottom: 1px solid #FFFFFF  !important;
+}
+html body .sp-salons-view-container .table-view li .push-right:after {
+  color: #FFFFFF  !important;
+}
+html body .sp-salons-view-container .table-view p {
+  color: #FFFFFF  !important;
+}
+html body .sp-propmotions-view-container .table-view {
+  background-color: transparent  !important;
+  color: #FFFFFF  !important;
+  border-top: 1px solid transparent  !important;
+  border-bottom: 1px solid transparent  !important;
+}
+html body .sp-propmotions-view-container .table-view li {
+  border-bottom: 1px solid #FFFFFF  !important;
+}
+html body .sp-propmotions-view-container .table-view li .push-right:after {
+  color: #FFFFFF  !important;
+}
+html body .sp-propmotions-view-container .table-view p {
+  color: #FFFFFF  !important;
+}
+html body .sp-salon-view-container .table-view {
+  font-size: 14px;
+  background-color: transparent  !important;
+  color: #FFFFFF  !important;
+  border-top: 1px solid transparent  !important;
+  border-bottom: 1px solid transparent  !important;
+}
+html body .sp-salon-view-container .table-view .btn-categories {
+  border-color: #FFFFFF  !important;
+  color: #FFFFFF  !important;
+}
+html body .sp-salon-view-container .table-view .table-view-divider {
+  background-color: #F06292  !important;
+  color: #FFFFFF  !important;
+}
+html body .sp-salon-view-container .table-view li {
+  border-bottom: 1px solid #FFFFFF  !important;
+}
+html body .sp-salon-view-container .table-view li .push-right:after {
+  color: #FFFFFF  !important;
+}
+html body .sp-salon-view-container .table-view p {
+  color: #FFFFFF  !important;
+}
+html body .sp-salon-direction-view-container .panel.panel-default {
+  font-size: 14px;
+  background-color: transparent  !important;
+  color: #FFFFFF  !important;
+  border-top: 1px solid transparent  !important;
+  border-bottom: 1px solid transparent  !important;
+  height: 100%;
+}
+html body .sp-salon-direction-view-container .panel.panel-default .panel-heading {
+  background-color: transparent  !important;
+}
+html body .sp-salon-direction-view-container .panel.panel-default .panel-heading select {
+  font-size: 14px;
+  -webkit-appearance: menulist-button;
+  /*webkit browsers */
+  -moz-appearance: menulist-button;
+  /*Firefox */
+  appearance: menulist-button;
+  /* modern browsers */
+  border-radius: 0;
+  height: 40px;
+}
+html body .sp-salon-direction-view-container .panel.panel-default .panel-body {
+  height: 90%;
+}
+html body .sp-salon-direction-view-container .panel.panel-default .panel-body #map-canvas {
+  height: 100%;
+}
+html body .sp-salon-direction-view-container .panel.panel-default .panel-body #map-canvas .angular-google-map {
+  height: 100%;
+}
+html body .sp-salon-direction-view-container .panel.panel-default .panel-body #map-canvas .angular-google-map .angular-google-map-container {
+  height: 100%;
+}
+html body .sp-salon-direction-view-container .panel.panel-default .btn-categories {
+  border-color: #FFFFFF  !important;
+  color: #FFFFFF  !important;
+}
+html body .sp-salon-direction-view-container .panel.panel-default .table-view-divider {
+  background-color: #F06292  !important;
+  color: #FFFFFF  !important;
+}
+html body .sp-salon-direction-view-container .panel.panel-default li {
+  border-bottom: 1px solid #FFFFFF  !important;
+}
+html body .sp-salon-direction-view-container .panel.panel-default li .push-right:after {
+  color: #FFFFFF  !important;
+}
+html body .sp-salon-direction-view-container .panel.panel-default p {
+  color: #FFFFFF  !important;
+}
 html body .toolbar--material {
   background-color: #E91E63;
 }

@@ -26,6 +26,14 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.PromotionProducts.M
                 return _Instance;
             }
         }
+        public PromotionProductSummaryDto MapAppQueryToPromotionProductSummaryDto(SqlDataReader sqlDataReader)
+        {
+            PromotionProductSummaryDto promotionProductSummaryDto = MapToPromotionProductSummaryDto(sqlDataReader);
+
+            promotionProductSummaryDto.CompanyId = sqlDataReader["CompanyId"].ToInteger();
+
+            return promotionProductSummaryDto;
+        }
 
         public PromotionProductSummaryDto MapToPromotionProductSummaryDto(SqlDataReader sqlDataReader)
         {

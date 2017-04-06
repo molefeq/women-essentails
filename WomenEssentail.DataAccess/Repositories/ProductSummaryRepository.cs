@@ -31,6 +31,17 @@ namespace WomenEssentail.DataAccess.Repositories
             return GetPagedEntities("ProductsCompanyFetch", productMapper, sqlQueryParameters.ToArray());
         }
 
+        public Result<ProductSummaryDto> GetAppProducts(ProductSearchFilter companySearchFilter, Func<SqlDataReader, ProductSummaryDto> productMapper)
+        {
+            List<SqlQueryParameter> sqlQueryParameters = GetPagedDataParameters(companySearchFilter.PageData);
+
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "SubCategoryId", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Integer, ParameterValue = companySearchFilter.SubCategoryId });
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "CompanyId", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Integer, ParameterValue = companySearchFilter.CompanyId });
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "SearchText", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companySearchFilter.SearchText });
+
+            return GetPagedEntities("ProductsAppFetch", productMapper, sqlQueryParameters.ToArray());
+        }
+
         public Result<ProductSummaryDto> Get(ProductSearchFilter companySearchFilter, Func<SqlDataReader, ProductSummaryDto> productMapper)
         {
             List<SqlQueryParameter> sqlQueryParameters = GetPagedDataParameters(companySearchFilter.PageData);

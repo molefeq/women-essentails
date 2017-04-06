@@ -1,24 +1,15 @@
-﻿html body .wrapper header {
-  display: none;
+﻿html body .wrapper #salons-page .center-box {
+  min-height: 600px;
+  padding-top: 50%;
 }
-html body .wrapper main {
-  margin-top: 0;
-  background: url('../img/login-bg.jpeg');
-  min-height: 800px;
-  position: relative;
-  padding: 15px;
-}
-html body .wrapper main .left-box {
-  display: inline-block;
-  width: 40%;
-  max-width: 120px;
+html body .wrapper #salons-page .list__item {
+  background-color: transparent;
 }
 @media (max-width: 767px) {
-  html body .wrapper header {
-    text-align: center;
-  }
-  html body .wrapper main .center-box {
+  html body .wrapper .center-box {
     min-height: 600px;
     padding-top: 50%;
+    width: 100%;
+    text-align: center;
   }
 }

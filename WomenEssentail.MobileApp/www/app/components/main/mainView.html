@@ -1,16 +1,47 @@
-﻿<header>
-    <h3>Women's Essentials</h3>
+﻿<header class="bar bar-nav">
+    <h1 class="title">Women's Essentials</h1>
+    <a class="tab-item pull-right" href="#popover">
+        <span class="icon icon-search"></span>
+    </a>
 </header>
-<main>
-    <div class="left-box">
-        <div class="module" ng-click="goToSalons()">
-            <div class="module-con">
-                <img src="../../../assets/css/components/raw_1486387247.png" />
+<div id="popover" class="popover">
+    <div class="content">
+        <form ng-submit="searchSalons()">
+            <div class="row">
+                <div class="col-lg-6">
+                    <input type="search" placeholder="Search" ng-model="SearchFilter.SearchText">
+                </div>
+                <div class="col-lg-6">
+                    <select type="search" ng-model="SearchFilter.SubCategoryId" style="padding:10px;"
+                            class="form-control" ng-change="searchSalons()">
+                        <option value="">Select</option>
+                        <option ng-repeat="subCategory in subCategories" value="subCategory.Id">{{subCategory.DisplayName}}</option>
+                    </select>
+                </div>
             </div>
-            <p class="module-title">Nearest salon</p>
-        </div>
+        </form>
     </div>
-</main>
+</div>
+<div class="content sp-main-view-container">
+
+    <ul class="table-view">
+        <li class="table-view-cell media">
+            <a class="navigate-right" href="#" data-transition="slide-in" ng-click="goToSalons($event)">
+                <div class="media-body">
+                    <span class="media-object icon icon-home"></span>
+                    <p> Nearest salons</p>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right" href="#" data-transition="slide-in" ng-click="goToPromotions($event)">
+                <div class="media-body">
+                    <span class="media-object icon icon-bars"></span>
+                    <p>Trending</p>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
 <footer></footer>
 
-<link href="../../../assets/css/components/main.min.css" rel="stylesheet" />

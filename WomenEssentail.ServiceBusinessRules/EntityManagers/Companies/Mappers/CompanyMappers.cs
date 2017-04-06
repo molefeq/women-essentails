@@ -52,7 +52,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             return companyDataObject;
         }
 
-        public CompanySummaryDto MapToLocationQueryCompanySummaryDto(SqlDataReader sqlDataReader)
+        public CompanySummaryDto MapCompanyAppToCompanySummaryDto(SqlDataReader sqlDataReader)
         {
             CompanySummaryDto companyDto = new CompanySummaryDto();
 
@@ -70,6 +70,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             companyDto.PhysicalAddressLatitude = sqlDataReader["PhysicalAddressLatitude"].ToString();
             companyDto.PhysicalAddressLongitude = sqlDataReader["PhysicalAddressLongitude"].ToString();
             companyDto.Distance = sqlDataReader["Distance"].ToInteger();
+            companyDto.HasPromotions = sqlDataReader["HasPromotions"].ToBoolean();
             companyDto.CrudStatus = CrudStatus.UPDATE;
 
             return companyDto;

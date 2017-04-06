@@ -29,8 +29,7 @@ namespace WomenEssentail.ApiService.Controllers
             
             return Request.CreateResponse<Result<CompanyRequestDto>>(HttpStatusCode.OK, result);
         }
-
-        [SecurityFilter("CompanyRequests")]
+        [AllowAnonymous]
         [HttpPost]
         public HttpResponseMessage AddCompanyRequest(CompanyRequestDto companyRequestDto)
         {

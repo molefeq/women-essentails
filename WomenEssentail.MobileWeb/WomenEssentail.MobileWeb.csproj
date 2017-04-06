@@ -207,7 +207,25 @@
     <Content Include="assets\css\components\main.less" />
     <Content Include="assets\css\components\salons.less" />
     <Content Include="app\components\home\views\home.less" />
+    <Content Include="assets\libs\framework7\css\framework7.ios.colors.css" />
+    <Content Include="assets\libs\framework7\css\framework7.ios.colors.min.css" />
+    <Content Include="assets\libs\framework7\css\framework7.ios.css" />
+    <Content Include="assets\libs\framework7\css\framework7.ios.min.css" />
+    <Content Include="assets\libs\framework7\css\framework7.ios.rtl.css" />
+    <Content Include="assets\libs\framework7\css\framework7.ios.rtl.min.css" />
+    <Content Include="assets\libs\framework7\css\framework7.material.colors.css" />
+    <Content Include="assets\libs\framework7\css\framework7.material.colors.min.css" />
+    <Content Include="assets\libs\framework7\css\framework7.material.css" />
+    <Content Include="assets\libs\framework7\css\framework7.material.min.css" />
+    <Content Include="assets\libs\framework7\css\framework7.material.rtl.css" />
+    <Content Include="assets\libs\framework7\css\framework7.material.rtl.min.css" />
+    <Content Include="assets\libs\framework7\css\my-app.css" />
+    <Content Include="assets\libs\framework7\js\framework7.js.map" />
+    <Content Include="assets\libs\framework7\js\framework7.min.js.map" />
     <None Include="assets\libs\jquery\jquery-1.9.1.intellisense.js" />
+    <Content Include="assets\libs\framework7\js\framework7.js" />
+    <Content Include="assets\libs\framework7\js\framework7.min.js" />
+    <Content Include="assets\libs\framework7\js\my-app.js" />
     <Content Include="assets\libs\jquery\jquery-1.9.1.js" />
     <Content Include="assets\libs\jquery\jquery-1.9.1.min.js" />
     <Content Include="assets\libs\jquery\jquery-2.1.4.js" />
@@ -332,6 +350,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="app\components\register\" />
+    <Folder Include="assets\libs\framework7\img\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

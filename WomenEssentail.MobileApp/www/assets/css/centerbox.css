@@ -1,25 +1,24 @@
 ﻿body .center-box {
   width: 360px;
-  margin: 7% auto;
+  margin: auto;
+  height: 100%;
 }
-body .center-box .center-box-body {
-  background: #fff;
-  padding: 20px;
-  color: #444;
-  border-top: 0;
-  color: #666;
+body .center-box button {
+  position: fixed;
+  top: 35%;
+  left: 40%;
+  padding: 15px;
+  border-color: #ecf0f5;
 }
-body .center-box .center-box-body .form-control-feedback {
-  color: #777;
-}
-body .center-box .center-box-body .center-box-msg {
-  margin: 0;
-  text-align: center;
-  padding: 0 20px 20px 20px;
+body .center-box button:hover {
+  background-color: #F48FB1;
+  color: #FFFFFF;
 }
 @media (max-width: 768px) {
   body .center-box {
-    width: 90%;
-    margin-top: 20px;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    height: 100%;
   }
 }
