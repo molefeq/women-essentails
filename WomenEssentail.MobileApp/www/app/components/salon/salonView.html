@@ -11,8 +11,48 @@
         {{salonFactory.salon.Name}}
     </h4>
     <div style="text-align: center;">
-        <img ng-attr-src="{{salonFactory.salon.RelativeFileName}}" alt="{{salonFactory.salon.Name}}" />
-    </div>
+        <div class="col-md-6" style="float: none; margin: auto;">
+            <div class="box box-solid">
+                <div class="box-body">
+                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-example-generic" ng-repeat="logo in salonFactory.salon.Logos" data-slide-to="{{$index}}" ng-class="$index==0?'active': ''"></li>
+                        </ol>
+                        <div class="carousel-inner">
+                            <div class="item" ng-repeat="logo in salonFactory.salon.Logos" ng-class="$index==0?'active': ''">
+                                <img ng-attr-src="{{logo.NormalRelativeFileName}}" alt="{{salonFactory.salon.Name}}" style="margin: auto;">
+                                <div class="carousel-caption">
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <!--<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                            <span class="fa fa-angle-left" style="color: gray;"></span>
+                        </a>
+                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                            <span class="fa fa-angle-right" style="color: gray;"></span>
+                        </a>-->
+                    </div>
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                    <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;"> {{salonFactory.salon.Description}}</p>
+                    <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;">
+                        <span ng-if="salonFactory.salon.PhysicalAddressLine1">{{salonFactory.salon.PhysicalAddressLine1}}</span>
+                        <span ng-if="salonFactory.salon.PhysicalAddressLine2">{{salonFactory.salon.PhysicalAddressLine2}}</span>
+                        <span ng-if="salonFactory.salon.PhysicalAddressSuburb">{{salonFactory.salon.PhysicalAddressSuburb}}</span>
+                        <span ng-if="salonFactory.salon.PhysicalAddressCity">{{salonFactory.salon.PhysicalAddressCity}}</span>
+                        <span ng-if="salonFactory.salon.PhysicalAddressPostalCode">{{salonFactory.salon.PhysicalAddressPostalCode}}</span>
+                        <span ng-if="salonFactory.salon.Distance">{{salonFactory.salon.Distance}} km</span>
+                    </p>
+                    <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;" ng-if="salonFactory.salon.BusinessContactCode && salonFactory.salon.BusinessContactNumber"> {{'(' + salonFactory.salon.BusinessContactCode + ') ' + salonFactory.salon.BusinessContactNumber}} </p>
+                    <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;"> {{salonFactory.salon.MobileNumber}}</p>
+                    <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;"> {{salonFactory.salon.EmailAddress}}</p>
+
+                </div>
+            </div><!-- /.box -->
+        </div>
+    </div><!-- /.box-header -->
     <div style="padding:15px;">
         <button class="btn pull-right" ng-click="goToSalonDirections()">
             Take Me There
@@ -43,7 +83,7 @@
             <small class="pull-left">{{product.Name}}</small><small class="pull-right">R {{product.Price| number:2}}</small> <a ng-if="product.IsInPromotion" href="{{'#popover_' + $index}}" class="fa fa-star" style="position: absolute;top: 0;left: 0; z-index: 999;color: gold;"></a>
 
             <div id="{{'popover_' + $index}}" class="popover" ng-if="product.IsInPromotion">
-                <div class="content" style="min-height:120px;">
+                <div class="content" style="min-height:50px; padding:15px;">
                     <small class="pull-left">{{product.Promotion.Name}}</small><small class="pull-right">R {{product.Promotion.Price| number:2}}</small>
                 </div>
             </div>

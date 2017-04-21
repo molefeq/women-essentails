@@ -47,10 +47,10 @@
 
         $rootScope.isLoading = true;
 
-        geolocation.getLocation().then(function (data) {
+        navigator.geolocation.getCurrentPosition(function (position) {
             $rootScope.isLoading = false;
-            viewModel.SearchFilter.Latitude = data.coords.latitude;
-            viewModel.SearchFilter.Longitude = data.coords.longitude;
+            viewModel.SearchFilter.Latitude = position.coords.latitude;
+            viewModel.SearchFilter.Longitude = position.coords.longitude;
             lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (response) {
                 viewModel.subCategories = response.Items;
 
@@ -59,7 +59,22 @@
                     $rootScope.isDataLoading = false;
                 });
             });
-        });
+        }, function (error) {
+            var newScope = $rootScope.$new();
+
+            newScope.model = {
+                'ErrorCode': 408,
+                'ErrorHeader': 'Error retrieving location',
+                'ErrorDetails': 'Error retrieving location, please ensure that gps location is enabled. ' + 'Error Code: ' + error.code + 'Error Message: ' + error.message
+            };
+
+            notificationFactory.open({
+                templateUrl: 'errortemplate.html',
+                scope: newScope,
+                size: 'sm',
+                controller: errorController
+            });
+        }, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
 
         function searchPromotionProducts() {
             viewModel.promotionProductsGrid.SetPage(null, 1);

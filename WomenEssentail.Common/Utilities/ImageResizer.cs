@@ -9,6 +9,11 @@ namespace WomenEssentail.Common.Utilities
     public class ImageResizer
     {
         public ImageResizer() { }
+        public ImageResizer(int newImageWidth, int newImageHeight)
+        {
+            NewImageHeight = newImageHeight;
+            NewImageWidth = newImageWidth;
+        }
 
         public ImageResizer(string oldImageFileName, string newImageFileName, int newImageWidth, int newImageHeight)
         {
@@ -27,6 +32,36 @@ namespace WomenEssentail.Common.Utilities
 
         #endregion
 
+        public Stream ResizeImage(Stream stream, string fileExtension)
+        {
+            //if (!File.Exists(OldImageFileName))
+            //{
+            //    throw new Exception("Image file you tring to resize does not exists");
+            //}
+
+            ImageFormat imageFormat = GetImageFormat(fileExtension);
+            MemoryStream outputStream = new MemoryStream();
+
+            try
+            {
+                using (stream)
+                {
+                    using (Bitmap oldImage = (Bitmap)Bitmap.FromStream(stream))
+                    {
+                        stream.Close();
+
+                        ResizeToFixedSize(oldImage).Save(outputStream, imageFormat);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return outputStream;
+        }
+
         public void ResizeImage()
         {
             if (!File.Exists(OldImageFileName))
@@ -34,8 +69,10 @@ namespace WomenEssentail.Common.Utilities
                 throw new Exception("Image file you tring to resize does not exists");
             }
 
-            ImageFormat imageFormat = GetImageFormat();
 
+            FileInfo fileInfo = new FileInfo(OldImageFileName);
+            ImageFormat imageFormat = GetImageFormat(fileInfo.Extension.ToLower());
+            
             try
             {
                 using (FileStream fs = new FileStream(OldImageFileName, FileMode.Open))
@@ -55,11 +92,9 @@ namespace WomenEssentail.Common.Utilities
         }
 
         // Getting the right format for the image.
-        private ImageFormat GetImageFormat()
+        private ImageFormat GetImageFormat(string fileExtension)
         {
-            FileInfo fileInfo = new FileInfo(OldImageFileName);
-
-            switch (fileInfo.Extension.ToLower())
+            switch (fileExtension.ToLower())
             {
                 case ".png":
                     return ImageFormat.Png;

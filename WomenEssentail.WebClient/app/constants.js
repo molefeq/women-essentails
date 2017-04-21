@@ -36,12 +36,13 @@ var anonymousStates =
         'aboutus': true,
         'contactus': true,
         'searchsalons': true,
+        'searchsalon': true,
         'searchsalondirections': true,
         'register': true
     };
-//angular.module('app').constant('ServerBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/');
-angular.module('app').constant('ServerBaseUrl', 'http://localhost:55464/');
-angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:55464/api/');
-//angular.module('app').constant('ServerApiBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/api/');
+angular.module('app').constant('ServerBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/');
+//angular.module('app').constant('ServerBaseUrl', 'http://localhost:55464/');
+//angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:55464/api/');
+angular.module('app').constant('ServerApiBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/api/');
 angular.module('app').constant('SubMenuItems', menus);
 angular.module('app').constant('AnonymousStates', anonymousStates);

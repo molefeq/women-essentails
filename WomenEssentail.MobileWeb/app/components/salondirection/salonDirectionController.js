@@ -4,9 +4,9 @@
 
     angular.module('app').controller('salonDirectionController', salonDirectionController);
 
-    salonDirectionController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'geolocation', 'salonDirectionFactory'];
+    salonDirectionController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'salonDirectionFactory', 'notificationFactory'];
 
-    function salonDirectionController($scope, $rootScope, $state, $stateParams, geolocation, salonDirectionFactory) {
+    function salonDirectionController($scope, $rootScope, $state, $stateParams, salonDirectionFactory, notificationFactory) {
         var viewModel = $scope;
         var salonId = $stateParams.salonId;
 
@@ -25,10 +25,12 @@
         viewModel.goToSalons = goToSalons;
         viewModel.showList = false;
 
-        geolocation.getLocation().then(function (data) {
+        navigator.geolocation.getCurrentPosition(locationSuccess, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
+
+        function locationSuccess(position) {
             $scope.map.center = {
-                latitude: data.coords.latitude,
-                longitude: data.coords.longitude
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude
             };
 
             viewModel.showList = false;
@@ -62,12 +64,42 @@
                         viewModel.showList = true;
                         $rootScope.isLoading = false;
                     } else {
-                        alert('Google route unsuccesfull!');
+                        var newScope = $rootScope.$new();
+
+                        newScope.model = {
+                            'ErrorCode': 408,
+                            'ErrorHeader': 'Error retrieving route',
+                            'ErrorDetails': 'Error retrieving route, please ensure that gps location is enabled.'
+                        };
+
+                        notificationFactory.open({
+                            templateUrl: 'errortemplate.html',
+                            scope: newScope,
+                            size: 'sm',
+                            controller: errorController
+                        });
                         $rootScope.isLoading = false;
                     }
                 });
             });
-        });
+        };
+
+        function locationError(error) {
+            var newScope = $rootScope.$new();
+
+            newScope.model = {
+                'ErrorCode': 408,
+                'ErrorHeader': 'Error retrieving location',
+                'ErrorDetails': 'Error retrieving location, please ensure that gps location is enabled. ' + 'Error Code: ' + error.code + 'Error Message: ' + error.message
+            };
+
+            notificationFactory.open({
+                templateUrl: 'errortemplate.html',
+                scope: newScope,
+                size: 'sm',
+                controller: errorController
+            });
+        };
 
         function goToSalons(e) {
             e.preventDefault();

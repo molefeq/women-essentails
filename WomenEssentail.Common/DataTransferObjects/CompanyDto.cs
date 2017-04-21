@@ -1,17 +1,18 @@
 using Libraries.Common.Enums;
 
 using System;
+using System.Collections.Generic;
 
 namespace WomenEssentail.Common.DataTransferObjects
 {
-	public class CompanyDto 
-	{
-		public int Id { get; set; }
-		public string Name { get; set; }
-		public string Code { get; set; }
-		public string Description { get; set; }
-		public int OrganisationId { get; set; }
-		public int CompanyTypeId { get; set; }
+    public class CompanyDto
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Code { get; set; }
+        public string Description { get; set; }
+        public int OrganisationId { get; set; }
+        public int CompanyTypeId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int? PhysicalAddressId { get; set; }
@@ -35,17 +36,24 @@ namespace WomenEssentail.Common.DataTransferObjects
         public int PostalAddressProvinceId { get; set; }
         public int PostalAddressCountryId { get; set; }
         public string EmailAddress { get; set; }
-		public string BusinessContactCode { get; set; }
-		public string BusinessContactNumber { get; set; }
-		public string MobileNumber { get; set; }
-		public string Logo { get; set; }
-        public string RelativeFileName { get; set; }
+        public string BusinessContactCode { get; set; }
+        public string BusinessContactNumber { get; set; }
+        public string MobileNumber { get; set; }
+        public string PreviewRelativeFileName { get; set; }
+        public string NormalRelativeFileName { get; set; }
+        public string ThumbnailRelativeFileName { get; set; }
+        public List<CompanyLogoDto> Logos { get; set; }
         public int StatusId { get; set; }
-		public int? EditUserId { get; set; }
-		public int CreateUserId { get; set; }
-		public DateTime EditDate { get; set; }
-		public DateTime CreateDate { get; set; }
-		public CrudStatus CrudStatus { get; set; }
-	}
+        public int? EditUserId { get; set; }
+        public int CreateUserId { get; set; }
+        public DateTime EditDate { get; set; }
+        public DateTime CreateDate { get; set; }
+        public CrudStatus CrudStatus { get; set; }
+
+        public CompanyDto()
+        {
+            Logos = new List<CompanyLogoDto>();
+        }
+    }
 }
 

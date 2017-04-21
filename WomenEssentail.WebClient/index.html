@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+
     <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="assets/libs/angular-toastr/angular-toastr.min.css" rel="stylesheet" />
@@ -29,12 +30,12 @@
 
 
             <nav class="navbar navbar-static-top" role="navigation" style="margin-left:0;">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+                <div class="navbar-header" ng-if="!appFactory.IsUserLogged">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".menu-container" aria-expanded="false">
                         <i class="fa fa-bars"></i>
                     </button>
                 </div>
-                <div class="collapse navbar-collapse" id="navbar-collapse" ng-if="!appFactory.IsUserLogged">
+                <div class="collapse navbar-collapse menu-container" id="navbar-collapse" ng-if="!appFactory.IsUserLogged">
                     <ul class="nav navbar-nav">
                         <li class="active"><a ui-sref="landing" style="color:white;">Home <span class="sr-only">(current)</span></a></li>
                         <li><a ui-sref="aboutus" style="color:white;">About Us</a></li>
@@ -58,7 +59,7 @@
                     <form class="navbar-form navbar-right" role="search" ng-submit="searchSalons()">
                         <div class="form-group">
                             <input type="text" class="form-control" id="navbar-search-input" ng-model="SearchText"
-                                    placeholder="Search">
+                                   placeholder="Search">
                         </div>
                     </form>
                 </div>
@@ -202,6 +203,11 @@
     <script type="text/javascript" src="app/components/companyrequests/companyRequestsController.js"></script>
 
     <script type="text/javascript" src="app/components/searchsalondirections/searchSalonDirectionsController.js"></script>
+
+    <script src="app/components/searchsalon/searchSalonController.js"></script>
+    <script src="app/components/searchsalon/searchSalonFactory.js"></script>
+
+
     <script>
         //angular.bootstrap(document, ['app']);
         function initMap() {

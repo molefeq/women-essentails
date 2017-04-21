@@ -26,5 +26,9 @@
   {
     "outputFile": "assets/css/centerbox.css",
     "inputFile": "assets/css/centerbox.less"
+  },
+  {
+    "outputFile": "assets/css/bundle.css",
+    "inputFile": "assets/css/bundle.less"
   }
 ]

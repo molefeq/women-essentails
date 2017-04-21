@@ -11,6 +11,7 @@ namespace WomenEssentail.Common.DataTransferObjects
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
         public string ContactNumber { get; set; }
+        public string Description { get; set; }
         public string PhysicalAddress { get; set; }
         public DateTime CreateDate { get; set; }
         public int StatusId { get; set; }

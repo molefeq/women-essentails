@@ -21,7 +21,7 @@ namespace WomenEssentail.DataAccess.Repositories
         {
         }
 
-        public Result<CompanySummaryDto> Get(CompanySearchFilter companySearchFilter, Func<SqlDataReader, CompanySummaryDto> companyMapper)
+        public Result<CompanySummaryDto> Get(CompanySearchFilter companySearchFilter, Func<SqlDataReader, Result<CompanySummaryDto>> companyMapper)
         {
             List<SqlQueryParameter> sqlQueryParameters = GetPagedDataParameters(companySearchFilter.PageData);
             
@@ -29,10 +29,10 @@ namespace WomenEssentail.DataAccess.Repositories
             sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "OrganisationId", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Integer, ParameterValue = companySearchFilter.OrganisationId });
             sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "SearchText", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companySearchFilter.SearchText });
 
-            return GetPagedEntities("CompaniesFetch", companyMapper, sqlQueryParameters.ToArray());
+            return companyMapper(CommandTypeManager.ExecuteReader("CompaniesFetch", sqlQueryParameters.ToArray()));
         }
 
-        public Result<CompanySummaryDto> GetApp(CompanyAppSearchFilter companyAppSearchFilter, Func<SqlDataReader, CompanySummaryDto> companyMapper)
+        public Result<CompanySummaryDto> GetApp(CompanyAppSearchFilter companyAppSearchFilter, Func<SqlDataReader, Result<CompanySummaryDto>> companyMapper)
         {
             List<SqlQueryParameter> sqlQueryParameters = GetPagedDataParameters(companyAppSearchFilter.PageData);
 
@@ -41,7 +41,7 @@ namespace WomenEssentail.DataAccess.Repositories
             sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "SubCategoryId", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Integer, ParameterValue = companyAppSearchFilter.SubCategoryId });
             sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "SearchText", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companyAppSearchFilter.SearchText });
 
-            return GetPagedEntities("CompaniesAppFetch", companyMapper, sqlQueryParameters.ToArray());
+            return companyMapper(CommandTypeManager.ExecuteReader("CompaniesAppFetch", sqlQueryParameters.ToArray()));
         }
     }
 }

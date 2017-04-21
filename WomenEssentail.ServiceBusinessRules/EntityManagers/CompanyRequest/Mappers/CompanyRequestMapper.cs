@@ -38,6 +38,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequest.Mapp
             companyRequestDto.EmailAddress = sqlDataReader["EmailAddress"].ToString();
             companyRequestDto.ContactNumber = sqlDataReader["ContactNumber"].ToString();
             companyRequestDto.PhysicalAddress = sqlDataReader["PhysicalAddress"].ToString();
+            companyRequestDto.Description = sqlDataReader["Description"].ToString();
             companyRequestDto.StatusId = sqlDataReader["StatusId"].ToInteger();
             companyRequestDto.StatusName = sqlDataReader["StatusName"].ToString();
             companyRequestDto.StatusCode = sqlDataReader["StatusCode"].ToString();

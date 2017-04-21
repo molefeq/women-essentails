@@ -72,6 +72,10 @@
     <Content Include="app\app.module.js" />
     <Content Include="app\app.routes.js" />
     <Content Include="app\app.run.js" />
+    <Content Include="app\bundle.js" />
+    <Content Include="app\bundle.min.js">
+      <DependentUpon>bundle.js</DependentUpon>
+    </Content>
     <Content Include="app\components\core\errormodal.html" />
     <Content Include="app\components\core\footer\footerView.html" />
     <Content Include="app\components\core\header\headerController.js" />
@@ -122,6 +126,12 @@
     <Content Include="assets\css\AdminLTE.min.css" />
     <Content Include="assets\css\app.css" />
     <Content Include="assets\css\app.min.css" />
+    <Content Include="assets\css\bundle.css">
+      <DependentUpon>bundle.less</DependentUpon>
+    </Content>
+    <Content Include="assets\css\bundle.min.css">
+      <DependentUpon>bundle.css</DependentUpon>
+    </Content>
     <Content Include="assets\css\centerbox.css" />
     <Content Include="assets\css\centerbox.min.css" />
     <Content Include="assets\css\components\home.css">
@@ -222,6 +232,7 @@
     <Content Include="assets\libs\framework7\css\my-app.css" />
     <Content Include="assets\libs\framework7\js\framework7.js.map" />
     <Content Include="assets\libs\framework7\js\framework7.min.js.map" />
+    <Content Include="assets\css\bundle.less" />
     <None Include="assets\libs\jquery\jquery-1.9.1.intellisense.js" />
     <Content Include="assets\libs\framework7\js\framework7.js" />
     <Content Include="assets\libs\framework7\js\framework7.min.js" />
@@ -331,6 +342,7 @@
     <Content Include="assets\libs\ratchet-v2.0.2\fonts\ratchicons.eot" />
     <Content Include="assets\libs\ratchet-v2.0.2\fonts\ratchicons.ttf" />
     <Content Include="assets\libs\ratchet-v2.0.2\fonts\ratchicons.woff" />
+    <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -349,7 +361,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\components\register\" />
     <Folder Include="assets\libs\framework7\img\" />
   </ItemGroup>
   <ItemGroup>

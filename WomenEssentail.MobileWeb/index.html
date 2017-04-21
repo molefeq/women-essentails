@@ -5,39 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>Woemen's Essentails App</title>
+    <title>Women's Essentails App</title>
 
     <link href="assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="assets/libs/angular-toastr/angular-toastr.min.css" rel="stylesheet" />
     <link href="assets/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/libs/ratchet-v2.0.2/css/ratchet.min.css" rel="stylesheet" />
 
-    <link href="assets/css/centerbox.min.css" rel="stylesheet" />
-    <link href="assets/css/controls.min.css" rel="stylesheet" />
-    <link href="assets/css/app.min.css" rel="stylesheet" />
-
-    <link href="assets/css/modals.min.css" rel="stylesheet" />
-    <link href="assets/css/components/home.min.css" rel="stylesheet" />
-    <link href="assets/css/components/main.min.css" rel="stylesheet" />
-
-    <!-- <link href="assets/css/components/salons.min.css" rel="stylesheet" />-->
-    <!--<script type="text/javascript" src="app/shared/objects/utils.js"></script>
-    <link href="assets/css/AdminLTE.css" rel="stylesheet" />
-    <script type="text/javascript" src="app/shared/objects/customgrid.js"></script>
-    <script type="text/javascript" src="app/shared/objects/subformvalidation.js"></script>
-    <script type="text/javascript" src="app/shared/objects/tabformvalidation.js"></script>
-    <script type="text/javascript" src="assets/libs/ratchet-v2.0.2/js/ratchet.min.js"></script>-->
+    <link href="assets/css/bundle.min.css" rel="stylesheet" />
 
 </head>
 <body>
-    <header ng-controller="appController">
 
-    </header>
+    <header ng-controller="appController"></header>
+
     <div class="wrapper" ui-view="">
 
-        <div id='loadingmessage' ng-show="isLoading">
-            <div><p>Loading ...</p><img src="assets/img/loading-image.gif" /></div>
-        </div>
     </div>
 
 
@@ -59,8 +42,10 @@
     <script type="text/javascript" src="assets/libs/lodash/lodash.js"></script>
     <script type="text/javascript" src="assets/libs/angular-simple-logger/angular-simple-logger.js"></script>
     <script type="text/javascript" src="assets/libs/angular-maps/angular-google-maps.js"></script>
-    <script src="assets/libs/ratchet-v2.0.2/js/ratchet.min.js"></script>
-    <script type="text/javascript" src="app/app.module.js"></script>
+    <script type="text/javascript" src="assets/libs/ratchet-v2.0.2/js/ratchet.min.js"></script>
+
+    <script type="text/javascript" src="app/bundle.min.js"></script>
+    <!--<script type="text/javascript" src="app/app.module.js"></script>
     <script type="text/javascript" src="app/app.routes.js"></script>
     <script type="text/javascript" src="app/app.config.js"></script>
     <script type="text/javascript" src="app/app.run.js"></script>
@@ -103,9 +88,9 @@
 
     <script type="text/javascript" src="app/components/salon/salonController.js"></script>
     <script type="text/javascript" src="app/components/salon/salonFactory.js"></script>
-    <script src="app/components/promotionproducts/promotionProductsController.js"></script>
+    <script src="app/components/promotionproducts/promotionProductsController.js"></script>-->
+
     <script>
-        //angular.bootstrap(document, ['app']);
         function initMap() {
             angular.element(function () {
                 angular.bootstrap(document, ['app']);

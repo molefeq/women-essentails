@@ -4,9 +4,9 @@
             {{productsFactory.salon.Name}} Products
         </h1>
         <ol class="breadcrumb">
-            <li access-control module="home"><a href="#" ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
-            <li access-control module="salons"><a href="#" ng-click="goToSalons($event);"><i class="fa fa-home"></i> Salons</a></li>
-            <li access-control module="companyusers"><a ui-sref="companyusers"><i class="fa fa-home"></i> Users</a></li>
+            <li access-control module="home"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
+            <li access-control module="salons"><a ui-sref="salons"><i class="fa fa-home"></i> Salons</a></li>
+            <li access-control module="companyusers"><a ui-sref="companyusers({ companyId: productsFactory.salon.Id })"><i class="fa fa-home"></i> Users</a></li>
         </ol>
     </section>
 
@@ -40,7 +40,7 @@
                             </tr>
                             <tr ng-repeat="product in productsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
                                 <td>{{product.Name}}</td>
-                                <td>{{product.Price}}</td>
+                                <td>R {{product.Price | number:2}}</td>
                                 <td>{{product.CreateDate | date:'dd/MM/yyyy'}}</td>
                                 <td>
                                     <div class="animate-switch-container" ng-switch on="product.StatusCode">

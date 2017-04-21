@@ -4,9 +4,9 @@
 
     angular.module('app').controller('mainController', mainController);
 
-    mainController.$inject = ['$scope', '$state', 'lookupApiFactory', 'salonsFactory'];
+    mainController.$inject = ['$scope', '$state', 'lookupApiFactory', 'salonsFactory', 'geolocation'];
 
-    function mainController($scope, $state, lookupApiFactory, salonsFactory) {
+    function mainController($scope, $state, lookupApiFactory, salonsFactory, geolocation) {
         var viewModel = $scope
 
         viewModel.goToSalons = goToSalons;

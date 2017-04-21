@@ -9,6 +9,7 @@
     function companyApiFactory($http, $rootScope, $q, $upload, ServerApiBaseUrl) {
         var factory = {
             getCompanies: getCompanies,
+            getAppCompanies: getAppCompanies,
             getCompany: getCompany,
             addCompany: addCompany,
             updateCompany: updateCompany,
@@ -34,7 +35,7 @@
 
             return deferred.promise;
         };
-        
+
         function getCompanies(searchFilter) {
             var deferred = $q.defer();
 
@@ -42,6 +43,22 @@
             {
                 method: 'POST',
                 url: ServerApiBaseUrl + '/Company/GetCompanies',
+                data: searchFilter
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ Companies: data.Items, TotalCompanies: data.TotalItems });
+            });
+
+            return deferred.promise;
+        };
+
+        function getAppCompanies(searchFilter) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + 'Company/GetAppCompanies',
                 data: searchFilter
             })
             .success(function (data, status, headers, config) {

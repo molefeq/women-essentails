@@ -2,6 +2,7 @@
 using Libraries.Common.ResponseObjects;
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web;
@@ -83,7 +84,7 @@ namespace WomenEssentail.ApiService.Controllers
 
             return SaveCompany(companyDto);
         }
-        
+
         [HttpPost]
         public HttpResponseMessage FetchCompany(int companyId)
         {
@@ -112,8 +113,7 @@ namespace WomenEssentail.ApiService.Controllers
             {
                 Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesNormalDimension"),
                 Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesNormalDimension"),
-                PhysicalDirectory = AppSettingsUtils.GetAppSettingPhysicalPath("CompanyImagesTempDirectory", HttpContext.Current.Server.MapPath),
-                RelativeDirectory = AppSettingsUtils.GetAppSettingUri(HttpContext.Current.Request.Url, "CompanyImagesTempDirectory", VirtualPathUtility.ToAbsolute)
+                BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobTempDirectory")
             };
 
             string fileName = UploadFileHandler.SaveUploadedImage(httpRequest.Files[0], normalImageInformation);
@@ -130,7 +130,7 @@ namespace WomenEssentail.ApiService.Controllers
 
             if (!response.HasErrors && !response.HasWarnings)
             {
-                if (companyDto.CrudStatus != CrudStatus.DELETE && companyDto.CrudStatus != CrudStatus.READ && !string.IsNullOrEmpty(companyDto.RelativeFileName) && companyDto.RelativeFileName.Contains("/Logos/Company/Temp/"))
+                if (companyDto.CrudStatus != CrudStatus.DELETE && companyDto.CrudStatus != CrudStatus.READ && companyDto.Logos != null && companyDto.Logos.Where(item => item.NormalRelativeFileName.Contains("Logos/Company/Temp/")).Count() > 0)
                 {
                     ResizeLogos(response.Item);
                 }
@@ -146,37 +146,37 @@ namespace WomenEssentail.ApiService.Controllers
 
         private void ResizeLogos(CompanyDto companyDto)
         {
-            string logoFileName = UploadFileHandler.GetPhysicalFileName(AppSettingsUtils.GetAppSettingPhysicalPath("CompanyImagesTempDirectory", HttpContext.Current.Server.MapPath), companyDto.Logo);
+            foreach (var companyLogo in companyDto.Logos)
+            {
+                string logoFileName = System.IO.Path.Combine(AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobTempDirectory"), companyLogo.Logo);
 
-            UploadFileHandler.ResizeImage(logoFileName, companyDto.Logo,
-                new ImageInformation
-                {
+                UploadFileHandler.ResizeFromStreamImage(logoFileName, companyLogo.Logo,
+                    new ImageInformation
+                    {
 
-                    Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesNormalDimension"),
-                    Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesNormalDimension"),
-                    PhysicalDirectory = AppSettingsUtils.GetAppSettingPhysicalPath("CompanyImagesNormalDirectory", HttpContext.Current.Server.MapPath),
-                    RelativeDirectory = AppSettingsUtils.GetAppSettingUri(HttpContext.Current.Request.Url, "CompanyImagesNormalDirectory", VirtualPathUtility.ToAbsolute)
-                });
+                        Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesNormalDimension"),
+                        Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesNormalDimension"),
+                        BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobNormalDirectory")
+                    });
 
-            UploadFileHandler.ResizeImage(logoFileName, companyDto.Logo,
-                new ImageInformation
-                {
+                UploadFileHandler.ResizeFromStreamImage(logoFileName, companyLogo.Logo,
+                    new ImageInformation
+                    {
 
-                    Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesThumbnailsDimension"),
-                    Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesThumbnailsDimension"),
-                    PhysicalDirectory = AppSettingsUtils.GetAppSettingPhysicalPath("CompanyImagesThumbnailsDirectory", HttpContext.Current.Server.MapPath),
-                    RelativeDirectory = AppSettingsUtils.GetAppSettingUri(HttpContext.Current.Request.Url, "CompanyImagesThumbnailsDirectory", VirtualPathUtility.ToAbsolute)
-                });
+                        Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesThumbnailsDimension"),
+                        Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesThumbnailsDimension"),
+                        BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobThumbnailsDirectory")
+                    });
 
-            UploadFileHandler.ResizeImage(logoFileName, companyDto.Logo,
-                new ImageInformation
-                {
+                UploadFileHandler.ResizeFromStreamImage(logoFileName, companyLogo.Logo,
+                    new ImageInformation
+                    {
 
-                    Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesPreviewDimension"),
-                    Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesPreviewDimension"),
-                    PhysicalDirectory = AppSettingsUtils.GetAppSettingPhysicalPath("CompanyImagesPreviewDirectory", HttpContext.Current.Server.MapPath),
-                    RelativeDirectory = AppSettingsUtils.GetAppSettingUri(HttpContext.Current.Request.Url, "CompanyImagesPreviewDirectory", VirtualPathUtility.ToAbsolute)
-                });
+                        Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesPreviewDimension"),
+                        Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesPreviewDimension"),
+                        BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobPreviewDirectory")
+                    });
+            }
         }
 
         private void MapRelativeLogoPaths(List<CompanySummaryDto> companySummaryDtos)
@@ -191,12 +191,26 @@ namespace WomenEssentail.ApiService.Controllers
 
         private void MapRelativeLogoPath(CompanyDto companyDto)
         {
-            if (string.IsNullOrEmpty(companyDto.Logo))
+            if (companyDto.Logos == null || companyDto.Logos.Count == 0)
             {
                 return;
             }
 
-            companyDto.RelativeFileName = AppSettingsUtils.GetStringAppSetting("SiteUrl") + UploadFileHandler.GetRelativeFileName(AppSettingsUtils.GetAppSettingPhysicalPath("CompanyImagesThumbnailsDirectory", VirtualPathUtility.ToAbsolute), companyDto.Logo);
+            companyDto.NormalRelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobNormalDirectory"), companyDto.Logos[0].Logo);
+            companyDto.ThumbnailRelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobThumbnailsDirectory"), companyDto.Logos[0].Logo);
+            companyDto.PreviewRelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobPreviewDirectory"), companyDto.Logos[0].Logo);
+
+            foreach (var companyLogo in companyDto.Logos)
+            {
+                if (string.IsNullOrEmpty(companyLogo.Logo))
+                {
+                    return;
+                }
+
+                companyLogo.NormalRelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobNormalDirectory"), companyLogo.Logo);
+                companyLogo.ThumbnailRelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobThumbnailsDirectory"), companyLogo.Logo);
+                companyLogo.PreviewRelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobPreviewDirectory"), companyLogo.Logo);
+            }
         }
 
         #endregion

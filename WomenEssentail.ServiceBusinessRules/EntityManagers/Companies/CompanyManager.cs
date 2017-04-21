@@ -21,7 +21,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                    return unitOfWork.CompanySummaries.GetApp(companyAppSearchFilter, CompanyMappers.Instance.MapCompanyAppToCompanySummaryDto);
+                    return unitOfWork.CompanySummaries.GetApp(companyAppSearchFilter, CompanyMappers.Instance.MapGetAppCompanies);
             }
         }
 
@@ -29,7 +29,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies
         {
             using (UnitOfWork unitOfWork = new UnitOfWork())
             {
-                return unitOfWork.CompanySummaries.Get(companySearchFilter, CompanyMappers.Instance.MapToCompanySummaryDto);
+                return unitOfWork.CompanySummaries.Get(companySearchFilter, CompanyMappers.Instance.MapGetCompanies);
             }
         }
 

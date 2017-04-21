@@ -63,12 +63,17 @@
 
             companyApiFactory.getCompany(salonId).then(function (data) {
                 factory.salon = data.Company;
+
+                for (var i = 0; i < factory.salon.Logos.length; i++) {
+                    factory.salon.Logos[i].id = i + 1;
+                }
+
                 deferred.resolve();
             });
 
             return deferred.promise;
         };
-        
+
         function add() {
             var deferred = $q.defer();
 
@@ -102,12 +107,30 @@
             return deferred.promise;
         };
 
-        function uploadLogo(file) {
+        function uploadLogo(files) {
             var deferred = $q.defer();
+            var promises = [];
 
-            companyApiFactory.saveCompanyLogo(file, inProgressFunction).then(function (data) {
-                factory.salon.Logo = data.CompanyImage.ImageFileName;
-                factory.salon.RelativeFileName = data.CompanyImage.ImageFileNamePath;
+            for (var i = 0; i < files.length; i++) {
+                promises.push(companyApiFactory.saveCompanyLogo(files[i], inProgressFunction));
+            }
+
+            $q.all(promises).then(function (data) {
+                if (!factory.salon.Logos) {
+                    factory.salon.Logos = [];
+                }
+
+                var logoStartIndex = factory.salon.Logos.length + 1;
+
+                for (var j = 0; j < data.length; j++) {
+                    factory.salon.Logos.push({
+                        id: logoStartIndex + j,
+                        Logo: data[j].CompanyImage.ImageFileName,
+                        NormalRelativeFileName: data[j].CompanyImage.ImageFileNamePath,
+                        ThumbnailRelativeFileName: data[j].CompanyImage.ImageFileNamePath,
+                        PreviewRelativeFileName: data[j].CompanyImage.ImageFileNamePath
+                    });
+                }
                 deferred.resolve();
             });
 

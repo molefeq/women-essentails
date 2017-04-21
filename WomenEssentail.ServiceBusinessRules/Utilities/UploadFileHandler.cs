@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Libraries.AzureLibrary.StorageManager;
+using System;
 using System.IO;
 using System.Web;
 
@@ -17,14 +18,48 @@ namespace WomenEssentail.ServiceBusinessRules.Utilities
             }
 
             string fileName = Guid.NewGuid().ToString() + Path.GetExtension(postedImage.FileName);
+            ImageResizer imageResizer = new ImageResizer(imageInformation.Width, imageInformation.Height);
 
-            imageInformation.PhysicalFileName = GetPhysicalFileName(imageInformation.PhysicalDirectory, fileName);
-            imageInformation.RelativeFileName = GetRelativeFileName(imageInformation.RelativeDirectory, fileName);
+            using (var memoryStream = imageResizer.ResizeImage(postedImage.InputStream, Path.GetExtension(postedImage.FileName)))
+            {
+                //go back to start
+                memoryStream.Seek(0, SeekOrigin.Begin);
 
-            postedImage.SaveAs(imageInformation.PhysicalFileName);
-            ResizeImage(imageInformation);
+                FileStorageManager.Instance.WriteToPublicContainer(
+                    AppSettingsUtils.GetStringAppSetting("StorageConnectionString"),
+                    AppSettingsUtils.GetStringAppSetting("StoragePublicContainerName"),
+                    GetPhysicalFileName(imageInformation.BlobDirectoryName, fileName),
+                    memoryStream);
+
+                imageInformation.RelativeFileName = GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), imageInformation.BlobDirectoryName, fileName);
+            }
+
+            imageInformation.RelativeFileName = GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), imageInformation.BlobDirectoryName, fileName);
 
             return fileName;
+        }
+
+        public static void ResizeFromStreamImage(string imageBlobFileName, string fileName, ImageInformation imageInformation)
+        {
+            using (var outputStream = FileStorageManager.Instance.ReadToPublicContainer(AppSettingsUtils.GetStringAppSetting("StorageConnectionString"), AppSettingsUtils.GetStringAppSetting("StoragePublicContainerName"), imageBlobFileName))
+            {
+                ImageResizer imageResizer = new ImageResizer(imageInformation.Width, imageInformation.Height);
+                outputStream.Seek(0, SeekOrigin.Begin);
+
+                using (var memoryStream = imageResizer.ResizeImage(outputStream, Path.GetExtension(fileName)))
+                {
+                    //go back to start
+                    memoryStream.Seek(0, SeekOrigin.Begin);
+
+                    FileStorageManager.Instance.WriteToPublicContainer(
+                        AppSettingsUtils.GetStringAppSetting("StorageConnectionString"),
+                        AppSettingsUtils.GetStringAppSetting("StoragePublicContainerName"),
+                        GetPhysicalFileName(imageInformation.BlobDirectoryName, fileName),
+                        memoryStream);
+
+                    imageInformation.RelativeFileName = GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), imageInformation.BlobDirectoryName, fileName);
+                }
+            }
         }
 
         public static void ResizeImage(ImageInformation imageInformation)
@@ -48,6 +83,11 @@ namespace WomenEssentail.ServiceBusinessRules.Utilities
             }
 
             return Path.Combine(directory, Path.GetFileNameWithoutExtension(fileName) + "_" + fileSuffix + Path.GetExtension(fileName));
+        }
+
+        public static string GetBlobRelativeFileName(string blobStorageUrl, string blobDirectoryName, string fileName)
+        {
+            return Path.Combine(blobStorageUrl, blobDirectoryName, fileName);
         }
 
         public static string GetRelativeFileName(string virtualDirectory, string fileName, string fileSuffix = "")

@@ -172,6 +172,9 @@
     <Content Include="app\components\searchsalondirections\searchSalonDirectionsView.html" />
     <Content Include="app\components\searchsalons\searchSalonsController.js" />
     <Content Include="app\components\searchsalons\searchSalonsView.html" />
+    <Content Include="app\components\searchsalon\searchSalonController.js" />
+    <Content Include="app\components\searchsalon\searchSalonFactory.js" />
+    <Content Include="app\components\searchsalon\searchSalonView.html" />
     <Content Include="app\components\userprofile\userProfileController.js" />
     <Content Include="app\components\userprofile\userProfileFactory.js" />
     <Content Include="app\components\userprofile\userProfileView.html" />

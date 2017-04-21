@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <widget xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:vs="http://schemas.microsoft.com/appx/2014/htmlapps" id="io.cordova.myapp3b96be" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" defaultlocale="en-US">
-  <name>Women's Essentails</name>
+  <name>Womens Essentails</name>
   <description>A blank project that uses Apache Cordova to help you build an app that targets multiple mobile platforms: Android, iOS, Windows, and Windows Phone.</description>
-  <author href="http://cordova.io" email="dev@cordova.apache.org">Apache Cordova Team </author>
+  <author href="http://cordova.io" email="dev@cordova.apache.org">SQS</author>
   <content src="index.html" />
   <access origin="*" />
   <vs:features />
@@ -106,7 +106,9 @@
   <platform name="wp8">
     <splash src="res/screens/wp8/SplashScreenImage.png" width="768" height="1280" />
   </platform>
-  <plugin name="cordova-plugin-googlemaps" version="1.4.0">
-    <variable name="API_KEY_FOR_ANDROID" value="AIzaSyCLXWOudYIPjLxgJM7LjwRtaQHlcViVFCI" />
-  </plugin>
+  <plugin name="cordova.plugins.diagnostic" version="3.4.2" />
+  <plugin name="cordova-plugin-request-location-accuracy" version="2.2.1" />
+  <plugin name="cordova-plugin-network-information" version="1.3.2" />
+  <plugin name="cordova-plugin-geolocation" version="2.4.2" />
+  <plugin name="cordova-plugin-compat" version="1.1.0" />
 </widget>

@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Libraries.AzureLibrary">
+      <HintPath>..\..\..\..\..\Libraries\Libraries.AzureLibrary\bin\Debug\Libraries.AzureLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Libraries.Common">
       <HintPath>..\..\..\..\..\Libraries\Libraries.DataAccess\bin\Debug\Libraries.Common.dll</HintPath>
     </Reference>
@@ -133,6 +136,7 @@
     <Compile Include="EntityManagers\Companies\CompanyManager.cs" />
     <Compile Include="EntityManagers\Companies\ICompanyManager.cs" />
     <Compile Include="EntityManagers\Companies\Mappers\CompanyMappers.cs" />
+    <Compile Include="EntityManagers\CompanyLogo\Mappers\CompanyLogoMappers.cs" />
     <Compile Include="EntityManagers\CompanyProducts\CompanyProductManager.cs" />
     <Compile Include="EntityManagers\CompanyProducts\ICompanyProductManager.cs" />
     <Compile Include="EntityManagers\CompanyProducts\Mappers\CompanyProductMappers.cs" />

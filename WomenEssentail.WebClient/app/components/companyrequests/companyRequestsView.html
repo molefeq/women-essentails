@@ -30,6 +30,7 @@
                         <thead>
                             <tr>
                                 <th>Contact User</th>
+                                <th>Description</th>
                                 <th>Address</th>
                                 <th>Create Date</th>
                                 <th>Status</th>
@@ -39,6 +40,7 @@
                         <tbody>
                             <tr ng-repeat="request in requestsGrid.DataSource.Data">
                                 <td>{{request.FirstName + ' ' + request.LastName}}</td>
+                                <td>{{request.Description}}</td>
                                 <td>{{request.PhysicalAddress}}</td>
                                 <td>{{request.CreateDate | date: 'dd/MM/yyyy'}}</td>
                                 <td>

@@ -9,6 +9,7 @@
     function productApiFactory($http, $rootScope, $q, $upload, ServerApiBaseUrl) {
         var factory = {
             getProducts: getProducts,
+            getAppProducts: getAppProducts,
             getProduct: getProduct,
             addProduct: addProduct,
             updateProduct: updateProduct,
@@ -25,6 +26,22 @@
             {
                 method: 'POST',
                 url: ServerApiBaseUrl + '/Product/GetProducts',
+                data: searchFilter
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ Products: data.Items, TotalProducts: data.TotalItems });
+            });
+
+            return deferred.promise;
+        };
+
+        function getAppProducts(searchFilter) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + 'Product/GetAppProducts',
                 data: searchFilter
             })
             .success(function (data, status, headers, config) {
@@ -111,7 +128,7 @@
             });
 
             return deferred.promise;
-        };        
+        };
     };
 
 })();

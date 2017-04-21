@@ -15,13 +15,16 @@
         <form ng-submit="searchSalons()">
             <div class="row">
                 <div class="col-lg-6">
-                    <input type="search" placeholder="Search" ng-model="SearchFilter.SearchText">
+                    <div class="input-group" style="max-width:100%; margin-bottom:5px;">
+                        <input type="search" placeholder="Search" ng-model="SearchFilter.SearchText" style="max-width:100%; border:1px solid #ddd;">
+                        <span class="input-group-btn" id="sizing-addon2" style="max-width:100%;height: 100%;"><button class="btn" style="max-width:100%;height: 100%;padding: 6px 12px;"><i class="fa fa-search"></i></button></span>
+                    </div>
                 </div>
                 <div class="col-lg-6">
-                    <select type="search" ng-model="SearchFilter.SubCategoryId" style="padding:10px;"
+                    <select type="search" ng-model="SearchFilter.SubCategoryId" style="padding:10px;" convert-to-number
                             class="form-control" ng-change="searchSalons()">
                         <option value="">Select</option>
-                        <option ng-repeat="subCategory in subCategories" value="subCategory.Id">{{subCategory.DisplayName}}</option>
+                        <option ng-repeat="subCategory in subCategories" value="{{subCategory.Id}}">{{subCategory.DisplayName}}</option>
                     </select>
                 </div>
             </div>
@@ -34,7 +37,7 @@
     <ul class="table-view">
         <li class="table-view-cell media" ng-repeat="salon in salonsFactory.salons" style="padding: 10px;">
             <a data-transition="slide-in">
-                <img class="media-object pull-left" ng-attr-src="{{salon.RelativeFileName}}" alt="{{salon.Name}}">
+                <img class="media-object pull-left" ng-attr-src="{{salon.ThumbnailRelativeFileName}}" alt="{{salon.Name}}">
                 <div class="media-body">
                     <div class="media-content-header">
                         {{salon.Name}}
@@ -60,3 +63,7 @@
     </ul>
 </div>
 <footer></footer>
+
+<div id='loadingmessage' ng-show="isLoading">
+    <div><p>Loading Salons ...</p><img src="assets/img/loading-image.gif" /></div>
+</div>

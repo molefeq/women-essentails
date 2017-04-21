@@ -14,14 +14,22 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="col-md-12 col-sm-12 col-xs-12 text-center" ng-if="salonsFactory.salon.RelativeFileName">
-                            <img ng-attr-src="{{salonsFactory.salon.RelativeFileName}}" class="img-responsive center-block" height="80" width="80">
+                        <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="companyLogo in salonsFactory.salon.Logos" style="margin-bottom:5px;">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <img ng-attr-src="{{companyLogo.PreviewRelativeFileName}}" class="img-responsive pull-left">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <a class="text-center" ng-click="removeImage(companyLogo.id)">
+                                        <i class="fa fa-remove" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="row text-center">
-                            <a class="addItemButton" ng-file-select ng-file-change="uploadImage($files)"><i class="fa fa-upload" aria-hidden="true"></i>Upload Logo</a>
-                            <input type="hidden" file-upload-input="salonsFactory.salon.Logo" class="file" name="Logo" id="Logo"
-                                   ng-model="salonsFactory.salon.Logo" required data-required-msg="Salon logo is required." />
-                            <div class="k-valid-msg text-center" data-for="Logo" style="text-align:center"></div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a class="addItemButton" ng-file-select ng-file-change="uploadImage($files)" multiple="multiple">
+                                    <i class="fa fa-upload" aria-hidden="true"></i>Upload Logo
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -36,6 +44,20 @@
                                    ng-model="salonsFactory.salon.Name" placeholder="Enter Name"
                                    ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for the Name are not allowed." />
                             <div class="k-valid-msg" data-for="Name"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row label">
+                            <label for="Description"> Description <i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <textarea required data-required-msg="Description is required." ng-maxlength="500" class="form-control"
+                                      data-maxlength-msg="Description cannot be more than 500 characters." id="Description" name="Description"
+                                      ng-model="salonsFactory.salon.Description" placeholder="Enter Description"
+                                      ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for the Description are not allowed." />
+                            <div class="k-valid-msg" data-for="Description"></div>
                         </div>
                     </div>
                 </div>
@@ -179,7 +201,7 @@
                             <div class="col-lg-3">
                                 <input ng-maxlength="20" data-maxlength-msg="Code cannot be more than 5 characters." class="form-control" ng-pattern="/^(\+27[0-9]{2}|0[0-9]{2})$/"
                                        data-pattern-msg="Enter a valid Code."
-                                       id="BusinessContactCode" name="BusinessContactCode" type="text" ng-model="salonsFactory.salon.BusinessContactCode" placeholder="Enter Code" />
+                                       id="BusinessContactCode" name="BusinessContactCode" type="text" ng-model="salonsFactory.salon.BusinessContactCode" placeholder="Code" />
                                 <div class="k-valid-msg" data-for="BusinessContactCode"></div>
                             </div>
                             <div class="col-lg-9">

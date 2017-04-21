@@ -1,12 +1,14 @@
+using Libraries.Common.Enums;
 using Libraries.Common.Extensions;
-
+using Libraries.Common.ResponseObjects;
+using System.Data.SqlClient;
+using System.Linq;
+using WomenEssentail.Common.DataHelper;
 using WomenEssentail.Common.DataTransferObjects;
 
-using System.Data.SqlClient;
-using Libraries.Common.Enums;
-using WomenEssentail.Common.DataHelper;
-using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyTypes.Mappers;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Categories.Mappers;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyLogo.Mappers;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyTypes.Mappers;
 
 namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
 {
@@ -29,7 +31,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
                 return _Instance;
             }
         }
-        
+
         public CompanyDataObject MapToCompanyDataObject(SqlDataReader sqlDataReader)
         {
             CompanyDataObject companyDataObject = new CompanyDataObject();
@@ -42,7 +44,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
                 }
 
                 sqlDataReader.NextResult();
-                
+
                 while (sqlDataReader.Read())
                 {
                     companyDataObject.Categories.Add(CategoryMappers.Instance.MapToCategoryDto(sqlDataReader));
@@ -52,6 +54,80 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             return companyDataObject;
         }
 
+        public Result<CompanySummaryDto> MapGetAppCompanies(SqlDataReader sqlDataReader)
+        {
+            Result<CompanySummaryDto> result = new Result<CompanySummaryDto>();
+
+            using (sqlDataReader)
+            {
+                if (sqlDataReader.Read())
+                {
+                    result.TotalItems = sqlDataReader["TotalRows"].ToInteger();
+                }
+
+                sqlDataReader.NextResult();
+
+                while (sqlDataReader.Read())
+                {
+                    result.Items.Add(MapCompanyAppToCompanySummaryDto(sqlDataReader));
+                }
+
+                sqlDataReader.NextResult();
+
+                while (sqlDataReader.Read())
+                {
+                    int companyId = sqlDataReader["CompanyId"].ToInteger();
+                    CompanySummaryDto companyDto = result.Items.Where(item => item.Id == companyId).FirstOrDefault();
+
+                    if (companyDto == null)
+                    {
+                        continue;
+                    }
+
+                    companyDto.Logos.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+                }
+            }
+
+            return result;
+        }
+
+
+        public Result<CompanySummaryDto> MapGetCompanies(SqlDataReader sqlDataReader)
+        {
+            Result<CompanySummaryDto> result = new Result<CompanySummaryDto>();
+
+            using (sqlDataReader)
+            {
+                if (sqlDataReader.Read())
+                {
+                    result.TotalItems = sqlDataReader["TotalRows"].ToInteger();
+                }
+
+                sqlDataReader.NextResult();
+
+                while (sqlDataReader.Read())
+                {
+                    result.Items.Add(MapToCompanySummaryDto(sqlDataReader));
+                }
+
+                sqlDataReader.NextResult();
+
+                while (sqlDataReader.Read())
+                {
+                    int companyId = sqlDataReader["CompanyId"].ToInteger();
+                    CompanySummaryDto companyDto = result.Items.Where(item => item.Id == companyId).FirstOrDefault();
+
+                    if (companyDto == null)
+                    {
+                        continue;
+                    }
+
+                    companyDto.Logos.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+                }
+            }
+
+            return result;
+        }
         public CompanySummaryDto MapCompanyAppToCompanySummaryDto(SqlDataReader sqlDataReader)
         {
             CompanySummaryDto companyDto = new CompanySummaryDto();
@@ -59,7 +135,6 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             companyDto.Id = sqlDataReader["Id"].ToInteger();
             companyDto.Name = sqlDataReader["Name"].ToString();
             companyDto.MobileNumber = sqlDataReader["MobileNumber"].ToString();
-            companyDto.Logo = sqlDataReader["Logo"].ToString();
             companyDto.Description = sqlDataReader["Description"].ToString();
             companyDto.EmailAddress = sqlDataReader["EmailAddress"].ToString();
             companyDto.PhysicalAddressLine1 = sqlDataReader["PhysicalAddressLine1"].ToString();
@@ -72,7 +147,6 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             companyDto.Distance = sqlDataReader["Distance"].ToInteger();
             companyDto.HasPromotions = sqlDataReader["HasPromotions"].ToBoolean();
             companyDto.CrudStatus = CrudStatus.UPDATE;
-
             return companyDto;
         }
 
@@ -84,7 +158,6 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             companyDto.Code = sqlDataReader["Code"].ToString();
             companyDto.Name = sqlDataReader["Name"].ToString();
             companyDto.MobileNumber = sqlDataReader["MobileNumber"].ToString();
-            companyDto.Logo = sqlDataReader["Logo"].ToString();
             companyDto.Description = sqlDataReader["Description"].ToString();
             companyDto.OrganisationId = sqlDataReader["OrganisationId"].ToInteger();
             companyDto.OrganisationId = sqlDataReader["OrganisationId"].ToInteger();
@@ -119,7 +192,6 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             companyDto.Code = sqlDataReader["Code"].ToString();
             companyDto.Name = sqlDataReader["Name"].ToString();
             companyDto.MobileNumber = sqlDataReader["MobileNumber"].ToString();
-            companyDto.Logo = sqlDataReader["Logo"].ToString();
             companyDto.Description = sqlDataReader["Description"].ToString();
             companyDto.OrganisationId = sqlDataReader["OrganisationId"].ToInteger();
             companyDto.OrganisationId = sqlDataReader["OrganisationId"].ToInteger();
@@ -148,6 +220,12 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             companyDto.EmailAddress = sqlDataReader["EmailAddress"].ToString();
             companyDto.CrudStatus = CrudStatus.UPDATE;
 
+            sqlDataReader.NextResult();
+
+            while (sqlDataReader.Read())
+            {
+                companyDto.Logos.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+            }
             return companyDto;
         }
 

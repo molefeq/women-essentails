@@ -37,7 +37,7 @@
                             </tr>
                             <tr ng-repeat="salon in salonsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
                                 <td>
-                                    <img ng-attr-src="{{salon.RelativeFileName}}" alt="{{salon.Name}}" class="img-circle"/>
+                                    <img ng-attr-src="{{salon.ThumbnailRelativeFileName}}" alt="{{salon.Name}}" class="img-circle"/>
                                 </td>
                                 <td>{{salon.Name}}</td>
                                 <td>
@@ -51,6 +51,7 @@
                                     </div>
                                 </td>
                                 <td>
+                                    <small class="action-label label label-info" ng-click="viewSalon(salon);"><i class="fa fa-eye"></i> View</small>
                                     <small class="action-label label label-info" ng-click="goToSalonDirection(salon);"><i class="fa fa-map-marker"></i> Go There</small>
                                 </td>
                             </tr>

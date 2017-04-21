@@ -104,8 +104,7 @@ namespace WomenEssentail.ApiService.Controllers
             {
                 Width = AppSettingsUtils.GetDimensionWidth("ProductImagesNormalDimension"),
                 Height = AppSettingsUtils.GetDimensionHeight("ProductImagesNormalDimension"),
-                PhysicalDirectory = AppSettingsUtils.GetAppSettingPhysicalPath("ProductImagesTempDirectory", HttpContext.Current.Server.MapPath),
-                RelativeDirectory = AppSettingsUtils.GetAppSettingUri(HttpContext.Current.Request.Url, "ProductImagesTempDirectory", VirtualPathUtility.ToAbsolute)
+                BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("ProductImagesBlobTempDirectory")
             };
 
             string fileName = UploadFileHandler.SaveUploadedImage(httpRequest.Files[0], normalImageInformation);
@@ -122,7 +121,7 @@ namespace WomenEssentail.ApiService.Controllers
 
             if (!response.HasErrors && !response.HasWarnings)
             {
-                if (productDto.CrudStatus != CrudStatus.DELETE && productDto.CrudStatus != CrudStatus.READ && !string.IsNullOrEmpty(productDto.RelativeFileName) && productDto.RelativeFileName.Contains("/Logos/Product/Temp/"))
+                if (productDto.CrudStatus != CrudStatus.DELETE && productDto.CrudStatus != CrudStatus.READ && !string.IsNullOrEmpty(productDto.RelativeFileName) && productDto.RelativeFileName.Contains("Logos/Product/Temp/"))
                 {
                     ResizeLogos(response.Item);
                 }
@@ -138,36 +137,33 @@ namespace WomenEssentail.ApiService.Controllers
 
         private void ResizeLogos(ProductDto productDto)
         {
-            string logoFileName = UploadFileHandler.GetPhysicalFileName(AppSettingsUtils.GetAppSettingPhysicalPath("ProductImagesTempDirectory", HttpContext.Current.Server.MapPath), productDto.Logo);
+            string logoFileName = System.IO.Path.Combine(AppSettingsUtils.GetStringAppSetting("ProductImagesBlobTempDirectory"), productDto.Logo);
 
-            UploadFileHandler.ResizeImage(logoFileName, productDto.Logo,
+            UploadFileHandler.ResizeFromStreamImage(logoFileName, productDto.Logo,
                 new ImageInformation
                 {
 
                     Width = AppSettingsUtils.GetDimensionWidth("ProductImagesNormalDimension"),
                     Height = AppSettingsUtils.GetDimensionHeight("ProductImagesNormalDimension"),
-                    PhysicalDirectory = AppSettingsUtils.GetAppSettingPhysicalPath("ProductImagesNormalDirectory", HttpContext.Current.Server.MapPath),
-                    RelativeDirectory = AppSettingsUtils.GetAppSettingUri(HttpContext.Current.Request.Url, "ProductImagesNormalDirectory", VirtualPathUtility.ToAbsolute)
+                    BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("ProductImagesBlobNormalDirectory")
                 });
 
-            UploadFileHandler.ResizeImage(logoFileName, productDto.Logo,
+            UploadFileHandler.ResizeFromStreamImage(logoFileName, productDto.Logo,
                 new ImageInformation
                 {
 
                     Width = AppSettingsUtils.GetDimensionWidth("ProductImagesThumbnailsDimension"),
                     Height = AppSettingsUtils.GetDimensionHeight("ProductImagesThumbnailsDimension"),
-                    PhysicalDirectory = AppSettingsUtils.GetAppSettingPhysicalPath("ProductImagesThumbnailsDirectory", HttpContext.Current.Server.MapPath),
-                    RelativeDirectory = AppSettingsUtils.GetAppSettingUri(HttpContext.Current.Request.Url, "ProductImagesThumbnailsDirectory", VirtualPathUtility.ToAbsolute)
+                    BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("ProductImagesBlobThumbnailsDirectory")
                 });
 
-            UploadFileHandler.ResizeImage(logoFileName, productDto.Logo,
+            UploadFileHandler.ResizeFromStreamImage(logoFileName, productDto.Logo,
                 new ImageInformation
                 {
 
                     Width = AppSettingsUtils.GetDimensionWidth("ProductImagesPreviewDimension"),
                     Height = AppSettingsUtils.GetDimensionHeight("ProductImagesPreviewDimension"),
-                    PhysicalDirectory = AppSettingsUtils.GetAppSettingPhysicalPath("ProductImagesPreviewDirectory", HttpContext.Current.Server.MapPath),
-                    RelativeDirectory = AppSettingsUtils.GetAppSettingUri(HttpContext.Current.Request.Url, "ProductImagesPreviewDirectory", VirtualPathUtility.ToAbsolute)
+                    BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("ProductImagesBlobPreviewDirectory")
                 });
         }
 
@@ -196,7 +192,7 @@ namespace WomenEssentail.ApiService.Controllers
                 return;
             }
 
-            productDto.RelativeFileName = AppSettingsUtils.GetStringAppSetting("SiteUrl") + UploadFileHandler.GetRelativeFileName(AppSettingsUtils.GetAppSettingPhysicalPath("ProductImagesThumbnailsDirectory", VirtualPathUtility.ToAbsolute), productDto.Logo);
+            productDto.RelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("ProductImagesBlobThumbnailsDirectory"), productDto.Logo);
         }
 
         private void MapRelativePromotionLogoPath(PromotionProductDto promotionProductDto)
@@ -206,7 +202,7 @@ namespace WomenEssentail.ApiService.Controllers
                 return;
             }
 
-            promotionProductDto.RelativeFileName = AppSettingsUtils.GetStringAppSetting("SiteUrl") + UploadFileHandler.GetRelativeFileName(AppSettingsUtils.GetAppSettingPhysicalPath("PromotionProductImagesThumbnailsDirectory", VirtualPathUtility.ToAbsolute), promotionProductDto.Logo);
+            promotionProductDto.RelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("PromotionProductBlobImagesThumbnailsDirectory"), promotionProductDto.Logo);
         }
 
         #endregion

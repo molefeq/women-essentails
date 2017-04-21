@@ -61,6 +61,7 @@ namespace WomenEssentail.DataAccess.Repositories
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "LastName", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companyRequestDto.LastName });
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "EmailAddress", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 500, ParameterValue = companyRequestDto.EmailAddress });
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "ContactNumber", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 20, ParameterValue = companyRequestDto.ContactNumber });
+                sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Description", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 1000, ParameterValue = companyRequestDto.Description });
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "PhysicalAddress", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 1000, ParameterValue = companyRequestDto.PhysicalAddress });
             }
 

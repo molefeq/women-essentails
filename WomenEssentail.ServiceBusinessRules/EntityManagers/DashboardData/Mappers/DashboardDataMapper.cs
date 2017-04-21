@@ -1,10 +1,11 @@
 ﻿using Libraries.Common.Extensions;
 
 using System.Data.SqlClient;
-
+using System.Linq;
 using WomenEssentail.Common.DataTransferObjects;
 
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyLogo.Mappers;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequest.Mappers;
 
 namespace WomenEssentail.ServiceBusinessRules.EntityManagers.DashboardData.Mappers
@@ -29,7 +30,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.DashboardData.Mappe
                 return _instance;
             }
         }
-        
+
         public DashboardDataDto MapToDashboardDataDto(SqlDataReader sqlDataReader)
         {
             DashboardDataDto dashboardDataDto = new DashboardDataDto();
@@ -51,6 +52,21 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.DashboardData.Mappe
                 while (sqlDataReader.Read())
                 {
                     dashboardDataDto.RecentCompanies.Add(CompanyMappers.Instance.MapToCompanySummaryDto(sqlDataReader));
+                }
+
+                sqlDataReader.NextResult();
+
+                while (sqlDataReader.Read())
+                {
+                    int companyId = sqlDataReader["CompanyId"].ToInteger();
+                    CompanySummaryDto companyDto = dashboardDataDto.RecentCompanies.Where(item => item.Id == companyId).FirstOrDefault();
+
+                    if (companyDto == null)
+                    {
+                        continue;
+                    }
+
+                    companyDto.Logos.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
                 }
             }
 

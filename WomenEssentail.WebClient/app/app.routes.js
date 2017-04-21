@@ -37,6 +37,14 @@ var app = app || {};
                   skip: true
               }
           })
+          .state('searchsalon', {
+              url: "/searchsalon/:salonId",
+              templateUrl: "app/components/searchsalon/searchSalonView.html",
+              controller: 'searchSalonController',
+              sessionState: {
+                  skip: true
+              }
+          })
           .state('searchsalondirections', {
               url: "/searchsalondirections/:salonId",
               templateUrl: "app/components/searchsalondirections/searchSalonDirectionsView.html",

@@ -12,6 +12,7 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
     viewModel.setPostalSameAsPhysicalAddress = setPostalSameAsPhysicalAddress;
     viewModel.postalSameAsPhysical = false;
     viewModel.getCurrentLocation = getCurrentLocation;
+    viewModel.removeImage = removeImage;
 
     function cancel() {
         $uibModalInstance.dismiss();
@@ -40,7 +41,7 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
             return;
         }
 
-        viewModel.salonsFactory.uploadLogo(files[0]).then(function (data) {
+        viewModel.salonsFactory.uploadLogo(files).then(function (data) {
             viewModel.imageuploading = false;
         });
     };
@@ -92,6 +93,14 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
             viewModel.salonsFactory.salon.PhysicalAddressLatitude = data.coords.latitude;
             viewModel.salonsFactory.salon.PhysicalAddressLongitude = data.coords.longitude;
         });
+    };
+
+    function removeImage(imageIndex) {
+        var index = app.Utils.indexOf(viewModel.salonsFactory.salon.Logos, imageIndex, 'id');
+
+        if (index >= 0) {
+            viewModel.salonsFactory.salon.Logos.splice(index, 1);
+        }
     };
 
 };

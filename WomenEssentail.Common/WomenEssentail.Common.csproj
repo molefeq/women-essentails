@@ -62,6 +62,7 @@
     <Compile Include="DataTransferObjects\CategoryDto.cs" />
     <Compile Include="DataTransferObjects\ChangePasswordDto.cs" />
     <Compile Include="DataTransferObjects\CompanyDto.cs" />
+    <Compile Include="DataTransferObjects\CompanyLogoDto.cs" />
     <Compile Include="DataTransferObjects\CompanyProductDto.cs" />
     <Compile Include="DataTransferObjects\CompanyRequestDto.cs" />
     <Compile Include="DataTransferObjects\CompanySummaryDto.cs" />

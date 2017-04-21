@@ -12,6 +12,7 @@
         viewModel.isLoading = false;
         viewModel.searchSalons = searchSalons;
         viewModel.goToSalonDirection = goToSalonDirection;
+        viewModel.viewSalon = viewSalon;
         viewModel.salons = [];
 
         viewModel.SearchFilter = {
@@ -38,7 +39,7 @@
                 viewModel.SearchFilter.PageData.Take = options.take;
                 viewModel.SearchFilter.PageData.Skip = options.skip;
 
-                companyApiFactory.getCompanies(viewModel.SearchFilter).then(function (response) {
+                companyApiFactory.getAppCompanies(viewModel.SearchFilter).then(function (response) {
                     viewModel.salonsGrid.SetDataSource(response.Companies, response.TotalCompanies);
                     $rootScope.isDataLoading = false;
                 });
@@ -65,6 +66,10 @@
 
         function goToSalonDirection(salon) {
             $state.go('searchsalondirections', { salonId: salon.Id });
+        };
+
+        function viewSalon(salon) {
+            $state.go('searchsalon', { salonId: salon.Id });
         };
     };
 

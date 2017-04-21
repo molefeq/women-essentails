@@ -8,5 +8,6 @@
         public string RelativeDirectory { get; set; }
         public string RelativeFileName { get; set; }
         public string PhysicalFileName { get; set; }
+        public string BlobDirectoryName { get; set; }
     }
 }

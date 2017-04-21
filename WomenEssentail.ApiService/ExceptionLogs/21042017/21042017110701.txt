@@ -1,0 +1,35 @@
+Message: 
+Error with the logging please make sure that the direcorty for the app settings key of ErrorLogDirectory D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\ExceptionLogs\ exists
+
+Paramaters: 
+
+
+Stack Trace: 
+   at WomenEssentail.ServiceBusinessRules.ExceptionHandlers.GlobalExceptionLogger.SetErrorFileName(Exception originalException, String errorLogDirectory) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\ExceptionHandlers\GlobalExceptionLogger.cs:line 82
+   at WomenEssentail.ServiceBusinessRules.ExceptionHandlers.GlobalExceptionLogger.LogError(ErrorLogModel errorLogModel) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\ExceptionHandlers\GlobalExceptionLogger.cs:line 48
+   at WomenEssentail.ServiceBusinessRules.ExceptionHandlers.GlobalExceptionLogger.<LogExceptionAsync>d__1.MoveNext() in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\ExceptionHandlers\GlobalExceptionLogger.cs:line 43
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at WomenEssentail.ServiceBusinessRules.ExceptionHandlers.GlobalExceptionLogger.<LogAsync>d__0.MoveNext() in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\ExceptionHandlers\GlobalExceptionLogger.cs:line 25
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter`1.GetResult()
+   at WomenEssentail.ApiService.Areas.RouteDebugger.InspectHandler.<SendAsync>d__0.MoveNext() in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Areas\RouteDebugger\InspectHandler.cs:line 62
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.HttpServer.<SendAsync>d__0.MoveNext()
+
+Error Url: 
+http://localhost:55464/api/Company/UpdateCompany
+
+Error Date: 
+21/04/2017 11:07:01
+

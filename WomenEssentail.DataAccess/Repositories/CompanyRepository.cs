@@ -1,4 +1,5 @@
 using Libraries.Common.Enums;
+using Libraries.Common.Extensions;
 using Libraries.Common.ResponseObjects;
 
 using Libraries.DataAccess.AdoDotNetLibrary;
@@ -21,7 +22,7 @@ namespace WomenEssentail.DataAccess.Repositories
             : base(new StoredProcedureManager(connection))
         {
         }
-        
+
         public Response<CompanyDto> Save(CompanyDto companyDto, object mapCompanyQuery)
         {
             throw new NotImplementedException();
@@ -38,9 +39,10 @@ namespace WomenEssentail.DataAccess.Repositories
         public CompanyDataObject GetData(string companyTypeCode, Func<SqlDataReader, CompanyDataObject> companyDataMapper)
         {
             SqlQueryParameter sqlQueryParameter = new SqlQueryParameter { ParameterName = "CompanyTypeCode", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companyTypeCode };
+
             return companyDataMapper(CommandTypeManager.ExecuteReader("CompanyDataFetch", sqlQueryParameter));
         }
-        
+
         #region Private Methods
 
         private SqlQueryParameter[] GetSaveParameters(CompanyDto companyDto)
@@ -78,7 +80,8 @@ namespace WomenEssentail.DataAccess.Repositories
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "BusinessContactCode", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 10, ParameterValue = companyDto.BusinessContactCode });
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "BusinessContactNumber", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 20, ParameterValue = companyDto.BusinessContactNumber });
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "MobileNumber", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companyDto.MobileNumber });
-                sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Logo", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 500, ParameterValue = companyDto.Logo });
+                sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Logos", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Structured, ParameterValue = companyDto.Logos.ToDataTable<CompanyLogoDto>() });
+
             }
 
             if (companyDto.CrudStatus == CrudStatus.DELETE || companyDto.CrudStatus == CrudStatus.UPDATE || companyDto.CrudStatus == CrudStatus.CREATE)
@@ -90,7 +93,7 @@ namespace WomenEssentail.DataAccess.Repositories
 
             return sqlQueryParameters.ToArray();
         }
-        
+
         private string GetCrudStoredProcedureName(CrudStatus crudStatus)
         {
             switch (crudStatus)
@@ -109,8 +112,7 @@ namespace WomenEssentail.DataAccess.Repositories
         }
 
         #endregion
-
-
+        
     }
 }
 
