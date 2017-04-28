@@ -1,0 +1,33 @@
+Message: 
+Object reference not set to an instance of an object.
+
+Paramaters: 
+
+
+Stack Trace: 
+   at WomenEssentail.DataAccess.Repositories.SubCategoryRepository.Get(SubCategorySearchFilter subCategorySearchFilter, Func`2 subCategoryDtoMapper) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.DataAccess\Repositories\SubCategoryRepository.cs:line 26
+   at WomenEssentail.ServiceBusinessRules.EntityManagers.SubCategories.SubCategoryManager.GetSubCategories(SubCategorySearchFilter subCategorySearchFilter) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\EntityManagers\SubCategories\SubCategoryManager.cs:line 16
+   at WomenEssentail.ApiService.Controllers.LookupController.GetSubCategories(SubCategorySearchFilter subCategorySearchFilter) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Controllers\LookupController.cs:line 47
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+
+Error Url: 
+http://localhost:55464/api/Lookup/GetSubCategories
+
+Error Date: 
+24/04/2017 21:19:13
+

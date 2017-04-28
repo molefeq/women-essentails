@@ -4,9 +4,9 @@
 
     angular.module('app').controller('appController', AppController);
 
-    AppController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'appFactory', 'notificationFactory', 'SubMenuItems', 'AnonymousStates'];
+    AppController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'appFactory', 'notificationFactory', 'SubMenuItems', 'AnonymousStates', 'lookupApiFactory', 'searchSalonsFactory'];
 
-    function AppController($scope, $rootScope, $state, $stateParams, appFactory, notificationFactory, SubMenuItems, AnonymousStates) {
+    function AppController($scope, $rootScope, $state, $stateParams, appFactory, notificationFactory, SubMenuItems, AnonymousStates, lookupApiFactory, searchSalonsFactory) {
         var viewModel = $scope;
 
         viewModel.appFactory = appFactory;
@@ -20,7 +20,12 @@
         viewModel.subMenuItems = [];
         viewModel.currentNavItem = '';
         viewModel.SearchText = '';
+        viewModel.contactUsModel = {};
+        viewModel.send = send;
+        viewModel.services = [];
+        viewModel.serviceSearchSalons = serviceSearchSalons;
 
+        initialise();
         viewModel.appFactory.Initialise();
 
         $scope.$on('server-error-occurred', function (event, data) {
@@ -59,12 +64,21 @@
             $state.go('login');
         };
 
-        function searchSalons() {
-            $rootScope.SearchSalonText = viewModel.SearchText;
+        function searchSalons(SearchText) {
+            searchSalonsFactory.SearchText = SearchText;
+            searchSalonsFactory.SubCategoryId = viewModel.SubCategoryId;
 
             $state.go('searchsalons');
         };
 
+
+        function serviceSearchSalons(subCategoryId, e) {
+            e.preventDefault();
+            searchSalonsFactory.SearchText = viewModel.SearchText;
+            searchSalonsFactory.SubCategoryId = subCategoryId;
+
+            $state.go('searchsalons');
+        };
         function goToMenuItem(menuItem) {
             var queryStrings = {};
 
@@ -94,6 +108,16 @@
             //var landingRoute = app.RoutesManager.getLandingRoute(appFactory.User.AccessModules, $state.get());
 
             //$state.go(landingRoute.name);
+        };
+
+        function send() {
+
+        };
+
+        function initialise() {
+            lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (data) {
+                viewModel.services = data.Items;
+            });
         };
     };
 

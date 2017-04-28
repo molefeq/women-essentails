@@ -38,6 +38,12 @@
                 <div class="collapse navbar-collapse menu-container" id="navbar-collapse" ng-if="!appFactory.IsUserLogged">
                     <ul class="nav navbar-nav">
                         <li class="active"><a ui-sref="landing" style="color:white;">Home <span class="sr-only">(current)</span></a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Services <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu" style="background:#3c8dbc;">
+                                <li ng-repeat="service in services" ng-click="serviceSearchSalons(service.Id, $event)"><a href="#" style="background:#3c8dbc;">{{service.DisplayName}}</a></li>
+                            </ul>
+                        </li>
                         <li><a ui-sref="aboutus" style="color:white;">About Us</a></li>
                         <li><a ui-sref="searchsalons" style="color:white;">Salons</a></li>
                         <li><a ui-sref="contactus" style="color:white;">Contact Us</a></li>
@@ -55,8 +61,13 @@
                                 <span class="label-login">Register</span>
                             </a>
                         </li>
+                        </li>
                     </ul>
-                    <form class="navbar-form navbar-right" role="search" ng-submit="searchSalons()">
+                    <form class="navbar-form navbar-right" role="search" ng-submit="searchSalons(SearchText)">
+                        <!--<select ng-change="searchSalons()" ng-model="SubCategoryId" class="form-control">
+                            <option value="">Select Service</option>
+                            <option ng-repeat="service in services" value="{{service.Id}}">{{service.DisplayName}}</option>
+                        </select>-->
                         <div class="form-group">
                             <input type="text" class="form-control" id="navbar-search-input" ng-model="SearchText"
                                    placeholder="Search">
@@ -65,6 +76,8 @@
                 </div>
                 <div class="navbar-custom-menu" ng-if="appFactory.IsUserLogged">
                     <ul class="nav navbar-nav">
+                        >
+
                         <li class="dropdown user user-menu">
                             <a class="dropdown-toggle" data-toggle="dropdown" style="color:white;">
                                 <i class="fa fa-user"></i>
@@ -162,6 +175,7 @@
     <script type="text/javascript" src="app/shared/factories/errorFactory.js"></script>
     <script type="text/javascript" src="app/shared/factories/notificationFactory.js"></script>
     <script type="text/javascript" src="app/shared/factories/companyRequestApiFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/beautyTipApiFactory.js"></script>
 
     <script type="text/javascript" src="app/shared/filters/percentageFormat.js"></script>
 
@@ -196,6 +210,7 @@
     <script type="text/javascript" src="app/components/promotionproducts/promotionProductsFactory.js"></script>
 
     <script type="text/javascript" src="app/components/searchsalons/searchSalonsController.js"></script>
+    <script type="text/javascript" src="app/components/searchsalons/searchSalonsFactory.js"></script>
 
     <script type="text/javascript" src="app/components/register/registerController.js"></script>
     <script type="text/javascript" src="app/components/register/registerFactory.js"></script>
@@ -204,9 +219,14 @@
 
     <script type="text/javascript" src="app/components/searchsalondirections/searchSalonDirectionsController.js"></script>
 
-    <script src="app/components/searchsalon/searchSalonController.js"></script>
-    <script src="app/components/searchsalon/searchSalonFactory.js"></script>
+    <script type="text/javascript" src="app/components/searchsalon/searchSalonController.js"></script>
+    <script type="text/javascript" src="app/components/searchsalon/searchSalonFactory.js"></script>
 
+    <script type="text/javascript" src="app/components/beautytips/beautyTipsController.js"></script>
+    <script type="text/javascript" src="app/components/beautytips/beautyTipsFactory.js"></script>
+    <script type="text/javascript" src="app/components/beautytips/Modals/beuatyTipModalController.js"></script>
+
+    <script type="text/javascript" src="app/components/contactus/contactUsController.js"></script>
 
     <script>
         //angular.bootstrap(document, ['app']);

@@ -24,7 +24,7 @@ var app = app || {};
           .state('contactus', {
               url: "/contactus",
               templateUrl: "app/components/contactus/contactUsView.html",
-              controller: 'appController',
+              controller: 'contactUsController',
               sessionState: {
                   skip: true
               }
@@ -144,6 +144,14 @@ var app = app || {};
                 home: 'home',
                 moduleOrder: 3,
                 modules: ['CompanyUsers']
+            }
+        })
+        .state('beautytips', {
+            url: "/beautytips",
+            templateUrl: "app/components/beautytips/beautyTipsView.html",
+            controller: 'beautyTipsController',
+            sessionState: {
+                home: 'home'
             }
         })
         .state('salonrequests', {

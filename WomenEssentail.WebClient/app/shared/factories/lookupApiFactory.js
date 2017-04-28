@@ -10,7 +10,9 @@
         var factory = {
             getCompanyTypes: getCompanyTypes,
             getCategories: getCategories,
-            getSubCategories: getSubCategories
+            getSubCategories: getSubCategories,
+            sendMessage: sendMessage,
+            getContactDetails: getContactDetails
         };
 
         return factory;
@@ -35,6 +37,37 @@
                 method: 'POST',
                 url: url,
                 data: searchFilter
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            });
+
+            return deferred.promise;
+        };
+
+        function sendMessage(model) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + 'Lookup/SendMessage',
+                data: model
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            });
+
+            return deferred.promise;
+        };
+
+        function getContactDetails() {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'GET',
+                url: ServerApiBaseUrl + 'Lookup/GetContactDetails'
             })
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);

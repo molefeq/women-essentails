@@ -1,0 +1,39 @@
+﻿<header class="bar bar-nav">
+    <a class="btn btn-link btn-nav pull-left" ui-sref="main" data-transition="slide-out">
+        <span class="icon icon-left-nav"></span>
+        Back
+    </a>
+    <h1 class="title">Women's Essentials</h1>
+</header>
+
+<div class="content sp-main-view-container">
+    <form ng-submit="searchBeautyTips()">
+        <div class="row">
+            <div class="col-lg-12" style="margin:5px;">
+                <div class="input-group" style="max-width:100%; margin-bottom:5px; margin-top:5px;">
+                    <input type="search" placeholder="Search" ng-model="SearchFilter.SearchText" style="max-width:100%; border:1px solid #ddd;">
+                    <span class="input-group-btn" id="sizing-addon2" style="max-width:100%;height: 100%;"><button class="btn" style="max-width:100%;height: 35px;padding: 6px 12px;"><i class="fa fa-search"></i></button></span>
+                </div>
+            </div>
+            <div class="col-lg-12" style="margin:5px;">
+                <select ng-change="searchBeautyTips()" ng-model="SearchFilter.SubCategoryId" class="form-control">
+                    <option value="">Select Service</option>
+                    <option ng-repeat="service in beautyTipsFactory.services" value="{{service.Id}}">{{service.DisplayName}}</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <ul class="table-view">
+        <li class="table-view-cell media" ng-repeat="beautyTip in beautyTipsFactory.beautyTips">
+                <div class="media-body">
+                    <h3>{{beautyTip.Subject}}</h3>
+                    <p>{{beautyTip.Tip}}</p>
+                </div>
+        </li>
+    </ul>
+</div>
+<footer></footer>
+
+<div id='loadingmessage' ng-show="isLoading">
+    <div><p>{{loadingMessage}}</p><img src="assets/img/loading-image.gif" /></div>
+</div>

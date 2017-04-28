@@ -50,6 +50,10 @@ namespace WomenEssentail.Common.DataTransferObjects
         public DateTime CreateDate { get; set; }
         public CrudStatus CrudStatus { get; set; }
 
+        public int RatingCount { get; set; }
+        public decimal AvarageRating { get; set; }
+        public int FeedbackCount { get; set; }
+
         public CompanyDto()
         {
             Logos = new List<CompanyLogoDto>();

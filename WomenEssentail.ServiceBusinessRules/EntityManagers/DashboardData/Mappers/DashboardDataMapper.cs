@@ -39,6 +39,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.DashboardData.Mappe
             {
                 dashboardDataDto.TotalCompanyCount = sqlDataReader["TotalCompanyCount"].ToInteger();
                 dashboardDataDto.TotalRequestCount = sqlDataReader["TotalRequestCount"].ToInteger();
+                dashboardDataDto.TotalBeuatyTipCount = sqlDataReader["TotalBeuatyTipCount"].ToInteger();
 
                 sqlDataReader.NextResult();
 

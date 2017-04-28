@@ -29,28 +29,12 @@
                 <div class="box-body table-responsive no-padding" app-grid="salonsGrid" app-grid-options="salonsGridOptions">
                     <table class="table table-hover">
                         <tbody>
-                            <tr>
-                                <th></th>
-                                <th>Name</th>
-                                <th>Address</th>
-                                <th>Actions</th>
-                            </tr>
                             <tr ng-repeat="salon in salonsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
                                 <td>
                                     <img ng-attr-src="{{salon.ThumbnailRelativeFileName}}" alt="{{salon.Name}}" class="img-circle"/>
                                 </td>
                                 <td>{{salon.Name}}</td>
-                                <td>
-                                    <div class="animate-switch-container">
-                                        <span ng-if="salon.PhysicalAddressLine1">{{salon.PhysicalAddressLine1}}</span>
-                                        <span ng-if="salon.PhysicalAddressLine2">{{salon.PhysicalAddressLine2}}</span>
-                                        <span ng-if="salon.PhysicalAddressSuburb">{{salon.PhysicalAddressSuburb}}</span>
-                                        <span ng-if="salon.PhysicalAddressCity">{{salon.PhysicalAddressCity}}</span>
-                                        <span ng-if="salon.PhysicalAddressPostalCode">{{salon.PhysicalAddressPostalCode}}</span>
-                                        <span ng-if="salon.Distance">{{salon.Distance}} km</span>
-                                    </div>
-                                </td>
-                                <td>
+                                <td class="pull-left">
                                     <small class="action-label label label-info" ng-click="viewSalon(salon);"><i class="fa fa-eye"></i> View</small>
                                     <small class="action-label label label-info" ng-click="goToSalonDirection(salon);"><i class="fa fa-map-marker"></i> Go There</small>
                                 </td>

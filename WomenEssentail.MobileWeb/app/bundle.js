@@ -159,6 +159,67 @@ var app = app || {};
 
 var app = app || {};
 
+(function (navigatorutils) {
+    navigatorutils.navigate = function (sourcePosition, destinationPosition, app) {
+        launchnavigator.navigate([destinationPosition.latitude, destinationPosition.longitude], {
+            start: [sourcePosition.latitude, sourcePosition.longitude],
+            app: app,
+            transportMode: launchnavigator.LAUNCH_MODE.TURN_BY_TURN,
+            launchMode : launchnavigator.TRANSPORT_MODE.DRIVING
+        });
+    };
+
+    function getAndroidDafaultApp(platform) {
+        var dfd = jQuery.Deferred();
+
+        launchnavigator.isAppAvailable(launchnavigator.APP.GOOGLE_MAPS, function (isAvailable) {
+            if (isAvailable) {
+                dfd.resolve(launchnavigator.APP.GOOGLE_MAPS);
+            }
+            else {
+                launchnavigator.isAppAvailable(launchnavigator.APP.GEO, function (isAvailable) {
+                    if (isAvailable) {
+                        dfd.resolve(launchnavigator.APP.GEO);
+                    }
+                    else {
+                        dfd.resolve('GOOGLE_WEB_BROWSER');
+                    }
+                });
+            }
+        });
+
+        return dfd.promise();
+    };
+
+    function getIOSDafaultApp(platform) {
+        var dfd = jQuery.Deferred();
+
+        launchnavigator.isAppAvailable(launchnavigator.APP.GOOGLE_MAPS, function (isAvailable) {
+            if (isAvailable) {
+                dfd.resolve(launchnavigator.APP.GOOGLE_MAPS);
+            }
+            else {
+                launchnavigator.isAppAvailable(launchnavigator.APP.APPLE_MAPS, function (isAvailable) {
+                    if (isAvailable) {
+                        dfd.resolve(launchnavigator.APP.APPLE_MAPS);
+                    }
+                    else {
+                        dfd.resolve('GOOGLE_WEB_BROWSER');
+                    }
+                });
+            }
+        });
+
+        return dfd.promise();
+    };
+
+})(app.NavigatorUtils = {});
+
+
+'use strict'
+
+var app = app || {};
+
 app.SubFormValidator = function () {
     var subformvalidator = this;
 
@@ -706,6 +767,26 @@ var app = app || {};
               url: "/salons",
               templateUrl: "app/components/salons/salonsView.html",
               controller: 'salonsController'
+          })
+          .state('services', {
+              url: "/services",
+              templateUrl: "app/components/services/servicesView.html",
+              controller: 'servicesController'
+          })
+          .state('contactus', {
+              url: "/contactus",
+              templateUrl: "app/components/contactus/contactusView.html",
+              controller: 'contactusController'
+          })
+          .state('beautytips', {
+              url: "/beautytips",
+              templateUrl: "app/components/beautytips/beautyTipsView.html",
+              controller: 'beautyTipsController'
+          })
+          .state('registersalon', {
+              url: "/registersalon",
+              templateUrl: "app/components/registersalon/registerSalonView.html",
+              controller: 'registerSalonController'
           })
           .state('salon', {
               url: "/salon/:salonId",
@@ -1564,7 +1645,12 @@ function errorController($scope, $rootScope, $uibModalInstance) {
     function companyApiFactory($http, $rootScope, $q, ServerApiBaseUrl) {
         var factory = {
             getCompanies: getCompanies,
-            getCompany: getCompany
+            getCompany: getCompany,
+            addCompanyRating: addCompanyRating,
+            addCompanyFeedback: addCompanyFeedback,
+            getCompanyFeedbacks: getCompanyFeedbacks,
+            addCompanyRequest: addCompanyRequest,
+            getBeautytips: getBeautytips
         }
 
         return factory;
@@ -1599,7 +1685,86 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
             return deferred.promise;
         };
+
+        function addCompanyRating(model) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + '/CompanyRating/AddCompanyRating',
+                data: model
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ CompanyRating: data.Item });
+            });
+
+            return deferred.promise;
+        };
+
+        function addCompanyFeedback(model) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + '/CompanyFeedback/AddCompanyFeedback',
+                data: model
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ CompanyFeedBack: data.Item });
+            });
+
+            return deferred.promise;
+        };
+
+        function getCompanyFeedbacks(searchFilter) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + '/CompanyFeedback/GetCompanyFeebacks',
+                data: searchFilter
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ CompanyFeedbacks: data.Items, TotalCompanyFeedbacks: data.TotalItems });
+            });
+
+            return deferred.promise;
+        };
         
+        function addCompanyRequest(companyRequest) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + '/CompanyRequest/AddCompanyRequest',
+                data: companyRequest
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ CompanyRequest: data.Item });
+            });
+
+            return deferred.promise;
+        };
+
+        function getBeautytips(searchFilter) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + '/BeautyTip/GetBeautyTips',
+                data: searchFilter
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ BeautyTips: data.Items, TotalBeautyTips: data.TotalItems });
+            });
+
+            return deferred.promise;
+        }
     };
 
 })();
@@ -1724,7 +1889,8 @@ function errorController($scope, $rootScope, $uibModalInstance) {
     function lookupApiFactory($http, $q, ServerApiBaseUrl) {
         var factory = {
             getCompanyTypes: getCompanyTypes,
-            getSubCategories: getSubCategories
+            getSubCategories: getSubCategories,
+            getContactDetails: getContactDetails
         };
 
         return factory;
@@ -1745,6 +1911,21 @@ function errorController($scope, $rootScope, $uibModalInstance) {
                 method: 'POST',
                 url: url,
                 data: searchFilter
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            });
+
+            return deferred.promise;
+        };
+
+        function getContactDetails() {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'GET',
+                url: ServerApiBaseUrl + 'Lookup/GetContactDetails'
             })
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
@@ -1961,6 +2142,112 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
     'use strict';
 
+    angular.module('app').controller('beautyTipsController', beautyTipsController);
+
+    beautyTipsController.$inject = ['$scope', '$rootScope', '$state', 'beautyTipsFactory'];
+
+    function beautyTipsController($scope, $rootScope, $state, beautyTipsFactory) {
+        var viewModel = $scope
+
+        viewModel.beautyTipsFactory = beautyTipsFactory;
+        viewModel.SearchFilter = {
+            StatusCode: 'ACTIVE',
+            PageData: {
+                Take: 30,
+                Skip: 0,
+                SortColumn: 'CreateDate',
+                SortOrder: 2
+            }
+        };
+        viewModel.searchBeautyTips = searchBeautyTips;
+
+        $rootScope.isLoading = true;
+        $rootScope.loadingMessage = 'Loading Services ...';
+
+        viewModel.beautyTipsFactory.initialise(viewModel.SearchFilter).then(function (data) {
+            $rootScope.isLoading = false;
+        })
+        
+        function searchBeautyTips() {
+            viewModel.beautyTipsFactory.searchBeautyTips(viewModel.SearchFilter)
+        };
+    };
+
+})();
+(function () {
+
+    'use strict';
+
+    angular.module('app').factory('beautyTipsFactory', beautyTipsFactory);
+
+    beautyTipsFactory.$inject = ['$q', '$rootScope', 'companyApiFactory', 'lookupApiFactory'];
+
+    function beautyTipsFactory($q, $rootScope, companyApiFactory, lookupApiFactory) {
+        var factory = {
+            initialise: initialise,
+            searchBeautyTips: searchBeautyTips,
+            services: [],
+            beautyTips: []
+        };
+
+        return factory;
+
+        function initialise(searchFilter) {
+            var deferred = $q.defer();
+            var promises = {
+                companyPromise: companyApiFactory.getBeautytips(searchFilter),
+                subCategoriesPromise: lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } })
+            };
+
+            factory.product = {};
+
+            $q.all(promises).then(function (data) {
+                factory.beautyTips = data.companyPromise.BeautyTips;
+                factory.services = data.subCategoriesPromise.Items;
+                deferred.resolve();
+            });
+
+            return deferred.promise;
+        };
+
+        function searchBeautyTips(searchFilter) {
+            var deferred = $q.defer();
+
+            companyApiFactory.getBeautytips(searchFilter).then(function (data) {
+                factory.beautyTips = data.BeautyTips;
+                deferred.resolve();
+            });
+
+            return deferred.promise;
+        };
+
+    };
+
+})();
+(function () {
+
+    'use strict';
+
+    angular.module('app').controller('contactusController', contactusController);
+
+    contactusController.$inject = ['$scope', '$state', 'lookupApiFactory'];
+
+    function contactusController($scope, $state, lookupApiFactory) {
+        var viewModel = $scope
+
+        viewModel.model = {};
+
+        lookupApiFactory.getContactDetails().then(function (data) {
+            viewModel.model = data;
+        });
+
+    };
+
+})();
+(function () {
+
+    'use strict';
+
     angular.module('app').controller('headerController', headerController);
 
     headerController.$inject = ['$scope', 'notificationFactory', 'appFactory'];
@@ -2024,20 +2311,15 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
     angular.module('app').controller('mainController', mainController);
 
-    mainController.$inject = ['$scope', '$state', 'lookupApiFactory', 'salonsFactory', 'geolocation'];
+    mainController.$inject = ['$scope', '$state', 'salonsFactory'];
 
-    function mainController($scope, $state, lookupApiFactory, salonsFactory, geolocation) {
+    function mainController($scope, $state, salonsFactory) {
         var viewModel = $scope
 
         viewModel.goToSalons = goToSalons;
         viewModel.goToPromotions = goToPromotions;
-        viewModel.subCategories = [];
         viewModel.SearchFilter = {};
         viewModel.searchSalons = searchSalons;
-
-        lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (data) {
-            viewModel.subCategories = data.Items;
-        });
 
         function goToSalons(e) {
             e.preventDefault();
@@ -2055,8 +2337,7 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
         function searchSalons() {
             salonsFactory.searchFilter = {
-                SearchText: viewModel.SearchFilter.SearchText,
-                SubCategoryId: viewModel.SearchFilter.SubCategoryId
+                SearchText: viewModel.SearchFilter.SearchText
             };
 
             $state.go('salons');
@@ -2070,16 +2351,14 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
     angular.module('app').controller('promotionProductsController', promotionProductsController);
 
-    promotionProductsController.$inject = ['$scope', '$state', '$rootScope', 'productApiFactory', 'salonsFactory', 'geolocation', 'lookupApiFactory'];
+    promotionProductsController.$inject = ['$scope', '$state', '$rootScope', 'productApiFactory', 'salonsFactory', 'geolocation', 'lookupApiFactory', 'companyApiFactory', 'notificationFactory'];
 
-    function promotionProductsController($scope, $state, $rootScope, productApiFactory, salonsFactory, geolocation, lookupApiFactory) {
+    function promotionProductsController($scope, $state, $rootScope, productApiFactory, salonsFactory, geolocation, lookupApiFactory, companyApiFactory, notificationFactory) {
         var viewModel = $scope
 
-        viewModel.searchPromotionProducts = searchPromotionProducts;
         viewModel.goToSalonDirection = goToSalonDirection;
         viewModel.subCategories = [];
         viewModel.promotions = [];
-
         viewModel.SearchFilter = {
             PageData: {
                 Take: 30,
@@ -2089,32 +2368,10 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             SubCategoryId: salonsFactory.searchFilter.SubCategoryId
         };
 
-        viewModel.promotionProductsGridOptions = {
-            Paging: {
-                PageIndex: 1,
-                PageSize: 30
-            },
-            PageSizes: [30, 40, 60, 90, 100],
-            Read: function (options) {
-                var that = this;
-
-                $rootScope.isDataLoading = true;
-                $rootScope.loadingMessage = 'Loading data, please wait ...';
-
-                viewModel.SearchFilter.PageData.Take = options.take;
-                viewModel.SearchFilter.PageData.Skip = options.skip;
-
-                productApiFactory.getPromotionProducts(viewModel.SearchFilter).then(function (response) {
-                    viewModel.promotionProductsGrid.SetDataSource(response.PromotionProducts, response.TotalPromotionProducts);
-                    $rootScope.isDataLoading = false;
-                });
-            }
-        };
-
         $rootScope.isLoading = true;
+        $rootScope.loadingMessage = 'Loading Promotions, please wait ...';
 
         navigator.geolocation.getCurrentPosition(function (position) {
-            $rootScope.isLoading = false;
             viewModel.SearchFilter.Latitude = position.coords.latitude;
             viewModel.SearchFilter.Longitude = position.coords.longitude;
             lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (response) {
@@ -2122,10 +2379,58 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
                 productApiFactory.getPromotionProducts(viewModel.SearchFilter).then(function (response) {
                     viewModel.promotions = response.PromotionProducts
-                    $rootScope.isDataLoading = false;
+                    $rootScope.isLoading = false;
                 });
             });
-        }, function (error) {
+        }, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
+
+        function goToSalonDirection(salonId) {
+            if (!window.device) {
+                return $state.go('salondirection', { salonId: salonId });
+            }
+
+            var platform = device.platform.toLowerCase();
+
+            launchnavigator.isAppAvailable(launchnavigator.APP.GOOGLE_MAPS, function (isAvailable) {
+                if (isAvailable) {
+                    navigate(launchnavigator.APP.GOOGLE_MAPS, salonId);
+                }
+                else if (platform == "android") {
+                    launchnavigator.isAppAvailable(launchnavigator.APP.GEO, function (isAppAvailable) {
+                        if (isAppAvailable) {
+                            navigate(launchnavigator.APP.GEO, salonId);
+                        }
+                        else {
+                            return $state.go('salondirection', { salonId: salonId });
+                        }
+                    });
+                }
+                else if (platform == "ios") {
+                    launchnavigator.isAppAvailable(launchnavigator.APP.APPLE_MAPS, function (isAppAvailable) {
+                        if (isAppAvailable) {
+                            navigate(launchnavigator.APP.APPLE_MAPS, salonId);
+                        }
+                        else {
+                            return $state.go('salondirection', { salonId: salonId });
+                        }
+                    });
+                }
+            });
+        };
+
+        function navigate(navigatorApp, salonId) {
+            $rootScope.isLoading = true;
+            $rootScope.loadingMessage = 'Navigating, please wait ...';
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+                companyApiFactory.getCompany(salonId).then(function (data) {
+                    app.NavigatorUtils.navigate(position.coords, { latitude: data.Company.PhysicalAddressLatitude, longitude: data.Company.PhysicalAddressLongitude }, navigatorApp);
+                    $rootScope.isLoading = false;
+                });
+            }, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
+        };
+
+        function locationError(error) {
             var newScope = $rootScope.$new();
 
             newScope.model = {
@@ -2140,15 +2445,42 @@ function errorController($scope, $rootScope, $uibModalInstance) {
                 size: 'sm',
                 controller: errorController
             });
-        }, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
+        };
+    };
 
-        function searchPromotionProducts() {
-            viewModel.promotionProductsGrid.SetPage(null, 1);
+})();
+(function () {
+
+    'use strict';
+
+    angular.module('app').controller('registerSalonController', RegisterSalonController);
+
+    RegisterSalonController.$inject = ['$scope', '$rootScope', '$state', 'companyApiFactory'];
+
+    function RegisterSalonController($scope, $rootScope, $state, companyApiFactory) {
+        var viewModel = $scope;
+
+        viewModel.model = {};
+        viewModel.register = register;
+        viewModel.cancel = cancel;
+        viewModel.isRegistrationSucceful = false;
+
+        function register() {
+            if (!viewModel.frmRegister.$valid) {
+                $rootScope.$broadcast('action-complete', true);
+                return;
+            }
+
+            companyApiFactory.addCompanyRequest(viewModel.model).then(function (data) {
+                viewModel.model = {};
+                viewModel.isRegistrationSucceful = true;
+            });
         };
 
-        function goToSalonDirection(salonId) {
-            $state.go('salondirection', { salonId: salonId });
+        function cancel() {
+            $state.go('main');
         };
+
     };
 
 })();
@@ -2158,9 +2490,9 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
     angular.module('app').controller('salonController', salonController);
 
-    salonController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'salonFactory'];
+    salonController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'salonFactory', 'notificationFactory', 'companyApiFactory'];
 
-    function salonController($scope, $rootScope, $state, $stateParams, salonFactory) {
+    function salonController($scope, $rootScope, $state, $stateParams, salonFactory, notificationFactory, companyApiFactory) {
         var viewModel = $scope;
         var salonId = $stateParams.salonId
 
@@ -2173,9 +2505,34 @@ function errorController($scope, $rootScope, $uibModalInstance) {
         viewModel.subCategoryName = '';
         viewModel.backToSubCategories = backToSubCategories;
         viewModel.isLoading = true;
+        viewModel.loadingMessage = 'Loading salon details ...';
+        viewModel.setRating = setRating;
+        viewModel.viewFeedbackHistory = viewFeedbackHistory;
+        viewModel.giveFeedback = giveFeedback;
+
+        $scope.rate = 2;
+
+        $scope.hoveringOver = function (value) {
+            $scope.overStar = value;
+            $scope.percent = 100 * (value / 5);
+        };
 
         viewModel.salonFactory.initialise(salonId).then(function () {
-            viewModel.isLoading = false;
+            $rootScope.isLoading = true;
+            $rootScope.loadingMessage = 'Navigating, please wait ...';
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+                viewModel.isLoading = false;
+                var salonPosition = { lat: position.coords.latitude, lng: position.coords.longitude }
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: salonPosition,
+                    zoom: 8
+                });
+                var marker = new google.maps.Marker({
+                    position: salonPosition,
+                    map: map
+                });
+            }, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
         });
 
         function goToSalons(e) {
@@ -2185,7 +2542,47 @@ function errorController($scope, $rootScope, $uibModalInstance) {
         };
 
         function goToSalonDirections() {
-            $state.go('salondirection', { salonId: salonId });
+            if (!window.device) {
+                return $state.go('salondirection', { salonId: salonId });
+            }
+
+            var platform = device.platform.toLowerCase();
+
+            launchnavigator.isAppAvailable(launchnavigator.APP.GOOGLE_MAPS, function (isAvailable) {
+                if (isAvailable) {
+                    navigate(launchnavigator.APP.GOOGLE_MAPS);
+                }
+                else if (platform == "android") {
+                    launchnavigator.isAppAvailable(launchnavigator.APP.GEO, function (isAppAvailable) {
+                        if (isAppAvailable) {
+                            navigate(launchnavigator.APP.GEO);
+                        }
+                        else {
+                            return $state.go('salondirection', { salonId: salonId });
+                        }
+                    });
+                }
+                else if (platform == "ios") {
+                    launchnavigator.isAppAvailable(launchnavigator.APP.APPLE_MAPS, function (isAppAvailable) {
+                        if (isAppAvailable) {
+                            navigate(launchnavigator.APP.APPLE_MAPS);
+                        }
+                        else {
+                            return $state.go('salondirection', { salonId: salonId });
+                        }
+                    });
+                }
+            });
+        };
+
+        function navigate(navigatorApp) {
+            $rootScope.isLoading = true;
+            $rootScope.loadingMessage = 'Navigating, please wait ...';
+
+            navigator.geolocation.getCurrentPosition(function (position) {
+                app.NavigatorUtils.navigate(position.coords, { latitude: viewModel.salonFactory.salon.PhysicalAddressLatitude, longitude: viewModel.salonFactory.salon.PhysicalAddressLongitude }, navigatorApp);
+                $rootScope.isLoading = false;
+            }, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
         };
 
         function viewProducts(e, categoryName, subCategoryName, products) {
@@ -2201,6 +2598,108 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             viewModel.categoryName = '';
             viewModel.subCategoryName = '';
         };
+
+        function locationError(error) {
+            var newScope = $rootScope.$new();
+
+            newScope.model = {
+                'ErrorCode': 408,
+                'ErrorHeader': 'Error retrieving location',
+                'ErrorDetails': 'Error retrieving location, please ensure that gps location is enabled. ' + 'Error Code: ' + error.code + 'Error Message: ' + error.message
+            };
+
+            notificationFactory.open({
+                templateUrl: 'errortemplate.html',
+                scope: newScope,
+                size: 'sm',
+                controller: errorController
+            });
+        };
+
+        function setRating(rating) {
+            companyApiFactory.addCompanyRating({ CompanyId: salonId, Rating: rating }).then(function (response) {
+
+            });
+        };
+
+        function viewFeedbackHistory(e) {
+            e.preventDefault();
+
+            var newScope = $rootScope.$new();
+            newScope.CompanyId = salonId;
+
+            notificationFactory.open({
+                templateUrl: 'salon-feedback-history-template.html',
+                scope: newScope,
+                size: 'sm',
+                controller: salonFeedbackHistoryController
+            });
+        }
+
+        function giveFeedback() {
+            var newScope = $rootScope.$new();
+
+            newScope.model = { CompanyId: salonId };
+
+            notificationFactory.open({
+                templateUrl: 'salon-feedback-template.html',
+                scope: newScope,
+                size: 'sm',
+                controller: salonFeedbackController
+            });
+        }
+    };
+
+    salonFeedbackHistoryController.$inject = ['$scope', '$rootScope', '$uibModalInstance', 'companyApiFactory', 'salonFactory'];
+
+    function salonFeedbackHistoryController($scope, $rootScope, $uibModalInstance, companyApiFactory, salonFactory) {
+        var viewModel = $scope;
+
+        viewModel.feedbacks = [];
+
+        var searchFilter = {
+            PageData: {
+                Take: 30,
+                Skip: 0
+            },
+            SearchText: '',
+            CompanyId: viewModel.CompanyId
+        };
+
+        viewModel.closeDialog = closeDialog;
+
+        companyApiFactory.getCompanyFeedbacks(searchFilter).then(function (response) {
+            viewModel.feedbacks = response.CompanyFeedbacks;
+        });
+
+        function closeDialog() {
+            $uibModalInstance.dismiss();
+        };
+
+    };
+
+    salonFeedbackController.$inject = ['$scope', '$rootScope', '$uibModalInstance', 'companyApiFactory', 'salonFactory'];
+
+    function salonFeedbackController($scope, $rootScope, $uibModalInstance, companyApiFactory, salonFactory) {
+        var viewModel = $scope;
+
+        viewModel.closeDialog = closeDialog;
+        viewModel.addFeedback = addFeedback;
+
+        function closeDialog() {
+            $uibModalInstance.dismiss();
+        };
+
+        function addFeedback() {
+            if (!viewModel.model.Feedback) {
+                return;
+            }
+
+            companyApiFactory.addCompanyFeedback(viewModel.model).then(function (response) {
+                salonFactory.salon.FeedbackCount = salonFactory.salon.FeedbackCount + 1;
+                $uibModalInstance.dismiss();
+            });
+        }
     };
 
 })();
@@ -2301,7 +2800,7 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             };
 
             viewModel.showList = false;
-            viewModel.salonDirectionFactory.initialise(salonId).then(function () {
+            viewModel.salonDirectionFactory.initialise(salonId).then(function () {              
                 var directionsDisplay = new google.maps.DirectionsRenderer();
                 var directionsService = new google.maps.DirectionsService();
                 var geocoder = new google.maps.Geocoder();
@@ -2454,8 +2953,49 @@ function errorController($scope, $rootScope, $uibModalInstance) {
         };
 
         function goToSalonDirection(salon) {
-            salonDirectionFactory.salon = salon;
-            $state.go('salondirection', { salonId: salon.Id });
+            if (!window.device) {
+                salonDirectionFactory.salon = salon;
+
+                return $state.go('salondirection', { salonId: salon.Id });
+            }
+
+            var platform = device.platform.toLowerCase();
+
+            launchnavigator.isAppAvailable(launchnavigator.APP.GOOGLE_MAPS, function (isAvailable) {
+                if (isAvailable) {
+                    navigate(launchnavigator.APP.GOOGLE_MAPS, salon);
+                }
+                else if (platform == "android") {
+                    launchnavigator.isAppAvailable(launchnavigator.APP.GEO, function (isAppAvailable) {
+                        if (isAppAvailable) {
+                            navigate(launchnavigator.APP.GEO, salon);
+                        }
+                        else {
+                            salonDirectionFactory.salon = salon;
+
+                            return $state.go('salondirection', { salonId: salon.Id });
+                        }
+                    });
+                }
+                else if (platform == "ios") {
+                    launchnavigator.isAppAvailable(launchnavigator.APP.APPLE_MAPS, function (isAppAvailable) {
+                        if (isAppAvailable) {
+                            navigate(launchnavigator.APP.APPLE_MAPS, salon);
+                        }
+                        else {
+                            salonDirectionFactory.salon = salon;
+
+                            return $state.go('salondirection', { salonId: salon.Id });
+                        }
+                    });
+                }
+            });
+        };
+
+        function navigate(navigatorApp, salon) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                app.NavigatorUtils.navigate(position.coords, { latitude: salon.PhysicalAddressLatitude, longitude: salon.PhysicalAddressLongitude }, navigatorApp);
+            }, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
         };
 
         function locationSuccess(position) {
@@ -2521,6 +3061,51 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             return deferred.promise;
         };
 
+    };
+
+})();
+(function () {
+
+    'use strict';
+
+    angular.module('app').controller('servicesController', servicesController);
+
+    servicesController.$inject = ['$scope', '$rootScope', '$state', 'lookupApiFactory', 'salonsFactory'];
+
+    function servicesController($scope, $rootScope, $state, lookupApiFactory, salonsFactory) {
+        var viewModel = $scope
+
+        viewModel.subCategories = [];
+        viewModel.SearchFilter = {};
+        viewModel.searchSalons = searchSalons;
+        viewModel.searchServiceSalons = searchServiceSalons;
+
+        $rootScope.isLoading = true;
+        $rootScope.loadingMessage = 'Loading Services ...';
+
+        lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (data) {
+            viewModel.subCategories = data.Items;
+            $rootScope.isLoading = false;
+        });
+
+        function searchSalons() {
+            salonsFactory.searchFilter = {
+                SearchText: viewModel.SearchFilter.SearchText,
+            };
+
+            $state.go('salons');
+        };
+
+        function searchServiceSalons(e, subCategoryId) {
+            e.preventDefault();
+
+            salonsFactory.searchFilter = {
+                SearchText: viewModel.SearchFilter.SearchText,
+                SubCategoryId: subCategoryId
+            };
+
+            $state.go('salons');
+        };
     };
 
 })();

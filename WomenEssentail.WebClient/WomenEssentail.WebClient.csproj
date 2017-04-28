@@ -101,6 +101,11 @@
     <Content Include="app\app.routes.js" />
     <Content Include="app\app.run.js" />
     <Content Include="app\components\aboutus\aboutUsView.html" />
+    <Content Include="app\components\beautytips\beautyTipsController.js" />
+    <Content Include="app\components\beautytips\beautyTipsFactory.js" />
+    <Content Include="app\components\beautytips\beautyTipsView.html" />
+    <Content Include="app\components\beautytips\Modals\beuatyTipModalController.js" />
+    <Content Include="app\components\beautytips\Modals\saveBeuatyTipModalView.html" />
     <Content Include="app\components\changepassword\changePasswordController.js" />
     <Content Include="app\components\changepassword\changePasswordFactory.js" />
     <Content Include="app\components\changepassword\changePasswordView.html" />
@@ -111,6 +116,7 @@
     <Content Include="app\components\companyusers\companyUsersView.html" />
     <Content Include="app\components\companyusers\Modals\companyUserModalController.js" />
     <Content Include="app\components\companyusers\Modals\companyUserModalView.html" />
+    <Content Include="app\components\contactus\contactUsController.js" />
     <Content Include="app\components\contactus\contactUsView.html" />
     <Content Include="app\components\core\errormodal.html" />
     <Content Include="app\components\core\footer\footerView.html" />
@@ -171,6 +177,7 @@
     <Content Include="app\components\searchsalondirections\searchSalonDirectionsController.js" />
     <Content Include="app\components\searchsalondirections\searchSalonDirectionsView.html" />
     <Content Include="app\components\searchsalons\searchSalonsController.js" />
+    <Content Include="app\components\searchsalons\searchSalonsFactory.js" />
     <Content Include="app\components\searchsalons\searchSalonsView.html" />
     <Content Include="app\components\searchsalon\searchSalonController.js" />
     <Content Include="app\components\searchsalon\searchSalonFactory.js" />
@@ -192,6 +199,7 @@
     <Content Include="app\shared\error\errorAlert.html" />
     <Content Include="app\shared\error\errorController.js" />
     <Content Include="app\shared\factories\accountApiFactory.js" />
+    <Content Include="app\shared\factories\beautyTipApiFactory.js" />
     <Content Include="app\shared\factories\companyApiFactory.js" />
     <Content Include="app\shared\factories\companyRequestApiFactory.js" />
     <Content Include="app\shared\factories\dashboardApiFactory.js" />

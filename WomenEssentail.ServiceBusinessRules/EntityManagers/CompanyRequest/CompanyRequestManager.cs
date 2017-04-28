@@ -33,7 +33,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests
 
                 if (companyRequestDto.CrudStatus == CrudStatus.CREATE)
                 {
-                    //SendCreateCompanyRequestEmail(response.Item);
+                    SendCreateCompanyRequestEmail(response.Item);
                 }
 
                 return response;
@@ -44,14 +44,13 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests
 
         private void SendCreateCompanyRequestEmail(CompanyRequestDto companyRequestDto)
         {
-            if (companyRequestDto.CrudStatus != CrudStatus.CREATE)
-            {
-                return;
-            }
 
-            string smtpServerAddress = ConfigurationManager.AppSettings["SMTPAddress"];
-            int smtpPortNumber = Convert.ToInt32(ConfigurationManager.AppSettings["SMTPPortNumber"]);
-            string fromAddress = ConfigurationManager.AppSettings["FromAddress"];
+            string smtpServerAddress = ConfigurationManager.AppSettings["LiveSMTPAddress"];
+            int smtpPortNumber = Convert.ToInt32(ConfigurationManager.AppSettings["LiveSMTPPortNumber"]);
+            string fromAddress = ConfigurationManager.AppSettings["LiveEmailFrom"];
+            string toAddress = ConfigurationManager.AppSettings["LiveEmailReciever"];
+            string accountUserName = ConfigurationManager.AppSettings["LiveAccountUsername"];
+            string accountPassword = ConfigurationManager.AppSettings["LiveAccountPassword"];
 
             string subject = string.Format("{0} Email notification ... Request to Join {0}!", ConfigurationManager.AppSettings["SiteName"]);
 
@@ -77,10 +76,10 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests
             }
             sb.Append("<br />");
             sb.Append(string.Format("<li>Log on to {0} by clicking on this link <a href='{1}'>{1}</a></li>", ConfigurationManager.AppSettings["SiteName"], ConfigurationManager.AppSettings["SiteUrl"]));
-            sb.Append("<li> Compltete the requests.</li>");
+            sb.Append("<li> Complete the request.</li>");
             sb.Append("</ol>");
 
-            EmailHandler.SendEmail(smtpServerAddress, smtpPortNumber, fromAddress, companyRequestDto.EmailAddress, null, subject, sb.ToString());
+            EmailHandler.SendEmailUsingExternalMailBox(smtpServerAddress, smtpPortNumber, accountUserName, accountPassword, fromAddress, toAddress, null, subject, sb.ToString());
         }
 
         #endregion

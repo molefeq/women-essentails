@@ -1,0 +1,34 @@
+Message: 
+Invalid crud operation.
+
+Paramaters: 
+
+
+Stack Trace: 
+   at WomenEssentail.DataAccess.Repositories.ContactUsRepository.GetCrudStoredProcedureName(CrudStatus crudStatus) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.DataAccess\Repositories\ContactUsRepository.cs:line 68
+   at WomenEssentail.DataAccess.Repositories.ContactUsRepository.Save(ContactUsDto contactUsDto, Func`2 contactUsDtoMapper) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.DataAccess\Repositories\ContactUsRepository.cs:line 27
+   at WomenEssentail.ServiceBusinessRules.EntityManagers.ContactUss.ContactUsManager.Save(ContactUsDto contactUsDto) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\EntityManagers\ContactUs\ContactUsManager.cs:line 22
+   at WomenEssentail.ApiService.Controllers.LookupController.SendMessage(ContactUsDto contactUsDto) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Controllers\LookupController.cs:line 69
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+
+Error Url: 
+http://localhost:55464/api/Lookup/SendMessage
+
+Error Date: 
+28/04/2017 15:15:14
+

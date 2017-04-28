@@ -146,6 +146,9 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             companyDto.PhysicalAddressLongitude = sqlDataReader["PhysicalAddressLongitude"].ToString();
             companyDto.Distance = sqlDataReader["Distance"].ToInteger();
             companyDto.HasPromotions = sqlDataReader["HasPromotions"].ToBoolean();
+            companyDto.RatingCount = sqlDataReader["RatingCount"].ToInteger();
+            companyDto.AvarageRating = sqlDataReader["AvarageRating"].ToDecimal();
+            companyDto.FeedbackCount = sqlDataReader["FeedbackCount"].ToInteger();
             companyDto.CrudStatus = CrudStatus.UPDATE;
             return companyDto;
         }
@@ -179,6 +182,9 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             companyDto.PhysicalAddressPostalCode = sqlDataReader["PhysicalAddressPostalCode"].ToString();
             companyDto.PhysicalAddressLatitude = sqlDataReader["PhysicalAddressLatitude"].ToString();
             companyDto.PhysicalAddressLongitude = sqlDataReader["PhysicalAddressLongitude"].ToString();
+            companyDto.RatingCount = sqlDataReader["RatingCount"].ToInteger();
+            companyDto.AvarageRating = sqlDataReader["AvarageRating"].ToDecimal();
+            companyDto.FeedbackCount = sqlDataReader["FeedbackCount"].ToInteger();
             companyDto.CrudStatus = CrudStatus.UPDATE;
 
             return companyDto;
@@ -218,6 +224,9 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             companyDto.FirstName = sqlDataReader["FirstName"].ToString();
             companyDto.LastName = sqlDataReader["LastName"].ToString();
             companyDto.EmailAddress = sqlDataReader["EmailAddress"].ToString();
+            companyDto.RatingCount = sqlDataReader["RatingCount"].ToInteger();
+            companyDto.AvarageRating = sqlDataReader["AvarageRating"].ToDecimal();
+            companyDto.FeedbackCount = sqlDataReader["FeedbackCount"].ToInteger();
             companyDto.CrudStatus = CrudStatus.UPDATE;
 
             sqlDataReader.NextResult();

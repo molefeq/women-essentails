@@ -4,20 +4,15 @@
 
     angular.module('app').controller('mainController', mainController);
 
-    mainController.$inject = ['$scope', '$state', 'lookupApiFactory', 'salonsFactory', 'geolocation'];
+    mainController.$inject = ['$scope', '$state', 'salonsFactory'];
 
-    function mainController($scope, $state, lookupApiFactory, salonsFactory, geolocation) {
+    function mainController($scope, $state, salonsFactory) {
         var viewModel = $scope
 
         viewModel.goToSalons = goToSalons;
         viewModel.goToPromotions = goToPromotions;
-        viewModel.subCategories = [];
         viewModel.SearchFilter = {};
         viewModel.searchSalons = searchSalons;
-
-        lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (data) {
-            viewModel.subCategories = data.Items;
-        });
 
         function goToSalons(e) {
             e.preventDefault();
@@ -35,8 +30,7 @@
 
         function searchSalons() {
             salonsFactory.searchFilter = {
-                SearchText: viewModel.SearchFilter.SearchText,
-                SubCategoryId: viewModel.SearchFilter.SubCategoryId
+                SearchText: viewModel.SearchFilter.SearchText
             };
 
             $state.go('salons');

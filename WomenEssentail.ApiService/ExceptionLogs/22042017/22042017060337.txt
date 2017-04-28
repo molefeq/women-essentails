@@ -1,0 +1,38 @@
+Message: 
+The SMTP server requires a secure connection or the client was not authenticated. The server response was: 5.7.0 Must issue a STARTTLS command first
+
+Paramaters: 
+
+
+Stack Trace: 
+   at System.Net.Mail.MailCommand.CheckResponse(SmtpStatusCode statusCode, String response)
+   at System.Net.Mail.MailCommand.Send(SmtpConnection conn, Byte[] command, MailAddress from, Boolean allowUnicode)
+   at System.Net.Mail.SmtpTransport.SendMail(MailAddress sender, MailAddressCollection recipients, String deliveryNotify, Boolean allowUnicode, SmtpFailedRecipientException& exception)
+   at System.Net.Mail.SmtpClient.Send(MailMessage message)
+   at Libraries.Common.Email.EmailHandler.SendEmailUsingExternalMailBox(String smtpServerAddress, Int32 smtpServerPortNumber, String username, String password, String emailFrom, String emailTo, List`1 ccEmailAddresses, String emailSubject, String emailBody, List`1 attachments) in D:\My Work\Libraries\Libraries.Common\Email\EmailHandler.cs:line 135
+   at WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests.CompanyRequestManager.SendCreateCompanyRequestEmail(CompanyRequestDto companyRequestDto) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\EntityManagers\CompanyRequest\CompanyRequestManager.cs:line 81
+   at WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests.CompanyRequestManager.Save(CompanyRequestDto companyRequestDto) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\EntityManagers\CompanyRequest\CompanyRequestManager.cs:line 36
+   at WomenEssentail.ApiService.Controllers.CompanyRequestController.AddCompanyRequest(CompanyRequestDto companyRequestDto) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Controllers\CompanyRequestController.cs:line 37
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+
+Error Url: 
+http://localhost:55464/api/CompanyRequest/AddCompanyRequest
+
+Error Date: 
+22/04/2017 06:03:37
+

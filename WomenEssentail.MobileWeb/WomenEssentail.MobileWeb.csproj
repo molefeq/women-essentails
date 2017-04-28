@@ -76,6 +76,11 @@
     <Content Include="app\bundle.min.js">
       <DependentUpon>bundle.js</DependentUpon>
     </Content>
+    <Content Include="app\components\beautytips\beautyTipsController.js" />
+    <Content Include="app\components\beautytips\beautyTipsFactory.js" />
+    <Content Include="app\components\beautytips\beautyTipsView.html" />
+    <Content Include="app\components\contactus\contactusController.js" />
+    <Content Include="app\components\contactus\contactusView.html" />
     <Content Include="app\components\core\errormodal.html" />
     <Content Include="app\components\core\footer\footerView.html" />
     <Content Include="app\components\core\header\headerController.js" />
@@ -86,6 +91,8 @@
     <Content Include="app\components\main\mainView.html" />
     <Content Include="app\components\promotionproducts\promotionProductsController.js" />
     <Content Include="app\components\promotionproducts\promotionProductsView.html" />
+    <Content Include="app\components\registersalon\registerSalonController.js" />
+    <Content Include="app\components\registersalon\registerSalonView.html" />
     <Content Include="app\components\salondirection\salonDirectionController.js" />
     <Content Include="app\components\salondirection\salonDirectionFactory.js" />
     <Content Include="app\components\salondirection\salonDirectionView.html" />
@@ -95,6 +102,8 @@
     <Content Include="app\components\salon\salonController.js" />
     <Content Include="app\components\salon\salonFactory.js" />
     <Content Include="app\components\salon\salonView.html" />
+    <Content Include="app\components\services\servicesController.js" />
+    <Content Include="app\components\services\servicesView.html" />
     <Content Include="app\constants.js" />
     <Content Include="app\shared\controllers\appController.js" />
     <Content Include="app\shared\directives\accessControlDirective.js" />
@@ -119,6 +128,7 @@
     <Content Include="app\shared\factories\utilsFactory.js" />
     <Content Include="app\shared\filters\percentageFormat.js" />
     <Content Include="app\shared\objects\customgrid.js" />
+    <Content Include="app\shared\objects\navigatorustils.js" />
     <Content Include="app\shared\objects\subformvalidation.js" />
     <Content Include="app\shared\objects\tabformvalidation.js" />
     <Content Include="app\shared\objects\utils.js" />
@@ -159,6 +169,7 @@
     <Content Include="assets\css\modals.min.css" />
     <Content Include="assets\img\loading-image.gif" />
     <Content Include="assets\libs\angular-maps\angular-google-maps.js" />
+    <Content Include="assets\libs\angular-rating\angular-rating.js" />
     <Content Include="assets\libs\angular-simple-logger\angular-simple-logger.js" />
     <Content Include="assets\libs\angular-toastr\angular-toastr.css" />
     <Content Include="assets\libs\angular-toastr\angular-toastr.js" />

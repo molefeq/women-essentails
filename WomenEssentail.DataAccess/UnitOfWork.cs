@@ -24,6 +24,10 @@ public class UnitOfWork : DataServer, IDisposable
     private SubCategoryRepository _SubCategories;
     private CategoryRepository _Categories;
     private CompanyRequestRepository _CompanyRequests;
+    private CompanyFeedbackRepository _CompanyFeedbacks;
+    private CompanyRatingRepository _CompanyRatings;
+    private BeautyTipRepository _BeautyTips;
+    private ContactUsRepository _ContactUs;
 
     #endregion
 
@@ -227,6 +231,58 @@ public class UnitOfWork : DataServer, IDisposable
             }
 
             return _CompanyRequests;
+        }
+    }
+    
+    public CompanyFeedbackRepository CompanyFeedbacks
+    {
+        get
+        {
+            if (_CompanyFeedbacks == null)
+            {
+                _CompanyFeedbacks = new CompanyFeedbackRepository(Connection);
+            }
+
+            return _CompanyFeedbacks;
+        }
+    }
+    
+    public CompanyRatingRepository CompanyRatings
+    {
+        get
+        {
+            if (_CompanyRatings == null)
+            {
+                _CompanyRatings = new CompanyRatingRepository(Connection);
+            }
+
+            return _CompanyRatings;
+        }
+    }
+
+    public BeautyTipRepository BeautyTips
+    {
+        get
+        {
+            if (_BeautyTips == null)
+            {
+                _BeautyTips = new BeautyTipRepository(Connection);
+            }
+
+            return _BeautyTips;
+        }
+    }
+
+    public ContactUsRepository ContactUs
+    {
+        get
+        {
+            if (_ContactUs == null)
+            {
+                _ContactUs = new ContactUsRepository(Connection);
+            }
+
+            return _ContactUs;
         }
     }
 

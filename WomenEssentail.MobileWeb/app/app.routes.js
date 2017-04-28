@@ -20,6 +20,26 @@ var app = app || {};
               templateUrl: "app/components/salons/salonsView.html",
               controller: 'salonsController'
           })
+          .state('services', {
+              url: "/services",
+              templateUrl: "app/components/services/servicesView.html",
+              controller: 'servicesController'
+          })
+          .state('contactus', {
+              url: "/contactus",
+              templateUrl: "app/components/contactus/contactusView.html",
+              controller: 'contactusController'
+          })
+          .state('beautytips', {
+              url: "/beautytips",
+              templateUrl: "app/components/beautytips/beautyTipsView.html",
+              controller: 'beautyTipsController'
+          })
+          .state('registersalon', {
+              url: "/registersalon",
+              templateUrl: "app/components/registersalon/registerSalonView.html",
+              controller: 'registerSalonController'
+          })
           .state('salon', {
               url: "/salon/:salonId",
               templateUrl: "app/components/salon/salonView.html",

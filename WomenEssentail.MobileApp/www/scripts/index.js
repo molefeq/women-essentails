@@ -2,6 +2,7 @@
     document.addEventListener('deviceready', onDeviceReady, false);
 
     function onDeviceReady() {
+        $('#loading-error').hide();
         if (checkConnection()) {
             switchOnGPSLocationServices();
         }
@@ -23,7 +24,7 @@
         var isConnectionAvailable = networkState !== Connection.NONE;
 
         if (!isConnectionAvailable) {
-            alert('Connection type: ' + states[networkState]);
+            displayError({ Header: "Connection not available", Message: 'Connection type: ' + states[networkState] });
         }
 
         return isConnectionAvailable;
@@ -32,13 +33,17 @@
     function switchOnGPSLocationServices() {
         cordova.plugins.diagnostic.isLocationAvailable(function (available) {
             if (!available) {
-                cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
-                return;
+                cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
+                    if (canRequest) {
+                        cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+                    }
+                });
             }
-
-            loadGoogleMapsApi();
+            else {
+                loadGoogleMapsApi();
+            }
         }, function (error) {
-            alert("The following error occurred: " + error);
+            displayError({ Header: "Location Services are not available", Message: "The following error occurred: " + error });
         });
     };
 
@@ -62,11 +67,24 @@
     };
 
     function onRequestFailure(error) {
-        if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
-            cordova.plugins.diagnostic.switchToLocationSettings();
-            loadGoogleMapsApi();
+        if (error) {
+            if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
+                if (window.confirm("Failed to automatically set Location Mode to 'High Accuracy'. Would you like to switch to the Location Settings page and do this manually?")) {
+                    cordova.plugins.diagnostic.switchToLocationSettings();
+                    loadGoogleMapsApi();
+                }
+                else {
+                    loadGoogleMapsApi();
+                }
+            }
         }
     };
+
+    function displayError(error) {
+        $('#error-header').text(error.Header);
+        $('#error-message').text(error.Message);
+        $('#loading-error').show();
+    }
 
 })();
 

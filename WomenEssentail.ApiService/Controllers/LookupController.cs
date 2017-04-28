@@ -1,5 +1,6 @@
-﻿using Libraries.Common.ResponseObjects;
-
+﻿using Libraries.Common.Enums;
+using Libraries.Common.ResponseObjects;
+using System.Configuration;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -8,6 +9,7 @@ using WomenEssentail.Common.DataFilters;
 using WomenEssentail.Common.DataTransferObjects;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Categories;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyTypes;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.ContactUss;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.SubCategories;
 
 namespace WomenEssentail.ApiService.Controllers
@@ -17,12 +19,14 @@ namespace WomenEssentail.ApiService.Controllers
         private readonly ICompanyTypeManager companyTypeManager;
         private readonly ISubCategoryManager subCategoryManager;
         private readonly ICategoryManager categoryManager;
+        private readonly IContactUsManager contactUsManager;
 
-        public LookupController(ICompanyTypeManager companyTypeManager, ICategoryManager categoryManager, ISubCategoryManager subCategoryManager)
+        public LookupController(ICompanyTypeManager companyTypeManager, ICategoryManager categoryManager, ISubCategoryManager subCategoryManager, IContactUsManager contactUsManager)
         {
             this.companyTypeManager = companyTypeManager;
             this.categoryManager = categoryManager;
             this.subCategoryManager = subCategoryManager;
+            this.contactUsManager = contactUsManager;
         }
 
         [HttpPost]
@@ -47,6 +51,24 @@ namespace WomenEssentail.ApiService.Controllers
             Result<SubCategoryDto> result = subCategoryManager.GetSubCategories(subCategorySearchFilter);
 
             return Request.CreateResponse<Result<SubCategoryDto>>(HttpStatusCode.OK, result);
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetContactDetails()
+        {
+            return Request.CreateResponse<ContactUsDto>(HttpStatusCode.OK, new ContactUsDto
+            {
+                Name = ConfigurationManager.AppSettings["ContactName"],
+                Number = ConfigurationManager.AppSettings["ContactNumber"],
+                EmailAddress = ConfigurationManager.AppSettings["ContactEmail"],
+            });
+        }
+
+        [HttpPost]
+        public HttpResponseMessage SendMessage(ContactUsDto contactUsDto)
+        {
+            contactUsDto.CrudStatus = CrudStatus.CREATE;
+            return Request.CreateResponse<Response<ContactUsDto>>(HttpStatusCode.OK, contactUsManager.Save(contactUsDto));
         }
     }
 }

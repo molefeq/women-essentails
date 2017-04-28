@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataFilters\AccountSearchFilter.cs" />
+    <Compile Include="DataFilters\BeautyTipSearchFilter.cs" />
     <Compile Include="DataFilters\CompanyAppSearchFilter.cs" />
+    <Compile Include="DataFilters\CompanyFeedbackSearchFilter.cs" />
     <Compile Include="DataFilters\CompanySearchFilter.cs" />
     <Compile Include="DataFilters\ProductPromotionAppSearchFilter.cs" />
     <Compile Include="DataFilters\ProductPromotionsearchFilter.cs" />
@@ -59,15 +61,19 @@
     <Compile Include="DataTransferObjects\AccountRoleDto.cs" />
     <Compile Include="DataTransferObjects\AccountSummaryDto.cs" />
     <Compile Include="DataTransferObjects\AddressDto.cs" />
+    <Compile Include="DataTransferObjects\BeautyTipDto.cs" />
     <Compile Include="DataTransferObjects\CategoryDto.cs" />
     <Compile Include="DataTransferObjects\ChangePasswordDto.cs" />
     <Compile Include="DataTransferObjects\CompanyDto.cs" />
+    <Compile Include="DataTransferObjects\CompanyFeedbackDto.cs" />
     <Compile Include="DataTransferObjects\CompanyLogoDto.cs" />
     <Compile Include="DataTransferObjects\CompanyProductDto.cs" />
+    <Compile Include="DataTransferObjects\CompanyRatingDto.cs" />
     <Compile Include="DataTransferObjects\CompanyRequestDto.cs" />
     <Compile Include="DataTransferObjects\CompanySummaryDto.cs" />
     <Compile Include="DataTransferObjects\CompanyTypeDto.cs" />
     <Compile Include="DataTransferObjects\CompanyTypeProductDto.cs" />
+    <Compile Include="DataTransferObjects\ContactUsDto.cs" />
     <Compile Include="DataTransferObjects\CountryDto.cs" />
     <Compile Include="DataTransferObjects\DashboardDataDto.cs" />
     <Compile Include="DataTransferObjects\ExternalAuthenticationTypeDto.cs" />

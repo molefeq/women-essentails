@@ -14,25 +14,10 @@
         <div class="col-md-6" style="float: none; margin: auto;">
             <div class="box box-solid">
                 <div class="box-body">
-                    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" ng-repeat="logo in salonFactory.salon.Logos" data-slide-to="{{$index}}" ng-class="$index==0?'active': ''"></li>
-                        </ol>
-                        <div class="carousel-inner">
-                            <div class="item" ng-repeat="logo in salonFactory.salon.Logos" ng-class="$index==0?'active': ''">
-                                <img ng-attr-src="{{logo.NormalRelativeFileName}}" alt="{{salonFactory.salon.Name}}" style="margin: auto;">
-                                <div class="carousel-caption">
-
-                                </div>
-                            </div>
-
+                    <div uib-carousel active="active" interval="5000" no-wrap="false">
+                        <div uib-slide ng-repeat="logo in salonFactory.salon.Logos" index="$index">
+                            <img ng-src="{{logo.NormalRelativeFileName}}" alt="{{salonFactory.salon.Name}}" style="margin:auto;">
                         </div>
-                        <!--<a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="fa fa-angle-left" style="color: gray;"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                            <span class="fa fa-angle-right" style="color: gray;"></span>
-                        </a>-->
                     </div>
                 </div><!-- /.box-body -->
                 <div class="box-footer">
@@ -54,9 +39,26 @@
         </div>
     </div><!-- /.box-header -->
     <div style="padding:15px;">
+        <div class="row">
+            <div class="col-md-12">
+                <small class="pull-left">
+                    <a href="#" ng-click="viewFeedbackHistory($event)" style="color:black; font-size:12px;">
+                        {{'view feedback (' + salonFactory.salon.FeedbackCount + ')'}}
+                    </a>
+                </small>
+                <span style="float:right;" uib-rating ng-click="setRating(salonFactory.salon.AvarageRating)" ng-model="salonFactory.salon.AvarageRating" max="5" read-only="false" aria-labelledby="default-rating"></span>
+                <p style="float:right; font-size:11px; color:black; padding-right:5px;">{{'From '+ salonFactory.salon.RatingCount + ' users.'}}</p>
+            </div>
+        </div>
         <button class="btn pull-right" ng-click="goToSalonDirections()">
             Take Me There
         </button>
+        <button class="btn pull-right" style="margin-right:5px;" ng-click="giveFeedback()">
+            Give Feeback
+        </button>
+    </div>
+    <div class="col-md-12" style="margin-top:25px;">
+        <div id="map" style="height:150px;width:100%; margin-top:10px;"></div>
     </div>
     <div ng-repeat="(key, value) in salonFactory.products" ng-if="products.length == 0" style="padding-top: 10px;">
         <h5 class="content-padded" style="text-transform: uppercase;">{{key}}</h5>
@@ -100,3 +102,42 @@
     </ul>
 </div>
 <footer></footer>
+
+<div id='loadingmessage' ng-show="isLoading">
+    <div><p>{{loadingMessage}}</p><img src="assets/img/loading-image.gif" /></div>
+</div>
+
+<script type="text/ng-template" id="salon-feedback-template.html">
+    <div class="modal-header">
+        <button class="close" aria-label="Close" type="button" ng-click="closeDialog()" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Give Feedback</h4>
+    </div>
+    <div class="modal-body dialog-content">
+        <div>
+            <textarea ng-model="model.Feedback" rows="3"></textarea>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-success pull-right" ng-click="addFeedback()" value="OK" style="width:auto; margin-left:5px;" />
+        <input type="button" class="btn btn-default pull-right" ng-click="closeDialog()" value="Cancel" style="width:auto" />
+    </div>
+</script>
+
+<script type="text/ng-template" id="salon-feedback-history-template.html">
+    <div class="modal-header">
+        <button class="close" aria-label="Close" type="button" ng-click="closeDialog()" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">Feedback History</h4>
+    </div>
+    <div class="modal-body dialog-content">
+        <div ng-repeat="feedback in feedbacks">
+            <p>{{feedback.Feedback}}</p>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-primary" ng-click="closeDialog()" value="OK" />
+    </div>
+</script>

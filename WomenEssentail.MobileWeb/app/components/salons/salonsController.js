@@ -46,8 +46,49 @@
         };
 
         function goToSalonDirection(salon) {
-            salonDirectionFactory.salon = salon;
-            $state.go('salondirection', { salonId: salon.Id });
+            if (!window.device) {
+                salonDirectionFactory.salon = salon;
+
+                return $state.go('salondirection', { salonId: salon.Id });
+            }
+
+            var platform = device.platform.toLowerCase();
+
+            launchnavigator.isAppAvailable(launchnavigator.APP.GOOGLE_MAPS, function (isAvailable) {
+                if (isAvailable) {
+                    navigate(launchnavigator.APP.GOOGLE_MAPS, salon);
+                }
+                else if (platform == "android") {
+                    launchnavigator.isAppAvailable(launchnavigator.APP.GEO, function (isAppAvailable) {
+                        if (isAppAvailable) {
+                            navigate(launchnavigator.APP.GEO, salon);
+                        }
+                        else {
+                            salonDirectionFactory.salon = salon;
+
+                            return $state.go('salondirection', { salonId: salon.Id });
+                        }
+                    });
+                }
+                else if (platform == "ios") {
+                    launchnavigator.isAppAvailable(launchnavigator.APP.APPLE_MAPS, function (isAppAvailable) {
+                        if (isAppAvailable) {
+                            navigate(launchnavigator.APP.APPLE_MAPS, salon);
+                        }
+                        else {
+                            salonDirectionFactory.salon = salon;
+
+                            return $state.go('salondirection', { salonId: salon.Id });
+                        }
+                    });
+                }
+            });
+        };
+
+        function navigate(navigatorApp, salon) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                app.NavigatorUtils.navigate(position.coords, { latitude: salon.PhysicalAddressLatitude, longitude: salon.PhysicalAddressLongitude }, navigatorApp);
+            }, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
         };
 
         function locationSuccess(position) {

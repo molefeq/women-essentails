@@ -17,7 +17,7 @@
                 <div class="col-lg-6">
                     <div class="input-group" style="max-width:100%; margin-bottom:5px;">
                         <input type="search" placeholder="Search" ng-model="SearchFilter.SearchText" style="max-width:100%; border:1px solid #ddd;">
-                        <span class="input-group-btn" id="sizing-addon2" style="max-width:100%;height: 100%;"><button class="btn" style="max-width:100%;height: 100%;padding: 6px 12px;"><i class="fa fa-search"></i></button></span>
+                        <span class="input-group-btn" id="sizing-addon2" style="max-width:100%;height: 100%;"><button class="btn" style="max-width:100%;height: 35px;padding: 6px 12px;"><i class="fa fa-search"></i></button></span>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -43,15 +43,11 @@
                         {{salon.Name}}
                     </div>
                     <p class="media-content-body">
-                        <small ng-if="salon.PhysicalAddressLine1">{{salon.PhysicalAddressLine1}} <br /></small>
-                        <small ng-if="salon.PhysicalAddressLine2">{{salon.PhysicalAddressLine2}}<br /></small>
-                        <small ng-if="salon.PhysicalAddressSuburb">{{salon.PhysicalAddressSuburb}}<br /></small>
-                        <small ng-if="salon.PhysicalAddressCity">{{salon.PhysicalAddressCity}}<br /></small>
                         <small>{{salon.Distance}} KM Away</small>
                     </p>
                 </div>
             </a>
-            <div class="col-lg-12">
+            <div class="col-lg-12" style="margin-top:5px;">
                 <button class="btn pull-left" ng-click="goToSalon(salon)">
                     View Details
                 </button>

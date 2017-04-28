@@ -9,7 +9,8 @@
     function lookupApiFactory($http, $q, ServerApiBaseUrl) {
         var factory = {
             getCompanyTypes: getCompanyTypes,
-            getSubCategories: getSubCategories
+            getSubCategories: getSubCategories,
+            getContactDetails: getContactDetails
         };
 
         return factory;
@@ -30,6 +31,21 @@
                 method: 'POST',
                 url: url,
                 data: searchFilter
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            });
+
+            return deferred.promise;
+        };
+
+        function getContactDetails() {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'GET',
+                url: ServerApiBaseUrl + 'Lookup/GetContactDetails'
             })
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);

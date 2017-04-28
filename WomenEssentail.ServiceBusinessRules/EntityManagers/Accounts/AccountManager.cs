@@ -36,7 +36,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts
 
                 if (accountDto.CrudStatus == CrudStatus.CREATE)
                 {
-                    //SendCreateAccountEmail(response.Item);
+                    SendCreateAccountEmail(accountDto);
                 }
 
                 return response;
@@ -69,7 +69,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts
 
             if (response.HasErrors) return response;
 
-            //SendResetPasswordEmail(response.Item);
+            SendResetPasswordEmail(response.Item);
 
             return response;
         }
@@ -91,15 +91,12 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts
         #region Private Methods
 
         private void SendCreateAccountEmail(AccountDto accountDto)
-        {
-            if (accountDto.CrudStatus != CrudStatus.CREATE)
-            {
-                return;
-            }
-
-            string smtpServerAddress = ConfigurationManager.AppSettings["SMTPAddress"];
-            int smtpPortNumber = Convert.ToInt32(ConfigurationManager.AppSettings["SMTPPortNumber"]);
-            string fromAddress = ConfigurationManager.AppSettings["FromAddress"];
+        {            
+            string smtpServerAddress = ConfigurationManager.AppSettings["LiveSMTPAddress"];
+            int smtpPortNumber = Convert.ToInt32(ConfigurationManager.AppSettings["LiveSMTPPortNumber"]);
+            string fromAddress = ConfigurationManager.AppSettings["LiveEmailReciever"];
+            string accountUserName = ConfigurationManager.AppSettings["LiveAccountUsername"];
+            string accountPassword = ConfigurationManager.AppSettings["LiveAccountPassword"];
 
             string subject = string.Format("{0} Email notification ... Welcome to {0}!", ConfigurationManager.AppSettings["SiteName"]);
 
@@ -125,7 +122,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts
             sb.Append("<li>Insert your credentials as provided in this email and follow the change password steps.</li>");
             sb.Append("</ol>");
 
-            EmailHandler.SendEmail(smtpServerAddress, smtpPortNumber, fromAddress, accountDto.EmailAddress, null, subject, sb.ToString());
+            EmailHandler.SendEmailUsingExternalMailBox(smtpServerAddress, smtpPortNumber, accountUserName, accountPassword, fromAddress, accountDto.EmailAddress, null, subject, sb.ToString());
         }
 
         private void SendResetPasswordEmail(AccountDto accountDto)
@@ -135,9 +132,11 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts
                 return;
             }
 
-            string smtpServerAddress = ConfigurationManager.AppSettings["SMTPAddress"];
-            int smtpPortNumber = Convert.ToInt32(ConfigurationManager.AppSettings["SMTPPortNumber"]);
-            string fromAddress = ConfigurationManager.AppSettings["FromAddress"];
+            string smtpServerAddress = ConfigurationManager.AppSettings["LiveSMTPAddress"];
+            int smtpPortNumber = Convert.ToInt32(ConfigurationManager.AppSettings["LiveSMTPPortNumber"]);
+            string fromAddress = ConfigurationManager.AppSettings["LiveEmailReciever"];
+            string accountUserName = ConfigurationManager.AppSettings["LiveAccountUsername"];
+            string accountPassword = ConfigurationManager.AppSettings["LiveAccountPassword"];
 
             string subject = string.Format("{0} Email notification ... Password Reset to {0}!", ConfigurationManager.AppSettings["SiteName"]);
             string siteLink = ConfigurationManager.AppSettings["ResetPasswordUrl"] + "?key=" + accountDto.ForgotPasswordKey.ToString();
@@ -153,7 +152,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts
             sb.Append(string.Format("<a href='{0}'>Click Here</a>", siteLink));
             sb.Append("<br />");
 
-            EmailHandler.SendEmail(smtpServerAddress, smtpPortNumber, fromAddress, accountDto.EmailAddress, null, subject, sb.ToString());
+            EmailHandler.SendEmailUsingExternalMailBox(smtpServerAddress, smtpPortNumber, accountUserName, accountPassword, fromAddress, accountDto.EmailAddress, null, subject, sb.ToString());
         }
 
         #endregion

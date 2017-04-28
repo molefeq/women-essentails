@@ -1,38 +1,23 @@
 ﻿<header class="bar bar-nav">
     <h1 class="title">Women's Essentials</h1>
-    <a class="tab-item pull-right" href="#popover">
-        <span class="icon icon-search"></span>
-    </a>
 </header>
-<div id="popover" class="popover">
-    <div class="content">
-        <form ng-submit="searchSalons()">
-            <div class="row">
-                <div class="col-lg-6">
-                    <div class="input-group" style="max-width:100%; margin-bottom:5px;">
-                        <input type="search" placeholder="Search" ng-model="SearchFilter.SearchText" style="max-width:100%; border:1px solid #ddd;">
-                        <span class="input-group-btn" id="sizing-addon2" style="max-width:100%;height: 100%;"><button class="btn" style="max-width:100%;height: 100%;padding: 6px 12px;"><i class="fa fa-search"></i></button></span>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <select type="search" ng-model="SearchFilter.SubCategoryId" style="padding:10px;" convert-to-number
-                            class="form-control" ng-change="searchSalons()">
-                        <option value="">Select</option>
-                        <option ng-repeat="subCategory in subCategories" value="subCategory.Id">{{subCategory.DisplayName}}</option>
-                    </select>
+<div class="content sp-main-view-container">
+    <form ng-submit="searchSalons()">
+        <div class="row">
+            <div class="col-lg-12" style="margin:5px;">
+                <div class="input-group" style="max-width:100%; margin-bottom:5px; margin-top:5px;">
+                    <input type="search" placeholder="Search" ng-model="SearchFilter.SearchText" style="max-width:100%; border:1px solid #ddd;">
+                    <span class="input-group-btn" id="sizing-addon2" style="max-width:100%;height: 100%;"><button class="btn" style="max-width:100%;height: 35px;padding: 6px 12px;"><i class="fa fa-search"></i></button></span>
                 </div>
             </div>
-        </form>
-    </div>
-</div>
-<div class="content sp-main-view-container">
-
+        </div>
+    </form>
     <ul class="table-view">
         <li class="table-view-cell media">
             <a class="navigate-right" href="#" data-transition="slide-in" ng-click="goToSalons($event)">
                 <div class="media-body">
                     <span class="media-object icon icon-home"></span>
-                    <p> Nearest salons</p>
+                    <span>Nearest salons</span>
                 </div>
             </a>
         </li>
@@ -40,7 +25,39 @@
             <a class="navigate-right" href="#" data-transition="slide-in" ng-click="goToPromotions($event)">
                 <div class="media-body">
                     <span class="media-object icon icon-bars"></span>
-                    <p>Trending</p>
+                    <span>Specials</span>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right" ui-sref="services" data-transition="slide-in">
+                <div class="media-body">
+                    <span class="media-object icon icon-gear"></span>
+                    <span>Services</span>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right" ui-sref="beautytips" data-transition="slide-in">
+                <div class="media-body">
+                    <span class="media-object icon icon-info"></span>
+                    <span>Beauty Tips</span>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right" ui-sref="registersalon" data-transition="slide-in">
+                <div class="media-body">
+                    <span class="media-object icon icon-more"></span>
+                    <span>Register A Salon</span>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right" ui-sref="contactus" data-transition="slide-in">
+                <div class="media-body">
+                    <span class="media-object icon icon-info"></span>
+                    <span>Contact Us</span>
                 </div>
             </a>
         </li>

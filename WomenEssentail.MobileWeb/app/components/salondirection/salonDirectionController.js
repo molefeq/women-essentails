@@ -34,7 +34,7 @@
             };
 
             viewModel.showList = false;
-            viewModel.salonDirectionFactory.initialise(salonId).then(function () {
+            viewModel.salonDirectionFactory.initialise(salonId).then(function () {              
                 var directionsDisplay = new google.maps.DirectionsRenderer();
                 var directionsService = new google.maps.DirectionsService();
                 var geocoder = new google.maps.Geocoder();

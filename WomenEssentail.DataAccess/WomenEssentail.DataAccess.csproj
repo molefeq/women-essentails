@@ -52,13 +52,17 @@
     <Compile Include="Repositories\AccountRoleRepository.cs" />
     <Compile Include="Repositories\AccountSummaryRepository.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
+    <Compile Include="Repositories\BeautyTipRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
+    <Compile Include="Repositories\CompanyFeedbackRepository.cs" />
     <Compile Include="Repositories\CompanyProductRepository.cs" />
+    <Compile Include="Repositories\CompanyRatingRepository.cs" />
     <Compile Include="Repositories\CompanyRepository.cs" />
     <Compile Include="Repositories\CompanyRequestRepository.cs" />
     <Compile Include="Repositories\CompanySummaryRepository.cs" />
     <Compile Include="Repositories\CompanyTypeProductRepository.cs" />
     <Compile Include="Repositories\CompanyTypeRepository.cs" />
+    <Compile Include="Repositories\ContactUsRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\DashboardRepository.cs" />
     <Compile Include="Repositories\ExternalAuthenticationTypeRepository.cs" />

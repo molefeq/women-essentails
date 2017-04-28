@@ -6,6 +6,7 @@ namespace WomenEssentail.Common.DataTransferObjects
     {
         public int TotalCompanyCount { get; set; }
         public int TotalRequestCount { get; set; }
+        public int TotalBeuatyTipCount { get; set; }
         public List<CompanyRequestDto> RecentRequests { get; set; }
         public List<CompanySummaryDto> RecentCompanies { get; set; }
 

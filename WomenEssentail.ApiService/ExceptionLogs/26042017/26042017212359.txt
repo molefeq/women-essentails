@@ -1,0 +1,42 @@
+Message: 
+The INSERT statement conflicted with the FOREIGN KEY constraint "FK_BeautyTip_Category_CategoryId". The conflict occurred in database "SQSWomenEssentail", table "dbo.Category", column 'Id'.
+Transaction count after EXECUTE indicates a mismatching number of BEGIN and COMMIT statements. Previous count = 0, current count = 1.
+The statement has been terminated.
+
+Paramaters: 
+
+
+Stack Trace: 
+   at Libraries.DataAccess.AdoDotNetLibrary.CommandTypeManagers.StoredProcedureManager.ExecuteReaderWithValidation(String commandText, SqlQueryParameter[] sqlParameters) in D:\My Work\Libraries\Libraries.DataAccess\AdoDotNetLibrary\CommandTypeManagers\StoredProcedureManager.cs:line 143
+   at Libraries.DataAccess.AdoDotNetLibrary.DataAccessEntitySet`1.Save(String storeProcedureName, Func`2 entityMapper, SqlQueryParameter[] parameters) in D:\My Work\Libraries\Libraries.DataAccess\AdoDotNetLibrary\DataAccessEntitySet.cs:line 75
+   at WomenEssentail.DataAccess.Repositories.BeautyTipRepository.Save(BeautyTipDto beautyTipDto, Func`2 beautyTipDtoMapper) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.DataAccess\Repositories\BeautyTipRepository.cs:line 54
+   at WomenEssentail.ServiceBusinessRules.EntityManagers.BeautyTips.BeautyTipManager.Save(BeautyTipDto beautyTipDto) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\EntityManagers\BeautyTips\BeautyTipManager.cs:line 30
+   at WomenEssentail.ApiService.Controllers.BeautyTipController.SaveBeautyTip(BeautyTipDto beautyTipDto) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Controllers\BeautyTipController.cs:line 84
+   at WomenEssentail.ApiService.Controllers.BeautyTipController.AddBeautyTip(BeautyTipDto beautyTipDto) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Controllers\BeautyTipController.cs:line 40
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.AuthorizationFilterAttribute.<ExecuteAuthorizationFilterAsyncCore>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+
+Error Url: 
+http://localhost:55464/api/BeautyTip/AddBeautyTip
+
+Error Date: 
+26/04/2017 21:23:59
+

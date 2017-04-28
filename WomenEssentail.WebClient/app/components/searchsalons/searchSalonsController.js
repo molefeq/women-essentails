@@ -4,9 +4,9 @@
 
     angular.module('app').controller('searchSalonsController', searchSalonsController);
 
-    searchSalonsController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'geolocation', 'companyApiFactory'];
+    searchSalonsController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'geolocation', 'companyApiFactory', 'searchSalonsFactory'];
 
-    function searchSalonsController($scope, $rootScope, $state, $stateParams, geolocation, companyApiFactory) {
+    function searchSalonsController($scope, $rootScope, $state, $stateParams, geolocation, companyApiFactory, searchSalonsFactory) {
         var viewModel = $scope;
 
         viewModel.isLoading = false;
@@ -20,10 +20,11 @@
                 Take: 30,
                 Skip: 0
             },
-            SearchText: $rootScope.SearchSalonText,
+            SearchText: searchSalonsFactory.SearchText,
+            SubCategoryId: searchSalonsFactory.SubCategoryId,
             IsLocationSearch: true
         };
-        
+
         viewModel.salonsGridOptions = {
             Paging: {
                 PageIndex: 1,
@@ -45,7 +46,7 @@
                 });
             }
         };
-        
+
         viewModel.$on('app-grid-rendered', function (event, data) {
             initialise();
         });
@@ -53,7 +54,7 @@
         function searchSalons() {
             viewModel.salonsGrid.SetPage(null, 1);
         };
-        
+
         function initialise() {
             viewModel.isLoading = true;
             geolocation.getLocation().then(function (data) {
