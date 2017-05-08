@@ -16,5 +16,13 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.SubCategories
                 return unitOfWork.SubCategories.Get(subCategorySearchFilter, SubCategoryMappers.Instance.MapToSubCategoryDto);
             }
         }
+
+        public Response<SubCategoryDto> Save(SubCategoryDto subCategoryDto)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                return unitOfWork.SubCategories.Save(subCategoryDto, SubCategoryMappers.Instance.MapToSubCategoryDto);
+            }
+        }
     }
 }

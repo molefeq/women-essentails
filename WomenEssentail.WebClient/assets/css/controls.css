@@ -88,6 +88,122 @@ body #navbar-collapse a > .label-login {
   line-height: .9;
   color: #FFFFFF  !important;
 }
+body .tableContainer {
+  width: 100%;
+}
+body .tableContainer tr {
+  width: 100%;
+}
+body .tableContainer tr th.k-header > .k-link {
+  text-decoration: none !important;
+}
+body .tableContainer tr td {
+  min-width: 30px;
+  position: relative;
+  word-wrap: hyphenate;
+  word-break: break-all;
+}
+body .tableContainer tr td p.text-full-paragraph.text-over-flow-tooltip-closed {
+  display: none;
+}
+body .tableContainer tr td p.text-full-paragraph.text-over-flow-tooltip-opened {
+  position: absolute;
+  right: 10px;
+  top: 14px;
+  width: 272px;
+  background-color: #fff;
+  padding: 5px;
+  border: 2px solid #cacaca;
+  z-index: 11;
+}
+body .tableContainer tr th {
+  background-color: #f5f5f5;
+  text-align: center;
+  border: 1px solid #cacaca;
+}
+body .tableContainer tr td:first-child {
+  padding-left: 15px !important;
+}
+body .tableContainer .resize {
+  width: 27px;
+}
+body .tableContainer table:first-child tr td:first-child {
+  padding-left: 2px !important;
+}
+body .tableContainer table:first-child tr:first-child td {
+  border-top: 0px;
+}
+body .tableContainer table:nth-child(2) tr:first-child td {
+  border-top: 0px;
+}
+body .tableContainer table.closeRow {
+  display: none;
+}
+body .tableContainer table.expandRow {
+  display: table;
+}
+body .tableContainer .mobileInfo {
+  display: none;
+}
+body .resizeDate {
+  width: 33px;
+}
+body th.width5,
+body td.width5 {
+  width: 5% !important;
+}
+body th.width10,
+body td.width10 {
+  width: 10% !important;
+}
+body th.width7,
+body td.width7 {
+  width: 7% !important;
+}
+body th.width15,
+body td.width15 {
+  width: 15% !important;
+}
+body th.width20,
+body td.width20 {
+  width: 20% !important;
+}
+body th.width45,
+body td.width45 {
+  width: 45% !important;
+}
+body th.width25,
+body td.width25 {
+  width: 25% !important;
+}
+body th.width30,
+body td.width30 {
+  width: 30% !important;
+}
+body th.width40,
+body td.width40 {
+  width: 40% !important;
+}
+body th.width50,
+body td.width50 {
+  width: 50% !important;
+}
+body th.width60,
+body td.width60 {
+  width: 60% !important;
+}
+body th.width70,
+body td.width70 {
+  width: 70% !important;
+}
+body th.width80,
+body td.width80 {
+  width: 80% !important;
+}
+body th.width90,
+body td.width90 {
+  width: 90% !important;
+}
 .angular-google-map-container {
   height: 400px;
   margin-bottom: 15px;
@@ -108,5 +224,103 @@ body #navbar-collapse a > .label-login {
   }
   .main-header .navbar-right {
     margin: 7.5px -15px;
+  }
+}
+@media screen and (max-width: 817px) {
+  body .tableContainer .mobileInfo {
+    display: table-cell;
+    width: 20px;
+    position: relative;
+  }
+  body .tableContainer .mobileInfo div {
+    position: absolute;
+    right: 10px;
+    top: 25px;
+    width: 272px;
+    background-color: #fff;
+    padding: 5px;
+    border: 2px solid #cacaca;
+    z-index: 999;
+  }
+  body .tableContainer .mobileInfo div table tr.summary-hidden {
+    display: table-row !important;
+  }
+  body .tableContainer .mobileInfo div table tr td {
+    border: 0px;
+    text-align: left;
+    vertical-align: top;
+    padding: 3px 0;
+    font-size: 11px;
+  }
+  body .tableContainer .mobileInfo div table tr th {
+    font-size: 11px;
+  }
+  body .tableContainer .mobileInfo div table tr td:first-child {
+    width: 100px;
+  }
+  body .tableContainer .mobileInfo div.hide {
+    display: none;
+  }
+  body .tableContainer .mobileInfo div.display {
+    display: block;
+  }
+  body .tableContainer .mobileInfo i {
+    /*float: left;*/
+    width: 15px;
+    height: 15px;
+    display: inline-block;
+  }
+  body .tableContainer tr th,
+  body .tableContainer tr td {
+    font-size: 11px;
+  }
+  body .tableContainer tr th.mobile-hidden,
+  body .tableContainer tr td.mobile-hidden {
+    display: none;
+  }
+  body .tableContainer tr th.xs-width5,
+  body .tableContainer tr td.xs-width5 {
+    width: 5% !important;
+  }
+  body .tableContainer tr th.xs-width7,
+  body .tableContainer tr td.xs-width7 {
+    width: 7% !important;
+  }
+  body .tableContainer tr th.xs-width10,
+  body .tableContainer tr td.xs-width10 {
+    width: 10% !important;
+  }
+  body .tableContainer tr th.xs-width20,
+  body .tableContainer tr td.xs-width20 {
+    width: 20% !important;
+  }
+  body .tableContainer tr th.xs-width25,
+  body .tableContainer tr td.xs-width25 {
+    width: 25% !important;
+  }
+  body .tableContainer tr th.xs-width30,
+  body .tableContainer tr td.xs-width30 {
+    width: 30% !important;
+  }
+  body .tableContainer tr th.xs-width50,
+  body .tableContainer tr td.xs-width50 {
+    width: 50% !important;
+  }
+  body .tableContainer tr th.xs-width60,
+  body .tableContainer tr td.xs-width60 {
+    width: 60% !important;
+  }
+  body .tableContainer tr th.xs-width70,
+  body .tableContainer tr td.xs-width70 {
+    width: 70% !important;
+  }
+  body .tableContainer tr th.xs-width45,
+  body .tableContainer tr td.xs-width45 {
+    width: 45% !important;
+  }
+  body .tableContainer .actions-item {
+    margin-left: 5px;
+    width: 15px;
+    height: 15px;
   }
 }

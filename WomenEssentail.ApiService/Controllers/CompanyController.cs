@@ -69,6 +69,14 @@ namespace WomenEssentail.ApiService.Controllers
 
         [SecurityFilter("Companies")]
         [HttpPost]
+        public HttpResponseMessage UpdateCompanyStatus(BulkUpdateModel bulkUpdateModel)
+        {
+            bulkUpdateModel.EditUserId = UserId.Value;
+            return Request.CreateResponse<Response<CompanyDto>>(HttpStatusCode.OK, companyManager.UpdateCompanyStatus(bulkUpdateModel));
+        }
+
+        [SecurityFilter("Companies")]
+        [HttpPost]
         public HttpResponseMessage UpdateCompany(CompanyDto companyDto)
         {
             companyDto.CrudStatus = CrudStatus.UPDATE;
@@ -86,9 +94,9 @@ namespace WomenEssentail.ApiService.Controllers
         }
 
         [HttpPost]
-        public HttpResponseMessage FetchCompany(int companyId)
+        public HttpResponseMessage FetchCompany(int companyId, string deviceId = "")
         {
-            CompanyDto companyDto = new CompanyDto { CrudStatus = CrudStatus.READ, Id = companyId };
+            CompanyDto companyDto = new CompanyDto { CrudStatus = CrudStatus.READ, Id = companyId, DeviceId = deviceId };
 
             return SaveCompany(companyDto);
         }
@@ -121,6 +129,34 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<ImageModel>(HttpStatusCode.OK, new ImageModel { ImageFileNamePath = normalImageInformation.RelativeFileName, ImageFileName = fileName });
         }
 
+        [SecurityFilter("Companies")]
+        [HttpPost]
+        public HttpResponseMessage SaveLogo()
+        {
+            if (!Request.Content.IsMimeMultipartContent())
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            var httpRequest = HttpContext.Current.Request;
+
+            if (httpRequest.Files.Count == 0)
+            {
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
+
+            ImageInformation normalImageInformation = new ImageInformation
+            {
+                Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesLogoDimension"),
+                Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesLogoDimension"),
+                BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobTempDirectory")
+            };
+
+            string fileName = UploadFileHandler.SaveUploadedImage(httpRequest.Files[0], normalImageInformation);
+
+            return Request.CreateResponse<ImageModel>(HttpStatusCode.OK, new ImageModel { ImageFileNamePath = normalImageInformation.RelativeFileName, ImageFileName = fileName });
+        }
+
         #region Private Methods
 
         private HttpResponseMessage SaveCompany(CompanyDto companyDto)
@@ -130,7 +166,9 @@ namespace WomenEssentail.ApiService.Controllers
 
             if (!response.HasErrors && !response.HasWarnings)
             {
-                if (companyDto.CrudStatus != CrudStatus.DELETE && companyDto.CrudStatus != CrudStatus.READ && companyDto.Logos != null && companyDto.Logos.Where(item => item.NormalRelativeFileName.Contains("Logos/Company/Temp/")).Count() > 0)
+                if (companyDto.CrudStatus != CrudStatus.DELETE && companyDto.CrudStatus != CrudStatus.READ &&
+                    ((companyDto.Logo != null && companyDto.Logo.NormalRelativeFileName.Contains("Logos/Company/Temp/") ||
+                     companyDto.Galleries != null && companyDto.Galleries.Where(item => item.NormalRelativeFileName.Contains("Logos/Company/Temp/")).Count() > 0)))
                 {
                     ResizeLogos(response.Item);
                 }
@@ -146,37 +184,58 @@ namespace WomenEssentail.ApiService.Controllers
 
         private void ResizeLogos(CompanyDto companyDto)
         {
-            foreach (var companyLogo in companyDto.Logos)
+            ResizeLogo(companyDto.Logo, true);
+
+            foreach (var companyLogo in companyDto.Galleries)
             {
-                string logoFileName = System.IO.Path.Combine(AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobTempDirectory"), companyLogo.Logo);
-
-                UploadFileHandler.ResizeFromStreamImage(logoFileName, companyLogo.Logo,
-                    new ImageInformation
-                    {
-
-                        Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesNormalDimension"),
-                        Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesNormalDimension"),
-                        BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobNormalDirectory")
-                    });
-
-                UploadFileHandler.ResizeFromStreamImage(logoFileName, companyLogo.Logo,
-                    new ImageInformation
-                    {
-
-                        Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesThumbnailsDimension"),
-                        Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesThumbnailsDimension"),
-                        BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobThumbnailsDirectory")
-                    });
-
-                UploadFileHandler.ResizeFromStreamImage(logoFileName, companyLogo.Logo,
-                    new ImageInformation
-                    {
-
-                        Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesPreviewDimension"),
-                        Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesPreviewDimension"),
-                        BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobPreviewDirectory")
-                    });
+                ResizeLogo(companyLogo, false);
             }
+        }
+
+        private void ResizeLogo(CompanyLogoDto companyLogo, bool isLogo)
+        {
+            string logoFileName = System.IO.Path.Combine(AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobTempDirectory"), companyLogo.Logo);
+
+            if (isLogo)
+            {
+                UploadFileHandler.ResizeFromStreamImage(logoFileName, companyLogo.Logo,
+                    new ImageInformation
+                    {
+
+                        Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesLogoDimension"),
+                        Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesLogoDimension"),
+                        BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobLogoDirectory")
+                    });
+
+                return;
+            }
+
+            UploadFileHandler.ResizeFromStreamImage(logoFileName, companyLogo.Logo,
+                new ImageInformation
+                {
+
+                    Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesNormalDimension"),
+                    Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesNormalDimension"),
+                    BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobNormalDirectory")
+                });
+
+            UploadFileHandler.ResizeFromStreamImage(logoFileName, companyLogo.Logo,
+                new ImageInformation
+                {
+
+                    Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesThumbnailsDimension"),
+                    Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesThumbnailsDimension"),
+                    BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobThumbnailsDirectory")
+                });
+
+            UploadFileHandler.ResizeFromStreamImage(logoFileName, companyLogo.Logo,
+                new ImageInformation
+                {
+
+                    Width = AppSettingsUtils.GetDimensionWidth("CompanyImagesPreviewDimension"),
+                    Height = AppSettingsUtils.GetDimensionHeight("CompanyImagesPreviewDimension"),
+                    BlobDirectoryName = AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobPreviewDirectory")
+                });
         }
 
         private void MapRelativeLogoPaths(List<CompanySummaryDto> companySummaryDtos)
@@ -191,16 +250,17 @@ namespace WomenEssentail.ApiService.Controllers
 
         private void MapRelativeLogoPath(CompanyDto companyDto)
         {
-            if (companyDto.Logos == null || companyDto.Logos.Count == 0)
+            if (companyDto.Galleries == null || companyDto.Galleries.Count == 0 || companyDto.Logo == null)
             {
                 return;
             }
 
-            companyDto.NormalRelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobNormalDirectory"), companyDto.Logos[0].Logo);
-            companyDto.ThumbnailRelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobThumbnailsDirectory"), companyDto.Logos[0].Logo);
-            companyDto.PreviewRelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobPreviewDirectory"), companyDto.Logos[0].Logo);
+            if (companyDto.Logo != null && !string.IsNullOrEmpty(companyDto.Logo.Logo))
+            {
+                companyDto.Logo.NormalRelativeFileName = UploadFileHandler.GetBlobRelativeFileName(AppSettingsUtils.GetStringAppSetting("StoragePrefixUrl"), AppSettingsUtils.GetStringAppSetting("CompanyImagesBlobLogoDirectory"), companyDto.Logo.Logo);
+            }
 
-            foreach (var companyLogo in companyDto.Logos)
+            foreach (var companyLogo in companyDto.Galleries)
             {
                 if (string.IsNullOrEmpty(companyLogo.Logo))
                 {

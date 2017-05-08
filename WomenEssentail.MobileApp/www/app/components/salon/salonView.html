@@ -3,7 +3,7 @@
         <span class="icon icon-left-nav"></span>
         Back
     </a>
-    <h1 class="title">Women's Essentials</h1>
+    <h1 class="title">Essentails for Women</h1>
 </header>
 <div class="content sp-salon-view-container">
 
@@ -15,32 +15,10 @@
             <div class="box box-solid">
                 <div class="box-body">
                     <div uib-carousel active="active" interval="5000" no-wrap="false">
-                        <div uib-slide ng-repeat="logo in salonFactory.salon.Logos" index="$index">
+                        <div uib-slide ng-repeat="logo in salonFactory.salon.Galleries" index="$index">
                             <img ng-src="{{logo.NormalRelativeFileName}}" alt="{{salonFactory.salon.Name}}" style="margin:auto;">
-                           
                         </div>
                     </div>
-                    <!--<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carousel-example-generic" ng-repeat="logo in salonFactory.salon.Logos" data-slide-to="{{$index}}" ng-class="$index==0?'active': ''"></li>
-                        </ol>
-                        <div class="carousel-inner">
-
-                            <div class="item" ng-repeat="logo in salonFactory.salon.Logos" ng-class="$index==0?'active': ''">
-                                <img ng-attr-src="{{logo.NormalRelativeFileName}}" alt="{{salonFactory.salon.Name}}" style="margin: auto;">
-                                <div class="carousel-caption">
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                            <span class="fa fa-angle-left" style="color: gray;"></span>
-                        </a>
-                        <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                            <span class="fa fa-angle-right" style="color: gray;"></span>
-                        </a>
-                    </div>-->
                 </div><!-- /.box-body -->
                 <div class="box-footer">
                     <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;"> {{salonFactory.salon.Description}}</p>
@@ -68,7 +46,6 @@
                         {{'view feedback (' + salonFactory.salon.FeedbackCount + ')'}}
                     </a>
                 </small>
-                <!--<rating class="pull-right" value="3" align="left" max="5" size="15px" ng-click="setRating(value)" interactive="false"></rating>-->
                 <span style="float:right;" uib-rating ng-click="setRating(salonFactory.salon.AvarageRating)" ng-model="salonFactory.salon.AvarageRating" max="5" read-only="false" aria-labelledby="default-rating"></span>
                 <p style="float:right; font-size:11px; color:black; padding-right:5px;">{{'From '+ salonFactory.salon.RatingCount + ' users.'}}</p>
             </div>
@@ -79,6 +56,9 @@
         <button class="btn pull-right" style="margin-right:5px;" ng-click="giveFeedback()">
             Give Feeback
         </button>
+    </div>
+    <div class="col-md-12" style="margin-top:25px;">
+        <div id="map" style="height:150px;width:100%; margin-top:10px;"></div>
     </div>
     <div ng-repeat="(key, value) in salonFactory.products" ng-if="products.length == 0" style="padding-top: 10px;">
         <h5 class="content-padded" style="text-transform: uppercase;">{{key}}</h5>

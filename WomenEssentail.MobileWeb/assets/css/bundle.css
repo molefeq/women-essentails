@@ -480,6 +480,20 @@ html body main .main-header > .navbar .sidebar-toggle {
 .social-auth-links {
   margin: 10px 0;
 }
+.wrapper {
+  /* start 'enter' transition */
+  /* end 'enter' transition */
+}
+.wrapper.ng-enter {
+  /* transition on enter for .5s */
+  transition: .5s;
+  /* start with opacity 0 (invisible) */
+  opacity: 0;
+}
+.wrapper.ng-enter-active {
+  /* end with opacity 1 (fade in) */
+  opacity: 1;
+}
 .ModalContainer .row {
   margin-bottom: 5px;
 }

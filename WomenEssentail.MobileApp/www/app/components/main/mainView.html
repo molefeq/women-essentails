@@ -1,5 +1,5 @@
 ﻿<header class="bar bar-nav">
-    <h1 class="title">Women's Essentials</h1>
+    <h1 class="title">Essentails for Women</h1>
 </header>
 <div class="content sp-main-view-container">
     <form ng-submit="searchSalons()">
@@ -14,18 +14,10 @@
     </form>
     <ul class="table-view">
         <li class="table-view-cell media">
-            <a class="navigate-right" href="#" data-transition="slide-in" ng-click="goToSalons($event)">
+            <a class="navigate-right" ui-sref="aboutus" data-transition="slide-in">
                 <div class="media-body">
-                    <span class="media-object icon icon-home"></span>
-                    <span>Nearest salons</span>
-                </div>
-            </a>
-        </li>
-        <li class="table-view-cell media">
-            <a class="navigate-right" href="#" data-transition="slide-in" ng-click="goToPromotions($event)">
-                <div class="media-body">
-                    <span class="media-object icon icon-bars"></span>
-                    <span>Specials</span>
+                    <span class="media-object icon icon-gear"></span>
+                    <span>About Us</span>
                 </div>
             </a>
         </li>
@@ -34,6 +26,22 @@
                 <div class="media-body">
                     <span class="media-object icon icon-gear"></span>
                     <span>Services</span>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right" href="#" data-transition="slide-in" ng-click="goToSalons($event)">
+                <div class="media-body">
+                    <span class="media-object icon icon-home"></span>
+                    <span>Nearest Salons</span>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right" href="#" data-transition="slide-in" ng-click="goToPromotions($event)">
+                <div class="media-body">
+                    <span class="media-object icon icon-bars"></span>
+                    <span>Specials In Your Area</span>
                 </div>
             </a>
         </li>
@@ -58,6 +66,22 @@
                 <div class="media-body">
                     <span class="media-object icon icon-info"></span>
                     <span>Contact Us</span>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right" ui-sref="shareapp" data-transition="slide-in">
+                <div class="media-body">
+                    <span class="media-object icon icon-share"></span>
+                    <span>Share With Friend</span>
+                </div>
+            </a>
+        </li>
+        <li class="table-view-cell media">
+            <a class="navigate-right" ui-sref="technicalreport" data-transition="slide-in">
+                <div class="media-body">
+                    <span class="media-object icon icon-plus"></span>
+                    <span>Technical Report</span>
                 </div>
             </a>
         </li>

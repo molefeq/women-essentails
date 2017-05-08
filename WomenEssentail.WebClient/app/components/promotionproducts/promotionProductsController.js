@@ -37,7 +37,7 @@
             Read: function (options) {
                 var that = this;
 
-                $rootScope.isDataLoading = true;
+                $rootScope.isLoading = true;
                 $rootScope.loadingMessage = 'Loading data, please wait ...';
 
                 viewModel.SearchFilter.PageData.Take = options.take;
@@ -45,7 +45,7 @@
 
                 viewModel.promotionProductsFactory.searchPromotionProducts(viewModel.SearchFilter).then(function (response) {
                     viewModel.promotionProductsGrid.SetDataSource(response.PromotionProducts, response.TotalPromotionProducts);
-                    $rootScope.isDataLoading = false;
+                    $rootScope.isLoading = false;
                 });
             }
         };

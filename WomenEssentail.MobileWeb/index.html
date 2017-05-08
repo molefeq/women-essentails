@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>Women's Essentails App</title>
+    <title>Essentails for Women App</title>
 
     <link href="assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="assets/libs/angular-toastr/angular-toastr.min.css" rel="stylesheet" />
@@ -15,9 +15,11 @@
     <link href="assets/css/bundle.min.css" rel="stylesheet" />
 
 </head>
-<body>
+<body style="position: static;top: 0;right: 0;bottom: 0;left: 0;font-size: 17px;line-height: 21px; color: #000;background-color: #fff;">
 
-    <header ng-controller="appController"></header>
+    <header ng-controller="appController">
+        
+    </header>
 
     <div class="wrapper" ui-view="">
 
@@ -27,6 +29,7 @@
     <div ng-include="'app/shared/error/errorAlert.html'"></div>
 
     <script src="assets/libs/jquery/jquery-2.1.4.min.js"></script>
+    <script src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
     <script type="text/javascript" src="assets/libs/angular/angular-animate.min.js"></script>
     <script type="text/javascript" src="assets/libs/angular/angular-cookies.min.js"></script>
@@ -42,10 +45,10 @@
     <script type="text/javascript" src="assets/libs/lodash/lodash.js"></script>
     <script type="text/javascript" src="assets/libs/angular-simple-logger/angular-simple-logger.js"></script>
     <script type="text/javascript" src="assets/libs/angular-maps/angular-google-maps.js"></script>
-    <script type="text/javascript" src="assets/libs/ratchet-v2.0.2/js/ratchet.min.js"></script>
-
-    <script type="text/javascript" src="app/bundle.min.js"></script>
-    <!--<script type="text/javascript" src="app/app.module.js"></script>
+    <script type="text/javascript" src="assets/libs/ngInfiniteScroll/ng-infinite-scroll.min.js"></script>
+    <!--<script type="text/javascript" src="assets/libs/ratchet-v2.0.2/js/ratchet.min.js"></script>-->
+    <!--<script type="text/javascript" src="app/bundle.min.js"></script>-->
+    <script type="text/javascript" src="app/app.module.js"></script>
     <script type="text/javascript" src="app/app.routes.js"></script>
     <script type="text/javascript" src="app/app.config.js"></script>
     <script type="text/javascript" src="app/app.run.js"></script>
@@ -61,7 +64,6 @@
     <script type="text/javascript" src="app/shared/directives/appSubFormDirective.js"></script>
     <script type="text/javascript" src="app/shared/directives/menuHighlightDirective.js"></script>
     <script type="text/javascript" src="app/shared/directives/accessControlDirective.js"></script>
-
     <script type="text/javascript" src="app/shared/factories/appFactory.js"></script>
     <script type="text/javascript" src="app/shared/factories/companyApiFactory.js"></script>
     <script type="text/javascript" src="app/shared/factories/utilsFactory.js"></script>
@@ -71,6 +73,7 @@
     <script type="text/javascript" src="app/shared/factories/productApiFactory.js"></script>
     <script type="text/javascript" src="app/shared/factories/errorFactory.js"></script>
     <script type="text/javascript" src="app/shared/factories/notificationFactory.js"></script>
+    <script type="text/javascript" src="app/shared/factories/appRatingApiFactory.js"></script>
 
     <script type="text/javascript" src="app/shared/filters/percentageFormat.js"></script>
 
@@ -98,8 +101,9 @@
     <script src="app/components/registersalon/registerSalonController.js"></script>
 
     <script src="app/components/beautytips/beautyTipsController.js"></script>
-    <script src="app/components/beautytips/beautyTipsFactory.js"></script>-->
-
+    <script src="app/components/beautytips/beautyTipsFactory.js"></script>
+    <script src="app/components/shareapp/shareAppController.js"></script>
+    <script src="app/components/technicalreport/technicalReportController.js"></script>
 
     <script>
         //angular.bootstrap(document, ['app']);
@@ -108,6 +112,7 @@
                 angular.bootstrap(document, ['app']);
             });
         }
+
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Dp0M7lBi97YoSYlpgt_7IDCMeXEZBiQ&callback=initMap" async defer></script>
 </body>

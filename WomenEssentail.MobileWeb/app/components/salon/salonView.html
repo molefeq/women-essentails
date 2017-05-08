@@ -3,7 +3,7 @@
         <span class="icon icon-left-nav"></span>
         Back
     </a>
-    <h1 class="title">Women's Essentials</h1>
+    <h1 class="title">Essentails for Women</h1>
 </header>
 <div class="content sp-salon-view-container">
 
@@ -15,7 +15,7 @@
             <div class="box box-solid">
                 <div class="box-body">
                     <div uib-carousel active="active" interval="5000" no-wrap="false">
-                        <div uib-slide ng-repeat="logo in salonFactory.salon.Logos" index="$index">
+                        <div uib-slide ng-repeat="logo in salonFactory.salon.Galleries" index="$index">
                             <img ng-src="{{logo.NormalRelativeFileName}}" alt="{{salonFactory.salon.Name}}" style="margin:auto;">
                         </div>
                     </div>

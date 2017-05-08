@@ -1,4 +1,4 @@
-﻿<div class="content-wrapper" style="min-height: 873px;">
+﻿<div class="content-wrapper">
     <section class="content-header">
         <h1>
             {{searchSalonFactory.salon.Name}}
@@ -21,10 +21,10 @@
                             <div class="box-body">
                                 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
                                     <ol class="carousel-indicators">
-                                        <li data-target="#carousel-example-generic" ng-repeat="logo in searchSalonFactory.salon.Logos" data-slide-to="{{$index}}" ng-class="$index==0?'active': ''"></li>
+                                        <li data-target="#carousel-example-generic" ng-repeat="logo in searchSalonFactory.salon.Galleries" data-slide-to="{{$index}}" ng-class="$index==0?'active': ''"></li>
                                     </ol>
                                     <div class="carousel-inner">
-                                        <div class="item" ng-repeat="logo in searchSalonFactory.salon.Logos" ng-class="$index==0?'active': ''">
+                                        <div class="item" ng-repeat="logo in searchSalonFactory.salon.Galleries" ng-class="$index==0?'active': ''">
                                             <img ng-attr-src="{{logo.NormalRelativeFileName}}" alt="{{searchSalonFactory.salon.Name}}" style="margin: auto;">
                                             <div class="carousel-caption">
 
@@ -41,7 +41,7 @@
                                 </div>
                             </div><!-- /.box-body -->
                             <div class="box-footer">
-                                <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;"> {{searchSalonFactory.salon.Description}}</p>
+                                <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center; word-break: break-all;"> {{searchSalonFactory.salon.Description}}</p>
                                 <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;">
                                     <span ng-if="searchSalonFactory.salon.PhysicalAddressLine1">{{searchSalonFactory.salon.PhysicalAddressLine1}}</span>
                                     <span ng-if="searchSalonFactory.salon.PhysicalAddressLine2">{{searchSalonFactory.salon.PhysicalAddressLine2}}</span>

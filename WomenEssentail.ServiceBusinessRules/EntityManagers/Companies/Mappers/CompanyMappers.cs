@@ -84,7 +84,16 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
                         continue;
                     }
 
-                    companyDto.Logos.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+                    string imageType = sqlDataReader["ImageType"].ToString();
+
+                    if (imageType == "Logo")
+                    {
+                        companyDto.Logo = CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader);
+                    }
+                    else
+                    {
+                        companyDto.Galleries.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+                    }
                 }
             }
 
@@ -122,7 +131,16 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
                         continue;
                     }
 
-                    companyDto.Logos.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+                    string imageType = sqlDataReader["ImageType"].ToString();
+
+                    if (imageType == "Logo")
+                    {
+                        companyDto.Logo = CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader);
+                    }
+                    else
+                    {
+                        companyDto.Galleries.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+                    }
                 }
             }
 
@@ -223,6 +241,9 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
             companyDto.PostalAddressLongitude = sqlDataReader["PostalAddressLongitude"].ToString();
             companyDto.FirstName = sqlDataReader["FirstName"].ToString();
             companyDto.LastName = sqlDataReader["LastName"].ToString();
+            companyDto.BusinessContactCode = sqlDataReader["BusinessContactCode"].ToString();
+            companyDto.BusinessContactNumber = sqlDataReader["BusinessContactNumber"].ToString();
+            companyDto.MobileNumber = sqlDataReader["MobileNumber"].ToString();
             companyDto.EmailAddress = sqlDataReader["EmailAddress"].ToString();
             companyDto.RatingCount = sqlDataReader["RatingCount"].ToInteger();
             companyDto.AvarageRating = sqlDataReader["AvarageRating"].ToDecimal();
@@ -233,7 +254,16 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
 
             while (sqlDataReader.Read())
             {
-                companyDto.Logos.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+                string imageType = sqlDataReader["ImageType"].ToString();
+
+                if (imageType == "Logo")
+                {
+                    companyDto.Logo = CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader);
+                }
+                else
+                {
+                    companyDto.Galleries.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+                }
             }
             return companyDto;
         }

@@ -108,6 +108,164 @@ body {
             }
         }
     }
+
+
+    .tableContainer {
+        width: 100%;
+        width: 100%;
+
+        tr {
+            width: 100%;
+
+            th.k-header > .k-link {
+                text-decoration: none !important;
+            }
+
+            td {
+                min-width: 30px;
+                position: relative;
+                word-wrap: hyphenate;
+                word-break: break-all;
+
+                p.text-full-paragraph.text-over-flow-tooltip-closed {
+                    display: none;
+                }
+
+                p.text-full-paragraph.text-over-flow-tooltip-opened {
+                    position: absolute;
+                    right: 10px;
+                    top: 14px;
+                    width: 272px;
+                    background-color: #fff;
+                    padding: 5px;
+                    border: 2px solid #cacaca;
+                    z-index: 11;
+                }
+            }
+
+            th {
+                background-color: #f5f5f5;
+                text-align: center;
+                border: 1px solid #cacaca;
+            }
+
+            td:first-child {
+                padding-left: 15px !important;
+            }
+        }
+
+        .resize {
+            width: 27px;
+        }
+
+        table:first-child {
+            tr {
+                td:first-child {
+                    padding-left: 2px !important;
+                }
+            }
+
+            tr:first-child {
+                td {
+                    border-top: 0px;
+                }
+            }
+        }
+
+        table:nth-child(2) {
+            tr:first-child {
+                td {
+                    border-top: 0px;
+                }
+            }
+        }
+
+        table.closeRow {
+            display: none;
+        }
+
+        table.expandRow {
+            display: table;
+        }
+
+        .mobileInfo {
+            display: none;
+        }
+    }
+
+    .resizeDate {
+        width: 33px;
+    }
+
+    th.width5,
+    td.width5 {
+        width: 5% !important;
+    }
+
+    th.width10,
+    td.width10 {
+        width: 10% !important;
+    }
+
+    th.width7,
+    td.width7 {
+        width: 7% !important;
+    }
+
+    th.width15,
+    td.width15 {
+        width: 15% !important;
+    }
+
+    th.width20,
+    td.width20 {
+        width: 20% !important;
+    }
+
+    th.width45,
+    td.width45 {
+        width: 45% !important;
+    }
+
+    th.width25,
+    td.width25 {
+        width: 25% !important;
+    }
+
+    th.width30,
+    td.width30 {
+        width: 30% !important;
+    }
+
+    th.width40,
+    td.width40 {
+        width: 40% !important;
+    }
+
+    th.width50,
+    td.width50 {
+        width: 50% !important;
+    }
+
+    th.width60,
+    td.width60 {
+        width: 60% !important;
+    }
+
+    th.width70,
+    td.width70 {
+        width: 70% !important;
+    }
+
+    th.width80,
+    td.width80 {
+        width: 80% !important;
+    }
+
+    th.width90,
+    td.width90 {
+        width: 90% !important;
+    }
 }
 
 .angular-google-map-container {
@@ -134,5 +292,136 @@ body {
 
     .main-header .navbar-right {
         margin: 7.5px -15px;
+    }
+}
+
+
+@media screen and (max-width:817px) {
+    body {
+        .tableContainer {
+            .mobileInfo {
+                display: table-cell;
+                width: 20px;
+                position: relative;
+
+                div {
+                    position: absolute;
+                    right: 10px;
+                    top: 25px;
+                    width: 272px;
+                    background-color: #fff;
+                    padding: 5px;
+                    border: 2px solid #cacaca;
+                    z-index: 999;
+
+                    table {
+                        tr.summary-hidden {
+                            display: table-row !important;
+                        }
+
+                        tr {
+                            td {
+                                border: 0px;
+                                text-align: left;
+                                vertical-align: top;
+                                padding: 3px 0;
+                                font-size: 11px;
+                            }
+
+                            th {
+                                font-size: 11px;
+                            }
+
+                            td:first-child {
+                                width: 100px;
+                            }
+                        }
+                    }
+                }
+
+                div.hide {
+                    display: none;
+                }
+
+                div.display {
+                    display: block;
+                }
+
+                i {
+                    /*float: left;*/
+                    width: 15px;
+                    height: 15px;
+                    display: inline-block;
+                }
+            }
+
+            tr {
+
+                th, td {
+                    font-size: 11px;
+                }
+
+                th.mobile-hidden,
+                td.mobile-hidden {
+                    display: none;
+                }
+
+                th.xs-width5,
+                td.xs-width5 {
+                    width: 5% !important;
+                }
+
+                th.xs-width7,
+                td.xs-width7 {
+                    width: 7% !important;
+                }
+
+                th.xs-width10,
+                td.xs-width10 {
+                    width: 10% !important;
+                }
+
+                th.xs-width20,
+                td.xs-width20 {
+                    width: 20% !important;
+                }
+
+                th.xs-width25,
+                td.xs-width25 {
+                    width: 25% !important;
+                }
+
+                th.xs-width30,
+                td.xs-width30 {
+                    width: 30% !important;
+                }
+
+                th.xs-width50,
+                td.xs-width50 {
+                    width: 50% !important;
+                }
+
+                th.xs-width60,
+                td.xs-width60 {
+                    width: 60% !important;
+                }
+
+                th.xs-width70,
+                td.xs-width70 {
+                    width: 70% !important;
+                }
+
+                th.xs-width45,
+                td.xs-width45 {
+                    width: 45% !important;
+                }
+            }
+
+            .actions-item {
+                margin-left: 5px;
+                width: 15px;
+                height: 15px;
+            }
+        }
     }
 }

@@ -1,62 +1,98 @@
-﻿<div class="content-wrapper" style="min-height: 873px;">
+﻿<div class="content-wrapper">
     <section class="content-header">
         <h1>
             Beuaty Tips
         </h1>
         <ol class="breadcrumb">
             <li access-control module="home"><a ui-sref="home"><i class="fa fa-home"></i> Home</a></li>
+            <li access-control module="companies"><a ui-sref="salons"><i class="fa fa-home"></i> Salons</a></li>
+            <li ng-if="isCompanyUser" access-control module="products"><a ui-sref="products"><i class="fa fa-home"></i> Products</a></li>
         </ol>
     </section>
 
     <section class="content">
-
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <!--<h3 class="box-title">Salons</h3>-->
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary pull-left" ng-click="addBeuatyTip()"><i class="fa fa-plus"></i></button>
-                    </div>
-                    <div class="box-tools">
-                        <div class="input-group">
-                            <input name="table_search" class="form-control input-sm pull-right" style="width: 250px;" type="text" placeholder="Search" ng-model="SearchFilter.SearchText">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-default" ng-click="searchBeuatyTips()"><i class="fa fa-search"></i></button>
-                            </div>
+        <div class="box">
+            <div class="box-header">
+                <!--<h3 class="box-title">Salons</h3>-->
+                <div class="input-group-btn hidden-xs">
+                    <button class="btn btn-primary pull-left" ng-click="addBeuatyTip()"><i class="fa fa-plus"></i></button>
+                </div>
+                <div class="box-tools">
+                    <div class="input-group">
+                        <input name="table_search" class="form-control input-sm pull-right" style="width: 250px;" type="text" placeholder="Search" ng-model="SearchFilter.SearchText">
+                        <div class="input-group-btn">
+                            <button class="btn btn-sm btn-default" ng-click="searchBeuatyTips()"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
-                </div><!-- /.box-header -->
-                <div class="box-body table-responsive no-padding" app-grid="beautyTipsGrid" app-grid-options="beautyTipsGridOptions">
-                    <table class="table table-hover">
-                        <tbody>
-                            <tr>
-                                <th>Subject</th>
-                                <th>Tip</th>
-                                <th>Date</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                            <tr ng-repeat="beautyTip in beautyTipsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
-                                <td>{{beautyTip.Subject}}</td>
-                                <td>{{beautyTip.Tip}}</td>
-                                <td>{{beautyTip.CreateDate | date:'dd/MM/yyyy'}}</td>
-                                <td>
-                                    <div class="animate-switch-container" ng-switch on="beautyTip.StatusCode">
-                                        <span ng-switch-when="NEW" class="label label-success">{{beautyTip.StatusName}}</span>
-                                        <span ng-switch-when="DELETED" class="label label-danger">{{beautyTip.StatusName}}</span>
-                                        <span ng-switch-when="ACTIVE" class="label label-primary">{{beautyTip.StatusName}}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <small class="action-label label label-info" ng-click="editBeuatyTip(beautyTip);"><i class="fa fa-pencil"></i> Edit</small>
-                                    <small class="action-label label label-info" ng-click="deleteBeuatyTip(beautyTip);"><i class="fa fa-remove"></i> Delete</small>
-                                    <small class="action-label label label-info" ng-click="activateBeuatyTip(beautyTip);">Activate</small>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><!-- /.box-body -->
-                <div class="box-footer clearfix" ng-show="beautyTipsGrid.Paging.Pages.length > 0">
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body" app-grid="beautyTipsGrid" app-grid-options="beautyTipsGridOptions" style="margin-top: 10px; margin-bottom: 30px;">
+                <div class="row visible-xs" style="margin-top: 10px; margin-bottom: 5px;">
+                    <div class="col-xs-12">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary pull-left" ng-click="addBeuatyTip()"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover table-striped tableContainer">
+                    <tbody>
+                        <tr>
+                            <th class="width20 xs-width30">Subject</th>
+                            <th class="width50 xs-width60">Tip</th>
+                            <th class="mobile-hidden width10">Date</th>
+                            <th class="mobile-hidden width15">Status</th>
+                            <th class="mobile-hidden width15">Actions</th>
+                            <th class="mobileInfo"></th>
+                        </tr>
+                        <tr ng-repeat="beautyTip in beautyTipsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
+                            <td class="width20 xs-width30">{{beautyTip.Subject}}</td>
+                            <td class="width50 xs-width60">{{beautyTip.Tip}}</td>
+                            <td class="mobile-hidden width10">{{beautyTip.CreateDate | date:'dd/MM/yyyy'}}</td>
+                            <td class="mobile-hidden width15">
+                                <div class="animate-switch-container" ng-switch on="beautyTip.StatusCode">
+                                    <span ng-switch-when="NEW" class="label label-success">{{beautyTip.StatusName}}</span>
+                                    <span ng-switch-when="DELETED" class="label label-danger">{{beautyTip.StatusName}}</span>
+                                    <span ng-switch-when="ACTIVE" class="label label-primary">{{beautyTip.StatusName}}</span>
+                                </div>
+                            </td>
+                            <td class="mobile-hidden width15">
+                                <small class="action-label label label-info" ng-click="editBeuatyTip(beautyTip);"><i class="fa fa-pencil"></i> Edit</small>
+                                <small class="action-label label label-info" ng-click="deleteBeuatyTip(beautyTip);"><i class="fa fa-remove"></i> Delete</small>
+                                <small class="action-label label label-info" ng-click="activateBeuatyTip(beautyTip);">Activate</small>
+                            </td>
+                            <td class="mobileInfo">
+                                <i mobile-table-toggle class="fa fa-info-circle"></i>
+                                <div class="info-container hide">
+                                    <table>
+                                        <tr>
+                                            <td><b>Date</b></td>
+                                            <td>{{beautyTip.CreateDate | date:'dd/MM/yyyy'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Date</b></td>
+                                            <td>
+                                                <span class="animate-switch-container" ng-switch on="beautyTip.StatusCode">
+                                                    <span ng-switch-when="NEW" class="label label-success">{{beautyTip.StatusName}}</span>
+                                                    <span ng-switch-when="DELETED" class="label label-danger">{{beautyTip.StatusName}}</span>
+                                                    <span ng-switch-when="ACTIVE" class="label label-primary">{{beautyTip.StatusName}}</span>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-right">
+                                                <small class="action-label label label-info" ng-click="editBeuatyTip(beautyTip);"><i class="fa fa-pencil"></i> Edit</small>
+                                                <small class="action-label label label-info" ng-click="deleteBeuatyTip(beautyTip);"><i class="fa fa-remove"></i> Delete</small>
+                                                <small class="action-label label label-info" ng-click="activateBeuatyTip(beautyTip);">Activate</small>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="height:50px;" ng-show="beautyTipsGrid.Paging.Pages.length > 0">
                     <ul class="pagination pagination-sm no-margin pull-right">
                         <li ng-click="beautyTipsGrid.SetPage($event, 1)" ng-disabled="beautyTipsGrid.Paging.IsFirstPage"><a href="#">«</a></li>
                         <li ng-repeat="page in beautyTipsGrid.Paging.Pages" ng-click="beautyTipsGrid.SetPage($event, page)" ng-disabled="beautyTipsGrid.Paging.PageIndex==page"><a href="#">{{page}}</a></li>

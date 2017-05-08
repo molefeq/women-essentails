@@ -10,12 +10,13 @@
         var viewModel = $scope;
         var salonId = $stateParams.salonId
 
-        viewModel.isLoading = false;
+        $rootScope.isLoading = true;
+        $rootScope.loadingMessage = 'Loading data, please wait ...';
         viewModel.goToSalonDirections = goToSalonDirections;
         viewModel.searchSalonFactory = searchSalonFactory;
 
         viewModel.searchSalonFactory.initialise(salonId).then(function () {
-            viewModel.isLoading = false;
+            $rootScope.isLoading = false;
         });
 
         function goToSalonDirections() {

@@ -57,10 +57,10 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests
             StringBuilder sb = new StringBuilder();
 
             // Add email heading
-            sb.Append(string.Format("Dear {0} Admin.", "Women's Essentails"));
+            sb.Append(string.Format("Dear {0} Admin.", "Essentails for Women"));
             sb.Append("<br />");
             sb.Append("<br />");
-            sb.Append(string.Format("This Email serves a notification for a new request to join Women's Essentails, from the following entity."));
+            sb.Append(string.Format("This Email serves a notification for a new request to join Essentails for Women, from the following entity."));
             sb.Append("<br />");
             sb.Append("<br />");
             sb.Append(string.Format("Contact Name: {0} {1}", companyRequestDto.FirstName, companyRequestDto.LastName));

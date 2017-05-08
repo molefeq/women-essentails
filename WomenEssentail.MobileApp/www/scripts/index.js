@@ -33,11 +33,7 @@
     function switchOnGPSLocationServices() {
         cordova.plugins.diagnostic.isLocationAvailable(function (available) {
             if (!available) {
-                cordova.plugins.locationAccuracy.canRequest(function (canRequest) {
-                    if (canRequest) {
-                        cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
-                    }
-                });
+                cordova.plugins.locationAccuracy.request(onRequestSuccess, onRequestFailure, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
             }
             else {
                 loadGoogleMapsApi();

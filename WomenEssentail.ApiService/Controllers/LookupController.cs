@@ -10,6 +10,7 @@ using WomenEssentail.Common.DataTransferObjects;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Categories;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyTypes;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.ContactUss;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.DeviceDetails;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.SubCategories;
 
 namespace WomenEssentail.ApiService.Controllers
@@ -20,13 +21,17 @@ namespace WomenEssentail.ApiService.Controllers
         private readonly ISubCategoryManager subCategoryManager;
         private readonly ICategoryManager categoryManager;
         private readonly IContactUsManager contactUsManager;
+        private readonly IDeviceDetailsManager deviceDetailsManager;
 
-        public LookupController(ICompanyTypeManager companyTypeManager, ICategoryManager categoryManager, ISubCategoryManager subCategoryManager, IContactUsManager contactUsManager)
+        public LookupController(ICompanyTypeManager companyTypeManager, ICategoryManager categoryManager, 
+                                ISubCategoryManager subCategoryManager, IContactUsManager contactUsManager,
+                                IDeviceDetailsManager deviceDetailsManager)
         {
             this.companyTypeManager = companyTypeManager;
             this.categoryManager = categoryManager;
             this.subCategoryManager = subCategoryManager;
             this.contactUsManager = contactUsManager;
+            this.deviceDetailsManager = deviceDetailsManager;
         }
 
         [HttpPost]
@@ -70,5 +75,13 @@ namespace WomenEssentail.ApiService.Controllers
             contactUsDto.CrudStatus = CrudStatus.CREATE;
             return Request.CreateResponse<Response<ContactUsDto>>(HttpStatusCode.OK, contactUsManager.Save(contactUsDto));
         }
+
+        [HttpPost]
+        public HttpResponseMessage SaveDeviceDetails(DeviceDetailsDto deviceDetailsDto)
+        {
+            deviceDetailsDto.CrudStatus = CrudStatus.CREATE;
+            return Request.CreateResponse<Response<DeviceDetailsDto>>(HttpStatusCode.OK, deviceDetailsManager.Save(deviceDetailsDto));
+        }
+
     }
 }

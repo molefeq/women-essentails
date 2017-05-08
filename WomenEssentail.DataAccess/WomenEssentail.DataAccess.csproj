@@ -52,6 +52,7 @@
     <Compile Include="Repositories\AccountRoleRepository.cs" />
     <Compile Include="Repositories\AccountSummaryRepository.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
+    <Compile Include="Repositories\AppRatingRepository.cs" />
     <Compile Include="Repositories\BeautyTipRepository.cs" />
     <Compile Include="Repositories\CategoryRepository.cs" />
     <Compile Include="Repositories\CompanyFeedbackRepository.cs" />
@@ -65,6 +66,7 @@
     <Compile Include="Repositories\ContactUsRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\DashboardRepository.cs" />
+    <Compile Include="Repositories\DeviceDetailsRepository.cs" />
     <Compile Include="Repositories\ExternalAuthenticationTypeRepository.cs" />
     <Compile Include="Repositories\ModuleRepository.cs" />
     <Compile Include="Repositories\OrganisationRepository.cs" />

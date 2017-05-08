@@ -10,6 +10,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies
         CompanyDataObject GetCompanyData(string companyTypeCode);
         Result<CompanySummaryDto> GetCompanies(CompanySearchFilter companySearchFilter);
         Result<CompanySummaryDto> GetAppCompanies(CompanyAppSearchFilter companyAppSearchFilter);
+        Response<CompanyDto> UpdateCompanyStatus(BulkUpdateModel bulkUpdateModel);
         Response<CompanyDto> Save(CompanyDto companyDto);
     }
 }

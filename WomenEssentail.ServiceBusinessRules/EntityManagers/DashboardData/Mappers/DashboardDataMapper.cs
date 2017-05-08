@@ -67,7 +67,16 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.DashboardData.Mappe
                         continue;
                     }
 
-                    companyDto.Logos.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+                    string imageType = sqlDataReader["ImageType"].ToString();
+
+                    if (imageType == "Logo")
+                    {
+                        companyDto.Logo = CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader);
+                    }
+                    else
+                    {
+                        companyDto.Galleries.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
+                    }
                 }
             }
 

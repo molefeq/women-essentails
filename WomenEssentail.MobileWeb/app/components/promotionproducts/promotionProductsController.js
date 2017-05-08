@@ -89,7 +89,7 @@
             newScope.model = {
                 'ErrorCode': 408,
                 'ErrorHeader': 'Error retrieving location',
-                'ErrorDetails': 'Error retrieving location, please ensure that gps location is enabled. ' + 'Error Code: ' + error.code + 'Error Message: ' + error.message
+                'ErrorDetails': 'Error retrieving location, please ensure that gps location is enabled.'
             };
 
             notificationFactory.open({

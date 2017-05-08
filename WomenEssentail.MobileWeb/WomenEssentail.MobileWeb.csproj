@@ -76,6 +76,7 @@
     <Content Include="app\bundle.min.js">
       <DependentUpon>bundle.js</DependentUpon>
     </Content>
+    <Content Include="app\components\aboutus\aboutUsView.html" />
     <Content Include="app\components\beautytips\beautyTipsController.js" />
     <Content Include="app\components\beautytips\beautyTipsFactory.js" />
     <Content Include="app\components\beautytips\beautyTipsView.html" />
@@ -104,6 +105,10 @@
     <Content Include="app\components\salon\salonView.html" />
     <Content Include="app\components\services\servicesController.js" />
     <Content Include="app\components\services\servicesView.html" />
+    <Content Include="app\components\shareapp\shareAppController.js" />
+    <Content Include="app\components\shareapp\shareAppView.html" />
+    <Content Include="app\components\technicalreport\technicalReportController.js" />
+    <Content Include="app\components\technicalreport\technicalReportView.html" />
     <Content Include="app\constants.js" />
     <Content Include="app\shared\controllers\appController.js" />
     <Content Include="app\shared\directives\accessControlDirective.js" />
@@ -119,6 +124,7 @@
     <Content Include="app\shared\error\errorController.js" />
     <Content Include="app\shared\factories\appFactory.js" />
     <Content Include="app\shared\factories\appHttpInterceptorFactory.js" />
+    <Content Include="app\shared\factories\appRatingApiFactory.js" />
     <Content Include="app\shared\factories\companyApiFactory.js" />
     <Content Include="app\shared\factories\dashboardApiFactory.js" />
     <Content Include="app\shared\factories\errorFactory.js" />
@@ -244,6 +250,7 @@
     <Content Include="assets\libs\framework7\js\framework7.js.map" />
     <Content Include="assets\libs\framework7\js\framework7.min.js.map" />
     <Content Include="assets\css\bundle.less" />
+    <Content Include="assets\css\header-component.less" />
     <None Include="assets\libs\jquery\jquery-1.9.1.intellisense.js" />
     <Content Include="assets\libs\framework7\js\framework7.js" />
     <Content Include="assets\libs\framework7\js\framework7.min.js" />
@@ -253,6 +260,8 @@
     <Content Include="assets\libs\jquery\jquery-2.1.4.js" />
     <Content Include="assets\libs\jquery\jquery-2.1.4.min.js" />
     <Content Include="assets\libs\lodash\lodash.js" />
+    <Content Include="assets\libs\ngInfiniteScroll\ng-infinite-scroll.js" />
+    <Content Include="assets\libs\ngInfiniteScroll\ng-infinite-scroll.min.js" />
     <Content Include="assets\libs\onsenui\css-components-src\gulpfile.js" />
     <Content Include="assets\libs\onsenui\css-components-src\src\components\alert-dialog.css" />
     <Content Include="assets\libs\onsenui\css-components-src\src\components\button-bar.css" />
@@ -354,6 +363,9 @@
     <Content Include="assets\libs\ratchet-v2.0.2\fonts\ratchicons.ttf" />
     <Content Include="assets\libs\ratchet-v2.0.2\fonts\ratchicons.woff" />
     <None Include="bundleconfig.json" />
+    <Content Include="bundleconfig.json.bindings">
+      <DependentUpon>bundleconfig.json</DependentUpon>
+    </Content>
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>

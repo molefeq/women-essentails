@@ -36,6 +36,14 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.SubCategories.Mappe
             subCategoryDto.Name = sqlDataReader["Name"].ToString();
             subCategoryDto.Code = sqlDataReader["Code"].ToString();
             subCategoryDto.DisplayName = sqlDataReader["DisplayName"].ToString();
+            subCategoryDto.StatusId = sqlDataReader["StatusId"].ToInteger();
+            subCategoryDto.StatusName = sqlDataReader["StatusName"].ToString();
+            subCategoryDto.StatusCode = sqlDataReader["StatusCode"].ToString();
+            subCategoryDto.CreateUserId = sqlDataReader["CreateUserId"].ToInteger();
+            subCategoryDto.EditUserId = sqlDataReader["EditUserId"].ToInteger();
+            subCategoryDto.CreateDate = sqlDataReader["CreateDate"].ToDateTime();
+            subCategoryDto.EditDate = sqlDataReader["EditDate"].ToDateTime();
+
             subCategoryDto.CrudStatus = CrudStatus.UPDATE;
 
             return subCategoryDto;

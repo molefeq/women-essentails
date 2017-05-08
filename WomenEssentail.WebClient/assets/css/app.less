@@ -20,6 +20,21 @@ html {
             min-height: 100%;
             position: static;
             overflow: hidden;
+            height: 100%;
+
+            main {
+                height: 100%;
+
+                .viewsContainer {
+                    height: 100%;
+
+                    .content-wrapper {
+                        min-height: 100%;
+                        height: 100%;
+                        overflow-y: auto;
+                    }
+                }
+            }
 
             &:after {
                 content: " ";
@@ -80,6 +95,9 @@ html {
     }
 }
 
+[ng\:cloak], [ng-cloak], .ng-cloak {
+  display: none !important;
+}
 
 
 
@@ -142,4 +160,59 @@ html {
 
 .social-auth-links {
     margin: 10px 0;
+}
+
+#loadingmessage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter: alpha(opacity=70);
+    display: block;
+    z-index: 999;
+    opacity: 0.7;
+
+    > div {
+        margin-left: 0;
+        margin-right: -50%;
+        color: white;
+        font-size: 18px;
+        vertical-align: middle;
+        text-align: center;
+        display: table-cell;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        /* 2 */
+        top: 50%;
+        background: url('../img/loading-image.gif') no-repeat scroll 8px 100%;
+    }
+}
+
+
+
+@media screen and (max-width:817px) {
+    body {
+        .wrapper {
+            .content-header {
+                padding: 5px;
+            }
+
+            .content {
+                padding: 5px;
+
+                .add-button-row {
+                    display: block@i;
+                    width: 100%@i;
+                }
+
+                .btn-xs-full {
+                    width: 100%@i;
+                    margin-bottom: 5px;
+                }
+            }
+        }
+    }
 }

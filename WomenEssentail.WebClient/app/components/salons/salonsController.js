@@ -17,6 +17,9 @@
         viewModel.goToProducts = goToProducts;
         viewModel.goToUsers = goToUsers;
         viewModel.goHome = goHome;
+        viewModel.activateSalons = activateSalons;
+        viewModel.deactivateSalons = deactivateSalons;
+        viewModel.deleteSalons = deleteSalons;
 
         viewModel.SearchFilter = {
             PageData: {
@@ -35,7 +38,7 @@
             Read: function (options) {
                 var that = this;
 
-                $rootScope.isDataLoading = true;
+                $rootScope.isLoading = true;
                 $rootScope.loadingMessage = 'Loading data, please wait ...';
 
                 viewModel.SearchFilter.PageData.Take = options.take;
@@ -43,7 +46,7 @@
 
                 viewModel.salonsFactory.searchSalons(viewModel.SearchFilter).then(function (response) {
                     viewModel.salonsGrid.SetDataSource(response.Salons, response.TotalSalons);
-                    $rootScope.isDataLoading = false;
+                    $rootScope.isLoading = false;
                 });
             }
         };
@@ -115,6 +118,88 @@
 
         function goToUsers(salon) {
             $state.go('companyusers', { companyId: salon.Id });
+        };
+
+        function activateSalons() {
+            if (!viewModel.salonsFactory.selectedSalons || viewModel.salonsFactory.selectedSalons.length == 0) {
+                return;
+            };
+
+            $rootScope.isLoading = true;
+            $rootScope.loadingMessage = 'Activating salons, please wait ...';
+
+            viewModel.salonsFactory.activateSalons().then(function () {
+                viewModel.salonsGrid.SetPage(null, 1);
+            }, function () {
+                $rootScope.isLoading = false;
+                var newScope = $rootScope.$new();
+
+                newScope.model = {
+                    'ErrorCode': "404",
+                    'ErrorHeader': "Error Activating Salons",
+                    'ErrorDetails': "An error occurred while activating salons.",
+                };
+
+                $rootScope.$broadcast('server-error-occurred', {
+                    templateUrl: 'errortemplate.html',
+                    scope: newScope,
+                    size: 'sm'
+                });
+            });
+        };
+
+        function deactivateSalons() {
+            if (!viewModel.salonsFactory.selectedSalons || viewModel.salonsFactory.selectedSalons.length == 0) {
+                return;
+            };
+
+            $rootScope.isLoading = true;
+            $rootScope.loadingMessage = 'Deactivating salons, please wait ...';
+            viewModel.salonsFactory.deactivateSalons().then(function () {
+                viewModel.salonsGrid.SetPage(null, 1);
+            }, function () {
+                $rootScope.isLoading = false;
+                var newScope = $rootScope.$new();
+
+                newScope.model = {
+                    'ErrorCode': "404",
+                    'ErrorHeader': "Error Activating Salons",
+                    'ErrorDetails': "An error occurred while activating salons.",
+                };
+
+                $rootScope.$broadcast('server-error-occurred', {
+                    templateUrl: 'errortemplate.html',
+                    scope: newScope,
+                    size: 'sm'
+                });
+            });
+        };
+
+        function deleteSalons() {
+            if (!viewModel.salonsFactory.selectedSalons || viewModel.salonsFactory.selectedSalons.length == 0) {
+                return;
+            };
+
+            $rootScope.isLoading = true;
+            $rootScope.loadingMessage = 'Deleting salons, please wait ...';
+            viewModel.salonsFactory.deleteSalons().then(function () {
+                viewModel.salonsGrid.SetPage(null, 1);
+            }, function () {
+                $rootScope.isLoading = false;
+                var newScope = $rootScope.$new();
+
+                newScope.model = {
+                    'ErrorCode': "404",
+                    'ErrorHeader': "Error Deleting Salons",
+                    'ErrorDetails': "An error occurred while activating salons.",
+                };
+
+                $rootScope.$broadcast('server-error-occurred', {
+                    templateUrl: 'errortemplate.html',
+                    scope: newScope,
+                    size: 'sm'
+                });
+            });
         };
     };
 

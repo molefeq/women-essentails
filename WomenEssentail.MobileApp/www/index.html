@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <title>Women's Essentails App</title>
+    <title>Essentails for Women App</title>
 
     <link href="assets/libs/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="assets/libs/angular-toastr/angular-toastr.min.css" rel="stylesheet" />
@@ -14,7 +14,7 @@
 
     <link href="assets/css/bundle.min.css" rel="stylesheet" />
 </head>
-<body>
+<body style="position: static;top: 0;right: 0;bottom: 0;left: 0;font-size: 17px;line-height: 21px; color: #000;background-color: #fff;">
 
     <header ng-controller="appController"></header>
 
@@ -22,14 +22,22 @@
 
     </div>
 
-    <div ng-include="'app/shared/error/errorAlert.html'"></div>
-
-    <div id='loading-error' style="display:none">
-        <div class="modal">
-            <p id="error-header"></p>
-            <div id="error-message"></div>
+    <script type="text/ng-template" id="errortemplate.html">
+        <div class="modal-header">
+            <button class="close" aria-label="Close" type="button" ng-click="closeDialog()" data-dismiss="modal">
+                <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title">{{model.ErrorHeader}}</h4>
         </div>
-    </div>
+        <div class="modal-body dialog-content">
+            <div class="error-dialog-details">
+                <div>{{model.ErrorDetails}}</div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-danger pull-right" ng-click="closeDialog()" value="OK" />
+        </div>
+    </script>
 
     <script type="text/javascript" src="assets/libs/jquery/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
@@ -47,7 +55,7 @@
     <script type="text/javascript" src="assets/libs/lodash/lodash.js"></script>
     <script type="text/javascript" src="assets/libs/angular-simple-logger/angular-simple-logger.js"></script>
     <script type="text/javascript" src="assets/libs/angular-maps/angular-google-maps.js"></script>
-    <script type="text/javascript" src="assets/libs/ratchet-v2.0.2/js/ratchet.min.js"></script>
+    <script type="text/javascript" src="assets/libs/ngInfiniteScroll/ng-infinite-scroll.min.js"></script>
 
     <script type="text/javascript" src="app/bundle.min.js"></script>
     <script type="text/javascript" src="cordova.js"></script>

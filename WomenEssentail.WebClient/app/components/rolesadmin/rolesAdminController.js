@@ -33,7 +33,7 @@
             Read: function (options) {
                 var that = this;
 
-                $rootScope.isDataLoading = true;
+                $rootScope.isLoading = true;
                 $rootScope.loadingMessage = 'Loading data, please wait ...';
 
                 viewModel.SearchFilter.PageData.Take = options.take;
@@ -41,7 +41,7 @@
 
                 viewModel.rolesAdminFactory.getRoles(viewModel.SearchFilter).then(function (response) {
                     viewModel.rolesGrid.SetDataSource(viewModel.rolesAdminFactory.roles, viewModel.rolesAdminFactory.totalRoles);
-                    $rootScope.isDataLoading = false;
+                    $rootScope.isLoading = false;
                 });
             }
         };

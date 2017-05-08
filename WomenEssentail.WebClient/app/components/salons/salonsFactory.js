@@ -1,4 +1,7 @@
-﻿(function () {
+﻿/// <reference path="../../shared/objects/utils.js" />
+
+
+(function () {
 
     'use strict';
 
@@ -13,19 +16,28 @@
             salons: [],
             provinces: [],
             salon: {},
+            selectedSalons: [],
             companyTypeId: {},
             clearAll: clearAll,
             edit: edit,
             add: add,
             update: update,
             deleteSalon: deleteSalon,
-            uploadLogo: uploadLogo
+            uploadSalonImage: uploadSalonImage,
+            uploadSalonLogo: uploadSalonLogo,
+            setSelectedSalon: setSelectedSalon,
+            activateSalons: activateSalons,
+            deactivateSalons: deactivateSalons,
+            deleteSalons: deleteSalons,
+            selectAll: selectAll
         };
 
         return factory;
 
         function initialise() {
             var deferred = $q.defer();
+
+            factory.selectedSalons = [];
 
             lookupApiFactory.getCompanyTypes({ PageData: { IncludeAllData: true } }).then(function (response) {
                 for (var i = 0; i < response.Items.length; i++) {
@@ -44,7 +56,13 @@
         function searchSalons(searchFilter) {
             var deferred = $q.defer();
 
+            factory.selectedSalons = [];
+
             companyApiFactory.getCompanies(searchFilter).then(function (data) {
+                for (var i = 0; i < data.Companies.length; i++) {
+                    data.Companies[i].IsSelected = false;
+                }
+
                 factory.salons = data.Companies;
                 factory.salon = {};
                 deferred.resolve({ Salons: data.Companies, TotalSalons: data.TotalCompanies });
@@ -54,6 +72,7 @@
         };
 
         function clearAll() {
+            factory.selectedSalons = [];
             factory.salons = [];
             factory.salon = {};
         };
@@ -64,8 +83,8 @@
             companyApiFactory.getCompany(salonId).then(function (data) {
                 factory.salon = data.Company;
 
-                for (var i = 0; i < factory.salon.Logos.length; i++) {
-                    factory.salon.Logos[i].id = i + 1;
+                for (var i = 0; i < factory.salon.Galleries.length; i++) {
+                    factory.salon.Galleries[i].id = i + 1;
                 }
 
                 deferred.resolve();
@@ -107,25 +126,45 @@
             return deferred.promise;
         };
 
-        function uploadLogo(files) {
+        function uploadSalonLogo(files) {
+            var deferred = $q.defer();
+            var promises = [];
+
+            companyApiFactory.saveCompanyLogo(files[0], inProgressFunction).then(function (data) {
+                factory.salon.Logo = {
+                    Logo: data.CompanyImage.ImageFileName,
+                    ImageType: 'Logo',
+                    NormalRelativeFileName: data.CompanyImage.ImageFileNamePath,
+                    ThumbnailRelativeFileName: data.CompanyImage.ImageFileNamePath,
+                    PreviewRelativeFileName: data.CompanyImage.ImageFileNamePath
+                };
+
+                deferred.resolve();
+            });
+
+            return deferred.promise;
+        };
+
+        function uploadSalonImage(files) {
             var deferred = $q.defer();
             var promises = [];
 
             for (var i = 0; i < files.length; i++) {
-                promises.push(companyApiFactory.saveCompanyLogo(files[i], inProgressFunction));
+                promises.push(companyApiFactory.saveCompanyImage(files[i], inProgressFunction));
             }
 
             $q.all(promises).then(function (data) {
-                if (!factory.salon.Logos) {
-                    factory.salon.Logos = [];
+                if (!factory.salon.Galleries) {
+                    factory.salon.Galleries = [];
                 }
 
-                var logoStartIndex = factory.salon.Logos.length + 1;
+                var logoStartIndex = factory.salon.Galleries.length + 1;
 
                 for (var j = 0; j < data.length; j++) {
-                    factory.salon.Logos.push({
+                    factory.salon.Galleries.push({
                         id: logoStartIndex + j,
                         Logo: data[j].CompanyImage.ImageFileName,
+                        ImageType: 'GALLERY',
                         NormalRelativeFileName: data[j].CompanyImage.ImageFileNamePath,
                         ThumbnailRelativeFileName: data[j].CompanyImage.ImageFileNamePath,
                         PreviewRelativeFileName: data[j].CompanyImage.ImageFileNamePath
@@ -140,6 +179,113 @@
         function inProgressFunction(event) {
             var progressPercentage = parseInt(100.0 * event.loaded / event.total);
             console.log('progress: ' + progressPercentage + '% ' + event.config.file.name);
+        };
+
+        function selectAll(salons, selectAll) {
+            for (var i = 0; i < salons.length; i++) {
+                var indexOfSalon = app.Utils.indexOf(factory.selectedSalons, salons[i].Id, "Id");
+
+                salons[i].IsSelected = selectAll;
+
+                if (selectAll && indexOfSalon < 0) {
+                    factory.selectedSalons.push(salons[i]);
+                }
+
+                if (!selectAll && indexOfSalon >= 0) {
+                    factory.selectedSalons.splice(indexOdSalon, 1);
+                }
+            }
+        };
+
+        function setSelectedSalon(salon) {
+            var indexOfSalon = app.Utils.indexOf(factory.selectedSalons, salon.Id, "Id");
+
+            if (salon.IsSelected && indexOfSalon < 0) {
+                factory.selectedSalons.push(salon);
+            }
+
+            if (!salon.IsSelected && indexOfSalon >= 0) {
+                factory.selectedSalons.splice(indexOdSalon, 1);
+            }
+        };
+
+        function activateSalons() {
+            if (!factory.selectedSalons || factory.selectedSalons.length == 0) {
+                return;
+            };
+
+            var deferred = $q.defer();
+
+            var model = {
+                StatusCode: 'ACTIVE',
+                Ids: getSelectedSalonsId()
+            };
+
+            companyApiFactory.updateCompanyStatus(model).then(function () {
+                factory.selectedSalons = [];
+                deferred.resolve();
+            }, function () {
+                deferred.reject();
+            });
+
+            return deferred.promise;
+        };
+
+        function deactivateSalons() {
+            if (!factory.selectedSalons || factory.selectedSalons.length == 0) {
+                return;
+            };
+
+            var deferred = $q.defer();
+
+            var model = {
+                StatusCode: 'INACTIVE',
+                Ids: getSelectedSalonsId()
+            };
+
+            companyApiFactory.updateCompanyStatus(model).then(function () {
+                factory.selectedSalons = [];
+                deferred.resolve();
+            }, function () {
+                deferred.reject();
+            });
+
+            return deferred.promise;
+        };
+
+        function deleteSalons() {
+            if (!factory.selectedSalons || factory.selectedSalons.length == 0) {
+                return;
+            };
+            var deferred = $q.defer();
+
+            var model = {
+                StatusCode: 'DELETED',
+                Ids: getSelectedSalonsId()
+            };
+
+            companyApiFactory.updateCompanyStatus(model).then(function () {
+                factory.selectedSalons = [];
+                deferred.resolve();
+            }, function () {
+                deferred.reject();
+            });
+
+            return deferred.promise;
+        };
+
+        function getSelectedSalonsId() {
+            var ids = [];
+
+            if (!factory.selectedSalons || factory.selectedSalons.length == 0) {
+                return ids;
+            };
+
+            for (var i = 0; i < factory.selectedSalons.length; i++) {
+                ids.push(factory.selectedSalons[i].Id);
+            }
+
+            return ids;
         };
     };
 

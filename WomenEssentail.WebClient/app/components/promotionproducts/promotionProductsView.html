@@ -1,66 +1,104 @@
-﻿<div class="content-wrapper" style="min-height: 873px;">
+﻿<div class="content-wrapper">
     <section class="content-header">
         <h1>
             {{promotionProductsFactory.product.Name}} Promotions
         </h1>
         <ol class="breadcrumb">
             <li access-control module="home"><a href="#" ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
-            <li access-control module="salons"><a href="#" ng-click="goToSalons($event);"><i class="fa fa-"></i> Salons</a></li>
+            <li access-control module="companies"><a href="#" ng-click="goToSalons($event);"><i class="fa fa-"></i> Salons</a></li>
             <li access-control module="products"><a href="#" ng-click="goToProducts($event);"><i class="fa fa-"></i> Products</a></li>
         </ol>
     </section>
 
     <section class="content">
-
-        <div class="col-xs-12">
-            <div class="box">
-                <div class="box-header">
-                    <!--<h3 class="box-title">Salons</h3>-->
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary pull-left" access-control module="promotionproducts" ng-click="addPromotionProduct()"><i class="fa fa-plus"></i></button>
-                    </div>
-                    <div class="box-tools">
-                        <div class="input-group">
-                            <input name="table_search" class="form-control input-sm pull-right" style="width: 250px;" type="text" placeholder="Search" ng-model="SearchFilter.SearchText">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-default" ng-click="searchPromotionProducts()"><i class="fa fa-search"></i></button>
-                            </div>
+        <div class="box">
+            <div class="box-header">
+                <!--<h3 class="box-title">Salons</h3>-->
+                <div class="input-group-btn hidden-xs">
+                    <button class="btn btn-primary pull-left" access-control module="promotionproducts" ng-click="addPromotionProduct()"><i class="fa fa-plus"></i></button>
+                </div>
+                <div class="box-tools">
+                    <div class="input-group">
+                        <input name="table_search" class="form-control input-sm pull-right" style="width: 250px;" type="text" placeholder="Search" ng-model="SearchFilter.SearchText">
+                        <div class="input-group-btn">
+                            <button class="btn btn-sm btn-default" ng-click="searchPromotionProducts()"><i class="fa fa-search"></i></button>
                         </div>
                     </div>
-                </div><!-- /.box-header -->
-                <div class="box-body table-responsive no-padding" app-grid="promotionProductsGrid" app-grid-options="promotionProductsGridOptions">
-                    <table class="table table-hover">
-                        <tbody>
-                            <tr>
-                                <th>Name</th>
-                                <th>Price</th>
-                                <th>Start Date</th>
-                                <th>End Date</th>
-                                <th>Status</th>
-                                <th>Actions</th>
-                            </tr>
-                            <tr ng-repeat="promotionProduct in promotionProductsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
-                                <td>{{promotionProduct.Name}}</td>
-                                <td>{{promotionProduct.Price}}</td>
-                                <td>{{promotionProduct.StartDate | date:'dd/MM/yyyy'}}</td>
-                                <td>{{promotionProduct.EndDate | date:'dd/MM/yyyy'}}</td>
-                                <td>
-                                    <div class="animate-switch-container" ng-switch on="promotionProduct.StatusCode">
-                                        <span ng-switch-when="NEW" class="label label-success">{{promotionProduct.StatusName}}</span>
-                                        <span ng-switch-when="DELETED" class="label label-danger">{{promotionProduct.StatusName}}</span>
-                                        <span ng-switch-when="ACTIVE" class="label label-primary">{{promotionProduct.StatusName}}</span>
-                                        <span ng-switch-when="INACTIVE" class="label label-warning">{{promotionProduct.StatusName}}</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <small class="action-label label label-info" access-control module="promotionproducts" ng-click="editPromotionProduct(promotionProduct);"><i class="fa fa-pencil"></i> Edit</small>
-                                    <small class="action-label label label-info" access-control module="promotionproducts" ng-click="deletePromotionProduct(promotionProduct);"><i class="fa fa-remove"></i> Delete</small>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div><!-- /.box-body -->
-                <div class="box-footer clearfix" ng-show="promotionProductsGrid.Paging.Pages.length > 0">
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body" app-grid="promotionProductsGrid" app-grid-options="promotionProductsGridOptions" style="margin-top: 10px; margin-bottom: 30px;">
+                <div class="row visible-xs" style="margin-top: 10px; margin-bottom: 5px;">
+                    <div class="col-xs-12">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary pull-left" access-control module="promotionproducts" ng-click="addPromotionProduct()"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-hover table-striped tableContainer">
+                    <tbody>
+                        <tr>
+                            <th class="width30 xs-width60">Name</th>
+                            <th class="width10 xs-width30">Price</th>
+                            <th class="mobile-hidden width10">Start Date</th>
+                            <th class="mobile-hidden width10">End Date</th>
+                            <th class="mobile-hidden width10">Status</th>
+                            <th class="mobile-hidden width15">Actions</th>
+                            <th class="mobileInfo"></th>
+                        </tr>
+                        <tr ng-repeat="promotionProduct in promotionProductsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
+                            <td class="width30 xs-width60">{{promotionProduct.Name}}</td>
+                            <td class="width10 xs-width30">R {{promotionProduct.Price| number:2}}</td>
+                            <td class="mobile-hidden width10">{{promotionProduct.StartDate | date:'dd/MM/yyyy'}}</td>
+                            <td class="mobile-hidden width15">{{promotionProduct.EndDate | date:'dd/MM/yyyy'}}</td>
+                            <td class="mobile-hidden width10">
+                                <div class="animate-switch-container" ng-switch on="promotionProduct.StatusCode">
+                                    <span ng-switch-when="NEW" class="label label-success">{{promotionProduct.StatusName}}</span>
+                                    <span ng-switch-when="DELETED" class="label label-danger">{{promotionProduct.StatusName}}</span>
+                                    <span ng-switch-when="ACTIVE" class="label label-primary">{{promotionProduct.StatusName}}</span>
+                                    <span ng-switch-when="INACTIVE" class="label label-warning">{{promotionProduct.StatusName}}</span>
+                                </div>
+                            </td>
+                            <td class="mobile-hidden width15">
+                                <small class="action-label label label-info" access-control module="promotionproducts" ng-click="editPromotionProduct(promotionProduct);"><i class="fa fa-pencil"></i> Edit</small>
+                                <small class="action-label label label-info" access-control module="promotionproducts" ng-click="deletePromotionProduct(promotionProduct);"><i class="fa fa-remove"></i> Delete</small>
+                            </td>
+                            <td class="mobileInfo">
+                                <i mobile-table-toggle class="fa fa-info-circle"></i>
+                                <div class="info-container hide">
+                                    <table>
+                                        <tr>
+                                            <td><b>Start Date</b></td>
+                                            <td>{{promotionProduct.StartDate | date:'dd/MM/yyyy'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>End Date</b></td>
+                                            <td>{{promotionProduct.EndDate | date:'dd/MM/yyyy'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Status</b></td>
+                                            <td>
+                                                <span class="animate-switch-container" ng-switch on="promotionProduct.StatusCode">
+                                                    <span ng-switch-when="NEW" class="label label-success">{{promotionProduct.StatusName}}</span>
+                                                    <span ng-switch-when="DELETED" class="label label-danger">{{promotionProduct.StatusName}}</span>
+                                                    <span ng-switch-when="ACTIVE" class="label label-primary">{{promotionProduct.StatusName}}</span>
+                                                    <span ng-switch-when="INACTIVE" class="label label-warning">{{promotionProduct.StatusName}}</span>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-right">
+                                                <small class="action-label label label-info" access-control module="promotionproducts" ng-click="editPromotionProduct(promotionProduct);"><i class="fa fa-pencil"></i> Edit</small>
+                                                <small class="action-label label label-info" access-control module="promotionproducts" ng-click="deletePromotionProduct(promotionProduct);"><i class="fa fa-remove"></i> Delete</small>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="height:50px;" ng-show="promotionProductsGrid.Paging.Pages.length > 0">
                     <ul class="pagination pagination-sm no-margin pull-right">
                         <li ng-click="promotionProductsGrid.SetPage($event, 1)" ng-disabled="promotionProductsGrid.Paging.IsFirstPage"><a href="#">«</a></li>
                         <li ng-repeat="page in promotionProductsGrid.Paging.Pages" ng-click="promotionProductsGrid.SetPage($event, page)" ng-disabled="promotionProductsGrid.Paging.PageIndex==page"><a href="#">{{page}}</a></li>

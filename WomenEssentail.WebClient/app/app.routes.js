@@ -154,6 +154,14 @@ var app = app || {};
                 home: 'home'
             }
         })
+        .state('servicesadmin', {
+            url: "/servicesadmin",
+            templateUrl: "app/components/subcategory/subCategoryView.html",
+            controller: 'subCategoryController',
+            sessionState: {
+                home: 'home'
+            }
+        })
         .state('salonrequests', {
             url: "/salonrequests",
             templateUrl: "app/components/companyrequests/companyRequestsView.html",
@@ -162,6 +170,22 @@ var app = app || {};
                 home: 'home',
                 moduleOrder: 3,
                 modules:['CompanyRequests']
+            }
+        })
+        .state('specials', {
+            url: "/specials",
+            templateUrl: "app/components/searchpromotionproducts/searchPromotionProductsView.html",
+            controller: 'searchPromotionProductsController',
+            sessionState: {
+                home: 'home'
+            }
+        })
+        .state('searchbeautytips', {
+            url: "/searchbeautytips",
+            templateUrl: "app/components/searchbeautytips/searchBeautyTipsView.html",
+            controller: 'searchBeautyTipsController',
+            sessionState: {
+                home: 'home'
             }
         });
     };

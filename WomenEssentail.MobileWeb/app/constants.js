@@ -27,9 +27,11 @@ var menus = {
 };
 var anonymousStates = { 'login': true, 'forgotpassword': true, 'resetpassword': true, 'changepassword': true };
 
-angular.module('app').constant('ServerBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/');
-//angular.module('app').constant('ServerBaseUrl', 'http://localhost:55464/');
-//angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:55464/api/');
-angular.module('app').constant('ServerApiBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/api/');
+angular.module('app').constant('ServerBaseUrl', 'https://essentials4women.co.za/');
+//angular.module('app').constant('ServerBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/');
+//angular.module('app').constant('ServerBaseUrl', 'http://localhost:64707/');
+//angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:64707/api/');
+//angular.module('app').constant('ServerApiBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/api/');
+angular.module('app').constant('ServerApiBaseUrl', 'https://essentials4women.co.za/api/');
 angular.module('app').constant('SubMenuItems', menus);
 angular.module('app').constant('AnonymousStates', anonymousStates);

@@ -54,6 +54,7 @@
     <Compile Include="DataFilters\ProductSearchFilter.cs" />
     <Compile Include="DataFilters\SearchFilter.cs" />
     <Compile Include="DataFilters\SubCategorySearchFilter.cs" />
+    <Compile Include="DataHelper\BulkUpdateModel.cs" />
     <Compile Include="DataHelper\CompanyDataObject.cs" />
     <Compile Include="DataHelper\ImageInformation.cs" />
     <Compile Include="DataHelper\ImageModel.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="DataTransferObjects\AccountRoleDto.cs" />
     <Compile Include="DataTransferObjects\AccountSummaryDto.cs" />
     <Compile Include="DataTransferObjects\AddressDto.cs" />
+    <Compile Include="DataTransferObjects\AppRatingDto.cs" />
     <Compile Include="DataTransferObjects\BeautyTipDto.cs" />
     <Compile Include="DataTransferObjects\CategoryDto.cs" />
     <Compile Include="DataTransferObjects\ChangePasswordDto.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="DataTransferObjects\ContactUsDto.cs" />
     <Compile Include="DataTransferObjects\CountryDto.cs" />
     <Compile Include="DataTransferObjects\DashboardDataDto.cs" />
+    <Compile Include="DataTransferObjects\DeviceDetailsDto.cs" />
     <Compile Include="DataTransferObjects\ExternalAuthenticationTypeDto.cs" />
     <Compile Include="DataTransferObjects\ModuleDto.cs" />
     <Compile Include="DataTransferObjects\OrganisationDto.cs" />

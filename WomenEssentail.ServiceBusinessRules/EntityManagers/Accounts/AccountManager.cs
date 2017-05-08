@@ -103,7 +103,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts
             StringBuilder sb = new StringBuilder();
 
             // Add email heading
-            sb.Append(string.Format("Dear {0} User.", "Women's Essentails"));
+            sb.Append(string.Format("Dear {0} User.", "Essentails for Women"));
             sb.Append("<br />");
             sb.Append("<br />");
             sb.Append(string.Format("This Email confirms that your unique profile has been created with the following credentials."));
@@ -144,7 +144,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts
             StringBuilder sb = new StringBuilder();
 
             // Add email heading
-            sb.Append(string.Format("Dear {0} User.", "Women's Essentails"));
+            sb.Append(string.Format("Dear {0} User.", "Essentails for Women"));
             sb.Append("<br />");
             sb.Append("<br />");
             sb.Append(string.Format("This Email confirms that you have requested a password reset please click the below link to reset your password."));

@@ -8,14 +8,17 @@
 
     function SalonsController($scope, $rootScope, $state, salonsFactory, salonDirectionFactory, lookupApiFactory, notificationFactory) {
         var viewModel = $scope;
+        var page = 1;
 
         $rootScope.isLoading = false;
+        viewModel.isBusy = true;
         viewModel.salonsFactory = salonsFactory;
         viewModel.searchSalons = searchSalons;
         viewModel.goToSalon = goToSalon;
         viewModel.goToMain = goToMain;
         viewModel.goToSalonDirection = goToSalonDirection;
         viewModel.subCategories = [];
+        viewModel.nextPage = nextPage;
 
         viewModel.SearchFilter = {
             PageData: {
@@ -27,13 +30,31 @@
             IsLocationSearch: true
         };
 
-        searchSalons();
+        initialise();
 
-        function searchSalons() {
+        function initialise() {
             $rootScope.isLoading = true;
-
+            page = 0;
+            viewModel.salonsFactory.salons = [];
             navigator.geolocation.getCurrentPosition(locationSuccess, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
         };
+
+        function searchSalons(isClear) {
+            viewModel.isBusy = true;
+            $rootScope.isLoading = true;
+
+            if (isClear) {
+                viewModel.salonsFactory.salons = [];
+            };
+            viewModel.salonsFactory.searchSalons(viewModel.SearchFilter).then(function (response) {
+                viewModel.isBusy = false;
+                $rootScope.isLoading = false;
+                console.log(viewModel.isBusy);
+            }, function () {
+                viewModel.isBusy = false;
+                $rootScope.isLoading = false;
+            });
+        }
 
         function goToMain(e) {
             e.preventDefault();
@@ -96,12 +117,9 @@
             viewModel.SearchFilter.Longitude = position.coords.longitude;
 
             lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (data) {
+                $rootScope.isLoading = false;
                 viewModel.subCategories = data.Items;
-                viewModel.salonsFactory.searchSalons(viewModel.SearchFilter).then(function (response) {
-                    $rootScope.isLoading = false;
-                }, function () {
-                    $rootScope.isLoading = false;
-                });
+                nextPage();
             }, function () {
                 $rootScope.isLoading = false;
             });
@@ -122,6 +140,12 @@
                 size: 'sm',
                 controller: errorController
             });
+        };
+
+        function nextPage() {
+            page = page + 1;
+            viewModel.SearchFilter.PageData.Skip = viewModel.SearchFilter.PageData.Take * (page - 1);
+            searchSalons();
         };
     };
 

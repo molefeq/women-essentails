@@ -10,16 +10,18 @@
         var factory = {
             searchSalons: searchSalons,
             searchFilter: {},
-            salons:[]
+            salons: []
         };
 
         return factory;
-        
+
         function searchSalons(searchFilter) {
             var deferred = $q.defer();
 
             companyApiFactory.getCompanies(searchFilter).then(function (data) {
-                factory.salons = data.Companies;
+                for (var i = 0; i < data.Companies.length; i++) {
+                    factory.salons.push(data.Companies[i]);
+                }
                 deferred.resolve();
             });
 

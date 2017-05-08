@@ -10,7 +10,8 @@
         var factory = {
             getCompanyTypes: getCompanyTypes,
             getSubCategories: getSubCategories,
-            getContactDetails: getContactDetails
+            getContactDetails: getContactDetails,
+            saveDeviceDetails: saveDeviceDetails
         };
 
         return factory;
@@ -49,6 +50,22 @@
             })
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
+            });
+
+            return deferred.promise;
+        };
+
+        function saveDeviceDetails(model) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'Post',
+                url: ServerApiBaseUrl + 'Lookup/SaveDeviceDetails',
+                data: model
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({DeviceDetail: data.Item});
             });
 
             return deferred.promise;

@@ -7,8 +7,8 @@ var app = app || {};
         launchnavigator.navigate([destinationPosition.latitude, destinationPosition.longitude], {
             start: [sourcePosition.latitude, sourcePosition.longitude],
             app: app,
-            transportMode: launchnavigator.LAUNCH_MODE.TURN_BY_TURN,
-            launchMode : launchnavigator.TRANSPORT_MODE.DRIVING
+            transportMode:launchnavigator.TRANSPORT_MODE.DRIVING,
+            launchMode: launchnavigator.LAUNCH_MODE.MAPS
         });
     };
 

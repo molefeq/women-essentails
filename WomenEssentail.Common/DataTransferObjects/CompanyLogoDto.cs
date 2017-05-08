@@ -13,6 +13,9 @@ namespace WomenEssentail.Common.DataTransferObjects
         [CustomSqlValueDataTypeAttribute(true, "CompanyId", typeof(int))]
         public int CompanyId { get; set; }
 
+        [CustomSqlValueDataTypeAttribute(true, "ImageType", typeof(string))]
+        public string ImageType { get; set; }
+
         [CustomSqlValueDataTypeAttribute(true, "Logo", typeof(string))]
         public string Logo { get; set; }
 

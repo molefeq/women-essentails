@@ -24,8 +24,12 @@
         };
 
         function initialise() {
+            $rootScope.isLoading = true;
+            $rootScope.loadingMessage = 'Loading data, please wait ...';
+
             dashboardApiFactory.getData().then(function (data) {
                 viewModel.model = data.Dashboard;
+                $rootScope.isLoading = false;
             });
         }
         function goToProducts(salon) {

@@ -32,7 +32,7 @@
             Read: function (options) {
                 var that = this;
 
-                $rootScope.isDataLoading = true;
+                $rootScope.isLoading = true;
                 $rootScope.loadingMessage = 'Loading data, please wait ...';
 
                 viewModel.SearchFilter.PageData.Take = options.take;
@@ -40,7 +40,7 @@
 
                 companyRequestApiFactory.getCompanyRequests(viewModel.SearchFilter).then(function (response) {
                     viewModel.requestsGrid.SetDataSource(response.CompanyRequests, response.TotalCompanyRequests);
-                    $rootScope.isDataLoading = false;
+                    $rootScope.isLoading = false;
                 });
             }
         };
@@ -52,11 +52,11 @@
         });
 
         viewModel.$on('salon-updated', function (event, data) {
-            $rootScope.isDataLoading = true;
+            $rootScope.isLoading = true;
             viewModel.request.StatusCode = 'COMPLETED';
 
             companyRequestApiFactory.updateCompanyRequest(request).then(function (response) {
-                $rootScope.isDataLoading = false;
+                $rootScope.isLoading = false;
                 viewModel.request = {};
                 search();
             });
@@ -88,11 +88,11 @@
         };
 
         function declineRequest(request) {
-            $rootScope.isDataLoading = true;
+            $rootScope.isLoading = true;
             request.StatusCode = 'DECLINED';
 
             companyRequestApiFactory.updateCompanyRequest(request).then(function (response) {
-                $rootScope.isDataLoading = false;
+                $rootScope.isLoading = false;
                 viewModel.request = {};
                 search();
             });

@@ -39,7 +39,7 @@
             Read: function (options) {
                 var that = this;
 
-                $rootScope.isDataLoading = true;
+                $rootScope.isLoading = true;
                 $rootScope.loadingMessage = 'Loading data, please wait ...';
 
                 viewModel.SearchFilter.PageData.Take = options.take;
@@ -47,7 +47,7 @@
 
                 viewModel.companyUsersFactory.getUsers(viewModel.SearchFilter).then(function (response) {
                     viewModel.companyUsersGrid.SetDataSource(viewModel.companyUsersFactory.users, viewModel.companyUsersFactory.totalUsers);
-                    $rootScope.isDataLoading = false;
+                    $rootScope.isLoading = false;
                 });
             }
         };

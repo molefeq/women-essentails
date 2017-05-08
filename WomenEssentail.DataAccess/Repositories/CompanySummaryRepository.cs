@@ -39,6 +39,7 @@ namespace WomenEssentail.DataAccess.Repositories
             sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Latitude", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Decimal, ParameterValue = companyAppSearchFilter.Latitude });
             sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Longitude", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Decimal, ParameterValue = companyAppSearchFilter.Longitude });
             sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "SubCategoryId", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Integer, ParameterValue = companyAppSearchFilter.SubCategoryId });
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "DeviceId", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companyAppSearchFilter.DeviceId });
             sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "SearchText", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companyAppSearchFilter.SearchText });
 
             return companyMapper(CommandTypeManager.ExecuteReader("CompaniesAppFetch", sqlQueryParameters.ToArray()));

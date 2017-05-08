@@ -174,6 +174,10 @@
     <Content Include="app\components\salons\salonsController.js" />
     <Content Include="app\components\salons\salonsFactory.js" />
     <Content Include="app\components\salons\salonsView.html" />
+    <Content Include="app\components\searchbeautytips\searchBeautyTipsController.js" />
+    <Content Include="app\components\searchbeautytips\searchBeautyTipsView.html" />
+    <Content Include="app\components\searchpromotionproducts\searchPromotionProductsController.js" />
+    <Content Include="app\components\searchpromotionproducts\searchPromotionProductsView.html" />
     <Content Include="app\components\searchsalondirections\searchSalonDirectionsController.js" />
     <Content Include="app\components\searchsalondirections\searchSalonDirectionsView.html" />
     <Content Include="app\components\searchsalons\searchSalonsController.js" />
@@ -182,6 +186,11 @@
     <Content Include="app\components\searchsalon\searchSalonController.js" />
     <Content Include="app\components\searchsalon\searchSalonFactory.js" />
     <Content Include="app\components\searchsalon\searchSalonView.html" />
+    <Content Include="app\components\subcategory\Modals\saveSubCategoryModalView.html" />
+    <Content Include="app\components\subcategory\Modals\subCategoryModalController.js" />
+    <Content Include="app\components\subcategory\subCategoryController.js" />
+    <Content Include="app\components\subcategory\subCategoryFactory.js" />
+    <Content Include="app\components\subcategory\subCategoryView.html" />
     <Content Include="app\components\userprofile\userProfileController.js" />
     <Content Include="app\components\userprofile\userProfileFactory.js" />
     <Content Include="app\components\userprofile\userProfileView.html" />
@@ -196,9 +205,11 @@
     <Content Include="app\shared\directives\appSubFormDirective.js" />
     <Content Include="app\shared\directives\appTabsValidatorDirective.js" />
     <Content Include="app\shared\directives\appValidatorDirective.js" />
+    <Content Include="app\shared\directives\mobileTableToggleDirective.js" />
     <Content Include="app\shared\error\errorAlert.html" />
     <Content Include="app\shared\error\errorController.js" />
     <Content Include="app\shared\factories\accountApiFactory.js" />
+    <Content Include="app\shared\factories\appRatingApiFactory.js" />
     <Content Include="app\shared\factories\beautyTipApiFactory.js" />
     <Content Include="app\shared\factories\companyApiFactory.js" />
     <Content Include="app\shared\factories\companyRequestApiFactory.js" />
@@ -213,6 +224,7 @@
     <Content Include="app\shared\factories\productApiFactory.js" />
     <Content Include="app\shared\factories\promotionProductApiFactory.js" />
     <Content Include="app\shared\factories\roleApiFactory.js" />
+    <Content Include="app\shared\factories\subCategoryApiFactory.js" />
     <Content Include="app\shared\factories\utilsFactory.js" />
     <Content Include="app\shared\filters\percentageFormat.js" />
     <Content Include="app\shared\objects\customgrid.js" />
@@ -233,6 +245,7 @@
     <Content Include="assets\css\modals.min.css">
       <DependentUpon>modals.css</DependentUpon>
     </Content>
+    <Content Include="assets\img\loading-image.gif" />
     <Content Include="assets\libs\angular-maps\angular-google-maps.js" />
     <Content Include="assets\libs\angular-simple-logger\angular-simple-logger.js" />
     <Content Include="assets\libs\angular\angularjs-geolocation.min.js" />
@@ -359,6 +372,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="app\components\shareapp\" />
     <Folder Include="assets\libs\lodash\" />
   </ItemGroup>
   <PropertyGroup>

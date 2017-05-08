@@ -1,6 +1,7 @@
 ﻿using SimpleInjector;
 
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Accounts;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.AppRatings;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.BeautyTips;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Categories;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Companies;
@@ -10,6 +11,7 @@ using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyRequests;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyTypes;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.ContactUss;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.DashboardData;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.DeviceDetails;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Modules;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Organisations;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Products;
@@ -39,6 +41,8 @@ namespace WomenEssentail.ServiceBusinessRules.Factories
             container.Register<ICompanyRatingManager, CompanyRatingManager>(Lifestyle.Singleton);
             container.Register<IBeautyTipManager, BeautyTipManager>(Lifestyle.Singleton);
             container.Register<IContactUsManager, ContactUsManager>(Lifestyle.Singleton);
+            container.Register<IDeviceDetailsManager, DeviceDetailsManager>(Lifestyle.Singleton);
+            container.Register<IAppRatingManager, AppRatingManager>(Lifestyle.Singleton);
         }        
     }
 }

@@ -13,21 +13,35 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12 col-sm-12 col-xs-12">
-                        <div class="col-md-3 col-sm-4 col-xs-12" ng-repeat="companyLogo in salonsFactory.salon.Logos" style="margin-bottom:5px;">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div style="margin-bottom:5px; max-width:150px; display:inline-block;">
                             <div class="col-md-12 col-sm-12 col-xs-12">
-                                <img ng-attr-src="{{companyLogo.PreviewRelativeFileName}}" class="img-responsive pull-left">
-                                <div class="col-md-12 col-sm-12 col-xs-12">
-                                    <a class="text-center" ng-click="removeImage(companyLogo.id)">
-                                        <i class="fa fa-remove" aria-hidden="true"></i>
-                                    </a>
-                                </div>
+                                <img ng-attr-src="{{salonsFactory.salon.Logo.NormalRelativeFileName}}" class="img-thumbnail img-responsive">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row text-center">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <a class="addItemButton" ng-file-select ng-file-change="uploadLogo($files)">
+                                <i class="fa fa-upload" aria-hidden="true"></i>Upload Logo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 text-center">
+                        <div ng-repeat="companyLogo in salonsFactory.salon.Galleries" style="margin:5px; max-width:150px; display:inline-block;">
+                            <img ng-attr-src="{{companyLogo.PreviewRelativeFileName}}" class="img-responsive img-thumbnail">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a class="text-center" style="cursor:pointer;" ng-click="removeImage(companyLogo.id)">
+                                    <i class="fa fa-remove" aria-hidden="true"></i>Remove
+                                </a>
                             </div>
                         </div>
                         <div class="row text-center">
                             <div class="col-md-12 col-sm-12 col-xs-12">
                                 <a class="addItemButton" ng-file-select ng-file-change="uploadImage($files)" multiple="multiple">
-                                    <i class="fa fa-upload" aria-hidden="true"></i>Upload Logo
+                                    <i class="fa fa-upload" aria-hidden="true"></i>Upload Salon Images
                                 </a>
                             </div>
                         </div>

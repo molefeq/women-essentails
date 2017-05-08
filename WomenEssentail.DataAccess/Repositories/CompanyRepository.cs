@@ -42,6 +42,17 @@ namespace WomenEssentail.DataAccess.Repositories
 
             return companyDataMapper(CommandTypeManager.ExecuteReader("CompanyDataFetch", sqlQueryParameter));
         }
+        public Response<CompanyDto> UpdateStatus(BulkUpdateModel bulkUpdateModel)
+        {
+            List<SqlQueryParameter> sqlQueryParameters = new List<SqlQueryParameter>();
+
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "EditUserId", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Integer, ParameterValue = bulkUpdateModel.EditUserId });
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "StatusCode", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = bulkUpdateModel.StatusCode });
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Companies", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Structured, ParameterValue = bulkUpdateModel.Ids.ValueListToDataTable<int>("Id") });
+            sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "ValidationMessages", ParameterDirection = DbParameterDirection.Output, ParamentType = CodeParameterType.String, ParameterSize = 8000 });
+
+            return Save("CompanyStatusUpdate", null, sqlQueryParameters.ToArray());
+        }
 
         #region Private Methods
 
@@ -52,6 +63,10 @@ namespace WomenEssentail.DataAccess.Repositories
             if (companyDto.CrudStatus == CrudStatus.DELETE || companyDto.CrudStatus == CrudStatus.UPDATE || companyDto.CrudStatus == CrudStatus.READ)
             {
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "CompanyId", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Integer, ParameterValue = companyDto.Id });
+            }
+            if (companyDto.CrudStatus == CrudStatus.READ)
+            {
+                sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "DeviceId", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companyDto.DeviceId });
             }
 
             if (companyDto.CrudStatus == CrudStatus.CREATE || companyDto.CrudStatus == CrudStatus.UPDATE)
@@ -80,8 +95,23 @@ namespace WomenEssentail.DataAccess.Repositories
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "BusinessContactCode", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 10, ParameterValue = companyDto.BusinessContactCode });
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "BusinessContactNumber", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 20, ParameterValue = companyDto.BusinessContactNumber });
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "MobileNumber", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companyDto.MobileNumber });
-                sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Logos", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Structured, ParameterValue = companyDto.Logos.ToDataTable<CompanyLogoDto>() });
+                
+                if (companyDto.Logo != null || (companyDto.Galleries != null && companyDto.Galleries.Count > 0))
+                {
+                    List<CompanyLogoDto> logos = new List<CompanyLogoDto>();
 
+                    if (companyDto.Logo != null)
+                    {
+                        logos.Add(companyDto.Logo);
+                    }
+
+                    if (companyDto.Galleries != null && companyDto.Galleries.Count > 0)
+                    {
+                        logos.AddRange(companyDto.Galleries);
+                    }
+
+                    sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Logos", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Structured, ParameterValue = logos.ToDataTable<CompanyLogoDto>() });
+                }
             }
 
             if (companyDto.CrudStatus == CrudStatus.DELETE || companyDto.CrudStatus == CrudStatus.UPDATE || companyDto.CrudStatus == CrudStatus.CREATE)
@@ -112,7 +142,7 @@ namespace WomenEssentail.DataAccess.Repositories
         }
 
         #endregion
-        
+
     }
 }
 

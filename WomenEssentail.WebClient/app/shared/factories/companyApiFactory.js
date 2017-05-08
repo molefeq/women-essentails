@@ -14,9 +14,11 @@
             addCompany: addCompany,
             updateCompany: updateCompany,
             deleteCompany: deleteCompany,
+            saveCompanyImage: saveCompanyImage,
             saveCompanyLogo: saveCompanyLogo,
             getCompanyData: getCompanyData,
-            addCompanyRequest: addCompanyRequest
+            addCompanyRequest: addCompanyRequest,
+            updateCompanyStatus: updateCompanyStatus
         };
 
         return factory;
@@ -131,7 +133,7 @@
             return deferred.promise;
         };
 
-        function saveCompanyLogo(file, inProgressFunction) {
+        function saveCompanyImage(file, inProgressFunction) {
             var deferred = $q.defer();
 
             $upload.upload({
@@ -163,6 +165,39 @@
             return deferred.promise;
         };
 
+        function updateCompanyStatus(model) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + '/Company/UpdateCompanyStatus',
+                data: model
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve();
+            }).error(function () {
+                deferred.reject();
+            });
+
+            return deferred.promise;
+        };
+
+        function saveCompanyLogo(file, inProgressFunction) {
+            var deferred = $q.defer();
+
+            $upload.upload({
+                url: ServerApiBaseUrl + '/Company/SaveLogo',
+                method: "POST",
+                file: file
+            }).progress(function (event) {
+                inProgressFunction(event);
+            }).success(function (data, status, headers, config) {
+                deferred.resolve({ CompanyImage: data });
+            });
+
+            return deferred.promise;
+        };
     };
 
 })();

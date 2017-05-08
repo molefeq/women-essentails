@@ -38,7 +38,9 @@ var anonymousStates =
         'searchsalons': true,
         'searchsalon': true,
         'searchsalondirections': true,
-        'register': true
+        'register': true,
+        'specials': true,
+        'searchbeautytips': true
     };
 //angular.module('app').constant('ServerBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/');
 angular.module('app').constant('ServerBaseUrl', 'http://localhost:55464/');

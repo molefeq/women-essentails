@@ -1,61 +1,61 @@
-﻿<div class="center-box">
-    <div class="center-box-body">
-        <p class="center-box-msg">Create Account</p>
+﻿<div class="content-wrapper">
+    <div class="center-box">
+        <div class="center-box-body">
+            <p class="center-box-msg">Create Account</p>
 
-        <form novalidate name="frmRegister" id="frmRegister" app-validator validation-summary-id="registerValidationSummary" ng-hide="isRegistrationSucceful">
-            <div class="form-group has-feedback">
-                <input type="text" required data-required-msg="Firstname is required." id="FirstName" name="FirstName"
-                       ng-maxlength="100" data-maxlength-msg="Name cannot be more than 100 characters." 
-                       ng-model="model.FirstName" class="form-control" placeholder="Name">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-            </div>
-            <div class="k-valid-msg" data-for="FirstName"></div>
-            <div class="form-group has-feedback">
-                <input type="text" required data-required-msg="Surname is required." id="LastName" name="LastName"
-                       ng-maxlength="100" data-maxlength-msg="Surname cannot be more than 100 characters." 
-                       ng-model="model.LastName" class="form-control" placeholder="Surname">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
-            </div>
-            <div class="k-valid-msg" data-for="LastName"></div>
-            <div class="form-group has-feedback">
-                <input type="text" required data-required-msg="Phone is required." id="ContactNumber" name="ContactNumber"
-                       ng-pattern="/^(\+27[0-9]{9}|0[0-9]{9})$/" data-pattern-msg="Enter a valid Phone."
-                       ng-model="model.ContactNumber" class="form-control" placeholder="Phone">
-                <span class="glyphicon glyphicon-phone form-control-feedback"></span>
-            </div>
-            <div class="k-valid-msg" data-for="ContactNumber"></div>
-            <div class="form-group has-feedback">
-                <input type="text" id="EmailAddress" name="EmailAddress" ng-pattern="/^([A-Za-z0-9_\.-]+)@([\dA-Za-z\.-]+)\.([A-Za-z\.]{2,6})$/"
-                       ng-maxlength="500" data-maxlength-msg="Email Address cannot be more than 500 characters." 
-                       data-pattern-msg="Invalid Email Address Format." ng-model="model.EmailAddress" class="form-control" placeholder="Email Address">
-                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-            </div>
-            <div class="k-valid-msg" data-for="EmailAddress"></div>           
-            <div class="form-group has-feedback">
-                <textarea required data-required-msg="Physical is required." id="PhysicalAddress" name="PhysicalAddress"
-                          ng-maxlength="1000" data-maxlength-msg="Physical Address cannot be more than 1000 characters." 
-                          rows="5"
-                          ng-model="model.PhysicalAddress" class="form-control" placeholder="Physical Address" />
-                <span class="glyphicon glyphicon-home form-control-feedback"></span>
-            </div>
-            <div class="k-valid-msg" data-for="PhysicalAddress"></div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="summary-validation-valid" data-valmsg-summary="true" id="registerValidationSummary">
+            <form novalidate name="frmRegister" id="frmRegister" app-validator validation-summary-id="registerValidationSummary" ng-hide="isRegistrationSucceful">
+                <div class="form-group has-feedback">
+                    <input type="text" required data-required-msg="Firstname is required." id="FirstName" name="FirstName"
+                           ng-maxlength="100" data-maxlength-msg="Name cannot be more than 100 characters."
+                           ng-model="model.FirstName" class="form-control" placeholder="Name">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="k-valid-msg" data-for="FirstName"></div>
+                <div class="form-group has-feedback">
+                    <input type="text" required data-required-msg="Surname is required." id="LastName" name="LastName"
+                           ng-maxlength="100" data-maxlength-msg="Surname cannot be more than 100 characters."
+                           ng-model="model.LastName" class="form-control" placeholder="Surname">
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+                </div>
+                <div class="k-valid-msg" data-for="LastName"></div>
+                <div class="form-group has-feedback">
+                    <input type="text" required data-required-msg="Phone is required." id="ContactNumber" name="ContactNumber"
+                           ng-pattern="/^(\+27[0-9]{9}|0[0-9]{9})$/" data-pattern-msg="Enter a valid Phone."
+                           ng-model="model.ContactNumber" class="form-control" placeholder="Phone">
+                    <span class="glyphicon glyphicon-phone form-control-feedback"></span>
+                </div>
+                <div class="k-valid-msg" data-for="ContactNumber"></div>
+                <div class="form-group has-feedback">
+                    <input type="text" id="EmailAddress" name="EmailAddress" ng-pattern="/^([A-Za-z0-9_\.-]+)@([\dA-Za-z\.-]+)\.([A-Za-z\.]{2,6})$/"
+                           ng-maxlength="500" data-maxlength-msg="Email Address cannot be more than 500 characters."
+                           data-pattern-msg="Invalid Email Address Format." ng-model="model.EmailAddress" class="form-control" placeholder="Email Address">
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                </div>
+                <div class="k-valid-msg" data-for="EmailAddress"></div>
+                <div class="form-group has-feedback">
+                    <textarea required data-required-msg="Physical is required." id="PhysicalAddress" name="PhysicalAddress"
+                              ng-maxlength="1000" data-maxlength-msg="Physical Address cannot be more than 1000 characters."
+                              rows="5"
+                              ng-model="model.PhysicalAddress" class="form-control" placeholder="Physical Address" />
+                    <span class="glyphicon glyphicon-home form-control-feedback"></span>
+                </div>
+                <div class="k-valid-msg" data-for="PhysicalAddress"></div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="summary-validation-valid" data-valmsg-summary="true" id="registerValidationSummary">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <button type="button" class="btn btn-primary btn-flat pull-right" ng-click="cancel()" button-control action-value="Cancel" action-in-progress-value="Cancelling ..." style="margin-left:5px;">Cancel</button>
-                    <button type="submit" class="btn btn-primary btn-flat pull-right" ng-click="register()" button-control action-value="Register" action-in-progress-value="Registering ...">Register</button>
-                </div><!-- /.col -->
-            </div>
-        </form>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-primary btn-flat pull-right" ng-click="register()" button-control action-value="Register" action-in-progress-value="Registering ...">Register</button>
+                    </div><!-- /.col -->
+                </div>
+            </form>
 
-        <div ng-show="isRegistrationSucceful">
-            <p>Registration was successful, a women's essentail's agent will contact you soon.</p>
+            <div ng-show="isRegistrationSucceful">
+                <p>Registration was successful, a Essentails for Women agent will contact you soon.</p>
+            </div>
         </div>
     </div>
 </div>
-

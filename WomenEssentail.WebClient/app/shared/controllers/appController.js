@@ -68,7 +68,11 @@
             searchSalonsFactory.SearchText = SearchText;
             searchSalonsFactory.SubCategoryId = viewModel.SubCategoryId;
 
-            $state.go('searchsalons');
+            if ($state.current.name != 'searchsalons') {
+                return $state.go('searchsalons');
+            }
+
+            $state.go($state.current, null, { reload: true });
         };
 
 
@@ -77,7 +81,11 @@
             searchSalonsFactory.SearchText = viewModel.SearchText;
             searchSalonsFactory.SubCategoryId = subCategoryId;
 
-            $state.go('searchsalons');
+            if ($state.current.name != 'searchsalons') {
+                return $state.go('searchsalons');
+            }
+
+            $state.go($state.current, null, { reload: true });
         };
         function goToMenuItem(menuItem) {
             var queryStrings = {};

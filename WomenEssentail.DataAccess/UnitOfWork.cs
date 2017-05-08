@@ -28,6 +28,8 @@ public class UnitOfWork : DataServer, IDisposable
     private CompanyRatingRepository _CompanyRatings;
     private BeautyTipRepository _BeautyTips;
     private ContactUsRepository _ContactUs;
+    private DeviceDetailsRepository _DeviceDetails;
+    private AppRatingRepository _AppRatings;
 
     #endregion
 
@@ -233,7 +235,7 @@ public class UnitOfWork : DataServer, IDisposable
             return _CompanyRequests;
         }
     }
-    
+
     public CompanyFeedbackRepository CompanyFeedbacks
     {
         get
@@ -246,7 +248,7 @@ public class UnitOfWork : DataServer, IDisposable
             return _CompanyFeedbacks;
         }
     }
-    
+
     public CompanyRatingRepository CompanyRatings
     {
         get
@@ -283,6 +285,32 @@ public class UnitOfWork : DataServer, IDisposable
             }
 
             return _ContactUs;
+        }
+    }
+
+    public DeviceDetailsRepository DeviceDetails
+    {
+        get
+        {
+            if (_DeviceDetails == null)
+            {
+                _DeviceDetails = new DeviceDetailsRepository(Connection);
+            }
+
+            return _DeviceDetails;
+        }
+    }
+
+    public AppRatingRepository AppRatings
+    {
+        get
+        {
+            if (_AppRatings == null)
+            {
+                _AppRatings = new AppRatingRepository(Connection);
+            }
+
+            return _AppRatings;
         }
     }
 

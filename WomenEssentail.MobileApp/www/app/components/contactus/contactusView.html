@@ -3,18 +3,20 @@
         <span class="icon icon-left-nav"></span>
         Back
     </a>
-    <h1 class="title">Women's Essentials</h1>
+    <h1 class="title">Essentails for Women</h1>
 </header>
 <div class="content sp-main-view-container">
     <div class="center-box">
         <h5>Contact Us</h5>
         <address>
-            <small>Qinisela Molefe, 0846750091</small> <br>
-            <a href="mailto:#"><small>molefeq@gmail.com</small></a><br>
+            <small>{{model.Name }}, {{model.Number }}</small> <br />
+            <a href="{{'mailto:' + model.EmailAddress +'?Subject=Hey'}}"><small>{{model.EmailAddress }}</small></a><br />
+
             <span class="fa fa-facebook" style="padding-right:5px;"></span>
             <span class="fa fa-twitter" style="padding-right:5px;"></span>
             <span class="fa fa-instagram" style="padding-right:5px;"></span>
-            <span class="fa fa-share" style="padding-right:5px;"></span>
+            <a href="mailto:?to=&subject=This%20application%20may%20interest%20you." class="glyphicon glyphicon-envelope" style="padding-right:5px;"></a><br />
+            <a class="icon-share-ad-email" href="mailto:?to=&amp;subject=This%20may%20interest%20you%3A%20Jerry%20Loghomes%20special%20offers&amp;body=Hello!%20I%20found%20this%20ad%20on%20Gumtree%20and%20thought%20you%20might%20be%20interested.%20https%3A%2F%2Fwww.gumtree.co.za%2Fa-garden-tools%2Fmelville%2Fjerry-loghomes-special-offers%2F1001927163170910384950609%3Futm_source%3Demail%26utm_medium%3Dsocial%26utm_campaign%3Dsocialbuttons%26utm_content%3Dvip%0D%0A%0D%0AJoin%20the%20Gumtree%20community%3A%0D%0AFacebook%3A%20https%3A%2F%2Fwww.facebook.com%2FGumtreeSouthAfrica%20%0D%0ATwitter%3A%20https%3A%2F%2Ftwitter.com%2Fgumtreecoza" target="_blank"></a>
         </address>
     </div>
 </div>

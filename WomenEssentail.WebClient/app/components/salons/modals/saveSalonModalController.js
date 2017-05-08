@@ -8,6 +8,7 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
     viewModel.cancel = cancel;
     viewModel.save = save;
     viewModel.uploadImage = uploadImage;
+    viewModel.uploadLogo = uploadLogo;
     viewModel.salonsFactory = salonsFactory;
     viewModel.setPostalSameAsPhysicalAddress = setPostalSameAsPhysicalAddress;
     viewModel.postalSameAsPhysical = false;
@@ -18,7 +19,7 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
         $uibModalInstance.dismiss();
     };
 
-    function uploadImage(files) {
+    function uploadLogo(files) {
         var isInvalidFileFound = false;
 
         viewModel.imageuploading = true;
@@ -46,8 +47,81 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
         });
     };
 
+    function uploadLogo(files) {
+        var isInvalidFileFound = false;
+
+        viewModel.imageuploading = true;
+
+        if (!files || files.length == 0) {
+            viewModel.imageuploading = false;
+            return;
+        }
+
+        angular.forEach(files, function (file, key) {
+            if (file.type.indexOf('image') < 0) {
+                isInvalidFileFound = true;
+                return;
+            }
+        });
+
+        if (isInvalidFileFound) {
+            alert('Only image files can be uploaded for an company logo');
+            $scope.imageuploading = false;
+            return;
+        }
+
+        viewModel.salonsFactory.uploadSalonLogo(files).then(function (data) {
+            viewModel.imageuploading = false;
+        });
+    };
+
+    function uploadImage(files) {
+
+        if (viewModel.salonsFactory.salon.Galleries && viewModel.salonsFactory.salon.Galleries.length > 2) {
+            displayError("Error Uploading Iamges", 'Salon galleries are required and must not be more than 2.');
+            $scope.imageuploading = false;
+            return;
+        }
+
+        var filesLength = viewModel.salonsFactory.salon.Galleries ? viewModel.salonsFactory.salon.Galleries.length : 0;
+
+        var isInvalidFileFound = false;
+
+        viewModel.imageuploading = true;
+
+        if (!files || files.length == 0) {
+            viewModel.imageuploading = false;
+            return;
+        }
+
+        angular.forEach(files, function (file, key) {
+            if (file.type.indexOf('image') < 0) {
+                isInvalidFileFound = true;
+                return;
+            }
+        });
+
+        if (isInvalidFileFound) {
+            displayError("Error Uploading Iamges", 'Only image files can be uploaded for an company logo');
+            $scope.imageuploading = false;
+            return;
+        }
+
+        filesLength = filesLength + files.length;
+
+        if (filesLength > 2) {
+            displayError("Error Uploading Iamges", 'Salon galleries are required and must not be more than 2.');
+            $scope.imageuploading = false;
+            return;
+        }
+
+        viewModel.salonsFactory.uploadSalonImage(files).then(function (data) {
+            viewModel.imageuploading = false;
+        });
+    };
+
     function save() {
-        if (!viewModel.frmSalon.$valid) {
+        if (!viewModel.frmSalon.$valid || !validateImages()) {
             $rootScope.$broadcast('action-complete', true);
             return;
         }
@@ -96,12 +170,51 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
     };
 
     function removeImage(imageIndex) {
-        var index = app.Utils.indexOf(viewModel.salonsFactory.salon.Logos, imageIndex, 'id');
+        var index = app.Utils.indexOf(viewModel.salonsFactory.salon.Galleries, imageIndex, 'id');
 
         if (index >= 0) {
-            viewModel.salonsFactory.salon.Logos.splice(index, 1);
+            viewModel.salonsFactory.salon.Galleries.splice(index, 1);
         }
     };
 
+    function validateImages() {
+        var isValid = true;
+        var errorMessage = '';
+
+        if (!viewModel.salonsFactory.salon.Logo || !viewModel.salonsFactory.salon.Logo) {
+            errorMessage = '<div>Salon Logo is required.</div>';
+            isValid = false;
+        }
+
+        if (!viewModel.salonsFactory.salon.Galleries || viewModel.salonsFactory.salon.Galleries.length == 0 || viewModel.salonsFactory.salon.Galleries.length > 2) {
+            errorMessage = errorMessage + '<div>Salon galleries are required and must not be more than 2.</div>';
+            isValid = false;
+        }
+
+        if (!isValid) {
+            displayError("Error Saving Salons", errorMessage);
+        }
+
+        return isValid;
+    }
+
+
+    function displayError(errorHeader, errorDetails) {
+
+        var newScope = $rootScope.$new();
+
+        newScope.model = {
+            'ErrorCode': "404",
+            'ErrorHeader': errorHeader,
+            'ErrorDetails': errorDetails,
+        };
+
+        $rootScope.$broadcast('server-error-occurred', {
+            templateUrl: 'errortemplate.html',
+            scope: newScope,
+            size: 'sm'
+        });
+
+    }
 };
 

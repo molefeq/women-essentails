@@ -12,10 +12,19 @@
 
         function linkFunction(scope, element, attributes) {
             var isFormInvalid = false;
+            var tagName = $(element).prop("tagName");
+
+            console.log(tagName);
 
             $(element).on('click', function (e, event) {
+
                 if (!isFormInvalid) {
-                    $(element).val(attributes.actionInProgressValue);
+                    if (tagName.toLowerCase() == 'input') {
+                        $(element).val(attributes.actionInProgressValue);
+                    }
+                    else if (tagName.toLowerCase() == 'button') {
+                        $(element).text(attributes.actionInProgressValue);
+                    }
                     $(element).prop("disabled", true);
                 }
                 isFormInvalid = false;
@@ -23,7 +32,12 @@
 
             scope.$on("action-complete", function (event, data) {
                 isFormInvalid = data ? data : false;
-                $(element).val(attributes.actionValue);
+                if (tagName.toLowerCase() == 'input') {
+                    $(element).val(attributes.actionValue);
+                }
+                else if (tagName.toLowerCase() == 'button') {
+                    $(element).text(attributes.actionValue);
+                }
                 $(element).prop("disabled", false);
             });
         };

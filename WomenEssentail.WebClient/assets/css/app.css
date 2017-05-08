@@ -18,6 +18,18 @@ html body .wrapper {
   min-height: 100%;
   position: static;
   overflow: hidden;
+  height: 100%;
+}
+html body .wrapper main {
+  height: 100%;
+}
+html body .wrapper main .viewsContainer {
+  height: 100%;
+}
+html body .wrapper main .viewsContainer .content-wrapper {
+  min-height: 100%;
+  height: 100%;
+  overflow-y: auto;
 }
 html body .wrapper:after {
   content: " ";
@@ -67,6 +79,11 @@ html body .wrapper .main-header > .navbar .sidebar-toggle {
   background-image: none;
   padding: 15px 15px;
   font-family: fontAwesome;
+}
+[ng\:cloak],
+[ng-cloak],
+.ng-cloak {
+  display: none !important;
 }
 /*
  * Page: Login & Register
@@ -119,4 +136,47 @@ html body .wrapper .main-header > .navbar .sidebar-toggle {
 }
 .social-auth-links {
   margin: 10px 0;
+}
+#loadingmessage {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  filter: alpha(opacity=70);
+  display: block;
+  z-index: 999;
+  opacity: 0.7;
+}
+#loadingmessage > div {
+  margin-left: 0;
+  margin-right: -50%;
+  color: white;
+  font-size: 18px;
+  vertical-align: middle;
+  text-align: center;
+  display: table-cell;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  /* 2 */
+  top: 50%;
+  background: url('../img/loading-image.gif') no-repeat scroll 8px 100%;
+}
+@media screen and (max-width: 817px) {
+  body .wrapper .content-header {
+    padding: 5px;
+  }
+  body .wrapper .content {
+    padding: 5px;
+  }
+  body .wrapper .content .add-button-row {
+    display: block  !important;
+    width: 100%  !important;
+  }
+  body .wrapper .content .btn-xs-full {
+    width: 100%  !important;
+    margin-bottom: 5px;
+  }
 }

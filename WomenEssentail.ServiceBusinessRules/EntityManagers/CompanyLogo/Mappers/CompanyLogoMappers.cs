@@ -34,6 +34,7 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyLogo.Mappers
 
             companyLogoDto.Id = sqlDataReader["Id"].ToInteger();
             companyLogoDto.Logo = sqlDataReader["Logo"].ToString();
+            companyLogoDto.ImageType = sqlDataReader["ImageType"].ToString();
             companyLogoDto.CrudStatus = CrudStatus.UPDATE;
 
             return companyLogoDto;

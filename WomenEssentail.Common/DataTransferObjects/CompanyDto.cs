@@ -8,6 +8,7 @@ namespace WomenEssentail.Common.DataTransferObjects
     public class CompanyDto
     {
         public int Id { get; set; }
+        public string DeviceId { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public string Description { get; set; }
@@ -42,7 +43,8 @@ namespace WomenEssentail.Common.DataTransferObjects
         public string PreviewRelativeFileName { get; set; }
         public string NormalRelativeFileName { get; set; }
         public string ThumbnailRelativeFileName { get; set; }
-        public List<CompanyLogoDto> Logos { get; set; }
+        public CompanyLogoDto Logo { get; set; }
+        public List<CompanyLogoDto> Galleries { get; set; }
         public int StatusId { get; set; }
         public int? EditUserId { get; set; }
         public int CreateUserId { get; set; }
@@ -56,7 +58,8 @@ namespace WomenEssentail.Common.DataTransferObjects
 
         public CompanyDto()
         {
-            Logos = new List<CompanyLogoDto>();
+            Logo = new CompanyLogoDto();
+            Galleries = new List<CompanyLogoDto>();
         }
     }
 }

@@ -10,6 +10,11 @@ var app = app || {};
               templateUrl: "app/components/home/views/homeView.html",
               controller: 'homeController'
           })
+          .state('aboutus', {
+              url: "/aboutus",
+              templateUrl: "app/components/aboutus/aboutUsView.html",
+              controller: 'appController'
+          })
           .state('main', {
               url: "/main",
               templateUrl: "app/components/main/mainView.html",
@@ -54,7 +59,17 @@ var app = app || {};
             url: "/salondirection/:salonId",
             templateUrl: "app/components/salondirection/salonDirectionView.html",
             controller: 'salonDirectionController'
+        })
+        .state('shareapp', {
+            url: "/shareapp",
+            templateUrl: "app/components/shareapp/shareAppView.html",
+            controller: 'shareAppController'
+        })
+        .state('technicalreport', {
+            url: "/technicalreport",
+            templateUrl: "app/components/technicalreport/technicalReportView.html",
+            controller: 'technicalReportController'
         });
     };
-    
+
 })(app.RoutesManager = {});

@@ -24,6 +24,9 @@
             SubCategoryId: searchSalonsFactory.SubCategoryId,
             IsLocationSearch: true
         };
+        
+        searchSalonsFactory.SearchText = '';
+        searchSalonsFactory.SubCategoryId = {};
 
         viewModel.salonsGridOptions = {
             Paging: {
@@ -34,7 +37,7 @@
             Read: function (options) {
                 var that = this;
 
-                $rootScope.isDataLoading = true;
+                $rootScope.isLoading = true;
                 $rootScope.loadingMessage = 'Loading data, please wait ...';
 
                 viewModel.SearchFilter.PageData.Take = options.take;
@@ -42,7 +45,7 @@
 
                 companyApiFactory.getAppCompanies(viewModel.SearchFilter).then(function (response) {
                     viewModel.salonsGrid.SetDataSource(response.Companies, response.TotalCompanies);
-                    $rootScope.isDataLoading = false;
+                    $rootScope.isLoading = false;
                 });
             }
         };
@@ -57,6 +60,7 @@
 
         function initialise() {
             viewModel.isLoading = true;
+            $rootScope.loadingMessage = 'Locating current location, please wait ...';
             geolocation.getLocation().then(function (data) {
                 viewModel.SearchFilter.Latitude = data.coords.latitude;
                 viewModel.SearchFilter.Longitude = data.coords.longitude;

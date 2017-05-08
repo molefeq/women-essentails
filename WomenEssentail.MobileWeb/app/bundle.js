@@ -164,8 +164,8 @@ var app = app || {};
         launchnavigator.navigate([destinationPosition.latitude, destinationPosition.longitude], {
             start: [sourcePosition.latitude, sourcePosition.longitude],
             app: app,
-            transportMode: launchnavigator.LAUNCH_MODE.TURN_BY_TURN,
-            launchMode : launchnavigator.TRANSPORT_MODE.DRIVING
+            transportMode:launchnavigator.TRANSPORT_MODE.DRIVING,
+            launchMode: launchnavigator.LAUNCH_MODE.MAPS
         });
     };
 
@@ -758,6 +758,11 @@ var app = app || {};
               templateUrl: "app/components/home/views/homeView.html",
               controller: 'homeController'
           })
+          .state('aboutus', {
+              url: "/aboutus",
+              templateUrl: "app/components/aboutus/aboutUsView.html",
+              controller: 'appController'
+          })
           .state('main', {
               url: "/main",
               templateUrl: "app/components/main/mainView.html",
@@ -802,16 +807,26 @@ var app = app || {};
             url: "/salondirection/:salonId",
             templateUrl: "app/components/salondirection/salonDirectionView.html",
             controller: 'salonDirectionController'
+        })
+        .state('shareapp', {
+            url: "/shareapp",
+            templateUrl: "app/components/shareapp/shareAppView.html",
+            controller: 'shareAppController'
+        })
+        .state('technicalreport', {
+            url: "/technicalreport",
+            templateUrl: "app/components/technicalreport/technicalReportView.html",
+            controller: 'technicalReportController'
         });
     };
-    
+
 })(app.RoutesManager = {});
 
 
 (function () {
     'use strict';
 
-    angular.module('app', ['ui.router', 'ngSanitize', 'ngCookies', 'ngResource', 'ui.bootstrap', 'toastr', 'geolocation', 'uiGmapgoogle-maps']);
+    angular.module('app', ['ui.router', 'ngAnimate', 'ngSanitize', 'ngCookies', 'ngResource', 'ui.bootstrap', 'toastr', 'geolocation', 'uiGmapgoogle-maps', 'infinite-scroll']);
 
 })();
 
@@ -878,10 +893,12 @@ var menus = {
 };
 var anonymousStates = { 'login': true, 'forgotpassword': true, 'resetpassword': true, 'changepassword': true };
 
-angular.module('app').constant('ServerBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/');
-//angular.module('app').constant('ServerBaseUrl', 'http://localhost:55464/');
-//angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:55464/api/');
-angular.module('app').constant('ServerApiBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/api/');
+angular.module('app').constant('ServerBaseUrl', 'https://essentials4women.co.za/');
+//angular.module('app').constant('ServerBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/');
+//angular.module('app').constant('ServerBaseUrl', 'http://localhost:64707/');
+//angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:64707/api/');
+//angular.module('app').constant('ServerApiBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/api/');
+angular.module('app').constant('ServerApiBaseUrl', 'https://essentials4women.co.za/api/');
 angular.module('app').constant('SubMenuItems', menus);
 angular.module('app').constant('AnonymousStates', anonymousStates);
 (function () {
@@ -1634,6 +1651,42 @@ function errorController($scope, $rootScope, $uibModalInstance) {
     };
 
 })();
+
+(function () {
+
+    'use strict';
+
+    angular.module('app').factory('appRatingApiFactory', appRatingApiFactory);
+
+    appRatingApiFactory.$inject = ['$http', '$rootScope', '$q', '$upload', 'ServerApiBaseUrl'];
+
+    function appRatingApiFactory($http, $rootScope, $q, $upload, ServerApiBaseUrl) {
+        var factory = {
+            addAppRating: addAppRating
+        };
+
+        return factory;
+
+        function addAppRating(appRating) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: ServerApiBaseUrl + '/AppRating/AddAppRating',
+                data: appRating
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ AppRating: data.Item });
+            });
+
+            return deferred.promise;
+        };
+
+
+    };
+
+})();
 (function () {
 
     'use strict';
@@ -1658,6 +1711,10 @@ function errorController($scope, $rootScope, $uibModalInstance) {
         function getCompanies(searchFilter) {
             var deferred = $q.defer();
 
+            if (window.device && !window.device.isVirtual) {
+                searchFilter.DeviceId = window.device.uuid;
+            }
+
             $http(
             {
                 method: 'POST',
@@ -1673,11 +1730,16 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
         function getCompany(companyId) {
             var deferred = $q.defer();
+            var deviceId;
+
+            if (window.device && !window.device.isVirtual) {
+                deviceId = window.device.uuid;
+            }
 
             $http(
             {
                 method: 'POST',
-                url: ServerApiBaseUrl + '/Company/FetchCompany/?companyId=' + companyId
+                url: ServerApiBaseUrl + '/Company/FetchCompany/?companyId=' + companyId + '&deviceId=' + deviceId
             })
             .success(function (data, status, headers, config) {
                 deferred.resolve({ Company: data.Item });
@@ -1733,7 +1795,7 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
             return deferred.promise;
         };
-        
+
         function addCompanyRequest(companyRequest) {
             var deferred = $q.defer();
 
@@ -1890,7 +1952,8 @@ function errorController($scope, $rootScope, $uibModalInstance) {
         var factory = {
             getCompanyTypes: getCompanyTypes,
             getSubCategories: getSubCategories,
-            getContactDetails: getContactDetails
+            getContactDetails: getContactDetails,
+            saveDeviceDetails: saveDeviceDetails
         };
 
         return factory;
@@ -1929,6 +1992,22 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             })
             .success(function (data, status, headers, config) {
                 deferred.resolve(data);
+            });
+
+            return deferred.promise;
+        };
+
+        function saveDeviceDetails(model) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'Post',
+                url: ServerApiBaseUrl + 'Lookup/SaveDeviceDetails',
+                data: model
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({DeviceDetail: data.Item});
             });
 
             return deferred.promise;
@@ -2292,12 +2371,31 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
     angular.module('app').controller('homeController', HomeController);
 
-    HomeController.$inject = ['$scope', '$state'];
+    HomeController.$inject = ['$scope', '$state', '$rootScope', 'lookupApiFactory'];
 
-    function HomeController($scope, $state) {
+    function HomeController($scope, $state, $rootScope, lookupApiFactory) {
         var viewModel = $scope
-              
+
         viewModel.goToMain = goToMain;
+
+        $rootScope.isLoading = true;
+      
+        if (window.device && !window.device.isVirtual) {
+
+            var model = {
+                DeviceId: window.device.uuid,
+                DeviceName: window.device.model,
+                DevicePlatform: window.device.platform,
+                DeviceSerialNumber: window.device.serial
+            }
+
+            lookupApiFactory.saveDeviceDetails(model).then(function (data) {
+                $rootScope.isLoading = false;
+            });
+        }
+        else {
+            $rootScope.isLoading = false;
+        }
 
         function goToMain() {
             $state.go('main');
@@ -2436,7 +2534,7 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             newScope.model = {
                 'ErrorCode': 408,
                 'ErrorHeader': 'Error retrieving location',
-                'ErrorDetails': 'Error retrieving location, please ensure that gps location is enabled. ' + 'Error Code: ' + error.code + 'Error Message: ' + error.message
+                'ErrorDetails': 'Error retrieving location, please ensure that gps location is enabled.'
             };
 
             notificationFactory.open({
@@ -2915,14 +3013,17 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
     function SalonsController($scope, $rootScope, $state, salonsFactory, salonDirectionFactory, lookupApiFactory, notificationFactory) {
         var viewModel = $scope;
+        var page = 1;
 
         $rootScope.isLoading = false;
+        viewModel.isBusy = true;
         viewModel.salonsFactory = salonsFactory;
         viewModel.searchSalons = searchSalons;
         viewModel.goToSalon = goToSalon;
         viewModel.goToMain = goToMain;
         viewModel.goToSalonDirection = goToSalonDirection;
         viewModel.subCategories = [];
+        viewModel.nextPage = nextPage;
 
         viewModel.SearchFilter = {
             PageData: {
@@ -2934,13 +3035,31 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             IsLocationSearch: true
         };
 
-        searchSalons();
+        initialise();
 
-        function searchSalons() {
+        function initialise() {
             $rootScope.isLoading = true;
-
+            page = 0;
+            viewModel.salonsFactory.salons = [];
             navigator.geolocation.getCurrentPosition(locationSuccess, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
         };
+
+        function searchSalons(isClear) {
+            viewModel.isBusy = true;
+            $rootScope.isLoading = true;
+
+            if (isClear) {
+                viewModel.salonsFactory.salons = [];
+            };
+            viewModel.salonsFactory.searchSalons(viewModel.SearchFilter).then(function (response) {
+                viewModel.isBusy = false;
+                $rootScope.isLoading = false;
+                console.log(viewModel.isBusy);
+            }, function () {
+                viewModel.isBusy = false;
+                $rootScope.isLoading = false;
+            });
+        }
 
         function goToMain(e) {
             e.preventDefault();
@@ -3003,12 +3122,9 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             viewModel.SearchFilter.Longitude = position.coords.longitude;
 
             lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (data) {
+                $rootScope.isLoading = false;
                 viewModel.subCategories = data.Items;
-                viewModel.salonsFactory.searchSalons(viewModel.SearchFilter).then(function (response) {
-                    $rootScope.isLoading = false;
-                }, function () {
-                    $rootScope.isLoading = false;
-                });
+                nextPage();
             }, function () {
                 $rootScope.isLoading = false;
             });
@@ -3030,6 +3146,12 @@ function errorController($scope, $rootScope, $uibModalInstance) {
                 controller: errorController
             });
         };
+
+        function nextPage() {
+            page = page + 1;
+            viewModel.SearchFilter.PageData.Skip = viewModel.SearchFilter.PageData.Take * (page - 1);
+            searchSalons();
+        };
     };
 
 })();
@@ -3045,16 +3167,18 @@ function errorController($scope, $rootScope, $uibModalInstance) {
         var factory = {
             searchSalons: searchSalons,
             searchFilter: {},
-            salons:[]
+            salons: []
         };
 
         return factory;
-        
+
         function searchSalons(searchFilter) {
             var deferred = $q.defer();
 
             companyApiFactory.getCompanies(searchFilter).then(function (data) {
-                factory.salons = data.Companies;
+                for (var i = 0; i < data.Companies.length; i++) {
+                    factory.salons.push(data.Companies[i]);
+                }
                 deferred.resolve();
             });
 
@@ -3106,6 +3230,34 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
             $state.go('salons');
         };
+    };
+
+})();
+(function () {
+
+    'use strict';
+
+    angular.module('app').controller('shareAppController', shareAppController);
+
+    shareAppController.$inject = ['$scope', '$state'];
+
+    function shareAppController($scope, $state) {
+        var viewModel = $scope
+
+    };
+
+})();
+(function () {
+
+    'use strict';
+
+    angular.module('app').controller('technicalReportController', technicalReportController);
+
+    technicalReportController.$inject = ['$scope', '$state'];
+
+    function technicalReportController($scope, $state) {
+        var viewModel = $scope
+
     };
 
 })();

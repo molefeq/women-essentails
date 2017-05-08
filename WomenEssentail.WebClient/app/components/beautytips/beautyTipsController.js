@@ -4,9 +4,9 @@
 
     angular.module('app').controller('beautyTipsController', BeautyTipsController);
 
-    BeautyTipsController.$inject = ['$scope', '$rootScope', '$state', 'notificationFactory', 'beautyTipsFactory'];
+    BeautyTipsController.$inject = ['$scope', '$rootScope', '$state', 'notificationFactory', 'beautyTipsFactory', 'appFactory'];
 
-    function BeautyTipsController($scope, $rootScope, $state, notificationFactory, beautyTipsFactory) {
+    function BeautyTipsController($scope, $rootScope, $state, notificationFactory, beautyTipsFactory, appFactory) {
         var viewModel = $scope;
 
         viewModel.beautyTipsFactory = beautyTipsFactory;
@@ -15,6 +15,11 @@
         viewModel.deleteBeuatyTip = deleteBeuatyTip;
         viewModel.searchBeuatyTips = searchBeuatyTips;
         viewModel.activateBeuatyTip = activateBeuatyTip;
+
+        appFactory.Initialise();
+
+        var companyId = appFactory.User.CompanyId;
+        viewModel.isCompanyUser = appFactory.User.CompanyId != null;
 
         viewModel.SearchFilter = {
             PageData: {
@@ -33,7 +38,7 @@
             Read: function (options) {
                 var that = this;
 
-                $rootScope.isDataLoading = true;
+                $rootScope.isLoading = true;
                 $rootScope.loadingMessage = 'Loading data, please wait ...';
 
                 viewModel.SearchFilter.PageData.Take = options.take;
@@ -41,7 +46,7 @@
 
                 viewModel.beautyTipsFactory.searchBeuatyTips(viewModel.SearchFilter).then(function (response) {
                     viewModel.beautyTipsGrid.SetDataSource(response.BeautyTips, response.TotalBeautyTips);
-                    $rootScope.isDataLoading = false;
+                    $rootScope.isLoading = false;
                 });
             }
         };

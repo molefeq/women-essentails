@@ -32,6 +32,13 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies
                 return unitOfWork.CompanySummaries.Get(companySearchFilter, CompanyMappers.Instance.MapGetCompanies);
             }
         }
+        public Response<CompanyDto> UpdateCompanyStatus(BulkUpdateModel bulkUpdateModel)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                return unitOfWork.Companies.UpdateStatus(bulkUpdateModel);
+            }
+        }
 
         public Response<CompanyDto> Save(CompanyDto companyDto)
         {

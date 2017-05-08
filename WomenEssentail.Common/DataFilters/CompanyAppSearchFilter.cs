@@ -7,6 +7,7 @@ namespace WomenEssentail.Common.DataFilters
         public int? SubCategoryId { get; set; }
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
+        public string DeviceId { get; set; }
         public string SearchText { get; set; }
         public PageData PageData { get; set; }
     }
