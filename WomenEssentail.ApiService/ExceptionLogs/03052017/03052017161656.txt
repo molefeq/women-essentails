@@ -1,0 +1,38 @@
+Message: 
+Value cannot be null.
+Parameter name: path3
+
+Paramaters: 
+
+
+Stack Trace: 
+   at System.IO.Path.Combine(String path1, String path2, String path3)
+   at WomenEssentail.ServiceBusinessRules.Utilities.UploadFileHandler.GetBlobRelativeFileName(String blobStorageUrl, String blobDirectoryName, String fileName) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\Utilities\UploadFileHandler.cs:line 90
+   at WomenEssentail.ApiService.Controllers.CompanyController.MapRelativeLogoPath(CompanyDto companyDto) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Controllers\CompanyController.cs:line 244
+   at WomenEssentail.ApiService.Controllers.CompanyController.<MapRelativeLogoPaths>b__15_0(CompanySummaryDto item) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Controllers\CompanyController.cs:line 234
+   at System.Collections.Generic.List`1.ForEach(Action`1 action)
+   at WomenEssentail.ApiService.Controllers.CompanyController.MapRelativeLogoPaths(List`1 companySummaryDtos) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Controllers\CompanyController.cs:line 234
+   at WomenEssentail.ApiService.Controllers.CompanyController.GetCompanies(CompanySearchFilter companySearchFilter) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Controllers\CompanyController.cs:line 56
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+
+Error Url: 
+http://localhost:55464/api/Company/GetCompanies
+
+Error Date: 
+03/05/2017 16:16:56
+

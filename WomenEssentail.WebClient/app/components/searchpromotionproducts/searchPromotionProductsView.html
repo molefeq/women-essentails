@@ -1,0 +1,77 @@
+﻿<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Nearest Specials
+            <!--<small>preview of simple tables</small>-->
+        </h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="landing"><i class="fa fa-home"></i> Home</a></li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="box">
+            <div class="box-header" style="min-height:50px;">
+                <!--<h3 class="box-title">Salons</h3>-->
+                <div class="input-group-btn">
+                </div>
+                <div class="box-tools">
+                    <div class="input-group">
+                        <input name="table_search" class="form-control input-sm pull-right" style="width: 250px;" type="text" placeholder="Search" ng-model="SearchFilter.SearchText">
+                        <div class="input-group-btn">
+                            <button class="btn btn-sm btn-default" ng-click="searchSpecials()"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.box-header -->
+            <div class="box-body table-responsive no-padding"
+                 app-grid="specialsGrid" app-grid-options="specialsGridOptions">
+                <table class="table table-hover table-striped tableContainer">
+                    <tbody>
+                        <tr ng-repeat="special in specialsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
+                            <td class="width30 xs-width50">
+                                {{special.Name}}
+                            </td>
+                            <td class="width15 xs-width30">R {{special.Price| number:2}}</td>
+                            <td class="width15 mobile-hidden"><small style="font-size:70%;"><b>From </b></small>{{special.StartDate | date: 'dd/MM/yyyy'}}</td>
+                            <td class="width15 mobile-hidden"><small style="font-size:70%;"><b>Till </b></small>{{special.EndDate| date:'dd/MM/yyyy'}}</td>
+                            <td class="text-right mobile-hidden width10">
+                                <small class="action-label label label-info" ng-click="goToSalonDirection(special.CompanyId);"><i class="fa fa-map-marker"></i> Go There</small>
+                            </td>
+                            <td class="mobileInfo">
+                                <i mobile-table-toggle class="fa fa-info-circle"></i>
+                                <div class="info-container hide">
+                                    <table>
+                                        <tr>
+                                            <td><b>From</b></td>
+                                            <td>{{special.StartDate | date: 'dd/MM/yyyy'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Till</b></td>
+                                            <td>{{special.EndDate| date:'dd/MM/yyyy'}}</td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-right">
+                                                <small class="action-label label label-info" ng-click="goToSalonDirection(special.CompanyId);"> Go There</small>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div><!-- /.box-body -->
+            <div class="box-footer clearfix" ng-show="specialsGrid.Paging.Pages.length > 0">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                    <li ng-click="specialsGrid.SetPage($event, 1)" ng-disabled="specialsGrid.Paging.IsFirstPage"><a href="#">«</a></li>
+                    <li ng-repeat="page in specialsGrid.Paging.Pages" ng-click="specialsGrid.SetPage($event, page)" ng-disabled="specialsGrid.Paging.PageIndex==page"><a href="#">{{page}}</a></li>
+                    <li><a href="#" ng-click="specialsGrid.SetPage($event, specialsGrid.Paging.TotalPages)" ng-disabled="specialsGrid.Paging.IsLastPage">»</a></li>
+                </ul>
+            </div>
+        </div><!-- /.box -->
+    </section>
+</div>
+

@@ -1,0 +1,126 @@
+﻿<div class="content-wrapper">
+    <section class="content-header">
+        <h1>
+            Salons
+            <!--<small>preview of simple tables</small>-->
+        </h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="home" access-control module="home" ng-click="goHome($event);"><i class="fa fa-home"></i> Home</a></li>
+            <li><a ui-sref="servicesadmin" access-control module="companies"><i class="fa fa-gear"></i> Services</a></li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+        <div class="box">
+            <div class="box-header">
+                <div class="col-xs-12">
+                    <div class="input-group" style="float: right;">
+                        <input name="table_search" class="form-control input-sm pull-right" style="min-width: 250px;" type="text" placeholder="Search" ng-model="SearchFilter.SearchText">
+                        <div class="input-group-btn">
+                            <button class="btn btn-sm btn-default" ng-click="searchSalons()"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <!--<h3 class="box-title">Salons</h3>-->
+
+            </div><!-- /.box-header -->
+            <div class="box-body" app-grid="salonsGrid" app-grid-options="salonsGridOptions">
+                <div class="row">
+
+                    <div class="col-md-2 col-xs-12">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary pull-left btn-xs-full" access-control module="companies" ng-click="addSalon()"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+                    <div class="col-md-10 col-xs-12">
+                        <div class="action-buttons" style="margin-bottom: 10px;height: 35px;margin-right: 5px;">
+                            <button class="btn btn-default pull-right btn-xs-full" access-control module="companies" ng-click="activateSalons()" style="font-size: 12px;margin-right: 5px;">Activate Selected</button>
+                            <button class="btn btn-default pull-right btn-xs-full" access-control module="companies" ng-click="deactivateSalons()" style="font-size: 12px;margin-right: 5px;">Deactivate Selected</button>
+                            <button class="btn btn-default pull-right btn-xs-full" access-control module="companies" ng-click="deleteSalons()" style="font-size: 12px;margin-right: 5px;">Delete Selected</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content" style="margin-bottom:20px;">
+                    <div class="alert alert-warning alert-dismissable">
+                        <h5 style="margin-top:5px;"><i class="icon fa fa-warning"></i> NOTE!</h5>
+                        All the active salon will appear to the mobile application. Activate the salon once you are happy with all its information.
+                    </div>
+                    <table class="table table-hover table-striped tableContainer">
+                        <tbody>
+                            <tr>
+                                <th class="width20 xs-width60">Name</th>
+                                <th class="mobile-hidden width10">Date</th>
+                                <th class="mobile-hidden width20">Status</th>
+                                <th class="width20 xs-width30">Select <input type="checkbox" class="pull-right" ng-click="salonsFactory.selectAll(salonsGrid.DataSource.Data, SelectAll)" ng-model="SelectAll" /></th>
+                                <th class="mobile-hidden width20">Actions</th>
+                                <th class="mobileInfo"></th>
+                            </tr>
+                            <tr ng-repeat="salon in salonsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
+                                <td class="width20 xs-width60">{{salon.Name}}</td>
+                                <td class="mobile-hidden width10">{{salon.CreateDate | date:'dd/MM/yyyy'}}</td>
+                                <td class="mobile-hidden width20">
+                                    <div class="animate-switch-container" ng-switch on="salon.StatusCode">
+                                        <span ng-switch-when="NEW" class="label label-success">{{salon.StatusName}}</span>
+                                        <span ng-switch-when="DELETED" class="label label-danger">{{salon.StatusName}}</span>
+                                        <span ng-switch-when="ACTIVE" class="label label-primary">{{salon.StatusName}}</span>
+                                        <span ng-switch-when="INACTIVE" class="label label-warning">{{salon.StatusName}}</span>
+                                    </div>
+                                </td>
+                                <td class="width20 xs-width30">
+                                    <input type="checkbox" class="pull-right" ng-click="salonsFactory.setSelectedSalon(salon)" ng-model="salon.IsSelected" ng-if="salon.StatusCode!='DELETED'" />
+                                </td>
+                                <td class="mobile-hidden width20">
+                                    <small class="action-label label label-info" access-control module="companies" ng-click="editSalon(salon);"><i class="fa fa-pencil"></i> Edit</small>
+                                    <small class="action-label label label-info" access-control module="companies" ng-click="deleteSalon(salon);"><i class="fa fa-remove"></i> Delete</small>
+                                    <small class="action-label label label-info" access-control module="companyusers" ng-click="goToUsers(salon);">{{salon.TotalUsers}} users</small>
+                                    <small class="action-label label label-info" access-control module="products" ng-click="goToProducts(salon);">{{salon.TotalProducts}} products</small>
+                                </td>
+                                <td class="mobileInfo">
+                                    <i mobile-table-toggle class="fa fa-info-circle"></i>
+                                    <div class="info-container hide">
+                                        <table>
+                                            <tr>
+                                                <td><b>Date</b></td>
+                                                <td>{{salon.CreateDate | date:'dd/MM/yyyy'}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Status</b></td>
+                                                <td>
+                                                    <span class="animate-switch-container" ng-switch on="salon.StatusCode">
+                                                        <span ng-switch-when="NEW" class="label label-success">{{salon.StatusName}}</span>
+                                                        <span ng-switch-when="DELETED" class="label label-danger">{{salon.StatusName}}</span>
+                                                        <span ng-switch-when="ACTIVE" class="label label-primary">{{salon.StatusName}}</span>
+                                                        <span ng-switch-when="INACTIVE" class="label label-warning">{{salon.StatusName}}</span>
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td></td>
+                                                <td class="text-right">
+                                                    <small class="action-label label label-info" access-control module="companies" ng-click="editSalon(salon);"><i class="fa fa-pencil"></i> Edit</small>
+                                                    <small class="action-label label label-info" access-control module="companies" ng-click="deleteSalon(salon);"><i class="fa fa-remove"></i> Delete</small>
+                                                    <small class="action-label label label-info" access-control module="companyusers" ng-click="goToUsers(salon);">{{salon.TotalUsers}} users</small>
+                                                    <small class="action-label label label-info" access-control module="products" ng-click="goToProducts(salon);">{{salon.TotalProducts}} products</small>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-show="salonsGrid.Paging.Pages.length > 0" style="height:70px;">
+                    <ul class="pagination pagination-sm no-margin pull-right">
+                        <li ng-click="salonsGrid.SetPage($event, 1)" ng-disabled="salonsGrid.Paging.IsFirstPage"><a href="#">«</a></li>
+                        <li ng-repeat="page in salonsGrid.Paging.Pages" ng-click="salonsGrid.SetPage($event, page)" ng-disabled="salonsGrid.Paging.PageIndex==page"><a href="#">{{page}}</a></li>
+                        <li><a href="#" ng-click="salonsGrid.SetPage($event, salonsGrid.Paging.TotalPages)" ng-disabled="salonsGrid.Paging.IsLastPage">»</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div><!-- /.box -->
+    </section>
+</div>
+
+<div ng-include="'app/components/salons/modals/saveSalonModalView.html'"></div>

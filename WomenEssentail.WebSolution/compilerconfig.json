@@ -1,0 +1,22 @@
+﻿[
+  {
+    "outputFile": "assets/css/app.css",
+    "inputFile": "assets/css/app.less"
+  },
+  {
+    "outputFile": "assets/css/controls.css",
+    "inputFile": "assets/css/controls.less"
+  },
+  {
+    "outputFile": "assets/css/centerbox.css",
+    "inputFile": "assets/css/centerbox.less"
+  },
+  {
+    "outputFile": "assets/css/modals.css",
+    "inputFile": "assets/css/modals.less"
+  },
+  {
+    "outputFile": "assets/css/header-component.css",
+    "inputFile": "assets/css/header-component.less"
+  }
+]

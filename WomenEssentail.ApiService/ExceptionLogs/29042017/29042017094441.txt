@@ -1,0 +1,39 @@
+Message: 
+Procedure or function 'CompanyStatusUpdate' expects parameter '@ValidationMessages', which was not supplied.
+
+Paramaters: 
+
+
+Stack Trace: 
+   at Libraries.DataAccess.AdoDotNetLibrary.CommandTypeManagers.StoredProcedureManager.ExecuteReaderWithValidation(String commandText, SqlQueryParameter[] sqlParameters) in D:\My Work\Libraries\Libraries.DataAccess\AdoDotNetLibrary\CommandTypeManagers\StoredProcedureManager.cs:line 143
+   at Libraries.DataAccess.AdoDotNetLibrary.DataAccessEntitySet`1.Save(String storeProcedureName, Func`2 entityMapper, SqlQueryParameter[] parameters) in D:\My Work\Libraries\Libraries.DataAccess\AdoDotNetLibrary\DataAccessEntitySet.cs:line 75
+   at WomenEssentail.DataAccess.Repositories.CompanyRepository.UpdateStatus(BulkUpdateModel bulkUpdateModel) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.DataAccess\Repositories\CompanyRepository.cs:line 53
+   at WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.CompanyManager.UpdateCompanyStatus(BulkUpdateModel bulkUpdateModel) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\EntityManagers\Companies\CompanyManager.cs:line 39
+   at WomenEssentail.ApiService.Controllers.CompanyController.UpdateCompanyStatus(BulkUpdateModel bulkUpdateModel) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ApiService\Controllers\CompanyController.cs:line 74
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Filters.AuthorizationFilterAttribute.<ExecuteAuthorizationFilterAsyncCore>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+
+Error Url: 
+http://localhost:55464/api/Company/UpdateCompanyStatus
+
+Error Date: 
+29/04/2017 09:44:41
+

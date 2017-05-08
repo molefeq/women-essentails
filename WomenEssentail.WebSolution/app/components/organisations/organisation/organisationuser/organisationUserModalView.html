@@ -1,0 +1,101 @@
+﻿<script type="text/ng-template" id="organisationusertemplate.html">
+    <div class="modal-header">
+        <h3>{{Title}}</h3>
+        <span ng-click="cancel()" class="close">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </span>
+    </div>
+    <div class="modal-body dialog-content">
+        <div class="ModalContainer">
+            <form novalidate name="frmOrganisationUser" id="frmOrganisationUser" app-validator validation-summary-id="organisationUserValidationSummary" ng-show="!IsDeleteUser">
+                <div class="form-container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 label">
+                            <div class="summary-validation-valid" data-valmsg-summary="true" id="organisationUserValidationSummary">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 label">
+                            <label for="FirstName">First Name(s)<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input required data-required-msg="First Name(s) is required." ng-maxlength="100" data-maxlength-msg="First Name(s) cannot be more than 100 characters." id="FirstName" name="FirstName"
+                                   type="text" ng-model="model.FirstName" ng-pattern="/^([A-Za-z0-9_\.\-@\s\']*)$/" data-pattern-msg="Characters entered for the First Name(s) are not allowed."
+                                   placeholder="Enter First Name(s)" />
+                            <div class="k-valid-msg" data-for="FirstName"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 label">
+                            <label for="LastName">Last Name<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input required data-required-msg="Last Name is required." ng-maxlength="200" data-maxlength-msg="Last Name cannot be more than 200 characters." id="LastName" name="LastName"
+                                   ng-pattern="/^([A-Za-z0-9_\.\-@\s\']*)$/" data-pattern-msg="Characters entered for the Last Name are not allowed." type="text" ng-model="model.LastName" placeholder="Enter Last Name" />
+                            <div class="k-valid-msg" data-for="LastName"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 label">
+                            <label for="UserName">Username<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input required data-required-msg="Username is required." ng-maxlength="100" data-maxlength-msg="Username cannot be more than 100 characters." id="UserName" name="UserName" type="text"
+                                   ng-pattern="/^([A-Za-z0-9_\.\-@]*)$/" data-pattern-msg="Characters entered for the Username." ng-model="model.UserName" placeholder="Enter Username" ng-disabled="!IsNew" />
+                            <div class="k-valid-msg" data-for="UserName"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 label">
+                            <label for="EmailAddress">Email Address<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input ng-maxlength="500" data-maxlength-msg="Email Address cannot be more than 500 characters." required data-required-msg="Email Address is required."
+                                   ng-pattern="/^([A-Za-z0-9_\.-]+)@([\dA-Za-z\.-]+)\.([A-Za-z\.]{2,6})$/" data-pattern-msg="Enter a valid Email Address."
+                                   id="EmailAddress" name="EmailAddress" type="text" ng-model="model.EmailAddress" placeholder="Enter Email Address" />
+                            <div class="k-valid-msg" data-for="EmailAddress"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 label">
+                            <label for="ContactNumber">Contact Number</label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input ng-maxlength="20" data-maxlength-msg="Contact Number cannot be more than 20 characters." ng-pattern="/^(\+27[0-9]{9}|0[0-9]{9})$/" data-pattern-msg="Enter a valid Contact Number."
+                                   id="ContactNumber" name="ContactNumber" type="text" ng-model="model.ContactNumber" placeholder="Enter Contact Number" />
+                            <div class="k-valid-msg" data-for="ContactNumber"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 label">
+                            <label for="RoleId">Role<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <select required data-required-msg="Role is required." id="RoleId" name="RoleId" ng-model="model.RoleId" placeholder="Select Role" convert-to-number>
+                                <option value="">---Please select---</option>
+                                <option ng-repeat="role in roles" value="{{role.Id}}" label="{{role.Name}}"></option>
+                            </select>
+                            <div class="k-valid-msg" data-for="RoleId"></div>
+                        </div>
+                    </div>
+                    <div class="row buttonRow">
+                        <input type="submit" class="btn btnGreen" ng-click="save()" value="Save" button-control action-value="Save" action-in-progress-value="Saving ..." />
+                        <input type="button" class="btn btnGreen" ng-click="cancel()" value="Cancel" button-control action-value="Cancel" action-in-progress-value="Cancelling ..." />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="form-container" ng-show="IsDeleteUser">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <p>Are you sure you want to delete this user?</p>
+                </div>
+                <div class="row buttonRow">
+                    <input type="submit" class="btn btnGreen" ng-click="deleteUser()" value="Yes" />
+                    <input type="button" class="btn btnGreen" ng-click="cancel()" value="No" />
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

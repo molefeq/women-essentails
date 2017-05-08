@@ -1,0 +1,125 @@
+﻿<script type="text/ng-template" id="producttemplate.html">
+    <div class="modal-header">
+        <button class="close" aria-label="Close" type="button" ng-click="cancel()" data-dismiss="modal"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title">{{Title}}</h4>
+    </div>
+    <div class="modal-body">
+        <div class="ModalContainer">
+            <form novalidate name="frmProduct" id="frmProduct" app-validator validation-summary-id="productValidationSummary" ng-show="!IsDeleteUser">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 label">
+                        <div class="summary-validation-valid" data-valmsg-summary="true" id="productValidationSummary">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-md-12 col-sm-12 col-xs-12 text-center" ng-if="productsFactory.product.RelativeFileName">
+                            <img ng-attr-src="{{productsFactory.product.RelativeFileName}}" class="img-responsive center-block" height="80" width="80">
+                        </div>
+                        <div class="row text-center">
+                            <a class="addItemButton" ng-file-select ng-file-change="uploadImage($files)"><i class="fa fa-upload" aria-hidden="true"></i>Upload Logo</a>
+                            <input type="hidden" file-upload-input="productsFactory.product.Logo" class="file" name="Logo" id="Logo"
+                                   ng-model="productsFactory.product.Logo" required data-required-msg="Salon logo is required." />
+                            <div class="k-valid-msg text-center" data-for="Logo" style="text-align:center"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row label">
+                            <label for="CategoryId"> Category <i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <select name="CategoryId" id="CategoryId" required data-required-msg="Category is required." ng-model="productsFactory.product.CategoryId" 
+                                    class="form-control" ng-change="categoryChange();" convert-to-number>
+                                <option value="">Select Category</option>
+                                <option ng-repeat="category in productsFactory.categories" value="{{category.Id}}">{{category.Name}}</option>
+                            </select>
+                            <div class="k-valid-msg" data-for="CategoryId"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row label">
+                            <label for="SubCategoryId"> Sub Category <i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <select name="SubCategoryId" id="SubCategoryId" required data-required-msg="Sub Category is required." ng-model="productsFactory.product.SubCategoryId" 
+                                    class="form-control" convert-to-number>
+                                <option value="">Select Sub Category</option>
+                                <option ng-repeat="category in productsFactory.subCategories" value="{{category.Id}}">{{category.Name}}</option>
+                            </select>
+                            <div class="k-valid-msg" data-for="SubCategoryId"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row label">
+                            <label for="Name"> Name <i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input required data-required-msg="Name is required." ng-maxlength="200" class="form-control"
+                                   data-maxlength-msg="Name cannot be more than 200 characters." id="Name" name="Name" type="text"
+                                   ng-model="productsFactory.product.Name" placeholder="Enter Name"
+                                   ng-pattern='/^(([^\\\\/*?\"<>|.])*)$/' data-pattern-msg="Characters entered for the Name are not allowed." />
+                            <div class="k-valid-msg" data-for="Name"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row label">
+                            <label for="Description">Description<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <textarea ng-maxlength="2000" data-maxlength-msg="Description cannot be more than 2000 characters." class="form-control"
+                                      ng-pattern="/^[a-zA-Z0-9/&quot&quot\\\]\[:;|=,+*?.\s\']+$/" data-pattern-msg="Characters entered for the Description are not allowed."
+                                      id="Description" name="Description" type="text" ng-model="productsFactory.product.Description"
+                                      required data-required-msg="Description is required."
+                                      placeholder="Enter Description" />
+                            <div class="k-valid-msg" data-for="Description"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row label">
+                            <label for="Price">Price<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input ng-pattern="/^([0-9]{1,10}|[0-9]{1,10}\.[0-9]{1,2})$/" data-pattern-msg="Price is in invalid." class="form-control"
+                                   id="Price" name="Price" type="text" ng-model="productsFactory.product.Price" required data-required-msg="Price is required."
+                                   placeholder="Enter Price" />
+                            <div class="k-valid-msg" data-for="Price"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+
+                    </div>
+                </div>
+                <div class="row button-row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <input type="submit" class="btn btn-primary pull-right" ng-click="save()" value="Save" button-control action-value="Save" action-in-progress-value="Saving ..." />
+                        <input type="button" class="btn btn-default pull-right" ng-click="cancel()" value="Cancel" button-control action-value="Cancel" action-in-progress-value="Cancelling ..." />
+                    </div>
+                </div>
+            </form>
+            <div class="form-container" ng-show="IsDeleteUser">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <p>Are you sure you want to delete this product?</p>
+                    </div>
+                    <div class="row button-row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input type="submit" class="btn btn-primary pull-right" ng-click="save()" value="Yes" button-control action-value="Save" action-in-progress-value="Saving ..." />
+                            <input type="button" class="btn btn-default pull-right" ng-click="cancel()" value="Cancel" button-control action-value="Cancel" action-in-progress-value="Cancelling ..." />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>

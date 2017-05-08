@@ -1,0 +1,58 @@
+﻿<div class="container-fluid">
+    <div id="landingPageContainer">
+        <div><h2>Roles</h2></div>
+        <div app-grid="rolesGrid" app-grid-options="rolesGridOptions">
+            <div class="pageFilters">
+                <div class="buttonActionsContainer"><button ng-click="addRole()" class="btnGreen">Add Role</button></div>
+                <div class="searchContainer">
+                    <div class="input-group">
+                        <input type="text" ng-model="SearchFilter.SearchText" name="SearchText" class="SearchInput form-control" />
+                        <span class="input-group-btn"><button class="btn btnGrey" type="button" ng-click="searchRoles()"><i class="fa fa-search"></i></button></span>
+                    </div>
+                </div>
+                <div>Items (  {{rolesGrid.Paging.CurrentItemsCount}}  -  {{rolesGrid.DataSource.Total}} )</div>
+            </div>
+            <table class="normalTable">
+                <thead>
+                    <tr>
+                        <th class="width90">
+                            Name
+                        </th>
+                        <th class="width10">
+
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="role in rolesGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
+                        <td class="width90">
+                            {{role.Name}}
+                        </td>
+                        <td class="width10 center-align">
+                            <div class="dropdown">
+                                <button class="btnActions dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <span class="glyphicon glyphicon-option-horizontal"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li access-control="capture"><a ng-click="editRole(role)">Edit</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li access-control="capture"><a ng-click="deleteRole(role)">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div ng-show="rolesGrid.Paging.Pages.length > 0">
+                <span ng-click="rolesGrid.SetPage($event, 1)" ng-disabled="rolesGrid.Paging.IsFirstPage" class="pageItem">&lt;&lt;</span>
+                <span ng-repeat="page in rolesGrid.Paging.Pages">
+                    <span ng-click="rolesGrid.SetPage($event, page)" ng-disabled="rolesGrid.Paging.PageIndex==page" class="pageItem">{{page}}</span>
+                    <span ng-hide="$last">|</span>
+                </span>
+                <span ng-click="rolesGrid.SetPage($event, rolesGrid.Paging.TotalPages)" ng-disabled="rolesGrid.Paging.IsLastPage" class="pageItem">&gt;&gt;</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'app/components/rolesadmin/modals/roleAdminSaveModalView.html'"></div>

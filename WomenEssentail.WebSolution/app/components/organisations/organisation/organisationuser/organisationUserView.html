@@ -1,0 +1,76 @@
+﻿<div class="container-fluid">
+    <div id="landingPageContainer">
+        <div><h3>{{organisationUserFactory.organisation.Name}}</h3></div>
+        <div class="sparPortal_orderTable pdClose" app-grid="organisationUsersGrid" app-grid-options="organisationUsersGridOptions">
+            <div class="pageFilters">
+                <div class="buttonActionsContainer"><button ng-click="addUser()" class="btnGreen">Add User</button></div>
+                <div class="searchContainer">
+                    <div class="input-group">
+                        <input type="text" ng-model="SearchFilter.SearchText" name="SearchText" class="SearchInput form-control" /><span class="input-group-btn"><button class="btn btnGrey" type="button" ng-click="searchOrganisationUsers()"><i class="fa fa-search"></i></button></span>
+                    </div>
+                </div>
+                <div class="orderTable_rowCount"><strong>Items (  {{organisationUsersGrid.Paging.CurrentItemsCount}}  -  {{organisationUsersGrid.DataSource.Total}} )</strong></div>
+            </div>
+            <table class="normalTable">
+                <thead>
+                    <tr>
+                        <th class="width30">
+                            Name
+                        </th>
+                        <th class="width20">
+                            UserName
+                        </th>
+                        <th class="width20">
+                            Email Address
+                        </th>
+                        <th class="width20">
+                            Contact Number
+                        </th>
+                        <th class="width10">
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in organisationUsersGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
+                        <td class="width30">
+                            {{user.FirstName}}
+                        </td>
+                        <td class="width20">
+                            {{user.UserName}}
+                        </td>
+                        <td class="width20">
+                            {{user.EmailAddress}}
+                        </td>
+                        <td class="width20">
+                            {{user.ContactNumber}}
+                        </td>
+                        <td class="width10 center-align">
+
+                            <div class="dropdown">
+                                <button class="btnActions dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <span class="glyphicon glyphicon-option-horizontal"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                                    <li access-control="capture"><a ng-click="editUser(user)">Edit</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li access-control="capture"><a ng-click="deleteUser(user)">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="orderTable_pagination" ng-show="organisationUsersGrid.Paging.Pages.length > 0">
+                <span ng-click="organisationUsersGrid.SetPage($event, 1)" ng-disabled="organisationUsersGrid.Paging.IsFirstPage" class="pageItem">&lt;&lt;</span>
+                <span ng-repeat="page in organisationUsersGrid.Paging.Pages">
+                    <span ng-click="organisationUsersGrid.SetPage($event, page)" ng-disabled="organisationUsersGrid.Paging.PageIndex==page" class="pageItem">{{page}}</span>
+                    <span ng-hide="$last">|</span>
+                </span>
+                <span ng-click="organisationUsersGrid.SetPage($event, organisationUsersGrid.Paging.TotalPages)"
+                      ng-disabled="organisationUsersGrid.Paging.IsLastPage" class="pageItem">&gt;&gt;</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div ng-include="'app/components/organisations/organisation/organisationuser/organisationUserModalView.html'"></div>

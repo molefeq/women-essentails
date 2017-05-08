@@ -1,0 +1,76 @@
+﻿<div class="container-fluid">
+    <div id="landingPageContainer">
+        <div class="container">
+            <form novalidate name="frmUserProfile" id="frmUserProfile" app-validator validation-summary-id="userProfileValidationSummary">
+                <div class="form-container">
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12 label">
+                            <div class="summary-validation-valid" data-valmsg-summary="true" id="userProfileValidationSummary">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12 label">
+                                <label for="FirstName">First Name<i class="required">*</i></label>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input required data-required-msg="First Name is required." ng-maxlength="200" data-maxlength-msg="First Name cannot be more than 200 characters." id="FirstName" name="FirstName" type="text"
+                                       ng-model="userProfileFactory.user.FirstName" placeholder="Enter First Name"
+                                       ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for the First Name are not allowed." />
+                                <div class="k-valid-msg" data-for="FirstName"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12 label">
+                                <label for="LastName">Last Name<i class="required">*</i></label>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input required data-required-msg="Last Name is required." ng-maxlength="100" 
+                                       data-maxlength-msg="Last Name cannot be more than 100 characters." id="LastName" name="LastName" type="text"
+                                       ng-model="userProfileFactory.user.LastName" placeholder="Enter Last Name"
+                                       ng-pattern="/^([A-Za-z0-9_\.\-@\s]*)$/" data-pattern-msg="Characters entered for the Last Name are not allowed." />
+                                <div class="k-valid-msg" data-for="LastName"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12 label">
+                                <label for="EmailAddress">Email Address<i class="required">*</i></label>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input required data-required-msg="Email Address is required." ng-maxlength="500"
+                                       data-maxlength-msg="Email Address cannot be more than 500 characters." id="EmailAddress" name="EmailAddress" type="text"
+                                       ng-model="userProfileFactory.user.EmailAddress" placeholder="Enter Email Address"
+                                       ng-pattern="/^([A-Za-z0-9_\.-]+)@([\dA-Za-z\.-]+)\.([A-Za-z\.]{2,6})$/" data-pattern-msg="Characters entered for the Email Address are not allowed." />
+                                <div class="k-valid-msg" data-for="EmailAddress"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="col-md-12 col-sm-12 col-xs-12 label">
+                                <label for="ContactNumber">Contact Number</label>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <input ng-maxlength="20"
+                                       data-maxlength-msg="Contact Number cannot be more than 20 characters." id="ContactNumber" name="ContactNumber" type="text"
+                                       ng-model="userProfileFactory.user.ContactNumber" placeholder="Enter Contact Number"
+                                       ng-pattern="/^(\+27[0-9]{9}|0[0-9]{9})$/" 
+                                       data-pattern-msg="Characters entered for the Contact Number are not allowed." />
+                                <div class="k-valid-msg" data-for="ContactNumber"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row buttonRow">
+                        <input type="submit" class="btn btnGreen" ng-click="saveProfile()" value="Save" button-control action-value="Save" action-in-progress-value="Saving ..." />
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>

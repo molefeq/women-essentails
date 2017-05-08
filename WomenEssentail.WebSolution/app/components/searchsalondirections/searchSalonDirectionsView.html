@@ -1,0 +1,29 @@
+﻿<div class="content-wrapper" style="min-height: 873px;">
+    <section class="content-header">
+        <h1>
+            {{salon.Name}} Directions
+            <!--<small>preview of simple tables</small>-->
+        </h1>
+        <ol class="breadcrumb">
+            <li><a ui-sref="landing"><i class="fa fa-home"></i> Home</a></li>
+            <li><a ui-sref="searchsalons"><i class="fa fa-home"></i> Salons</a></li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div id='loadingmessage' ng-show="isLoading">
+            <div><p>{{loadingMessage}}</p><img src="/assets/img/loading-image.gif" /></div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div id="map-canvas" style="min-height:500px;">
+                    <ui-gmap-google-map control="map.control" center="map.center" zoom="map.zoom">
+                        <marker coords="marker.center"></marker>
+                    </ui-gmap-google-map>
+                </div>
+                <div id="directionsList" ng-show="showList" class="panel panel-primary"></div>
+            </div>
+        </div>
+    </section>
+</div>
+

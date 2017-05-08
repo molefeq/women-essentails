@@ -1,0 +1,17 @@
+﻿
+<script type="text/ng-template" id="errortemplate.html">
+    <div class="modal-header">
+        <button class="close" aria-label="Close" type="button" ng-click="closeDialog()" data-dismiss="modal">
+            <span aria-hidden="true">×</span>
+        </button>
+        <h4 class="modal-title">{{model.ErrorHeader}}</h4>
+    </div>
+    <div class="modal-body dialog-content">
+        <div class="error-dialog-details">
+            <div ng-bind-html="model.ErrorDetails"></div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="submit" class="btn btn-danger pull-right" ng-click="closeDialog()" value="OK" />
+    </div>
+</script>
