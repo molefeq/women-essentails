@@ -11,7 +11,8 @@
             getCompanyTypes: getCompanyTypes,
             getSubCategories: getSubCategories,
             getContactDetails: getContactDetails,
-            saveDeviceDetails: saveDeviceDetails
+            saveDeviceDetails: saveDeviceDetails,
+            logGoToCompany: logGoToCompany
         };
 
         return factory;
@@ -65,7 +66,23 @@
                 data: model
             })
             .success(function (data, status, headers, config) {
-                deferred.resolve({DeviceDetail: data.Item});
+                deferred.resolve({ DeviceDetail: data.Item });
+            });
+
+            return deferred.promise;
+        };
+
+
+        function logGoToCompany(companyId, deviceId) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'Post',
+                url: ServerApiBaseUrl + 'Lookup/LogGoToCompany?companyId=' + companyId + '&deviceId=' + deviceId
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve();
             });
 
             return deferred.promise;

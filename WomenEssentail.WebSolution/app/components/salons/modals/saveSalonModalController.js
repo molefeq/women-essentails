@@ -1,6 +1,6 @@
-﻿salonModalController.$inject = ['$scope', '$rootScope', '$uibModalInstance', 'geolocation', 'salonsFactory', 'utilsFactory'];
+﻿salonModalController.$inject = ['$scope', '$rootScope', '$uibModalInstance', 'geolocation', 'salonsFactory', 'utilsFactory', 'companyWorkingHourFactory'];
 
-function salonModalController($scope, $rootScope, $uibModalInstance, geolocation, salonsFactory, utilsFactory) {
+function salonModalController($scope, $rootScope, $uibModalInstance, geolocation, salonsFactory, utilsFactory, companyWorkingHourFactory) {
     var viewModel = $scope;
 
     viewModel.IsDeleteUser = viewModel.actionType == 'DELETE';
@@ -14,6 +14,10 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
     viewModel.postalSameAsPhysical = false;
     viewModel.getCurrentLocation = getCurrentLocation;
     viewModel.removeImage = removeImage;
+    viewModel.saveWorkingHour = saveWorkingHour;
+    viewModel.companyWorkingHourViewModel = companyWorkingHourFactory;
+
+    viewModel.companyWorkingHourViewModel.dayNames = angular.copy(salonsFactory.dayNames);
 
     function cancel() {
         $uibModalInstance.dismiss();
@@ -231,5 +235,11 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
         });
 
     }
+
+    function saveWorkingHour() {
+        if (!viewModel.frmWorkingHours.isValid(viewModel.companyWorkingHourViewModel.companyWorkingHour)) {
+            return;
+        }
+    };
 };
 

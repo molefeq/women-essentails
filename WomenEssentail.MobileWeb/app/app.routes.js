@@ -69,6 +69,16 @@ var app = app || {};
             url: "/technicalreport",
             templateUrl: "app/components/technicalreport/technicalReportView.html",
             controller: 'technicalReportController'
+        })
+        .state('salonlocationfinder', {
+            url: "/salonlocationfinder",
+            templateUrl: "app/components/salonlocationfinder/salonLocationFinderView.html",
+            controller: 'salonLocationFinderController'
+        })
+        .state('userregistration', {
+            url: "/userregistration",
+            templateUrl: "app/components/userregistration/userRegistrationView.html",
+            controller: 'userRegisterSalonController'
         });
     };
 

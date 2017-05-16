@@ -97,6 +97,8 @@
     <Content Include="app\components\salondirection\salonDirectionController.js" />
     <Content Include="app\components\salondirection\salonDirectionFactory.js" />
     <Content Include="app\components\salondirection\salonDirectionView.html" />
+    <Content Include="app\components\salonlocationfinder\salonLocationFinderController.js" />
+    <Content Include="app\components\salonlocationfinder\salonLocationFinderView.html" />
     <Content Include="app\components\salons\salonsController.js" />
     <Content Include="app\components\salons\salonsFactory.js" />
     <Content Include="app\components\salons\salonsView.html" />
@@ -109,6 +111,8 @@
     <Content Include="app\components\shareapp\shareAppView.html" />
     <Content Include="app\components\technicalreport\technicalReportController.js" />
     <Content Include="app\components\technicalreport\technicalReportView.html" />
+    <Content Include="app\components\userregistration\userRegistrationController.js" />
+    <Content Include="app\components\userregistration\userRegistrationView.html" />
     <Content Include="app\constants.js" />
     <Content Include="app\shared\controllers\appController.js" />
     <Content Include="app\shared\directives\accessControlDirective.js" />
@@ -119,6 +123,7 @@
     <Content Include="app\shared\directives\buttonControlDirective.js" />
     <Content Include="app\shared\directives\compareToValidatorDirective.js" />
     <Content Include="app\shared\directives\convertToNumberDirective.js" />
+    <Content Include="app\shared\directives\googlePlacesInputDirective.js" />
     <Content Include="app\shared\directives\menuHighlightDirective.js" />
     <Content Include="app\shared\error\errorAlert.html" />
     <Content Include="app\shared\error\errorController.js" />

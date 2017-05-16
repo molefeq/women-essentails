@@ -4,11 +4,13 @@
 
     angular.module('app').controller('salonController', salonController);
 
-    salonController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'salonFactory', 'notificationFactory', 'companyApiFactory'];
+    salonController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'salonFactory', 'notificationFactory', 'companyApiFactory', 'appFactory', 'lookupApiFactory'];
 
-    function salonController($scope, $rootScope, $state, $stateParams, salonFactory, notificationFactory, companyApiFactory) {
+    function salonController($scope, $rootScope, $state, $stateParams, salonFactory, notificationFactory, companyApiFactory, appFactory, lookupApiFactory) {
         var viewModel = $scope;
         var salonId = $stateParams.salonId
+
+        appFactory.Initialise();
 
         viewModel.salonFactory = salonFactory;
         viewModel.goToSalonDirections = goToSalonDirections;
@@ -31,22 +33,23 @@
             $scope.percent = 100 * (value / 5);
         };
 
-        viewModel.salonFactory.initialise(salonId).then(function () {
+        viewModel.salonFactory.initialise(salonId, appFactory.User.DeviceId).then(function () {
             $rootScope.isLoading = true;
             $rootScope.loadingMessage = 'Navigating, please wait ...';
 
-            navigator.geolocation.getCurrentPosition(function (position) {
-                viewModel.isLoading = false;
-                var salonPosition = { lat: position.coords.latitude, lng: position.coords.longitude }
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    center: salonPosition,
-                    zoom: 8
-                });
-                var marker = new google.maps.Marker({
-                    position: salonPosition,
-                    map: map
-                });
-            }, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
+            $rootScope.isLoading = false;
+            $rootScope.loadingMessage = '';
+            //navigator.geolocation.getCurrentPosition(function (position) {
+            var salonPosition = { lat: Number(viewModel.salonFactory.salon.PhysicalAddressLatitude), lng: Number(viewModel.salonFactory.salon.PhysicalAddressLongitude) }
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: salonPosition,
+                zoom: 8
+            });
+            var marker = new google.maps.Marker({
+                position: salonPosition,
+                map: map
+            });
+            //}, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
         });
 
         function goToSalons(e) {
@@ -56,6 +59,8 @@
         };
 
         function goToSalonDirections() {
+            lookupApiFactory.logGoToCompany(salonId, appFactory.User.DeviceId);
+
             if (!window.device) {
                 return $state.go('salondirection', { salonId: salonId });
             }
@@ -162,6 +167,7 @@
                 controller: salonFeedbackController
             });
         }
+
     };
 
     salonFeedbackHistoryController.$inject = ['$scope', '$rootScope', '$uibModalInstance', 'companyApiFactory', 'salonFactory'];

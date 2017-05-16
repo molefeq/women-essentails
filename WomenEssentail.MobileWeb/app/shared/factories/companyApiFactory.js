@@ -21,11 +21,7 @@
 
         function getCompanies(searchFilter) {
             var deferred = $q.defer();
-
-            if (window.device && !window.device.isVirtual) {
-                searchFilter.DeviceId = window.device.uuid;
-            }
-
+            
             $http(
             {
                 method: 'POST',
@@ -39,13 +35,8 @@
             return deferred.promise;
         };
 
-        function getCompany(companyId) {
+        function getCompany(companyId, deviceId) {
             var deferred = $q.defer();
-            var deviceId;
-
-            if (window.device && !window.device.isVirtual) {
-                deviceId = window.device.uuid;
-            }
 
             $http(
             {

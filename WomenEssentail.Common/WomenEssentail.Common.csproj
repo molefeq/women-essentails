@@ -75,11 +75,14 @@
     <Compile Include="DataTransferObjects\CompanySummaryDto.cs" />
     <Compile Include="DataTransferObjects\CompanyTypeDto.cs" />
     <Compile Include="DataTransferObjects\CompanyTypeProductDto.cs" />
+    <Compile Include="DataTransferObjects\CompanyWorkingHourDto.cs" />
     <Compile Include="DataTransferObjects\ContactUsDto.cs" />
     <Compile Include="DataTransferObjects\CountryDto.cs" />
     <Compile Include="DataTransferObjects\DashboardDataDto.cs" />
     <Compile Include="DataTransferObjects\DeviceDetailsDto.cs" />
     <Compile Include="DataTransferObjects\ExternalAuthenticationTypeDto.cs" />
+    <Compile Include="DataTransferObjects\LookupFieldDto.cs" />
+    <Compile Include="DataTransferObjects\LookupFieldValueDto.cs" />
     <Compile Include="DataTransferObjects\ModuleDto.cs" />
     <Compile Include="DataTransferObjects\OrganisationDto.cs" />
     <Compile Include="DataTransferObjects\PersonDto.cs" />

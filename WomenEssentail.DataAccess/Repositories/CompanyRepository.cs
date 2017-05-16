@@ -95,7 +95,7 @@ namespace WomenEssentail.DataAccess.Repositories
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "BusinessContactCode", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 10, ParameterValue = companyDto.BusinessContactCode });
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "BusinessContactNumber", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 20, ParameterValue = companyDto.BusinessContactNumber });
                 sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "MobileNumber", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.String, ParameterSize = 100, ParameterValue = companyDto.MobileNumber });
-                
+
                 if (companyDto.Logo != null || (companyDto.Galleries != null && companyDto.Galleries.Count > 0))
                 {
                     List<CompanyLogoDto> logos = new List<CompanyLogoDto>();
@@ -111,6 +111,11 @@ namespace WomenEssentail.DataAccess.Repositories
                     }
 
                     sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "Logos", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Structured, ParameterValue = logos.ToDataTable<CompanyLogoDto>() });
+                }
+
+                if (companyDto.CompanyWorkingHours != null && companyDto.CompanyWorkingHours.Count > 0)
+                {
+                    sqlQueryParameters.Add(new SqlQueryParameter { ParameterName = "WorkingHours", ParameterDirection = DbParameterDirection.Input, ParamentType = CodeParameterType.Structured, ParameterValue = companyDto.CompanyWorkingHours.ToDataTable<CompanyWorkingHourDto>() });
                 }
             }
 

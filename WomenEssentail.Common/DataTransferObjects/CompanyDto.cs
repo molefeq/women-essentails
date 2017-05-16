@@ -45,6 +45,7 @@ namespace WomenEssentail.Common.DataTransferObjects
         public string ThumbnailRelativeFileName { get; set; }
         public CompanyLogoDto Logo { get; set; }
         public List<CompanyLogoDto> Galleries { get; set; }
+        public List<CompanyWorkingHourDto> CompanyWorkingHours { get; set; }
         public int StatusId { get; set; }
         public int? EditUserId { get; set; }
         public int CreateUserId { get; set; }
@@ -60,6 +61,7 @@ namespace WomenEssentail.Common.DataTransferObjects
         {
             Logo = new CompanyLogoDto();
             Galleries = new List<CompanyLogoDto>();
+            CompanyWorkingHours = new List<CompanyWorkingHourDto>();
         }
     }
 }

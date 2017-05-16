@@ -4,6 +4,13 @@ var app = app || {};
 
 (function (utils) {
 
+    utils.appVariables = {
+        lastLocation: null,
+        currentLocation: null,
+        isLocationServicesEnabled: false,
+        lastLocationDate: null
+    };
+
     utils.setNonCachedImageFileName = function (imageFileName) {
         var currentDate = new Date();
         var h = currentDate.getHours();
@@ -161,6 +168,71 @@ var app = app || {};
 
         return new Date(getYear(dateText), getMonth(dateText), getDay(dateText));
     };
+
+    utils.share = function () {
+        var options = {
+            message: 'share this', // not supported on some apps (Facebook, Instagram)
+            subject: 'the subject', // fi. for email
+            files: ['', ''], // an array of filenames either locally or remotely
+            url: 'https://www.website.com/foo/#bar?a=b',
+            chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+        }
+
+        window.plugins.socialsharing.shareWithOptions(options, onShareSuccess, onShareError);
+    };
+
+    function onShareSuccess(result) {
+        console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+        console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+        utils.displayModal('Success!', 'Sharing comleted successfully.');
+    };
+
+    function onShareError(msg) {
+        utils.displayModal('Error!', 'Error occured while trying to share the information . Please try again later.');
+    };
+
+    utils.getCurrentLocation = function(successFunction) {
+        if (!utils.appVariables.isLocationServicesEnabled) {
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+            locationSuccess(position);
+            successFunction();
+        }, locationError, { maximumAge: 3000, timeout: 30000, enableHighAccuracy: true });
+    };
+
+    function locationSuccess(position) {
+        utils.appVariables = {
+            lastLocation: position.coords,
+            currentLocation: position.coords,
+            lastLocationDate: new Date()
+        };
+    };
+
+    function locationError(error) {
+        utils.appVariables = {
+            currentLocation: null
+        };
+
+        utils.displayModal('Error!', 'Error retrieving location, please ensure that gps location is enabled. Please try again later.');
+    };
+
+    utils.displayModal = function (options) {
+        $('#error-modal-title').text('');
+        $('#error-modal-content').text('');
+
+        if (options.header) {
+            $('#error-modal-title').text(options.header);
+        }
+
+        if (options.message) {
+            $('#error-modal-content').text(options.message);
+        }
+
+        $('#error-modal').modal('show');
+    };
+
 
     function getYear(dateText) {
         var year = dateText.split('/')[2].split(' ')[0];

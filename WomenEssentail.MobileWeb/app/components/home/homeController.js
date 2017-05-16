@@ -11,7 +11,7 @@
 
         viewModel.goToMain = goToMain;
 
-        $rootScope.isLoading = true;
+        //$rootScope.isLoading = true;
       
         if (window.device && !window.device.isVirtual) {
 

@@ -1,0 +1,35 @@
+Message: 
+Procedure or function 'CompanyGoThere' expects parameter '@ValidationMessages', which was not supplied.
+
+Paramaters: 
+
+
+Stack Trace: 
+   at Libraries.DataAccess.AdoDotNetLibrary.CommandTypeManagers.StoredProcedureManager.ExecuteReaderWithValidation(String commandText, SqlQueryParameter[] sqlParameters) in D:\My Work\Libraries\Libraries.DataAccess\AdoDotNetLibrary\CommandTypeManagers\StoredProcedureManager.cs:line 143
+   at Libraries.DataAccess.AdoDotNetLibrary.DataAccessEntitySet`1.Save(String storeProcedureName, Func`2 entityMapper, SqlQueryParameter[] parameters) in D:\My Work\Libraries\Libraries.DataAccess\AdoDotNetLibrary\DataAccessEntitySet.cs:line 75
+   at WomenEssentail.DataAccess.Repositories.DeviceDetailsRepository.CompanyGoThere(Int32 companyId, String deviceId) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.DataAccess\Repositories\DeviceDetailsRepository.cs:line 37
+   at WomenEssentail.ServiceBusinessRules.EntityManagers.DeviceDetails.DeviceDetailsManager.CompanyGoThere(Int32 companyId, String deviceId) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\EntityManagers\DeviceDetails\DeviceDetailsManager.cs:line 22
+   at WomenEssentail.WebSolution.Controllers.LookupController.LogGoToCompany(Int32 companyId, String deviceId) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.WebSolution\Controllers\LookupController.cs:line 89
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+
+Error Url: 
+http://localhost:64707/api/Lookup/LogGoToCompany?companyId=5&deviceId=WebBrowser
+
+Error Date: 
+16/05/2017 11:53:18
+

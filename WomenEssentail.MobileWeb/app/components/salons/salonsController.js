@@ -4,15 +4,18 @@
 
     angular.module('app').controller('salonsController', SalonsController);
 
-    SalonsController.$inject = ['$scope', '$rootScope', '$state', 'salonsFactory', 'salonDirectionFactory', 'lookupApiFactory', 'notificationFactory'];
+    SalonsController.$inject = ['$scope', '$rootScope', '$state', 'salonsFactory', 'salonDirectionFactory', 'lookupApiFactory', 'notificationFactory', 'appFactory'];
 
-    function SalonsController($scope, $rootScope, $state, salonsFactory, salonDirectionFactory, lookupApiFactory, notificationFactory) {
+    function SalonsController($scope, $rootScope, $state, salonsFactory, salonDirectionFactory, lookupApiFactory, notificationFactory, appFactory) {
         var viewModel = $scope;
         var page = 1;
+
+        appFactory.Initialise();
 
         $rootScope.isLoading = false;
         viewModel.isBusy = true;
         viewModel.salonsFactory = salonsFactory;
+        viewModel.salonsFactory.isScrollDisabled = true;
         viewModel.searchSalons = searchSalons;
         viewModel.goToSalon = goToSalon;
         viewModel.goToMain = goToMain;
@@ -27,7 +30,8 @@
             },
             SearchText: salonsFactory.searchFilter.SearchText,
             SubCategoryId: salonsFactory.searchFilter.SubCategoryId,
-            IsLocationSearch: true
+            IsLocationSearch: true,
+            DeviceId: appFactory.User.DeviceId
         };
 
         initialise();
@@ -36,12 +40,23 @@
             $rootScope.isLoading = true;
             page = 0;
             viewModel.salonsFactory.salons = [];
-            navigator.geolocation.getCurrentPosition(locationSuccess, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
+            viewModel.SearchFilter.Latitude = appFactory.location.latitude;
+            viewModel.SearchFilter.Longitude = appFactory.location.longitude;
+
+            nextPage();
+
+            lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (data) {
+                $rootScope.isLoading = false;
+                viewModel.subCategories = data.Items;
+            }, function () {
+                $rootScope.isLoading = false;
+            });
         };
 
         function searchSalons(isClear) {
             viewModel.isBusy = true;
             $rootScope.isLoading = true;
+            $rootScope.Message = 'Loading salons ..';
 
             if (isClear) {
                 viewModel.salonsFactory.salons = [];
@@ -49,10 +64,12 @@
             viewModel.salonsFactory.searchSalons(viewModel.SearchFilter).then(function (response) {
                 viewModel.isBusy = false;
                 $rootScope.isLoading = false;
+                $rootScope.Message = '';
                 console.log(viewModel.isBusy);
             }, function () {
                 viewModel.isBusy = false;
                 $rootScope.isLoading = false;
+                $rootScope.Message = '';
             });
         }
 
@@ -67,6 +84,8 @@
         };
 
         function goToSalonDirection(salon) {
+            lookupApiFactory.logGoToCompany(salon.Id, appFactory.User.DeviceId);
+
             if (!window.device) {
                 salonDirectionFactory.salon = salon;
 
@@ -113,13 +132,13 @@
         };
 
         function locationSuccess(position) {
-            viewModel.SearchFilter.Latitude = position.coords.latitude;
-            viewModel.SearchFilter.Longitude = position.coords.longitude;
+            viewModel.SearchFilter.Latitude = appFactory.location.coords.latitude;
+            viewModel.SearchFilter.Longitude = appFactory.location.coords.longitude;
 
+            nextPage();
             lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (data) {
                 $rootScope.isLoading = false;
                 viewModel.subCategories = data.Items;
-                nextPage();
             }, function () {
                 $rootScope.isLoading = false;
             });
@@ -147,6 +166,7 @@
             viewModel.SearchFilter.PageData.Skip = viewModel.SearchFilter.PageData.Take * (page - 1);
             searchSalons();
         };
+
     };
 
 })();

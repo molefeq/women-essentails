@@ -29,27 +29,33 @@
             activateSalons: activateSalons,
             deactivateSalons: deactivateSalons,
             deleteSalons: deleteSalons,
-            selectAll: selectAll
+            selectAll: selectAll,
+            dayNames:[]
         };
 
         return factory;
 
         function initialise() {
             var deferred = $q.defer();
+            var promises = {
+                companyTypesPromise: lookupApiFactory.getCompanyTypes({ PageData: { IncludeAllData: true } }),
+                dayNamesPromise: lookupApiFactory.getLookupFields('DayName')
+            }
 
             factory.selectedSalons = [];
-
-            lookupApiFactory.getCompanyTypes({ PageData: { IncludeAllData: true } }).then(function (response) {
-                for (var i = 0; i < response.Items.length; i++) {
-                    if (response.Items[i].Code == 'SALON') {
-                        factory.companyTypeId = response.Items[i].Id;
+            
+            $q.all(promises).then(function (data) {
+                factory.dayNames = data.dayNamesPromise;
+                for (var i = 0; i < data.companyTypesPromise.Items.length; i++) {
+                    if (data.companyTypesPromise.Items[i].Code == 'SALON') {
+                        factory.companyTypeId = data.companyTypesPromise.Items[i].Id;
                         break;
                     }
                 }
 
                 deferred.resolve();
             });
-
+            
             return deferred.promise;
         };
 

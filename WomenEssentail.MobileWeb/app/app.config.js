@@ -14,7 +14,7 @@
     };
 
     function configRoutes($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise("/home");
+        $urlRouterProvider.otherwise("/main");
         app.RoutesManager.initialise($stateProvider);
     };
 

@@ -68,6 +68,7 @@
     <Compile Include="Repositories\DashboardRepository.cs" />
     <Compile Include="Repositories\DeviceDetailsRepository.cs" />
     <Compile Include="Repositories\ExternalAuthenticationTypeRepository.cs" />
+    <Compile Include="Repositories\LookupFieldRepository.cs" />
     <Compile Include="Repositories\ModuleRepository.cs" />
     <Compile Include="Repositories\OrganisationRepository.cs" />
     <Compile Include="Repositories\PersonRepository.cs" />

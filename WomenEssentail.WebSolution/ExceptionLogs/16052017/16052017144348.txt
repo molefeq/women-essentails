@@ -1,0 +1,35 @@
+Message: 
+Invalid column name 'ZenitFields_Id'.
+
+Paramaters: 
+
+
+Stack Trace: 
+   at Libraries.DataAccess.AdoDotNetLibrary.CommandTypeManagers.StoredProcedureManager.ExecuteReaderWithValidation(String commandText, SqlQueryParameter[] sqlParameters) in D:\My Work\Libraries\Libraries.DataAccess\AdoDotNetLibrary\CommandTypeManagers\StoredProcedureManager.cs:line 143
+   at Libraries.DataAccess.AdoDotNetLibrary.DataAccessEntitySet`1.Save(String storeProcedureName, Func`2 entityMapper, SqlQueryParameter[] parameters) in D:\My Work\Libraries\Libraries.DataAccess\AdoDotNetLibrary\DataAccessEntitySet.cs:line 75
+   at WomenEssentail.DataAccess.Repositories.LookupFieldRepository.LookupFieldsFetch(Nullable`1 lookupFieldId, String fieldName, Func`2 lookupFieldDtoMapper) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.DataAccess\Repositories\LookupFieldRepository.cs:line 31
+   at WomenEssentail.ServiceBusinessRules.EntityManagers.LookupFields.LookupFieldManager.GetLookupFields(Nullable`1 lookFieldId, String fieldName) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\EntityManagers\LookupFields\LookupFieldManager.cs:line 15
+   at WomenEssentail.WebSolution.Controllers.LookupController.GetLookupFields(String fieldName) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.WebSolution\Controllers\LookupController.cs:line 47
+   at lambda_method(Closure , Object , Object[] )
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.<>c__DisplayClass10.<GetExecutor>b__9(Object instance, Object[] methodParameters)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ActionExecutor.Execute(Object instance, Object[] arguments)
+   at System.Web.Http.Controllers.ReflectedHttpActionDescriptor.ExecuteAsync(HttpControllerContext controllerContext, IDictionary`2 arguments, CancellationToken cancellationToken)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ApiControllerActionInvoker.<InvokeActionAsyncCore>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Controllers.ActionFilterResult.<ExecuteAsync>d__2.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+
+Error Url: 
+http://localhost:64707/api/Lookup/GetLookupFields?fieldName=DayName
+
+Error Date: 
+16/05/2017 14:43:48
+

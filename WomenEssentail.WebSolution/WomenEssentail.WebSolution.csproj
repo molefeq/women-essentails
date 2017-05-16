@@ -170,6 +170,10 @@
     <Content Include="app\app.module.js" />
     <Content Include="app\app.routes.js" />
     <Content Include="app\app.run.js" />
+    <Content Include="app\bundle.js" />
+    <Content Include="app\bundle.min.js">
+      <DependentUpon>bundle.js</DependentUpon>
+    </Content>
     <Content Include="app\components\aboutus\aboutUsView.html" />
     <Content Include="app\components\beautytips\beautyTipsController.js" />
     <Content Include="app\components\beautytips\beautyTipsFactory.js" />
@@ -239,6 +243,7 @@
     <Content Include="app\components\rolesadmin\rolesAdminController.js" />
     <Content Include="app\components\rolesadmin\rolesAdminFactory.js" />
     <Content Include="app\components\rolesadmin\rolesAdminView.html" />
+    <Content Include="app\components\salons\companyWorkingHourFactory.js" />
     <Content Include="app\components\salons\modals\saveSalonModalController.js" />
     <Content Include="app\components\salons\modals\saveSalonModalView.html" />
     <Content Include="app\components\salons\salonsController.js" />
@@ -413,6 +418,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <Content Include="compilerconfig.json" />
+    <None Include="bundleconfig.json" />
     <None Include="compilerconfig.json.defaults" />
     <Content Include="assets\css\app.less" />
     <Content Include="assets\css\centerbox.less" />
@@ -456,6 +462,9 @@
       <Project>{c4bf5521-30cb-4451-b04c-3cd0e3ac0b5d}</Project>
       <Name>WomenEssentail.ServiceBusinessRules</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

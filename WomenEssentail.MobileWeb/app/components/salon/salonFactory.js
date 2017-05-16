@@ -15,11 +15,11 @@
 
         return factory;
 
-        function initialise(salonId) {
+        function initialise(salonId, deviceId) {
             var deferred = $q.defer();
 
             var promises = {
-                companyPromise: companyApiFactory.getCompany(salonId),
+                companyPromise: companyApiFactory.getCompany(salonId, deviceId),
                 productsPromise: searchProducts(salonId)
             }
 

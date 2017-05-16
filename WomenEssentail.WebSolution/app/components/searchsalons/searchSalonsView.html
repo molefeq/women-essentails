@@ -25,7 +25,7 @@
                 </div>
             </div><!-- /.box-header -->
             <div class="box-body table-responsive no-padding" app-grid="salonsGrid" app-grid-options="salonsGridOptions">
-                <table class="table table-hover table-striped tableContainer">
+                <table class="table table-hover table-striped tableContainer" ng-if="salonsGrid.DataSource.Data.length > 0">
                     <tbody>
                         <tr ng-repeat="salon in salonsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
                             <td class="width20 xs-width30">

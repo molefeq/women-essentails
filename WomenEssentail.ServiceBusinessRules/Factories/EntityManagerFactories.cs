@@ -12,6 +12,7 @@ using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyTypes;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.ContactUss;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.DashboardData;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.DeviceDetails;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.LookupFields;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Modules;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Organisations;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Products;
@@ -43,6 +44,7 @@ namespace WomenEssentail.ServiceBusinessRules.Factories
             container.Register<IContactUsManager, ContactUsManager>(Lifestyle.Singleton);
             container.Register<IDeviceDetailsManager, DeviceDetailsManager>(Lifestyle.Singleton);
             container.Register<IAppRatingManager, AppRatingManager>(Lifestyle.Singleton);
+            container.Register<ILookupFieldManager, LookupFieldManager>(Lifestyle.Singleton);
         }        
     }
 }

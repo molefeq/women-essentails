@@ -56,7 +56,7 @@
                             <input required data-required-msg="Name is required." ng-maxlength="200" class="form-control"
                                    data-maxlength-msg="Name cannot be more than 200 characters." id="Name" name="Name" type="text"
                                    ng-model="salonsFactory.salon.Name" placeholder="Enter Name"
-                                   ng-pattern='/^[^\\\\/*?\"<>|.]*$/' data-pattern-msg="Characters entered for Name are not allowed."  />
+                                   ng-pattern='/^[^\\\\/*?\"<>|.]*$/' data-pattern-msg="Characters entered for Name are not allowed." />
                             <div class="k-valid-msg" data-for="Name"></div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                             <textarea required data-required-msg="Description is required." ng-maxlength="500" class="form-control"
                                       data-maxlength-msg="Description cannot be more than 500 characters." id="Description" name="Description"
                                       ng-model="salonsFactory.salon.Description" placeholder="Enter Description"
-                                      ng-pattern="/^[a-zA-Z0-9/&quot&quot\\\]\[:;|=,+*?.\s\']+$/" data-pattern-msg="Characters entered for Description are not allowed."  />
+                                      ng-pattern="/^[a-zA-Z0-9/&quot&quot\\\]\[:;|=,+*?.\s\']+$/" data-pattern-msg="Characters entered for Description are not allowed." />
                             <div class="k-valid-msg" data-for="Description"></div>
                         </div>
                     </div>
@@ -83,8 +83,7 @@
                         <div class="col-md-12 col-sm-12 col-xs-12 address-row">
                             <input required data-required-msg="Physical Address Line 1 is required." ng-maxlength="100" data-maxlength-msg="Physical Address Line 1 cannot be more than 100 characters."
                                    id="PhysicalAddressLine1" name="PhysicalAddressLine1" type="text" class="form-control"
-                                   ng-model="salonsFactory.salon.PhysicalAddressLine1" placeholder="Enter Physical Address Line 1"
-                                    />
+                                   ng-model="salonsFactory.salon.PhysicalAddressLine1" placeholder="Enter Physical Address Line 1" />
                             <div class="k-valid-msg" data-for="PhysicalAddressLine1"></div>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12 address-row">
@@ -209,6 +208,31 @@
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="row label">
+                            <label for="FirstName">Contact Person FirstName<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input ng-maxlength="200" data-maxlength-msg="Contact Person FirstName cannot be more than 200 characters." class="form-control"
+                                   ng-pattern='/^(([^\\\\/*?\"<>|.])*)$/' data-pattern-msg="Characters entered for the Contact Person FirstName are not allowed."
+                                   id="FirstName" name="FirstName" type="text" ng-model="salonsFactory.salon.FirstName" required data-required-msg="Contact Person FirstName is required."
+                                   placeholder="Enter FirstName" />
+                            <div class="k-valid-msg" data-for="FirstName"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row label">
+                            <label for="LastName">Contact Person LastName<i class="required">*</i></label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input ng-maxlength="200" data-maxlength-msg="Contact Person LastName cannot be more than 200 characters." class="form-control" required data-required-msg="Contact Person LastName is required."
+                                   ng-pattern='/^(([^\\\\/*?\"<>|.])*)$/' data-pattern-msg="Characters entered for the Contact Person LastName are not allowed."
+                                   id="ContactPersonName" name="LastName" type="text" ng-model="salonsFactory.salon.LastName" placeholder="Enter LastName" />
+                            <div class="k-valid-msg" data-for="LastName"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row label">
                             <label for="BusinessContactCode">Telephone Number</label>
                         </div>
                         <div class="col-md-12 col-sm-12 col-xs-12">
@@ -239,6 +263,92 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="row label">
+                            <label for="MobileNumber">Mobile Number</label>
+                        </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <input ng-maxlength="13" data-maxlength-msg="Mobile Number cannot be more than 13 characters."
+                                   class="form-control" ng-pattern="/^(\+27[0-9]{9}|0[0-9]{9})$/" data-pattern-msg="Enter a valid Mobile Number."
+                                   id="MobileNumber" name="MobileNumber" type="text" ng-model="salonsFactory.salon.MobileNumber"
+                                   placeholder="Enter Mobile Number" />
+                            <div class="k-valid-msg" data-for="MobileNumber"></div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="box box-primary" style="margin-top:30px;">
+                    <div class="box-header">
+                        <h3 class="box-title">Working Hours</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <app-sub-form name="frmWorkingHours" model="companyWorkingHourViewModel.companyWorkingHour">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Day</label>
+                                        <select name="DayName" id="DayName" sub-form-required="true" sub-form-required-msg="Day is required."
+                                                ng-model="workingHour.DayName"
+                                                class="form-control">
+                                            <option value="">Select</option>
+                                            <option ng-repeat="dayName in viewModel.companyWorkingHourViewModel.dayNames| filter: { display: true }" value="{{dayName.FieldValue}}">{{dayName.FieldValue}}</option>
+                                        </select>
+                                        <div class="k-valid-msg" data-for="DayName"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Opening</label>
+                                        <div uib-timepicker show-meridian="false" id="StartTime" name="StartTime"
+                                             sub-form-required="true" sub-form-required-msg="Opening time is required."
+                                             ng-model="workingHour.StartTime" hour-step="1" minute-step="15"></div>
+                                    </div>
+                                    <div class="k-valid-msg" data-for="StartTime"></div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Closing</label>
+                                        <div uib-timepicker show-meridian="false" id="EndTime" name="EndTime"
+                                             sub-form-required="true" sub-form-required-msg="Closing time is required."
+                                             ng-model="workingHour.EndTime" hour-step="1" minute-step="15"></div>
+                                    </div>
+                                    <div class="k-valid-msg" data-for="EndTime"></div>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="submit" style="margin-right:5px;" class="btn btn-primary pull-right" ng-click="saveWorkingHour()" value="Save" button-control action-value="Save" action-in-progress-value="Saving ..." />
+                                    <input type="button" style="margin-right:5px;" class="btn btn-default pull-right"
+                                           ng-click="viewModel.companyWorkingHourViewModel.reset()" value="Cancel" button-control action-value="Cancel" action-in-progress-value="Cancelling ..." />
+                                </div>
+                            </app-sub-form>
+                        </div>
+
+                        <div>
+                            <table class="table table-hover table-striped tableContainer">
+                                <tbody>
+                                    <tr>
+                                        <th class="width40">Day</th>
+                                        <th class="width20">Start Time</th>
+                                        <th class="width20">End Time</th>
+                                        <th class="width20">Actions</th>
+                                    </tr>
+                                    <tr ng-repeat="companyWorkingHour in salonsFactory.salon.CompanyWorkingHours" ng-class="$index % 2 == 1 ? 'altrow': ''">
+                                        <td class="DayName">{{companyWorkingHour.DayName}}</td>
+                                        <td class="width20">{{companyWorkingHour.StartTime}}</td>
+                                        <td class="width20">{{companyWorkingHour.EndTime}}</td>
+                                        <td class="width20">
+                                            <small class="action-label label label-info" ng-click="viewModel.companyWorkingHourViewModel.edit(companyWorkingHour);"><i class="fa fa-pencil"></i> Edit</small>
+                                            <small class="action-label label label-info" ng-click="viewModel.companyWorkingHourViewModel.deleteItem(companyWorkingHour);"><i class="fa fa-remove"></i> Delete</small>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div>
+
+
                 <div class="row button-row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
                         <input type="submit" class="btn btn-primary pull-right" ng-click="save()" value="Save" button-control action-value="Save" action-in-progress-value="Saving ..." />

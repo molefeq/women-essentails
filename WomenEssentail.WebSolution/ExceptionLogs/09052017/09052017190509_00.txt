@@ -1,0 +1,29 @@
+Message: 
+Error with the logging please make sure that the file you writing to does not exist.
+
+Paramaters: 
+
+
+Stack Trace: 
+   at WomenEssentail.ServiceBusinessRules.ExceptionHandlers.GlobalExceptionLogger.LogError(ErrorLogModel errorLogModel) in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\ExceptionHandlers\GlobalExceptionLogger.cs:line 53
+   at WomenEssentail.ServiceBusinessRules.ExceptionHandlers.GlobalExceptionLogger.<LogExceptionAsync>d__1.MoveNext() in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\ExceptionHandlers\GlobalExceptionLogger.cs:line 43
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.GetResult()
+   at WomenEssentail.ServiceBusinessRules.ExceptionHandlers.GlobalExceptionLogger.<LogAsync>d__0.MoveNext() in D:\My Work\SQS Work\Women Essentail\Solution\WomenEssentail\WomenEssentail.ServiceBusinessRules\ExceptionHandlers\GlobalExceptionLogger.cs:line 25
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.Dispatcher.HttpControllerDispatcher.<SendAsync>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at System.Web.Http.HttpServer.<SendAsync>d__0.MoveNext()
+
+Error Url: 
+http://localhost:64707/api/Lookup/GetSubCategories
+
+Error Date: 
+09/05/2017 19:05:09
+

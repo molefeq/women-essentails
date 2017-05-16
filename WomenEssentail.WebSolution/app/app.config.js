@@ -9,7 +9,7 @@
     function appConfig($stateProvider, $urlRouterProvider, $httpProvider, $compileProvider) {
         $httpProvider.interceptors.push('appHttpInterceptorFactory');
         $httpProvider.defaults.useXDomain = true;
-        $compileProvider.debugInfoEnabled(false);
+        //$compileProvider.debugInfoEnabled(false);
 
         configRoutes($stateProvider, $urlRouterProvider);
     };

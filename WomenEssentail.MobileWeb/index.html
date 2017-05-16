@@ -17,16 +17,36 @@
 </head>
 <body style="position: static;top: 0;right: 0;bottom: 0;left: 0;font-size: 17px;line-height: 21px; color: #000;background-color: #fff;">
 
-    <header ng-controller="appController">
-        
-    </header>
+    <header ng-controller="appController"></header>
 
-    <div class="wrapper" ui-view="">
+    <div class="wrapper" ui-view="" ng-cloak>
 
     </div>
 
+    <div id='loadingmessage' ng-show="isLoading" ng-cloak>
+        <div><p>{{loadingMessage}}</p><img src="assets/img/loading-image.gif" /></div>
+    </div>
 
     <div ng-include="'app/shared/error/errorAlert.html'"></div>
+
+    <div class="modal fade bd-example-modal-sm" id="error-modal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="error-modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="error-modal-content"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Okay</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="assets/libs/jquery/jquery-2.1.4.min.js"></script>
     <script src="assets/libs/bootstrap/js/bootstrap.min.js"></script>
@@ -64,6 +84,9 @@
     <script type="text/javascript" src="app/shared/directives/appSubFormDirective.js"></script>
     <script type="text/javascript" src="app/shared/directives/menuHighlightDirective.js"></script>
     <script type="text/javascript" src="app/shared/directives/accessControlDirective.js"></script>
+    <script type="text/javascript" src="app/shared/directives/googlePlacesInputDirective.js"></script>
+
+
     <script type="text/javascript" src="app/shared/factories/appFactory.js"></script>
     <script type="text/javascript" src="app/shared/factories/companyApiFactory.js"></script>
     <script type="text/javascript" src="app/shared/factories/utilsFactory.js"></script>
@@ -105,15 +128,25 @@
     <script src="app/components/shareapp/shareAppController.js"></script>
     <script src="app/components/technicalreport/technicalReportController.js"></script>
 
+    <script src="app/components/salonlocationfinder/salonLocationFinderController.js"></script>
+    <script src="app/components/userregistration/userRegistrationController.js"></script>
+
     <script>
-        //angular.bootstrap(document, ['app']);
         function initMap() {
-            angular.element(function () {
-                angular.bootstrap(document, ['app']);
-            });
+            angular.bootstrap(document, ['app']);
+            //window.postMessage("hello there!", "*");
+            //window.addEventListener("message", receiveMessage, false);
+
+            //function receiveMessage(event) {
+            //    alert(event.origin)
+            //}
+            // $('#error-modal').modal('show');
         }
 
     </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Dp0M7lBi97YoSYlpgt_7IDCMeXEZBiQ&callback=initMap" async defer></script>
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7Dp0M7lBi97YoSYlpgt_7IDCMeXEZBiQ&libraries=places&callback=initMap" async defer></script>
 </body>
 </html>

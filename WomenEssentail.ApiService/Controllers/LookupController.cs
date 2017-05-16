@@ -83,5 +83,11 @@ namespace WomenEssentail.ApiService.Controllers
             return Request.CreateResponse<Response<DeviceDetailsDto>>(HttpStatusCode.OK, deviceDetailsManager.Save(deviceDetailsDto));
         }
 
+        [HttpPost]
+        public HttpResponseMessage LogGoToCompany(int companyId, string deviceId)
+        {
+            return Request.CreateResponse<Response<DeviceDetailsDto>>(HttpStatusCode.OK, deviceDetailsManager.CompanyGoThere(companyId, deviceId));
+        }
+
     }
 }

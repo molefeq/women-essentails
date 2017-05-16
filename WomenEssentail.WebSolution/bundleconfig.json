@@ -1,0 +1,19 @@
+[
+  {
+    "outputFileName": "app/bundle.js",
+    "inputFiles": [
+      "app/shared/objects/*.js",
+      "app/app.routes.js",
+      "app/app.module.js",
+      "app/app.config.js",
+      "app/app.run.js",
+      "app/constants.js",
+      "app/shared/controllers/*.js",
+      "app/shared/directives/*.js",
+      "app/shared/error/*.js",
+      "app/shared/factories/*.js",
+      "app/shared/filters/*.js",
+      "app/components/**/*.js"
+    ]
+  }
+]

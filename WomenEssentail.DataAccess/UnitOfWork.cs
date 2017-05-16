@@ -30,6 +30,7 @@ public class UnitOfWork : DataServer, IDisposable
     private ContactUsRepository _ContactUs;
     private DeviceDetailsRepository _DeviceDetails;
     private AppRatingRepository _AppRatings;
+    private LookupFieldRepository _LookupFields;
 
     #endregion
 
@@ -314,6 +315,18 @@ public class UnitOfWork : DataServer, IDisposable
         }
     }
 
+    public LookupFieldRepository LookupFields
+    {
+        get
+        {
+            if (_LookupFields == null)
+            {
+                _LookupFields = new LookupFieldRepository(Connection);
+            }
+
+            return _LookupFields;
+        }
+    }
     #endregion
 
     void IDisposable.Dispose()

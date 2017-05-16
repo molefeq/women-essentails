@@ -10,7 +10,8 @@
         var factory = {
             searchSalons: searchSalons,
             searchFilter: {},
-            salons: []
+            salons: [],
+            isScrollDisabled: false
         };
 
         return factory;
@@ -22,6 +23,8 @@
                 for (var i = 0; i < data.Companies.length; i++) {
                     factory.salons.push(data.Companies[i]);
                 }
+
+                factory.isScrollDisabled = factory.salons.length >= data.TotalCompanies;
                 deferred.resolve();
             });
 

@@ -9,6 +9,7 @@ using WomenEssentail.Common.DataTransferObjects;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Categories.Mappers;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyLogo.Mappers;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyTypes.Mappers;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyWorkingHours.Mappers;
 
 namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
 {
@@ -264,6 +265,13 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.Companies.Mappers
                 {
                     companyDto.Galleries.Add(CompanyLogoMappers.Instance.MapToCompanyLogoDto(sqlDataReader));
                 }
+            }
+            sqlDataReader.NextResult();
+
+            while (sqlDataReader.Read())
+            {
+                    companyDto.CompanyWorkingHours.Add(CompanyWorkingHourMappers.Instance.MapToCompanyWorkingHourDto(sqlDataReader));
+               
             }
             return companyDto;
         }

@@ -12,7 +12,8 @@
             getCategories: getCategories,
             getSubCategories: getSubCategories,
             sendMessage: sendMessage,
-            getContactDetails: getContactDetails
+            getContactDetails: getContactDetails,
+            getLookupFields: getLookupFields
         };
 
         return factory;
@@ -28,6 +29,21 @@
         function getSubCategories(searchFilter) {
             return getResultSet(searchFilter, ServerApiBaseUrl + 'Lookup/GetSubCategories');
         };
+
+        function getLookupFields(fieldName) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'GET',
+                url: ServerApiBaseUrl + 'Lookup/GetLookupFields?fieldName=' + fieldName
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve(data);
+            });
+
+            return deferred.promise;
+        }
 
         function getResultSet(searchFilter, url) {
             var deferred = $q.defer();

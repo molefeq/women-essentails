@@ -31,7 +31,7 @@
         <div style="min-height:1%;position: relative; overflow: auto;transform: none;background: #ffd1dc !important;" id="thisElement">
 
             <ul class="table-view" style="min-height:1%;position: relative; overflow: auto;transform: none;"
-                infinite-scroll='nextPage()' infinite-scroll-disabled='isBusy' infinite-scroll-distance="1"
+                infinite-scroll='nextPage()' infinite-scroll-disabled='salonsFactory.isScrollDisabled' infinite-scroll-distance="1"
                 infinite-scroll-container="'#thisElement'" infinite-scroll-parent="true">
                 <li class="table-view-cell media" ng-repeat="salon in salonsFactory.salons" style="padding: 10px;">
                     <a data-transition="slide-in">
@@ -60,7 +60,3 @@
     </div>
 </div>
 <footer></footer>
-
-<div id='loadingmessage' ng-show="isLoading">
-    <div><p>Loading Salons ...</p><img src="assets/img/loading-image.gif" /></div>
-</div>

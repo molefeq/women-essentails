@@ -27,7 +27,7 @@
             </div><!-- /.box-header -->
             <div class="box-body table-responsive no-padding"
                  app-grid="specialsGrid" app-grid-options="specialsGridOptions">
-                <table class="table table-hover table-striped tableContainer">
+                <table class="table table-hover table-striped tableContainer" ng-if="specialsGrid.DataSource.Data.length > 0">
                     <tbody>
                         <tr ng-repeat="special in specialsGrid.DataSource.Data" ng-class="$index % 2 == 1 ? 'altrow': ''">
                             <td class="width30 xs-width50">

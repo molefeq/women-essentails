@@ -111,13 +111,13 @@
         </header>
 
         <main>
-            <div class="viewsContainer" ui-view="" ng-cloak></div>
-            <div id='loadingmessage' loading-modal ng-cloak>
-                <div><p>{{loadingMessage}}</p><img src="assets/img/loading-image.gif" /></div>
-            </div>
+            <div class="viewsContainer view-animate" ui-view="" ng-cloak> </div>
         </main>
 
-        <footer ui-view="footer"></footer>
+        <div id='loadingmessage' loading-modal ng-cloak>
+            <div><p>{{loadingMessage}}</p><img src="assets/img/loading-image.gif" /></div>
+        </div>
+        <footer></footer>
 
     </div>
 
@@ -125,7 +125,6 @@
 
     <script src="assets/libs/jquery/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="assets/libs/angular/angular.min.js"></script>
-    <script type="text/javascript" src="assets/libs/angular/angular-animate.min.js"></script>
     <script type="text/javascript" src="assets/libs/angular/angular-cookies.min.js"></script>
     <script type="text/javascript" src="assets/libs/angular/angular-sanitize.min.js"></script>
     <script type="text/javascript" src="assets/libs/angular/angular-aria.min.js"></script>
@@ -142,6 +141,8 @@
     <script type="text/javascript" src="assets/libs/underscore/underscore.js"></script>
     <script type="text/javascript" src="assets/libs/angular-simple-logger/angular-simple-logger.js"></script>
     <script type="text/javascript" src="assets/libs/angular-maps/angular-google-maps.js"></script>
+
+    <!--<script src="app/bundle.min.js"></script>-->
 
     <script type="text/javascript" src="app/app.module.js"></script>
     <script type="text/javascript" src="app/app.routes.js"></script>
@@ -200,6 +201,7 @@
     <script type="text/javascript" src="app/components/salons/salonsController.js"></script>
     <script type="text/javascript" src="app/components/salons/modals/saveSalonModalController.js"></script>
     <script type="text/javascript" src="app/components/salons/salonsFactory.js"></script>
+    <script type="text/javascript" src="app/components/salons/companyWorkingHourFactory.js"></script>
 
     <script type="text/javascript" src="app/components/products/Modals/saveProductModalController.js"></script>
     <script type="text/javascript" src="app/components/products/productsController.js"></script>
@@ -241,11 +243,11 @@
     <script src="app/components/searchbeautytips/searchBeautyTipsController.js"></script>
 
     <script>
-        //angular.bootstrap(document, ['app']);
+        angular.bootstrap(document, ['app']);
         function initMap() {
-            angular.element(function () {
-                angular.bootstrap(document, ['app']);
-            });
+            //angular.element(function () {
+            //    angular.bootstrap(document, ['app']);
+            //});
         }
 
     </script>

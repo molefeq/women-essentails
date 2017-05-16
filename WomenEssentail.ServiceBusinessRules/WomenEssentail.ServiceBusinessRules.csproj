@@ -161,6 +161,7 @@
     <Compile Include="EntityManagers\CompanyTypes\CompanyTypeManager.cs" />
     <Compile Include="EntityManagers\CompanyTypes\ICompanyTypeManager.cs" />
     <Compile Include="EntityManagers\CompanyTypes\Mappers\CompanyTypeMappers.cs" />
+    <Compile Include="EntityManagers\CompanyWorkingHours\Mappers\CompanyWorkingHourMappers.cs" />
     <Compile Include="EntityManagers\ContactUs\ContactUsManager.cs" />
     <Compile Include="EntityManagers\ContactUs\IContactUsManager.cs" />
     <Compile Include="EntityManagers\ContactUs\Mappers\ContactUsMappers.cs" />
@@ -176,6 +177,10 @@
     <Compile Include="EntityManagers\ExternalAuthenticationTypes\ExternalAuthenticationTypeManager.cs" />
     <Compile Include="EntityManagers\ExternalAuthenticationTypes\IExternalAuthenticationTypeManager.cs" />
     <Compile Include="EntityManagers\ExternalAuthenticationTypes\Mappers\ExternalAuthenticationTypeMappers.cs" />
+    <Compile Include="EntityManagers\LookupFields\ILookupFieldManager.cs" />
+    <Compile Include="EntityManagers\LookupFields\LookupFieldManager.cs" />
+    <Compile Include="EntityManagers\LookupFields\Mappers\LookupFieldMappers.cs" />
+    <Compile Include="EntityManagers\LookupFieldValues\Mappers\LookupFieldValueMappers.cs" />
     <Compile Include="EntityManagers\Modules\IModuleManager.cs" />
     <Compile Include="EntityManagers\Modules\Mappers\ModuleMappers.cs" />
     <Compile Include="EntityManagers\Modules\ModuleManager.cs" />

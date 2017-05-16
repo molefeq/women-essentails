@@ -15,7 +15,13 @@ namespace WomenEssentail.ServiceBusinessRules.EntityManagers.DeviceDetails
                 return unitOfWork.DeviceDetails.Save(deviceDetailsDto, DeviceDetailsMappers.Instance.MapToDeviceDetailsDto);
             }
         }
-
+        public Response<DeviceDetailsDto> CompanyGoThere(int companyId, string deviceId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork())
+            {
+                return unitOfWork.DeviceDetails.CompanyGoThere(companyId, deviceId);
+            }
+        }
     }
 }
 

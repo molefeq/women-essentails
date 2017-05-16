@@ -3,9 +3,7 @@
 
     angular.module('app').run(['appFactory', '$rootScope', function (appFactory, $rootScope) {
         appFactory.Initialise();
-
-        $rootScope.freeTextRegex = "/^[^\\\\/*?\"<>|.]*$/";
-
+        
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
             appFactory.ManageUrlRedirects(event, fromState, toState);
 

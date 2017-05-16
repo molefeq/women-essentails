@@ -543,6 +543,13 @@ var app = app || {};
 
 (function (utils) {
 
+    utils.appVariables = {
+        lastLocation: null,
+        currentLocation: null,
+        isLocationServicesEnabled: false,
+        lastLocationDate: null
+    };
+
     utils.setNonCachedImageFileName = function (imageFileName) {
         var currentDate = new Date();
         var h = currentDate.getHours();
@@ -701,6 +708,71 @@ var app = app || {};
         return new Date(getYear(dateText), getMonth(dateText), getDay(dateText));
     };
 
+    utils.share = function () {
+        var options = {
+            message: 'share this', // not supported on some apps (Facebook, Instagram)
+            subject: 'the subject', // fi. for email
+            files: ['', ''], // an array of filenames either locally or remotely
+            url: 'https://www.website.com/foo/#bar?a=b',
+            chooserTitle: 'Pick an app' // Android only, you can override the default share sheet title
+        }
+
+        window.plugins.socialsharing.shareWithOptions(options, onShareSuccess, onShareError);
+    };
+
+    function onShareSuccess(result) {
+        console.log("Share completed? " + result.completed); // On Android apps mostly return false even while it's true
+        console.log("Shared to app: " + result.app); // On Android result.app is currently empty. On iOS it's empty when sharing is cancelled (result.completed=false)
+        utils.displayModal('Success!', 'Sharing comleted successfully.');
+    };
+
+    function onShareError(msg) {
+        utils.displayModal('Error!', 'Error occured while trying to share the information . Please try again later.');
+    };
+
+    utils.getCurrentLocation = function(successFunction) {
+        if (!utils.appVariables.isLocationServicesEnabled) {
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+            locationSuccess(position);
+            successFunction();
+        }, locationError, { maximumAge: 3000, timeout: 30000, enableHighAccuracy: true });
+    };
+
+    function locationSuccess(position) {
+        utils.appVariables = {
+            lastLocation: position.coords,
+            currentLocation: position.coords,
+            lastLocationDate: new Date()
+        };
+    };
+
+    function locationError(error) {
+        utils.appVariables = {
+            currentLocation: null
+        };
+
+        utils.displayModal('Error!', 'Error retrieving location, please ensure that gps location is enabled. Please try again later.');
+    };
+
+    utils.displayModal = function (options) {
+        $('#error-modal-title').text('');
+        $('#error-modal-content').text('');
+
+        if (options.header) {
+            $('#error-modal-title').text(options.header);
+        }
+
+        if (options.message) {
+            $('#error-modal-content').text(options.message);
+        }
+
+        $('#error-modal').modal('show');
+    };
+
+
     function getYear(dateText) {
         var year = dateText.split('/')[2].split(' ')[0];
         return year;
@@ -817,6 +889,16 @@ var app = app || {};
             url: "/technicalreport",
             templateUrl: "app/components/technicalreport/technicalReportView.html",
             controller: 'technicalReportController'
+        })
+        .state('salonlocationfinder', {
+            url: "/salonlocationfinder",
+            templateUrl: "app/components/salonlocationfinder/salonLocationFinderView.html",
+            controller: 'salonLocationFinderController'
+        })
+        .state('userregistration', {
+            url: "/userregistration",
+            templateUrl: "app/components/userregistration/userRegistrationView.html",
+            controller: 'userRegisterSalonController'
         });
     };
 
@@ -846,7 +928,7 @@ var app = app || {};
     };
 
     function configRoutes($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise("/home");
+        $urlRouterProvider.otherwise("/main");
         app.RoutesManager.initialise($stateProvider);
     };
 
@@ -855,13 +937,51 @@ var app = app || {};
 (function () {
     'use strict';
 
-    angular.module('app').run(['appFactory', '$rootScope', function (appFactory, $rootScope) {
+    angular.module('app').run(['appFactory', '$rootScope', '$interval', 'utilsFactory', function (appFactory, $rootScope, $interval, utilsFactory) {
         $rootScope.$on('$stateChangeStart', function (event, toState, toParams, fromState, fromParams, options) {
             appFactory.ManageUrlRedirects(event, fromState, toState);
         });
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams, options) {
         });
+
+        $rootScope.isLoading = true;
+        $rootScope.loadingMessage = 'Switching on location services.';
+
+        utilsFactory.switchOnGPSLocationServices().then(function (response) {
+
+            if (!appFactory.isLocationServicesEnabled) {
+
+                $rootScope.isLoading = false;
+                $rootScope.loadingMessage = '';
+                return;
+            }
+
+            $rootScope.loadingMessage = 'Retrieving current location.';
+
+            utilsFactory.getCurrentLocation().then(function (data) {
+                $rootScope.loadingMessage = 'Retrieving current location full address.';
+
+                utilsFactory.getCurrentLocationAddress(appFactory.location).then(function (data) {
+                    $rootScope.isLoading = false;
+                    $rootScope.loadingMessage = '';
+                });
+            });
+        });
+
+        var locationInterval = $interval(function () {
+            $rootScope.loadingMessage = 'Retrieving current location.';
+
+            utilsFactory.getCurrentLocation().then(function (data) {
+                $rootScope.loadingMessage = 'Retrieving current location full address.';
+
+                utilsFactory.getCurrentLocationAddress(appFactory.location).then(function (data) {
+                    $rootScope.isLoading = false;
+                    $rootScope.loadingMessage = '';
+                });
+            });
+        }, 300000);
+
     }]);
 })();
 'use strict';
@@ -893,12 +1013,12 @@ var menus = {
 };
 var anonymousStates = { 'login': true, 'forgotpassword': true, 'resetpassword': true, 'changepassword': true };
 
-angular.module('app').constant('ServerBaseUrl', 'https://essentials4women.co.za/');
+//angular.module('app').constant('ServerBaseUrl', 'http://essentials4women.co.za/');
 //angular.module('app').constant('ServerBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/');
-//angular.module('app').constant('ServerBaseUrl', 'http://localhost:64707/');
-//angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:64707/api/');
+angular.module('app').constant('ServerBaseUrl', 'http://localhost:64707/');
+angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:64707/api/');
 //angular.module('app').constant('ServerApiBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/api/');
-angular.module('app').constant('ServerApiBaseUrl', 'https://essentials4women.co.za/api/');
+///angular.module('app').constant('ServerApiBaseUrl', 'http://essentials4women.co.za/api/');
 angular.module('app').constant('SubMenuItems', menus);
 angular.module('app').constant('AnonymousStates', anonymousStates);
 (function () {
@@ -1546,6 +1666,41 @@ angular.module('app').constant('AnonymousStates', anonymousStates);
     };
 
 })();
+
+
+(function () {
+
+    'use strict';
+
+    angular.module('app').directive('googlePlacesInput', googlePlacesInputDirective);
+
+    googlePlacesInputDirective.$inject = ['$rootScope'];
+
+    function googlePlacesInputDirective($rootScope) {
+        var directive = {
+            restrict: 'A',
+            link: linkFunction,
+            scope: {
+
+            }
+        };
+
+        function linkFunction(scope, element, attributes) {
+            var autocomplete = new google.maps.places.Autocomplete(element[0], { types: ['geocode'] });
+
+            autocomplete.addListener('place_changed', fillInAddress);
+
+            function fillInAddress() {
+                var place = autocomplete.getPlace();
+
+                $rootScope.$broadcast('google-map-place-updated', place);
+            }
+        };
+
+        return directive;
+    };
+
+})();
 (function () {
 
     'use strict';
@@ -1595,18 +1750,40 @@ function errorController($scope, $rootScope, $uibModalInstance) {
     'use strict';
 
     angular.module('app').factory('appFactory', AppFactory);
-    
-    function AppFactory() {
+
+    AppFactory.$inject = ['$state'];
+
+    function AppFactory($state) {
         var user, userDisplayName, token;
 
         var factory = {
-            ManageUrlRedirects: manageUrlRedirects
+            ManageUrlRedirects: manageUrlRedirects,
+            location: null,
+            locationAddress: null,
+            isLocationServicesEnabled: false,
+            Initialise: initialise,
+            User: {}
         };
 
         return factory;
-        
+
+        function initialise() {
+            if (localStorage["user"] === null || localStorage["user"] === undefined) {
+                factory.User = null;
+                return;
+            }
+
+            factory.User = JSON.parse(localStorage["user"]);
+        }
+
         function manageUrlRedirects(event, fromState, toState) {
-            
+
+            if (toState.name != 'userregistration' && (localStorage["user"] === null || localStorage["user"] === undefined)) {
+                event.preventDefault();
+                $state.go('userregistration');
+                return;
+            }
+
         };
     };
 
@@ -1710,11 +1887,7 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
         function getCompanies(searchFilter) {
             var deferred = $q.defer();
-
-            if (window.device && !window.device.isVirtual) {
-                searchFilter.DeviceId = window.device.uuid;
-            }
-
+            
             $http(
             {
                 method: 'POST',
@@ -1728,13 +1901,8 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             return deferred.promise;
         };
 
-        function getCompany(companyId) {
+        function getCompany(companyId, deviceId) {
             var deferred = $q.defer();
-            var deviceId;
-
-            if (window.device && !window.device.isVirtual) {
-                deviceId = window.device.uuid;
-            }
 
             $http(
             {
@@ -1953,7 +2121,8 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             getCompanyTypes: getCompanyTypes,
             getSubCategories: getSubCategories,
             getContactDetails: getContactDetails,
-            saveDeviceDetails: saveDeviceDetails
+            saveDeviceDetails: saveDeviceDetails,
+            logGoToCompany: logGoToCompany
         };
 
         return factory;
@@ -2007,7 +2176,23 @@ function errorController($scope, $rootScope, $uibModalInstance) {
                 data: model
             })
             .success(function (data, status, headers, config) {
-                deferred.resolve({DeviceDetail: data.Item});
+                deferred.resolve({ DeviceDetail: data.Item });
+            });
+
+            return deferred.promise;
+        };
+
+
+        function logGoToCompany(companyId, deviceId) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'Post',
+                url: ServerApiBaseUrl + 'Lookup/LogGoToCompany?companyId=' + companyId + '&deviceId=' + deviceId
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve();
             });
 
             return deferred.promise;
@@ -2128,13 +2313,139 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
     angular.module('app').factory('utilsFactory', utilsFactory);
 
+    utilsFactory.$inject = ['$http', '$q', 'appFactory'];
 
-    function utilsFactory() {
+    function utilsFactory($http, $q, appFactory) {
         var factory = {
-            stringToDate: stringToDate
+            stringToDate: stringToDate,
+            getCurrentLocation: getCurrentLocation,
+            getCurrentLocationAddress: getCurrentLocationAddress,
+            switchOnGPSLocationServices: switchOnGPSLocationServices
         };
 
         return factory;
+
+        function switchOnGPSLocationServices() {
+            var deferred = $q.defer();
+
+            if (!window.device) {
+                navigator.permissions && navigator.permissions.query({ name: 'geolocation' }).then(function (PermissionStatus) {
+                    if (PermissionStatus.state == 'granted') {
+                        appFactory.isLocationServicesEnabled = true;
+                        //allowed
+                    } else {
+                        appFactory.isLocationServicesEnabled = false;
+                        //denied
+                    }
+                    deferred.resolve();
+                })
+                return deferred.promise;
+            }
+
+            var deferred = $q.defer();
+
+            cordova.plugins.diagnostic.isLocationAvailable(function (available) {
+                if (!available) {
+                    cordova.plugins.locationAccuracy.request(function () {
+                        appFactory.isLocationServicesEnabled = true;
+                        deferred.resolve();
+                    }, function () {
+                        appFactory.isLocationServicesEnabled = false;
+                        deferred.resolve();
+                    }, cordova.plugins.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY);
+                }
+                else {
+                    appFactory.isLocationServicesEnabled = true;
+                    deferred.resolve();
+                }
+            }, function (error) {
+                appFactory.isLocationServicesEnabled = false;
+                deferred.resolve();
+            });
+
+            return deferred.promise;
+        };
+
+        function getCurrentLocation() {
+            var deferred = $q.defer();
+
+            navigator.geolocation.getCurrentPosition(function (data) {
+                appFactory.location = data.coords;
+                deferred.resolve({ Position: data.coords });
+            }, function () {
+                getCurrentLocationUsingGoogleMaps(deferred).then(function (response) {
+                    appFactory.location = response.Position;
+                    deferred.resolve({ Position: response.Position });
+                }, function () {
+                    appFactory.location = null;
+                    deferred.reject({
+                        'ErrorCode': 408,
+                        'ErrorHeader': 'Error retrieving location',
+                        'ErrorDetails': 'Error retrieving location, please ensure that gps location is enabled.'
+                    });
+                });
+            }, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
+
+            return deferred.promise;
+        };
+
+        function getCurrentLocationUsingGoogleMaps() {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'POST',
+                url: "https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyB7Dp0M7lBi97YoSYlpgt_7IDCMeXEZBiQ"
+            })
+            .success(function (data, status, headers, config) {
+                deferred.resolve({ Position: { latitude: data.location.lat, longitude: data.location.lng } });
+            });
+
+            return deferred.promise;
+        };
+
+        function getCurrentLocationAddress(position) {
+            var deferred = $q.defer();
+
+            $http(
+            {
+                method: 'GET',
+                url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + position.latitude + "," + position.longitude + "&key=AIzaSyAXNExX0Fa99nRDq8xAZv93oiL8MI-b-Ew",
+            })
+            .success(function (data, status, headers, config) {
+                appFactory.locationAddress = data.results[0].formatted_address;
+                deferred.resolve({ address: data.results[0].formatted_address });
+            }, function () {
+                appFactory.locationAddress = null;
+                deferred.reject({
+                    'ErrorCode': 408,
+                    'ErrorHeader': 'Error retrieving location',
+                    'ErrorDetails': 'Error retrieving location, please ensure that gps location is enabled.'
+                });
+            });
+
+            return deferred.promise;
+        };
+
+        //function onRequestSuccess(success) {
+        //    appFactory.isLocationServicesEnabled = true;
+        //};
+
+        //function onRequestFailure(error) {
+        //    if (error) {
+        //        if (error.code !== cordova.plugins.locationAccuracy.ERROR_USER_DISAGREED) {
+        //            if (window.confirm("Failed to automatically set Location Mode to 'High Accuracy'. Would you like to switch to the Location Settings page and do this manually?")) {
+        //                cordova.plugins.diagnostic.switchToLocationSettings();
+        //                appFactory.isLocationServicesEnabled = true;
+        //                loadGoogleMapsApi();
+        //            }
+        //            else {
+        //                appFactory.isLocationServicesEnabled = false;
+        //                loadGoogleMapsApi();
+        //            }
+        //        }
+        //    }
+        //};
 
         function stringToDate(dateText) {
             if (!dateText) {
@@ -2191,6 +2502,10 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             var seconds = dateText.split('/')[2].split(' ')[1].split(':')[2];
             return seconds;
         };
+
+        function getAddress(addressItems) {
+
+        }
     };
 
 })();
@@ -2320,6 +2635,10 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             viewModel.model = data;
         });
 
+        viewModel.share = function () {
+            app.Utils.share();
+        };
+
     };
 
 })();
@@ -2378,7 +2697,7 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
         viewModel.goToMain = goToMain;
 
-        $rootScope.isLoading = true;
+        //$rootScope.isLoading = true;
       
         if (window.device && !window.device.isVirtual) {
 
@@ -2588,11 +2907,13 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
     angular.module('app').controller('salonController', salonController);
 
-    salonController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'salonFactory', 'notificationFactory', 'companyApiFactory'];
+    salonController.$inject = ['$scope', '$rootScope', '$state', '$stateParams', 'salonFactory', 'notificationFactory', 'companyApiFactory', 'appFactory', 'lookupApiFactory'];
 
-    function salonController($scope, $rootScope, $state, $stateParams, salonFactory, notificationFactory, companyApiFactory) {
+    function salonController($scope, $rootScope, $state, $stateParams, salonFactory, notificationFactory, companyApiFactory, appFactory, lookupApiFactory) {
         var viewModel = $scope;
         var salonId = $stateParams.salonId
+
+        appFactory.Initialise();
 
         viewModel.salonFactory = salonFactory;
         viewModel.goToSalonDirections = goToSalonDirections;
@@ -2615,22 +2936,23 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             $scope.percent = 100 * (value / 5);
         };
 
-        viewModel.salonFactory.initialise(salonId).then(function () {
+        viewModel.salonFactory.initialise(salonId, appFactory.User.DeviceId).then(function () {
             $rootScope.isLoading = true;
             $rootScope.loadingMessage = 'Navigating, please wait ...';
 
-            navigator.geolocation.getCurrentPosition(function (position) {
-                viewModel.isLoading = false;
-                var salonPosition = { lat: position.coords.latitude, lng: position.coords.longitude }
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    center: salonPosition,
-                    zoom: 8
-                });
-                var marker = new google.maps.Marker({
-                    position: salonPosition,
-                    map: map
-                });
-            }, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
+            $rootScope.isLoading = false;
+            $rootScope.loadingMessage = '';
+            //navigator.geolocation.getCurrentPosition(function (position) {
+            var salonPosition = { lat: Number(viewModel.salonFactory.salon.PhysicalAddressLatitude), lng: Number(viewModel.salonFactory.salon.PhysicalAddressLongitude) }
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: salonPosition,
+                zoom: 8
+            });
+            var marker = new google.maps.Marker({
+                position: salonPosition,
+                map: map
+            });
+            //}, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
         });
 
         function goToSalons(e) {
@@ -2640,6 +2962,8 @@ function errorController($scope, $rootScope, $uibModalInstance) {
         };
 
         function goToSalonDirections() {
+            lookupApiFactory.logGoToCompany(salonId, appFactory.User.DeviceId);
+
             if (!window.device) {
                 return $state.go('salondirection', { salonId: salonId });
             }
@@ -2746,6 +3070,7 @@ function errorController($scope, $rootScope, $uibModalInstance) {
                 controller: salonFeedbackController
             });
         }
+
     };
 
     salonFeedbackHistoryController.$inject = ['$scope', '$rootScope', '$uibModalInstance', 'companyApiFactory', 'salonFactory'];
@@ -2818,11 +3143,11 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
         return factory;
 
-        function initialise(salonId) {
+        function initialise(salonId, deviceId) {
             var deferred = $q.defer();
 
             var promises = {
-                companyPromise: companyApiFactory.getCompany(salonId),
+                companyPromise: companyApiFactory.getCompany(salonId, deviceId),
                 productsPromise: searchProducts(salonId)
             }
 
@@ -3007,17 +3332,38 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
     'use strict';
 
+    angular.module('app').controller('salonLocationFinderController', SalonLocationFinderController);
+
+    SalonLocationFinderController.$inject = ['$scope', '$state', '$rootScope'];
+
+    function SalonLocationFinderController($scope, $state, $rootScope) {
+        var viewModel = $scope;
+        
+        viewModel.$on('google-map-place-updated', function (event, data) {
+            console.log(data);
+        });
+
+    };
+
+})();
+(function () {
+
+    'use strict';
+
     angular.module('app').controller('salonsController', SalonsController);
 
-    SalonsController.$inject = ['$scope', '$rootScope', '$state', 'salonsFactory', 'salonDirectionFactory', 'lookupApiFactory', 'notificationFactory'];
+    SalonsController.$inject = ['$scope', '$rootScope', '$state', 'salonsFactory', 'salonDirectionFactory', 'lookupApiFactory', 'notificationFactory', 'appFactory'];
 
-    function SalonsController($scope, $rootScope, $state, salonsFactory, salonDirectionFactory, lookupApiFactory, notificationFactory) {
+    function SalonsController($scope, $rootScope, $state, salonsFactory, salonDirectionFactory, lookupApiFactory, notificationFactory, appFactory) {
         var viewModel = $scope;
         var page = 1;
+
+        appFactory.Initialise();
 
         $rootScope.isLoading = false;
         viewModel.isBusy = true;
         viewModel.salonsFactory = salonsFactory;
+        viewModel.salonsFactory.isScrollDisabled = true;
         viewModel.searchSalons = searchSalons;
         viewModel.goToSalon = goToSalon;
         viewModel.goToMain = goToMain;
@@ -3032,7 +3378,8 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             },
             SearchText: salonsFactory.searchFilter.SearchText,
             SubCategoryId: salonsFactory.searchFilter.SubCategoryId,
-            IsLocationSearch: true
+            IsLocationSearch: true,
+            DeviceId: appFactory.User.DeviceId
         };
 
         initialise();
@@ -3041,12 +3388,23 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             $rootScope.isLoading = true;
             page = 0;
             viewModel.salonsFactory.salons = [];
-            navigator.geolocation.getCurrentPosition(locationSuccess, locationError, { maximumAge: 3000, timeout: 10000, enableHighAccuracy: true });
+            viewModel.SearchFilter.Latitude = appFactory.location.latitude;
+            viewModel.SearchFilter.Longitude = appFactory.location.longitude;
+
+            nextPage();
+
+            lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (data) {
+                $rootScope.isLoading = false;
+                viewModel.subCategories = data.Items;
+            }, function () {
+                $rootScope.isLoading = false;
+            });
         };
 
         function searchSalons(isClear) {
             viewModel.isBusy = true;
             $rootScope.isLoading = true;
+            $rootScope.Message = 'Loading salons ..';
 
             if (isClear) {
                 viewModel.salonsFactory.salons = [];
@@ -3054,10 +3412,12 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             viewModel.salonsFactory.searchSalons(viewModel.SearchFilter).then(function (response) {
                 viewModel.isBusy = false;
                 $rootScope.isLoading = false;
+                $rootScope.Message = '';
                 console.log(viewModel.isBusy);
             }, function () {
                 viewModel.isBusy = false;
                 $rootScope.isLoading = false;
+                $rootScope.Message = '';
             });
         }
 
@@ -3072,6 +3432,8 @@ function errorController($scope, $rootScope, $uibModalInstance) {
         };
 
         function goToSalonDirection(salon) {
+            lookupApiFactory.logGoToCompany(salon.Id, appFactory.User.DeviceId);
+
             if (!window.device) {
                 salonDirectionFactory.salon = salon;
 
@@ -3118,13 +3480,13 @@ function errorController($scope, $rootScope, $uibModalInstance) {
         };
 
         function locationSuccess(position) {
-            viewModel.SearchFilter.Latitude = position.coords.latitude;
-            viewModel.SearchFilter.Longitude = position.coords.longitude;
+            viewModel.SearchFilter.Latitude = appFactory.location.coords.latitude;
+            viewModel.SearchFilter.Longitude = appFactory.location.coords.longitude;
 
+            nextPage();
             lookupApiFactory.getSubCategories({ PageData: { IncludeAllData: true } }).then(function (data) {
                 $rootScope.isLoading = false;
                 viewModel.subCategories = data.Items;
-                nextPage();
             }, function () {
                 $rootScope.isLoading = false;
             });
@@ -3152,6 +3514,7 @@ function errorController($scope, $rootScope, $uibModalInstance) {
             viewModel.SearchFilter.PageData.Skip = viewModel.SearchFilter.PageData.Take * (page - 1);
             searchSalons();
         };
+
     };
 
 })();
@@ -3167,7 +3530,8 @@ function errorController($scope, $rootScope, $uibModalInstance) {
         var factory = {
             searchSalons: searchSalons,
             searchFilter: {},
-            salons: []
+            salons: [],
+            isScrollDisabled: false
         };
 
         return factory;
@@ -3179,6 +3543,8 @@ function errorController($scope, $rootScope, $uibModalInstance) {
                 for (var i = 0; i < data.Companies.length; i++) {
                     factory.salons.push(data.Companies[i]);
                 }
+
+                factory.isScrollDisabled = factory.salons.length >= data.TotalCompanies;
                 deferred.resolve();
             });
 
@@ -3257,6 +3623,53 @@ function errorController($scope, $rootScope, $uibModalInstance) {
 
     function technicalReportController($scope, $state) {
         var viewModel = $scope
+
+    };
+
+})();
+(function () {
+
+    'use strict';
+
+    angular.module('app').controller('userRegisterSalonController', UserRegisterSalonController);
+
+    UserRegisterSalonController.$inject = ['$scope', '$rootScope', '$state', 'lookupApiFactory'];
+
+    function UserRegisterSalonController($scope, $rootScope, $state, lookupApiFactory) {
+        var viewModel = $scope;
+
+        viewModel.model = {
+            DeviceId: 'WebBrowser',
+            DeviceName: 'WebBrowser'
+        };
+
+        viewModel.register = register;
+
+        //var model = {
+        //    DeviceId: 'WebBrowser',
+        //    DeviceName: 'WebBrowser'
+        //}
+
+        if (window.device && !window.device.isVirtual) {
+            viewModel.model = {
+                DeviceId: window.device.uuid,
+                DeviceName: window.device.model,
+                DevicePlatform: window.device.platform,
+                DeviceSerialNumber: window.device.serial
+            }
+        }
+
+        function register() {
+            if (!viewModel.frmRegisterUser.$valid) {
+                $rootScope.$broadcast('action-complete', true);
+                return;
+            }
+
+            lookupApiFactory.saveDeviceDetails(viewModel.model).then(function (data) {
+                localStorage.setItem('user', JSON.stringify(viewModel.model));
+                $state.go('main');
+            });
+        };
 
     };
 

@@ -1,5 +1,7 @@
 ﻿using Libraries.Common.Enums;
 using Libraries.Common.ResponseObjects;
+
+using System.Collections.Generic;
 using System.Configuration;
 using System.Net;
 using System.Net.Http;
@@ -7,10 +9,12 @@ using System.Web.Http;
 
 using WomenEssentail.Common.DataFilters;
 using WomenEssentail.Common.DataTransferObjects;
+
 using WomenEssentail.ServiceBusinessRules.EntityManagers.Categories;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.CompanyTypes;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.ContactUss;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.DeviceDetails;
+using WomenEssentail.ServiceBusinessRules.EntityManagers.LookupFields;
 using WomenEssentail.ServiceBusinessRules.EntityManagers.SubCategories;
 
 namespace WomenEssentail.WebSolution.Controllers
@@ -22,16 +26,27 @@ namespace WomenEssentail.WebSolution.Controllers
         private readonly ICategoryManager categoryManager;
         private readonly IContactUsManager contactUsManager;
         private readonly IDeviceDetailsManager deviceDetailsManager;
+        private readonly ILookupFieldManager lookupFieldManager;
 
         public LookupController(ICompanyTypeManager companyTypeManager, ICategoryManager categoryManager, 
                                 ISubCategoryManager subCategoryManager, IContactUsManager contactUsManager,
-                                IDeviceDetailsManager deviceDetailsManager)
+                                IDeviceDetailsManager deviceDetailsManager,
+                                ILookupFieldManager lookupFieldManager)
         {
             this.companyTypeManager = companyTypeManager;
             this.categoryManager = categoryManager;
             this.subCategoryManager = subCategoryManager;
             this.contactUsManager = contactUsManager;
             this.deviceDetailsManager = deviceDetailsManager;
+            this.lookupFieldManager = lookupFieldManager;
+        }
+
+        [HttpGet]
+        public HttpResponseMessage GetLookupFields(string fieldName)
+        {
+            Response<LookupFieldDto> result = lookupFieldManager.GetLookupFields(null, fieldName);
+
+            return Request.CreateResponse<List<LookupFieldValueDto>>(HttpStatusCode.OK, result.Item.LookupFieldValues);
         }
 
         [HttpPost]
@@ -82,6 +97,11 @@ namespace WomenEssentail.WebSolution.Controllers
             deviceDetailsDto.CrudStatus = CrudStatus.CREATE;
             return Request.CreateResponse<Response<DeviceDetailsDto>>(HttpStatusCode.OK, deviceDetailsManager.Save(deviceDetailsDto));
         }
-
+        
+        [HttpPost]
+        public HttpResponseMessage LogGoToCompany(int companyId, string deviceId)
+        {
+            return Request.CreateResponse<Response<DeviceDetailsDto>>(HttpStatusCode.OK, deviceDetailsManager.CompanyGoThere(companyId, deviceId));
+        }
     }
 }

@@ -15,6 +15,10 @@
             viewModel.model = data;
         });
 
+        viewModel.share = function () {
+            app.Utils.share();
+        };
+
     };
 
 })();
