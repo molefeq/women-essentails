@@ -43,11 +43,11 @@ var anonymousStates =
         'searchbeautytips': true
     };
 
-//angular.module('app').constant('ServerBaseUrl', 'http://www.essentials4women.co.za/');
+angular.module('app').constant('ServerBaseUrl', 'http://www.essentials4women.co.za/');
 //angular.module('app').constant('ServerBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/');
-angular.module('app').constant('ServerBaseUrl', 'http://localhost:64707/');
-angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:64707/api/');
+//angular.module('app').constant('ServerBaseUrl', 'http://localhost:64707/');
+//angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:64707/api/');
 //angular.module('app').constant('ServerApiBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/api/');
-//angular.module('app').constant('ServerApiBaseUrl', 'http://www.essentials4women.co.za/api/');
+angular.module('app').constant('ServerApiBaseUrl', 'http://www.essentials4women.co.za/api/');
 angular.module('app').constant('SubMenuItems', menus);
 angular.module('app').constant('AnonymousStates', anonymousStates);

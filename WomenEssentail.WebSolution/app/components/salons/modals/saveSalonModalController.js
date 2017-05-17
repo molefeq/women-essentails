@@ -240,6 +240,8 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
         if (!viewModel.frmWorkingHours.isValid(viewModel.companyWorkingHourViewModel.companyWorkingHour)) {
             return;
         }
+
+        viewModel.companyWorkingHourViewModel.save();
     };
 };
 

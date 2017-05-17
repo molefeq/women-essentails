@@ -628,6 +628,28 @@ var app = app || {};
         return +(Math.round(this + "e+" + places) + "e-" + places);
     };
 
+    Date.prototype.toTimeDisplayString = function () {
+        var hours = ('00' + this.getHours()).slice(-2);
+        var minutes = ('00' + this.getMinutes()).slice(-2);
+
+        return hours + ':' + minutes;
+    };
+
+    utils.timeToDateTime = function (timeText) {
+        var currentDate = new Date().setHours(0, 0, 0, 0);
+
+        if (!timeText) {
+            return currentDate;
+        }
+
+        var hours = Number(timeText.split(':')[0]);
+        var minutes = Number(timeText.split(':')[1]);
+
+        currentDate = new Date().setHours(hours, minutes, 0, 0);
+
+        return currentDate;
+    };
+
     utils.stringToDate = function (dateText) {
         if (!dateText) {
             return '';
@@ -1039,12 +1061,12 @@ var anonymousStates =
         'searchbeautytips': true
     };
 
-//angular.module('app').constant('ServerBaseUrl', 'http://www.essentials4women.co.za/');
+angular.module('app').constant('ServerBaseUrl', 'http://www.essentials4women.co.za/');
 //angular.module('app').constant('ServerBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/');
-angular.module('app').constant('ServerBaseUrl', 'http://localhost:64707/');
-angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:64707/api/');
+//angular.module('app').constant('ServerBaseUrl', 'http://localhost:64707/');
+//angular.module('app').constant('ServerApiBaseUrl', 'http://localhost:64707/api/');
 //angular.module('app').constant('ServerApiBaseUrl', 'https://sqswomenessentailapiqa.azurewebsites.net/api/');
-//angular.module('app').constant('ServerApiBaseUrl', 'http://www.essentials4women.co.za/api/');
+angular.module('app').constant('ServerApiBaseUrl', 'http://www.essentials4women.co.za/api/');
 angular.module('app').constant('SubMenuItems', menus);
 angular.module('app').constant('AnonymousStates', anonymousStates);
 (function () {
@@ -6531,7 +6553,7 @@ function roleAdminSaveModalController($scope, $rootScope, $uibModalInstance, rol
     function companyWorkingHourFactory($rootScope, salonsFactory) {
 
         var factory = {
-            dayNames: angular.copy(salonsFactory.dayNames),
+            dayNames: [],
             save: save,
             edit: edit,
             deleteItem: deleteItem,
@@ -6544,7 +6566,10 @@ function roleAdminSaveModalController($scope, $rootScope, $uibModalInstance, rol
         function save() {
             removeDayName(factory.companyWorkingHour.DayName);
 
-            var indexOfCompanyWorkingHour = payRollApp.Utils.indexOf(salonsFactory.CompanyWorkingHours, factory.companyWorkingHour.DayName, "DayName");
+            var indexOfCompanyWorkingHour = app.Utils.indexOf(salonsFactory.salon.CompanyWorkingHours, factory.companyWorkingHour.DayName, "DayName");
+
+            factory.companyWorkingHour.StartTime = new Date(factory.companyWorkingHour.StartDateTime).toTimeDisplayString();
+            factory.companyWorkingHour.EndTime = new Date(factory.companyWorkingHour.EndDateTime).toTimeDisplayString();
 
             if (indexOfCompanyWorkingHour < 0) {
                 add();
@@ -6569,7 +6594,7 @@ function roleAdminSaveModalController($scope, $rootScope, $uibModalInstance, rol
         };
 
         function removeDayName(dayName) {
-            var indexOfDayName = payRollApp.Utils.indexOf(factory.dayNames, dayName, "FieldValue");
+            var indexOfDayName = app.Utils.indexOf(factory.dayNames, dayName, "FieldValue");
 
             if (indexOfDayName >= 0) {
                 factory.dayNames[indexOfDayName].display = false;
@@ -6577,7 +6602,7 @@ function roleAdminSaveModalController($scope, $rootScope, $uibModalInstance, rol
         };
 
         function addDayName(dayName) {
-            var indexOfDayName = payRollApp.Utils.indexOf(factory.dayNames, dayName, "FieldValue");
+            var indexOfDayName = app.Utils.indexOf(factory.dayNames, dayName, "FieldValue");
 
             if (indexOfDayName >= 0) {
                 factory.dayNames[indexOfDayName].display = true;
@@ -6591,12 +6616,15 @@ function roleAdminSaveModalController($scope, $rootScope, $uibModalInstance, rol
 
             addDayName(companyWorkingHour.DayName);
 
+            companyWorkingHour.StartDateTime = app.Utils.timeToDateTime(companyWorkingHour.StartTime);
+            companyWorkingHour.EndDateTime = app.Utils.timeToDateTime(companyWorkingHour.EndTime);
+
             factory.companyWorkingHour = companyWorkingHour;
             factory.companyWorkingHour.ActionType = 'UPDATE';
         };
 
         function deleteItem(companyWorkingHour) {
-            var indexOfDayName = payRollApp.Utils.indexOf(factory.dayNames, companyWorkingHour.DayName, "FieldValue");
+            var indexOfDayName = app.Utils.indexOf(factory.dayNames, companyWorkingHour.DayName, "FieldValue");
 
             if (indexOfDayName < 0) {
                 return;
@@ -6871,7 +6899,12 @@ function roleAdminSaveModalController($scope, $rootScope, $uibModalInstance, rol
             factory.selectedSalons = [];
             
             $q.all(promises).then(function (data) {
+                for (var i = 0; i < data.dayNamesPromise.length; i++) {
+                    data.dayNamesPromise[i].display = true;
+                }
+
                 factory.dayNames = data.dayNamesPromise;
+
                 for (var i = 0; i < data.companyTypesPromise.Items.length; i++) {
                     if (data.companyTypesPromise.Items[i].Code == 'SALON') {
                         factory.companyTypeId = data.companyTypesPromise.Items[i].Id;
@@ -7364,6 +7397,8 @@ function salonModalController($scope, $rootScope, $uibModalInstance, geolocation
         if (!viewModel.frmWorkingHours.isValid(viewModel.companyWorkingHourViewModel.companyWorkingHour)) {
             return;
         }
+
+        viewModel.companyWorkingHourViewModel.save();
     };
 };
 

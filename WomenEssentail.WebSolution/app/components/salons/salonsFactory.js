@@ -45,7 +45,12 @@
             factory.selectedSalons = [];
             
             $q.all(promises).then(function (data) {
+                for (var i = 0; i < data.dayNamesPromise.length; i++) {
+                    data.dayNamesPromise[i].display = true;
+                }
+
                 factory.dayNames = data.dayNamesPromise;
+
                 for (var i = 0; i < data.companyTypesPromise.Items.length; i++) {
                     if (data.companyTypesPromise.Items[i].Code == 'SALON') {
                         factory.companyTypeId = data.companyTypesPromise.Items[i].Id;

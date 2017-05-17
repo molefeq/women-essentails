@@ -51,8 +51,10 @@
                                     <span ng-if="searchSalonFactory.salon.Distance">{{searchSalonFactory.salon.Distance}} km</span>
                                 </p>
                                 <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;" ng-if="searchSalonFactory.salon.BusinessContactCode && searchSalonFactory.salon.BusinessContactNumber"> {{'(' + searchSalonFactory.salon.BusinessContactCode + ') ' + searchSalonFactory.salon.BusinessContactNumber}} </p>
-                                <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;"> {{searchSalonFactory.salon.MobileNumber}}</p>
-                                <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;"> {{searchSalonFactory.salon.EmailAddress}}</p>
+                                <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;" ng-if="searchSalonFactory.salon.MobileNumber"> {{searchSalonFactory.salon.MobileNumber}}</p>
+                                <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;" ng-if="searchSalonFactory.salon.EmailAddress"> {{searchSalonFactory.salon.EmailAddress}}</p>
+                                <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;" ng-if="searchSalonFactory.salon.CompanyWorkingHours.length > 0"> Working Hours</p>
+                                <p style="margin-top: 10px; color: black; font-size: 12px; text-align:center;" ng-repeat="item in searchSalonFactory.salon.CompanyWorkingHours"> {{item.DayName}} - {{item.StartTime}} - {{item.EndTime}}</p>
                             </div>
                         </div><!-- /.box -->
                     </div>

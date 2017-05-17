@@ -150,6 +150,28 @@ var app = app || {};
         return +(Math.round(this + "e+" + places) + "e-" + places);
     };
 
+    Date.prototype.toTimeDisplayString = function () {
+        var hours = ('00' + this.getHours()).slice(-2);
+        var minutes = ('00' + this.getMinutes()).slice(-2);
+
+        return hours + ':' + minutes;
+    };
+
+    utils.timeToDateTime = function (timeText) {
+        var currentDate = new Date().setHours(0, 0, 0, 0);
+
+        if (!timeText) {
+            return currentDate;
+        }
+
+        var hours = Number(timeText.split(':')[0]);
+        var minutes = Number(timeText.split(':')[1]);
+
+        currentDate = new Date().setHours(hours, minutes, 0, 0);
+
+        return currentDate;
+    };
+
     utils.stringToDate = function (dateText) {
         if (!dateText) {
             return '';

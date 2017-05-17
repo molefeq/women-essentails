@@ -9,7 +9,7 @@
     function companyWorkingHourFactory($rootScope, salonsFactory) {
 
         var factory = {
-            dayNames: angular.copy(salonsFactory.dayNames),
+            dayNames: [],
             save: save,
             edit: edit,
             deleteItem: deleteItem,
@@ -22,7 +22,10 @@
         function save() {
             removeDayName(factory.companyWorkingHour.DayName);
 
-            var indexOfCompanyWorkingHour = payRollApp.Utils.indexOf(salonsFactory.CompanyWorkingHours, factory.companyWorkingHour.DayName, "DayName");
+            var indexOfCompanyWorkingHour = app.Utils.indexOf(salonsFactory.salon.CompanyWorkingHours, factory.companyWorkingHour.DayName, "DayName");
+
+            factory.companyWorkingHour.StartTime = new Date(factory.companyWorkingHour.StartDateTime).toTimeDisplayString();
+            factory.companyWorkingHour.EndTime = new Date(factory.companyWorkingHour.EndDateTime).toTimeDisplayString();
 
             if (indexOfCompanyWorkingHour < 0) {
                 add();
@@ -47,7 +50,7 @@
         };
 
         function removeDayName(dayName) {
-            var indexOfDayName = payRollApp.Utils.indexOf(factory.dayNames, dayName, "FieldValue");
+            var indexOfDayName = app.Utils.indexOf(factory.dayNames, dayName, "FieldValue");
 
             if (indexOfDayName >= 0) {
                 factory.dayNames[indexOfDayName].display = false;
@@ -55,7 +58,7 @@
         };
 
         function addDayName(dayName) {
-            var indexOfDayName = payRollApp.Utils.indexOf(factory.dayNames, dayName, "FieldValue");
+            var indexOfDayName = app.Utils.indexOf(factory.dayNames, dayName, "FieldValue");
 
             if (indexOfDayName >= 0) {
                 factory.dayNames[indexOfDayName].display = true;
@@ -69,12 +72,15 @@
 
             addDayName(companyWorkingHour.DayName);
 
+            companyWorkingHour.StartDateTime = app.Utils.timeToDateTime(companyWorkingHour.StartTime);
+            companyWorkingHour.EndDateTime = app.Utils.timeToDateTime(companyWorkingHour.EndTime);
+
             factory.companyWorkingHour = companyWorkingHour;
             factory.companyWorkingHour.ActionType = 'UPDATE';
         };
 
         function deleteItem(companyWorkingHour) {
-            var indexOfDayName = payRollApp.Utils.indexOf(factory.dayNames, companyWorkingHour.DayName, "FieldValue");
+            var indexOfDayName = app.Utils.indexOf(factory.dayNames, companyWorkingHour.DayName, "FieldValue");
 
             if (indexOfDayName < 0) {
                 return;
